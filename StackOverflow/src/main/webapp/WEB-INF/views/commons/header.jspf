@@ -1,0 +1,24 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<div class="header">
+	<div class="headerBox">
+		<div class="left">
+			<a href=""><img src="1.png" class="logo"> </a>
+		</div>
+		<div class="left search2">
+			<input class="search" type="text" placeholder="Search..." id="search">
+			<span id="icon_search"><i class="fas fa-search"></i> </span>
+		</div>
+
+		<div class="right">
+
+			<a class="hover" href=""><i class="fas fa-file-medical"></i></a> <a
+				class="hover" href=""><i class="fas fa-trophy"></i></a> <a
+				class="hover" href=""><i class="fas fa-question-circle"></i></a> <a
+				class="hover" href=""><i class="fas fa-comment-alt"></i></a> <input
+				type="button" class="login" value="Log IN"> <input
+				type="button" class="signup" value="Sign Up">
+
+		</div>
+	</div>
+</div>

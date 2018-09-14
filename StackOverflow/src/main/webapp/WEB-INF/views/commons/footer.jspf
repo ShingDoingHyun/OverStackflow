@@ -1,0 +1,30 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<div class="footer">
+
+	<div class="left">
+		<span class="icon"><i class="fas fa-adjust" id="icon"></i></span>
+		<ul>
+			<li><a href="">이성범</a></li>
+			<li><a href="">윤재민</a></li>
+			<li><a href="">류인혜</a></li>
+			<li><a href="">메뉴3</a></li>
+			<li><a href="">메뉴3</a></li>
+		</ul>
+		<ul>
+			<li><a href="">신동현</a></li>
+			<li><a href="">박상범</a></li>
+			<li><a href="">정대윤</a></li>
+			<li><a href="">링크3</a></li>
+			<li><a href="">링크4</a></li>
+		</ul>
+
+
+	</div>
+	<div class="right">
+		<br> <a href="">blog</a> <a href="">Faceebook</a> <a href="">Twitter</a>
+		<br> <br> <span class="small_text"> site design /
+			logo@2018 Stack Exchange inc : user
+			fjaskfjklasdfkjasdklfjiuhasudfhjadshfjlfdklsaj </span>
+	</div>
+</div>

@@ -1,0 +1,199 @@
+@charset "UTF-8";
+<style>
+body {
+	margin: 0;
+}
+
+.header {
+	height: 5%;
+	background-color: white;
+}
+
+.first_row {
+	background-color: #FAFAFB;
+}
+
+.first_row_icon {
+	float: right;
+}
+
+.second_row_span {
+	float: left;
+	width: 50%;
+}
+
+.second_row2 {
+	width: 50%;
+}
+
+.title {
+	width: 230px;
+	display: inline;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	background-color: lightgray;
+}
+
+.login {
+	background-color: white;
+	color: #1179F4;
+	border: none;
+	font-size: 20px;
+}
+
+.login:hover {
+	background-color: lightblue;
+}
+
+.signup {
+	background-color: #1179F4;
+	color: white;
+	border: none;
+	font-size: 18px;
+}
+
+.signup:hover {
+	background-color: blue;
+}
+
+.box {
+	width: 230px;
+	background-color: #FFFFFF;
+	display: inline;
+	border: 1px solid gray;
+}
+
+.sidenav {
+	margin-top: 70px;
+	height: 100%;
+	width: 120px;
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	overflow-x: hidden;
+	padding-top: 20px;
+	margin-bottom: 150px;
+}
+
+.sidenav a {
+	padding: 6px 6px 6px 32px;
+	text-decoration: none;
+	font-size: 15px;
+	color: #818181;
+	display: block;
+}
+
+.sidenav a:hover {
+	color: #f1f1f1;
+}
+
+.main {
+	margin-left: 150px;
+	/* Same as the width of the sidenav */
+
+}
+
+.search {
+	border: none;
+	line-height: 30px;
+}
+
+.logo {
+	height: 60px;
+	width: 180px;
+}
+
+@media screen and (max-height: 450px) {
+	.sidenav {
+		padding-top: 15px;
+	}
+	.sidenav a {
+		font-size: 18px;
+	}
+}
+
+.footer a {
+	text-decoration: none;
+	color: white;
+	font-size: 12px;
+}
+
+.footer {
+	background-color: #242729;
+	color: white;
+	height: 130px;
+	margin-top: 30%;
+
+	left: 0;
+	bottom: 0;
+	width: 100%;
+}
+
+ul {
+	list-style-type: none;
+	padding-left: 10%;
+}
+
+li {
+	display: inline;
+	margin: 10px;
+	margin-left: 20px;
+}
+
+.footer .left {
+	float: left;
+	width: 70%;
+	font-size: 10px;
+}
+
+.footer .right {
+	float: left;
+	width: 30%;
+}
+
+.icon {
+	text-align: center;
+	size: 50px;
+}
+
+.box {
+	height: 50px;
+	margin: 0 auto;
+	padding-bottom: 30px
+}
+
+#icon {
+	margin-left: 10px;
+	margin-top: 10px;
+	font-size: 26px;
+}
+
+.small_text {
+	font-size: 12px;
+}
+
+.headerBox {
+	overflow: hidden;
+}
+
+.headerBox .right {
+	float: right;
+	width: 300px;
+}
+
+.headerBox .left {
+	float: left;
+	width: auto;
+}
+
+.search2 {
+	margin: 0 20px;
+	line-height: 50px;
+}
+</style>
