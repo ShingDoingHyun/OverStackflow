@@ -16,10 +16,5 @@ public class HomeController {
 		
 		return "index";
 	}
-	@RequestMapping(value = "/board", method = RequestMethod.GET)
-	public String board(Locale locale, Model model) {
 
-		
-		return "board/boardWrite";
-	}
 }

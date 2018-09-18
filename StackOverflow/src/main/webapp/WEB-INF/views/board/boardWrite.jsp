@@ -8,37 +8,62 @@
 
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/index.css" type="text/css" media="all" />
 
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/index.css" type="text/css"
-	media="all" />
 
-
-<link
-	href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css"
-	rel="stylesheet">
-<script
-	src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-<script
-	src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
-
-<link href="<%=request.getContextPath()%>/summernote/summernote.css"
-	rel="stylesheet">
+<link href="<%=request.getContextPath()%>/summernote/summernote.css" rel="stylesheet">
 <script src="<%=request.getContextPath()%>/summernote/summernote.min.js"></script>
 
-
 <!-- include summernote-ko-KR -->
-<script
-	src="<%=request.getContextPath()%>/summernote/lang/summernote-ko-KR.js"></script>
+<script src="<%=request.getContextPath()%>/summernote/lang/summernote-ko-KR.js"></script>
+
+
 </head>
+<style>
 
+/* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 10000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+    
+        /* Modal Content/Box */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 50%; /* Could be more or less, depending on screen size */                          
+        }
+        /* The Close Button */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+
+</style>
 <body>
-
-	<script>
-		
-	</script>
-
 
 	<!----------------------header--------------------------------------->
 
@@ -51,25 +76,69 @@
 	<!----------------------left menu End--------------------------------------->
 
 
-
-
-
 	<!----------------------main--------------------------------------->
-	<div class="main">
-		<form>
+	<!-- 썸머노트 부분 -->
+	<div class="main" >
+		<form action="insertQuestion" method="post">
+		<input type="hidden" name="memId" />
 			<br> <br> <br>
 			<p>질문 제목</p>
-			<input type="text" size="80" /> <br> <br>
+			<input type="text" size="80" name="title" /> <br> <br>
 			<p>질문 내용</p>
-			<div id="summernote">
-				<p>댕댕윤</p>
+			<div>
+			<textarea id="summernote" name="content"></textarea>
 			</div>
 			<br>
 			<p>태그선택</p>
-			<input type="text" size="60" /> <br>
+			<input type="text" size="67" name="tag" />  <button type="button" style="margin-left: 15px;"  id="myBtn">태그선택</button>  <br>
 			<br> <input type="submit" value="작성" />
 		</form>
 	</div>
+	
+	
+	    <!-- The Modal -->
+    <div id="myModal" class="modal">
+ 
+      <!-- Modal content -->
+      <div class="modal-content">
+      <span class="close">&times;</span>   
+        <form>
+        <input type="text" size="20" />  <button type="button" style="margin-left: 15px;" >태그검색</button>
+        </form>    
+        <br>
+        <form>
+        	<table border="1px">
+        		<tr>
+        			<td style="width:250px; text-align: center;">대분류</td>
+        			<td style="width:250px; text-align: center;">중분류</td>
+        			<td style="width:250px; text-align: center;">태그</td>	
+        		</tr>
+        		<tr>
+	        		<td style="height:200px;" valign="top">
+	        			<table>
+							<tr>
+								<td>td안에 tr은 안돼나<td>
+							</tr>
+							<tr>
+								<td>td안에 tr은 안돼나<td>
+							</tr>
+							<tr>
+								<td>td안에 tr은 안돼나<td>
+							</tr>
+						</table>
+					</td>
+	        		<td style="height:200px;" valign="top">중분류 영역</td>
+	        		<td style="height:200px;" valign="top">대분류 영역</td>
+        		</tr>
+        
+        
+        	</table>
+        </form>                                                      
+        
+      </div>
+ 
+    </div>
+	
 
 
 	<!----------------------main End--------------------------------------->
@@ -97,29 +166,74 @@
 									'Comic Sans MS', 'Courier New', ],
 							fontNamesIgnoreCheck : [ '맑은고딕' ],
 							focus : true,
-							onImageUpload: function(files, editor, welEditable) {
-							      sendFile(files[0],editor,welEditable); 
-							    }
+							callbacks: {
+								onImageUpload: function(files, editor, welEditable) {
+						            for (var i = files.length - 1; i >= 0; i--) {
+
+						            	sendFile(files[i], this);
+						            }
+						        }
+							}
+							
 						});
 			});
 	
-	 function sendFile(file,editor,welEditable) 
-	  {
-	  data = new FormData();
-	  data.append("file", file);
-	            $.ajax({
-	            data: data,
-	            type: "POST",
-	                    // 이미지 업로드하는 파일 path 
-	            url: rooturl+'/modules/bbs/lang.korean/action/a.ajax_imgupload.php',
-	            cache: false,
-	            contentType: false,
-	            processData: false,
-	            success: function(url) {
-	                alert(url);
-	                   editor.insertImage(welEditable, url);
+	
+	function sendFile(file, el) {
+		var form_data = new FormData();
+		form_data.append('file', file);
+      	
+
+      	$.ajax({
+        	data: form_data,
+        	type: "POST",
+        	url: 'imageUpload',
+        	cache: false,
+        	contentType: false,
+        	enctype: 'multipart/form-data',
+        	processData: false,
+        	dataType:"text",
+        	success: function(img_name) {
+
+        		$('#summernote').summernote('insertImage', getContextPath()+img_name);
+        	}
+      	});
+    }
+	
+	
+	
+	
+	//모달부분
+	function getContextPath() {
+		var hostIndex = location.href.indexOf( location.host ) + location.host.length;
+		return location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
+		};
+	
+		
+		   var modal = document.getElementById('myModal');
+		   
+	        // Get the button that opens the modal
+	        var btn = document.getElementById("myBtn");
+	 
+	        // Get the <span> element that closes the modal
+	        var span = document.getElementsByClassName("close")[0];                                          
+	 
+	        // When the user clicks on the button, open the modal 
+	        btn.onclick = function() {
+	            modal.style.display = "block";
+	        }
+	 
+	        // When the user clicks on <span> (x), close the modal
+	        span.onclick = function() {
+	            modal.style.display = "none";
+	        }
+	 
+	        // When the user clicks anywhere outside of the modal, close it
+	        window.onclick = function(event) {
+	            if (event.target == modal) {
+	                modal.style.display = "none";
 	            }
-	        });
-	  }
+	        }
+
 </script>
 </html>

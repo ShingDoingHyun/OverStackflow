@@ -3,7 +3,7 @@
 <div class="header">
 	<div class="headerBox">
 		<div class="left">
-			<a href=""><img src="1.png" class="logo"> </a>
+			<a href=""><img src="<c:url value='logo/logo.png'/>" class="logo"> </a>
 		</div>
 		<div class="left search2">
 			<input class="search" type="text" placeholder="Search..." id="search">
