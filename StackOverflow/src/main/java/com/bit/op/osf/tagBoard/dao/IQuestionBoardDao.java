@@ -7,6 +7,17 @@ import com.bit.op.osf.tagBoard.model.QuestionBoard;
 public interface IQuestionBoardDao {
 
 
-	int boardList(QuestionBoard questionboard);
+	int insertQuestionBoard(QuestionBoard questionboard);
+
+	QuestionBoard selectQuestionNo(int questionNo);
+
+	QuestionBoard insertQuestionAction(QuestionBoard questionboard);
+
+	List<QuestionBoard> selectPopQuestionList();
+
+	int updateQuestionView(int questionNo);
+
+	Object selectQuestionDeltail(int questionBoardNo);
+
 
 }

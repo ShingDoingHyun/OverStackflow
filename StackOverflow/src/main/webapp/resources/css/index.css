@@ -32,11 +32,14 @@ body {
 }
 
 a {
-	text-decoration: none;
+	color: black; 
+	text-decoration: none; 
+	outline: none
 }
 
-a:hover {
+a:hover, a:active  {
 	background-color: lightgray;
+	color:black;
 }
 
 .login {
@@ -95,6 +98,7 @@ a:hover {
 
 .main {
 	margin-left: 150px;
+	width: 100%;
 	/* Same as the width of the sidenav */
 
 }
