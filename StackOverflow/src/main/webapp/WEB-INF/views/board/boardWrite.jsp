@@ -201,14 +201,14 @@
     }
 	
 	
-	
-	
-	//모달부분
 	function getContextPath() {
 		var hostIndex = location.href.indexOf( location.host ) + location.host.length;
 		return location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
 		};
 	
+	
+	//모달부분
+
 		
 		   var modal = document.getElementById('myModal');
 		   

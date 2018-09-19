@@ -20,13 +20,13 @@
 }
 .mainLeft{
 	float: left;
-	width:650px;
+	width: 50%;
 	height:1000px;
 	border-right: 1px solid black;
 }
 .mainRight{
 	float: Right;
-	width:650px;
+	width: 50%;
 	height:1000px;
 }
 
