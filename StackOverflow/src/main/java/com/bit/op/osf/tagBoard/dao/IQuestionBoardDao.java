@@ -11,8 +11,6 @@ public interface IQuestionBoardDao {
 
 	QuestionBoard selectQuestionNo(int questionNo);
 
-	QuestionBoard insertQuestionAction(QuestionBoard questionboard);
-
 	List<QuestionBoard> selectPopQuestionList();
 
 	int updateQuestionView(int questionNo);

@@ -38,7 +38,7 @@
 		<property name="mapperLocations"> 
 			<list> 
 				<value>classpath:com/bit/op/osf/job/mapper/*.xml</value>
-				<value>classpath:com/bit/op/osf/tagBoard/mapper/*.xml</value>				
+				<value>classpath:com/bit/op/osf/tagBoard/mapper/*.xml</value>							
 			 </list>
 		 </property>
 	</bean>

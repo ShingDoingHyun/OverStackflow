@@ -4,30 +4,27 @@
 
 <mapper namespace="com.bit.op.osf.tagBoard.mapper.QuestionBoardMapper">
 
-	<insert id="insertQuestion" parameterType="com.bit.op.osf.tagBoard.model.QuestionBoard" useGeneratedKeys="true" keyProperty="questionNo"> 
-     
-      
+	<insert id="insertQuestion" parameterType="com.bit.op.osf.tagBoard.model.QuestionBoard"> 
         insert into questionboard(memId, content, title) value ('test', #{content}, #{title});
-         
          <selectKey keyProperty="questionNo" resultType="int" order="AFTER">
         	 SELECT LAST_INSERT_ID();
     	</selectKey>
     </insert>
     
     <select id="selectQuestionNo" resultType="com.bit.op.osf.tagBoard.model.QuestionBoard" parameterType="int">
-    
-    	select memId, content, title from questionboard where questionno= #{param};
+    	select questionNo, memId, content, title from questionboard where questionno= #{param};
     </select>
     
     <select id="selectPopQuestion" resultType="com.bit.op.osf.tagBoard.model.QuestionBoard">
-    
-    	select questionNo, memId, title from questionboard;
+    	select questionNo, memId, title, regDate, view from questionboard order by view desc limit 0,99;
     </select>
     
-    <update id="updatQuestionView"  parameterType="int">
-    	
+    <update id="updateQuestionView"  parameterType="int">
     	update questionboard set view= view+1 where questionno = #{param};
     </update>
     
+    <update id="updateQuestion"  parameterType="com.bit.op.osf.tagBoard.model.QuestionBoard">  	
+    	update questionboard set content=#{content}, title=#{title} where questionno = #{questionno};
+    </update>
     
 </mapper>

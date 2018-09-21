@@ -3,11 +3,9 @@ package com.bit.op.osf.tagBoard.controller;
 
 
 
-import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -33,11 +31,12 @@ public class QuestionBoardController {
 	
 	
 	@RequestMapping(value = "/popQuestionList", method = RequestMethod.GET)
-	public String board(Model model) {
+	public String popQuestionList(Model model) {
 		List<QuestionBoard> questionBoardList = new ArrayList<QuestionBoard>();
 		questionBoardList = questionBoardDao.selectPopQuestionList();
 		
 		model.addAttribute("questionBoardList", questionBoardList);
+
 		return "board/popQuestionList";
 	}
 	
@@ -52,12 +51,12 @@ public class QuestionBoardController {
 	}
 	
 	@RequestMapping(value = "/insertQuestion", method = RequestMethod.POST)
-	public String insertQuestion(Model model, QuestionBoard questionBoardNo) {
+	public String insertQuestion(QuestionBoard questionBoard) {
 		
 		//시퀀스 1로 받아오는 문제 나중에 수정...
-		model.addAttribute("questionBoard", questionBoardDao.insertQuestionAction(questionBoardNo));
+		int result = questionBoardDao.insertQuestionBoard(questionBoard);
 		
-		return "board/questionDetail";
+		return "redirect:/questionDetail/"+result;
 		
 	}
 	
