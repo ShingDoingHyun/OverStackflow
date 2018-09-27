@@ -131,7 +131,7 @@ iframe {
 					<p>${questionBoard.content }</p>
 				</div>
 				<div style="margin-top: 100px;">
-					<a href="">공유</a> <a href="">수정</a> <a href="">삭제</a>
+					<a href="">공유</a> <a href="/openUpdateQuestion/${questionBoard.questionNo }">수정</a> <a href="">삭제</a>
 				</div>
 				<div style="width: 100%; display: inline-block;">
 					<div style="float: left; width: 50%; margin-top: 80px;" class="accordian">

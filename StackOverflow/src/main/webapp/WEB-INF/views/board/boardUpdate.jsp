@@ -83,7 +83,7 @@
 	<!----------------------main--------------------------------------->
 	<!-- 썸머노트 부분 -->
 	<div class="main" >
-		<form action="insertQuestion" method="post">
+		<form action="updateQuestion" method="post">
 		<input type="hidden" name="memId" />
 			<br> <br> <br>
 			<p>질문 제목</p>

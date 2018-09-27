@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bit.op.osf.tagBoard.mapper.TagMapper">
+
+	<select id="selectTagList" resultType="com.bit.op.osf.tagBoard.model.Tag">
+		select tagNo, tagMainName, tagMiddleName, tagName, tagDetail from tag;
+	</select>
+	
+	<select id="selectTagMainNameList" resultType="com.bit.op.osf.tagBoard.model.Tag">
+		select DISTINCT tagMainName from tag;
+	</select>
+	
+	<select id="selectTagMiddleNameList" resultType="com.bit.op.osf.tagBoard.model.Tag" parameterType="String">
+		select DISTINCT tagMiddleName from tag where tagMainName= #{param};
+	</select>
+	
+	<select id="selectTagNameList" resultType="com.bit.op.osf.tagBoard.model.Tag" parameterType="String">
+		select DISTINCT tagName from tag where tagMiddleName= #{param};
+	</select>
+	
+</mapper>

@@ -29,6 +29,7 @@ public class QuestionBoardController {
 	@Inject
 	private IQuestionBoardDao questionBoardDao;
 	
+
 	
 	@RequestMapping(value = "/popQuestionList", method = RequestMethod.GET)
 	public String popQuestionList(Model model) {
@@ -43,8 +44,7 @@ public class QuestionBoardController {
 	
 	
 	@RequestMapping(value = "/openWriteQuestion", method = RequestMethod.GET)
-	public String openWriteQuestion(Model model) {
-
+	public String openWriteQuestion() {		
 		
 		return "board/boardWrite";
 		
@@ -60,6 +60,18 @@ public class QuestionBoardController {
 		
 	}
 	
+	@RequestMapping(value = "/openUpdateQuestion/{questionBoardNo}", method = RequestMethod.GET)
+	public String openUpdateQuestion(Model model, @PathVariable("questionBoardNo") int questionBoardNo) {		
+		
+		model.addAttribute("questionBoard", questionBoardDao.selectQuestionDeltail(questionBoardNo));
+		
+		return "board/boardUpdate";
+		
+	}
+	
+	
+	
+	
 	@RequestMapping(value = "/questionDetail/{questionBoardNo}", method = RequestMethod.GET)
 	public String questionDetail(Model model, @PathVariable("questionBoardNo") int questionBoardNo) {
 		
@@ -68,10 +80,7 @@ public class QuestionBoardController {
 		
 		return "board/questionDetail";
 		
-	}
-	
-	
-
+	}	
 
 	@RequestMapping(value = "/imageUpload", method = RequestMethod.POST)
 	@ResponseBody
