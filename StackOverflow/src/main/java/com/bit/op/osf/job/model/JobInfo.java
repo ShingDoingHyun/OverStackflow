@@ -9,7 +9,7 @@ public class JobInfo {
     private String comId;
     private String jobTitle;
     private String jobField;
-/*    private List<String> jobType;*/
+    private List<String> jobType;
     private String jobRequiredTask;
     private String jobQualification;
     private String jobLocation;
@@ -24,13 +24,28 @@ public class JobInfo {
     private String jobDueDate;
     private String jobApplyType;
     private String jobHomePageUrl;
+    private String jobChargerSendEmail;
     private String jobChargerName;
     private String jobChargerEmail;
     private String jobEtc;
     private String jobRegisterDate;
-/*    private List<Tag> jobTagList;*/
+    private List<Tag> jobTagList;
     private String endedJob;
     
+    private String comName;
+    private String comAddress;
+    private String comZipcode;
+    private String comPhoto;
+    
+    
+
+	public String getJobChargerSendEmail() {
+		return jobChargerSendEmail;
+	}
+
+	public void setJobChargerSendEmail(String jobChargerSendEmail) {
+		this.jobChargerSendEmail = jobChargerSendEmail;
+	}
 
 	public int getJobNo() {
 		return jobNo;
@@ -88,14 +103,14 @@ public class JobInfo {
 		this.jobField = jobField;
 	}
 
-/*	public List<String> getJobType() {
+	public List<String> getJobType() {
 		return jobType;
 	}
 
 	public void setJobType(List<String> jobType) {
 		this.jobType = jobType;
-	}*/
-
+	}
+	
 	public String getJobRequiredTask() {
 		return jobRequiredTask;
 	}
@@ -232,6 +247,40 @@ public class JobInfo {
 		this.endedJob = endedJob;
 	}
 
+	public String getComName() {
+		return comName;
+	}
+
+	public void setComName(String comName) {
+		this.comName = comName;
+	}
+
+	public String getComAddress() {
+		return comAddress;
+	}
+
+	public void setComAddress(String comAddress) {
+		this.comAddress = comAddress;
+	}
+
+	public String getComZipcode() {
+		return comZipcode;
+	}
+
+	public void setComZipcode(String comZipcode) {
+		this.comZipcode = comZipcode;
+	}
+
+	public String getComPhoto() {
+		return comPhoto;
+	}
+
+	public void setComPhoto(String comPhoto) {
+		this.comPhoto = comPhoto;
+	}
+	
+	
+
 	/*@Override
 	public String toString() {
 		return "JobInfo [jobNo=" + jobNo + ", comId=" + comId + ", jobTitle=" + jobTitle + ", jobField=" + jobField
@@ -245,6 +294,5 @@ public class JobInfo {
 	}*/
     
    
-    
-    
+
 }

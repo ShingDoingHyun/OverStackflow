@@ -21,7 +21,6 @@
 <!-- include summernote-ko-KR -->
 <script src="<%=request.getContextPath()%>/summernote/lang/summernote-ko-KR.js"></script>
 
-
 </head>
 <style>
 

@@ -1,8 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
-	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
 <mapper namespace="com.bit.op.osf.tagBoard.mapper.QuestionBoardMapper">
-	<select id="boardList" parameterType="com.bit.op.osf.tagBoard.model.Board">
-        insert into questionboard(memId, content, title) value ('test', #{content}, #{title}); 
-    </select>
+
+    <insert id="insertQuestion" parameterType="com.bit.op.osf.tagBoard.model.QuestionBoard" useGeneratedKeys="true" keyProperty="questionNo">
+
+
+       insert into questionboard(memId, content, title) value ('test', #{content}, #{title});
+
+        <selectKey keyProperty="questionNo" resultType="int" order="AFTER">
+            SELECT LAST_INSERT_ID();
+       </selectKey>
+   </insert>
+
+   <select id="selectQuestionNo" resultType="com.bit.op.osf.tagBoard.model.QuestionBoard" parameterType="int">
+
+       select memId, content, title from questionboard where questionno= #{param};
+   </select>
+
+   <select id="selectPopQuestion" resultType="com.bit.op.osf.tagBoard.model.QuestionBoard">
+
+       select questionNo, memId, title from questionboard;
+   </select>
+
+   <update id="updatQuestionView"  parameterType="int">
+       
+       update questionboard set view= view+1 where questionno = #{param};
+   </update>
+
+
 </mapper>
