@@ -67,7 +67,7 @@ td{
 	<div class="main">
 		<div class="left">
 			<div>
-				<h2>인기질문</h2>
+				<h2>질문리스트</h2>
 				<br> <br>
 
 			</div>
@@ -82,14 +82,16 @@ td{
 	<div class="main">
 		<div class="left">
 		<p align="right">
-			<button>나의흥미</button>
-			<button>이번주인기</button>
-			<button>이번달인기</button>
-			<button>전체인기</button>
+			<button>최신순</button>
+			<button>많이본</button>
+			<button>인기순</button>
+			<button>현상금</button>
+			<button>채택안됨</button>
+			<button>리스트수</button>
 			</p>
 			<hr>
 			<table width="100%">
-				<c:forEach items="${questionBoardList }" var="questionBoard">
+				<c:forEach items="${questionBoardList.questionBoardList }" var="questionBoard">
 						<tr>
 							<td width="8%" align="center" rowspan="2" style=" border-bottom: 1px solid #777777;"><img src="<c:url value='/img/unFav.png'/>" width="30px" height="30px"></td>
 							<td width="8%" align="center">0</td>
@@ -111,6 +113,25 @@ td{
 						</tr>
 				</c:forEach>
 			</table>
+			<p style='text-align: center'>
+				
+<%-- 				<c:if test="${param.page > 9 }">
+					<<
+				</c:if>
+				<c:set var="count" value="${questionBoardList.pageTotalCount /10}" /> --%>
+				
+				<c:forEach begin="1" end="" var="i">
+					<a href="<c:url value='/questionList?page=${ i}'/>"style="display: inline;">${ i}</a>
+				</c:forEach>
+				
+<%-- 				
+				<c:if test="${param.page < 10 }">
+					>>
+				</c:if>
+				 --%>
+				
+				<br>
+			</p>
 		</div>
 	</div>
 	<!----------------------main End--------------------------------------->

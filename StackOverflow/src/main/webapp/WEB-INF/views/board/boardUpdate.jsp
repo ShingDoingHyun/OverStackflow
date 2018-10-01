@@ -21,6 +21,7 @@
 <!-- include summernote-ko-KR -->
 <script src="<%=request.getContextPath()%>/summernote/lang/summernote-ko-KR.js"></script>
 
+
 </head>
 <style>
 
@@ -82,19 +83,23 @@
 	<!----------------------main--------------------------------------->
 	<!-- 썸머노트 부분 -->
 	<div class="main" >
-		<form action="insertQuestion" method="post">
-		<input type="hidden" name="memId" />
+		<form action="<c:url value="/updateQuestion"/>" method="post">
+		<input type="hidden" name="questionNo" value="${questionBoard.questionNo }"/>
 			<br> <br> <br>
 			<p>질문 제목</p>
-			<input type="text" size="80" name="title" /> <br> <br>
+			<input type="text" size="80" name="title" value="${questionBoard.title }"/> <br> <br>
 			<p>질문 내용</p>
 			<div>
-			<textarea id="summernote" name="content"></textarea>
+			<textarea id="summernote" name="content">${questionBoard.content }</textarea>
 			</div>
 			<br>
 			<button type="button" id="myBtn">태그선택</button>  
-			<div style="height:50px;" id="tags"></div>
-			<input type="hidden" name="tags">
+			<div style="height:50px;" id="tags">
+			<c:forEach items="${questionBoard.tagList }" var="tag" >
+				<span class="tag" style="margin-left:10px;">#${tag.tagName }</span>
+			</c:forEach>
+			</div>
+			<input type="hidden" name="tags" value="<c:forEach items="${questionBoard.tagList }" var="tag" >#${tag.tagNo }</c:forEach>">
 			<br>
 			<br> <input type="submit" value="작성" />
 		</form>
@@ -105,7 +110,7 @@
     <div id="myModal" class="modal">
  
       <!-- Modal content -->
-      <div class="modal-content"  style="width: 710px;">
+      <div class="modal-content" style="width: 710px;">
       <span class="close">&times;</span>   
         <form>
         <input type="text" size="20" />  <button type="button" style="margin-left: 15px;" >태그검색</button>
@@ -226,7 +231,7 @@
 	    modal.style.display = "block";
 	    var html = '';
 	    $.ajax({
-	       	url: 'selectTagMainName',
+	       	url: getContextPath()+'/selectTagMainName',
 	        dataType:"json",
 	        success: function(data) {
 	        	$.each(data, function(index,tag){ 
@@ -251,7 +256,7 @@
 		data.css('background', '#AED6F1');
 	    var html = '';
 	    $.ajax({
-	       	url: 'selectTagMiddleName',
+	       	url: getContextPath()+'/selectTagMiddleName',
 	       	data : { "mainTag" : data.text()},
 	        dataType:"json",
 	        success: function(data) {
@@ -274,7 +279,7 @@
 		data.css('background', '#AED6F1');
 	    var html = '';
 	    $.ajax({
-	       	url: 'selectTagName',
+	       	url: getContextPath()+'/selectTagName',
 	       	data : { "middleTag" : data.text()},
 	        dataType:"json",
 	        success: function(data) {
@@ -328,6 +333,7 @@
  		} 
 		
 	}
+	 
 	 
 	// When the user clicks on <span> (x), close the modal
 	span.onclick = function() {

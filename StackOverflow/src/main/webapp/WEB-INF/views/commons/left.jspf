@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="sidenav">
 	<a href="#">홈</a> 
-	<a href="#">질문게시판</a> 
-	<a href="#">랭크</a>
-	<a href="<c:url value="/comJob/seeJobInfoList/1"/>">채용</a>
+	<a href="<c:url value="/popQuestionList"/>">질문게시판</a> 
+	<a href="">랭크</a>
+	<a href="<c:url value="/comJob/writeJobInfo"/>">채용</a>
 </div>

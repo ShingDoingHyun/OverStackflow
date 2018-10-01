@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bit.op.osf.tagBoard.mapper.CommentMapper">
+
+	<insert id="insertComment" parameterType="com.bit.op.osf.tagBoard.model.Comment">
+		insert into comment(questionNo, replyNo, memId, upperCommentNo, content) value (#{questionNo}, #{replyNo}, 'test', #{upperCommentNo}, #{content});
+	</insert>
+	
+	<select id="selectCommentList" resultType="com.bit.op.osf.tagBoard.model.Comment" parameterType="int">
+    	select commentNo, questionNo, memId, content, upperCommentNo, regDate from comment where questionNo=#{param} and upperCommentNo=0 and replyNo=0;
+    </select>
+    
+    <select id="selectSubCommentList" resultType="com.bit.op.osf.tagBoard.model.Comment" parameterType="com.bit.op.osf.tagBoard.model.Comment">
+    	select commentNo, questionNo, memId, content, regDate from comment where questionNo=#{questionNo} and upperCommentNo=#{commentNo};
+    </select>
+    
+    <select id="selectReplyCommentList" resultType="com.bit.op.osf.tagBoard.model.Comment" parameterType="int">
+    	select commentNo, questionNo, replyNo, memId, content, upperCommentNo, regDate from comment where replyNo=#{param} and upperCommentNo=0;
+    </select>
+    
+    <select id="selectSubReplyCommentList" resultType="com.bit.op.osf.tagBoard.model.Comment" parameterType="com.bit.op.osf.tagBoard.model.Comment">
+    	select commentNo, questionNo, replyNo,  memId, content, regDate from comment where replyNo=#{replyNo} and upperCommentNo=#{commentNo};
+    </select>
+    
+    <update id="updateComment"  parameterType="com.bit.op.osf.tagBoard.model.Comment">  	
+    	update comment set content=#{content} where commentNo = #{commentNo};
+    </update>
+    
+    <update id="deleteComment"  parameterType="int">  	
+    	update comment set content='삭제된 댓글입니다.', memId='알 수 없는 사용자' where commentNo = #{param};
+    </update>
+	
+</mapper>

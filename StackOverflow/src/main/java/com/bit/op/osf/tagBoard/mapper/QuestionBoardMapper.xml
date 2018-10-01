@@ -4,30 +4,64 @@
 
 <mapper namespace="com.bit.op.osf.tagBoard.mapper.QuestionBoardMapper">
 
-    <insert id="insertQuestion" parameterType="com.bit.op.osf.tagBoard.model.QuestionBoard" useGeneratedKeys="true" keyProperty="questionNo">
-
-
-       insert into questionboard(memId, content, title) value ('test', #{content}, #{title});
-
+	<insert id="insertQuestion" parameterType="com.bit.op.osf.tagBoard.model.QuestionBoard"> 
+        insert into questionboard(memId, content, title) value ('test', #{content}, #{title});
         <selectKey keyProperty="questionNo" resultType="int" order="AFTER">
-            SELECT LAST_INSERT_ID();
-       </selectKey>
-   </insert>
-
-   <select id="selectQuestionNo" resultType="com.bit.op.osf.tagBoard.model.QuestionBoard" parameterType="int">
-
-       select memId, content, title from questionboard where questionno= #{param};
-   </select>
-
-   <select id="selectPopQuestion" resultType="com.bit.op.osf.tagBoard.model.QuestionBoard">
-
-       select questionNo, memId, title from questionboard;
-   </select>
-
-   <update id="updatQuestionView"  parameterType="int">
-       
-       update questionboard set view= view+1 where questionno = #{param};
-   </update>
-
-
+        	 SELECT LAST_INSERT_ID();
+    	</selectKey>
+    </insert>
+    
+    <select id="selectQuestionNo" resultType="com.bit.op.osf.tagBoard.model.QuestionBoard" parameterType="int">
+    	select questionboard.questionNo, memId, title, content, regDate, view, tags, tagNos
+			from questionboard
+			left join (select questionNo, group_concat(tagName separator ' ') as tags , group_concat(questiontag.tagNo separator ' ') as tagNos
+				from questiontag
+				left join tag  
+					on questiontag.tagNo = tag.tagNo
+			   	group by questionNo) as b
+			on questionboard.questionNo = b.questionNo
+		where questionboard.questionNo = #{param};
+    </select>
+    
+    <select id="selectPopQuestion" resultType="com.bit.op.osf.tagBoard.model.QuestionBoard">
+	    select questionboard.questionNo, memId, title, regDate, view, tags
+			from questionboard
+			left join (select questionNo, group_concat(tagName separator ' ') as tags
+				from questiontag
+				left join tag  
+					on questiontag.tagNo = tag.tagNo
+			   	group by questionNo) as b
+			on questionboard.questionNo = b.questionNo
+		order by view desc limit 0,99;
+    </select>
+   
+    <select id="selectQuestion" resultType="com.bit.op.osf.tagBoard.model.QuestionBoard" parameterType="com.bit.op.osf.tagBoard.model.Search">
+	    select questionboard.questionNo, memId, title, regDate, view, tags
+			from questionboard
+			left join (select questionNo, group_concat(tagName separator ' ') as tags
+				from questiontag
+				
+				left join tag  
+					on questiontag.tagNo = tag.tagNo
+			   	group by questionNo) as b
+			on questionboard.questionNo = b.questionNo
+		limit
+		#{firstRow}, #{endRow}; 
+    </select>
+    
+    <update id="updateQuestionView"  parameterType="int">
+    	update questionboard set view= view+1 where questionno = #{param};
+    </update>
+    
+    <update id="updateQuestion"  parameterType="com.bit.op.osf.tagBoard.model.QuestionBoard">  	
+    	update questionboard set content=#{content}, title=#{title} where questionno = #{questionNo};
+    </update>
+    
+    <update id="deleteQuestion" parameterType="int">
+    	update questionboard set content='삭제된 질문입니다.', title='삭제된 질문입니다.', memId='알 수 없는 사용자' where questionno = #{param};
+    </update>
+    
+    <select id="selectCount" resultType="int">
+	    select count(*) from questionboard; 
+    </select>
 </mapper>
