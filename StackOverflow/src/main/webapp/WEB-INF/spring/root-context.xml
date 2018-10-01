@@ -12,16 +12,6 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
 
-	<!-- Root Context: defines shared resources visible to all other web components -->
-	<!-- Connection Pool DataSource -->
-
-<!-- 	<bean class="org.apache.commons.dbcp2.BasicDataSource" id="dataSource">
-		<property value="com.mysql.jdbc.Driver" name="driverClassName" />
-		<property value="jdbc:mysql://127.0.0.1:3306/overstackflow?useSSL=false" name="url" />
-		<property value="root" name="username" />
-		<property value="1234" name="password" />
-	</bean> -->
-	
 	<!-- MySQL 연동 -->
 	<bean
 	id="dataSource"
@@ -36,8 +26,7 @@
 		<property name="dataSource" ref="dataSource" />
 		<property value="classpath:/mybatis-config.xml" name="configLocation" />
 		<property name="mapperLocations"> 
-			<list> 
-			
+			<list> 	
 			 <value>classpath:com/bit/op/osf/**/*Mapper.xml</value>	 				
 			 </list>
 		 </property>
