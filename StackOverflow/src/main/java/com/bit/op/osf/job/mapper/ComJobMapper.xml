@@ -1,14 +1,154 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.bit.op.osf.job.mapper.ComJobMapper">
 
-<insert id="insertJobInfo" parameterType="com.bit.op.osf.job.model.JobInfo">
-insert into osf_jobInfo (jobTitle, jobField, jobRequiredTask, jobQualification, jobLocation, jobZipcode, jobWorkTime, jobPayType,
-					jobPayAmount, jobBenefits, jobContent, comCall, comIntroduction, jobDueDate, jobApplyType, jobHomePageUrl,
-					jobChargerName, jobChargerEmail, jobEtc) 
-values(#{jobTitle}, #{jobField}, #{jobRequiredTask}, #{jobQualification}, #{jobLocation}, #{jobZipcode}, #{jobWorkTime}, #{jobPayType},
-					#{jobPayAmount}, #{jobBenefits}, #{jobContent}, #{comCall}, #{comIntroduction}, #{jobDueDate}, #{jobApplyType}, #{jobHomePageUrl},
-					#{jobChargerName}, #{jobChargerEmail}, #{jobEtc})
+<select id="selectComMember" resultType="com.bit.op.osf.job.model.ComMember" parameterType="String">
+select comName, comAddress, comZipcode, comCall, comHomePageUrl, comChargerName, comChargerEmail, comIntroduction, comBenefits from osf_commember where comId = #{comId}
+</select>
+
+<insert id="insertJobInfo" parameterType="com.bit.op.osf.job.model.JobInfo" > 
+	insert into osf_jobInfo (jobTitle, jobField, jobRequiredTask, jobQualification, 
+	jobLocation, jobZipcode, jobWorkTime, jobPayType, jobPayAmount, jobBenefits, jobContent, comIntroduction, jobDueDate, jobApplyType, jobHomePageUrl, jobChargerSendEmail ,jobChargerName, jobChargerEmail, jobEtc, comId) 
+	values
+	(#{jobTitle}, #{jobField}, #{jobRequiredTask}, #{jobQualification}, #{jobLocation}, #{jobZipcode}, #{jobWorkTime}, #{jobPayType}, #{jobPayAmount}, 
+	#{jobBenefits}, #{jobContent}, #{comIntroduction}, #{jobDueDate}, #{jobApplyType}, #{jobHomePageUrl}, #{jobChargerSendEmail}, #{jobChargerName}, #{jobChargerEmail}, #{jobEtc}, #{comId}) 
 </insert>
+
+<insert id="insertJobType" parameterType="java.util.HashMap">
+	<if test="jobNo == 0">
+	insert into osf_jobtype (jobType, jobNo) values ( #{jobType}, (select max(jobNo) from osf_jobInfo))
+	</if>
+	<if test="jobNo != 0">
+	insert into osf_jobtype (jobType, jobNo) values ( #{jobType}, #{jobNo})
+	</if>
+</insert>
+
+<select id="selectJobno" resultType="Integer">
+	 select max(jobNo) from osf_jobInfo 
+</select>
+ 
+ <select id="countJobInfo" resultType="Integer" parameterType="String">
+ 	select count(*) from osf_jobInfo
+ 	<if test="value!=null and value!=''">
+ 	where comId = #{value}
+ 	</if>
+ </select>
+ 
+ <select id="selectJobInfoList" resultType="com.bit.op.osf.job.model.JobInfo" parameterType="java.util.HashMap">
+	 select jobNo, jobTitle, jobField, jobLocation, jobZipcode, jobWorkTime, jobPayType, jobPayAmount, 
+	 DATE_FORMAT(jobDueDate ,'%Y-%m-%d') as jobDueDate, DATE_FORMAT(jobRegisterDate ,'%Y-%m-%d') as jobRegisterDate
+	 from osf_jobInfo
+	 <if test="comId!=null">
+	 	where comId = #{comId}
+	 </if>
+	 order by jobRegisterDate desc
+	 limit #{firstRow}, #{endRow}
+ </select>
+ 
+<select id="selectJobInfo" resultType="com.bit.op.osf.job.model.JobInfo" parameterType="Integer">
+	select jobNo, jobTitle, jobField, jobRequiredTask, jobQualification, jobLocation, jobZipcode, 
+	jobWorkTime, jobPayType, jobPayAmount, jobBenefits, jobContent, com.comCall as comCall, 
+	jobInfo.comIntroduction as comIntroduction, DATE_FORMAT(jobDueDate ,'%Y-%m-%d') as jobDueDate, 
+	jobApplyType, jobHomePageUrl, jobChargerSendEmail ,jobChargerName, jobChargerEmail, jobEtc, endedJob ,DATE_FORMAT(jobRegisterDate ,'%Y-%m-%d') as jobRegisterDate,
+	comName, comAddress, comZipcode, comPhoto
+	from osf_jobinfo jobInfo, osf_commember com
+	where jobInfo.comId = com.comId and jobNo = #{jobNo};
+</select>
+
+<select id="selectJobTypeList" resultType="String" parameterType="Integer">
+	select jobType from osf_jobtype where jobNo = #{jobNo}
+</select> 
+
+<update id="updateJobInfo" parameterType="com.bit.op.osf.job.model.JobInfo">
+	update osf_jobInfo 
+	 set jobTitle=#{jobTitle}, jobField=#{jobField}, jobRequiredTask=#{jobRequiredTask}, jobQualification=#{jobQualification}, jobLocation=#{jobLocation},  jobZipcode=#{jobZipcode},
+	 jobWorkTime=#{jobWorkTime}, jobPayType=#{jobPayType},  jobPayAmount=#{jobPayAmount}, jobBenefits=#{jobBenefits},  jobContent=#{jobContent},  comIntroduction=#{comIntroduction},
+	 jobDueDate=#{jobDueDate}, jobApplyType=#{jobApplyType}, jobHomePageUrl=#{jobHomePageUrl}, jobChargerSendEmail=#{jobChargerSendEmail}, jobChargerName=#{jobChargerName}, jobChargerEmail=#{jobChargerEmail}, jobEtc=#{jobEtc}
+	where jobNo=#{jobNo}
+</update>
+
+<delete id="deleteJobType" parameterType="Integer">
+	delete from osf_jobtype where jobNo = #{jobNo}
+</delete>
+
+<update id="updateJobInfoPeriod" parameterType="java.util.HashMap">
+	update osf_jobInfo
+	set jobDueDate = #{now}
+	where jobNo = #{jobNo}
+</update>
+
+<delete id="deleteJobInfo" parameterType="Integer">
+	delete from osf_jobInfo where jobNo=#{jobNo}
+</delete>
+ 
+<select id="countJobInfoBySearch" resultType="Integer" parameterType="java.util.HashMap">
+	select count(distinct a.jobNo)
+	from osf_jobInfo a, osf_jobtype b
+	where a.jobNo = b.jobNo
+		<if test="search!=null and search.jobTitle!=null and search.jobTitle!=''">
+ 		 and (jobTitle like '%'||#{search.jobTitle}||'%' or jobRequiredTask like '%'||#{search.jobTitle}||'%')
+ 		</if>
+ 		<if test="search!=null and search.jobLocation!=null">
+ 		 and jobLocation like '%'||#{search.jobLocation}||'%'
+ 		</if>
+ 		<if test="search!=null and search.jobPayType!=null">
+ 		 and jobPayType like '%'||#{search.jobPayType}||'%'
+ 		</if>
+ 		<if test="search!=null and search.jobPayAmount!=null">
+ 		 and jobPayAmount > #{search.jobPayAmount}
+ 		</if>
+ 		<if test="search.jobTypeList!=null and search.jobTypeList!=''">
+ 		  <foreach collection="search.jobTypeList" item="jobType" >
+ 		  	and jobType like CONCAT('%',#{jobType},'%')
+ 		  </foreach>
+ 		</if>
+ 		<if test="comId!=null and comId!=''">
+	 	 and comId = #{comId}
+	 	</if>
+</select>
+ 
+ <select id="selectJobInfoListBySearch" resultType="com.bit.op.osf.job.model.JobInfo" parameterType="java.util.HashMap">
+	 select distinct a.jobNo as jobNo, jobTitle, jobField, jobLocation, jobZipcode, jobWorkTime, jobPayType, jobPayAmount, DATE_FORMAT(jobDueDate ,'%Y-%m-%d') as jobDueDate, DATE_FORMAT(jobRegisterDate ,'%Y-%m-%d') as jobRegisterDate
+	 from osf_jobInfo a, osf_jobtype b
+	 where a.jobNo = b.jobNo
+		 <if test="search.jobTitle!=null and search.jobTitle!=''">
+ 		 and (jobTitle like CONCAT('%',#{search.jobTitle},'%') or jobRequiredTask like CONCAT('%',#{search.jobTitle},'%'))
+ 		</if>
+ 		<if test="search.jobLocation!=null and search.jobLocation!=''">
+ 		 and jobLocation like CONCAT('%',#{search.jobLocation},'%')
+ 		</if>
+ 		<if test="search.jobPayType!=null and search.jobPayType!=''">
+ 		 and jobPayType like CONCAT('%',#{search.jobPayType},'%')
+ 		</if>
+ 		<if test="search.jobPayAmount!=null and  search.jobPayAmount!=''">
+ 		 and jobPayAmount > #{search.jobPayAmount}
+ 		</if>
+ 		<if test="search.jobTypeList!=null and search.jobTypeList!=''">
+ 		  <foreach collection="search.jobTypeList" item="jobType" >
+ 		  	and jobType like CONCAT('%',#{jobType},'%')
+ 		  </foreach>
+ 		</if>
+ 		<if test="comId!=null and comId!=''">
+	 	 and comId = #{comId}
+	 	</if>
+		 order by jobRegisterDate desc
+		 limit #{firstRow}, #{endRow}
+ </select>
+ 
+ <select id="selectJobAppManageList" resultType="com.bit.op.osf.job.model.JobApplication" parameterType="java.util.HashMap">
+ 	select appNo, appName, appAge, DATE_FORMAT(appBirth, '%Y-%m-%d') as appBirth, appGender, appEmail, appPhone, appCall, appAddress, appPhoto, appEduLevel, appEduName, appEduEntraDate, appEduGraduDate , appEduState , appMajor, appMinor, 
+ 	appScore, appTotalScore, appIntroduction, appAmbition , appResult, DATE_FORMAT(appInterviewDate, '%Y-%m-%d') as appInterviewDate, DATE_FORMAT(appRegisterDate ,'%Y-%m-%d') as appRegisterDate
+ 	from jobapp a, osf_jobInfo b
+ 	where a.jobNo = b.jobNo and comId=#{comId} 
+ 	<if test="jobNo!=null and jobNo!=''">
+ 	and a.jobNo=#{jobNo}
+ 	</if>
+ </select>
+ 
+ <update id="updateAppResult" parameterType="java.util.HashMap">
+ 	update jobapp set appResult = #{appResult} where appNo = #{appNo}
+ </update>
+
 </mapper>

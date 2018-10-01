@@ -72,7 +72,7 @@ public class QuestionBoardController {
 		return "redirect:/questionDetail/"+result;
 		
 	}
-	
+
 	@RequestMapping(value = "/openUpdateQuestion/{questionBoardNo}", method = RequestMethod.GET)
 	public String openUpdateQuestion(Model model, @PathVariable("questionBoardNo") int questionBoardNo) {		
 		
@@ -113,7 +113,6 @@ public class QuestionBoardController {
 	}	
 	
 	
-
 	@RequestMapping(value = "/imageUpload", method = RequestMethod.POST)
 	@ResponseBody
 	public String profileUpload(@RequestParam("file") MultipartFile file, HttpServletRequest request) throws Exception {

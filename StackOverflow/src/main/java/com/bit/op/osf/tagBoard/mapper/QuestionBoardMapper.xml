@@ -40,6 +40,7 @@
 			from questionboard
 			left join (select questionNo, group_concat(tagName separator ' ') as tags
 				from questiontag
+				
 				left join tag  
 					on questiontag.tagNo = tag.tagNo
 			   	group by questionNo) as b
@@ -63,5 +64,4 @@
     <select id="selectCount" resultType="int">
 	    select count(*) from questionboard; 
     </select>
-    
 </mapper>

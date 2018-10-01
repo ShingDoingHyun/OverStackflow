@@ -15,10 +15,9 @@
 			<a class="hover" href=""><i class="fas fa-file-medical"></i></a> <a
 				class="hover" href=""><i class="fas fa-trophy"></i></a> <a
 				class="hover" href=""><i class="fas fa-question-circle"></i></a> <a
-				class="hover" href=""><i class="fas fa-comment-alt"></i></a> <input
-				type="button" class="login" value="Log IN"> <input
-				type="button" class="signup" value="Sign Up">
-
+				class="hover" href=""><i class="fas fa-comment-alt"></i></a> 
+				<input	type="button" class="login" value="Log IN"> 
+				<input	type="button" class="signup" value="Sign Up"><a href=""></a>
 		</div>
 	</div>
 </div>
