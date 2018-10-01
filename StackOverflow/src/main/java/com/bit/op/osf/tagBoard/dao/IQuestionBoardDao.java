@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.bit.op.osf.tagBoard.model.QuestionBoard;
 import com.bit.op.osf.tagBoard.model.QuestionBoardList;
+import com.bit.op.osf.tagBoard.model.Search;
 
 public interface IQuestionBoardDao {
 
@@ -22,7 +23,7 @@ public interface IQuestionBoardDao {
 
 	int deleteQuestionBoard(int questionBoardNo);
 
-	QuestionBoardList selectQuestionList();
+	QuestionBoardList selectQuestionList(Search search);
 
 
 }

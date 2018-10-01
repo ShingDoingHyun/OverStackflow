@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.bit.op.osf.tagBoard.dao.IQuestionBoardDao;
 import com.bit.op.osf.tagBoard.model.QuestionBoard;
 import com.bit.op.osf.tagBoard.model.QuestionBoardList;
+import com.bit.op.osf.tagBoard.model.Search;
 
 @Controller
 public class QuestionBoardController {
@@ -43,9 +44,8 @@ public class QuestionBoardController {
 	}
 	
 	@RequestMapping(value = "/questionList", method = RequestMethod.GET)
-	public String questionList(Model model) {
-		QuestionBoardList questionBoardList = new QuestionBoardList();
-		questionBoardList = questionBoardDao.selectQuestionList();
+	public String questionList(Model model, Search search) {
+		QuestionBoardList questionBoardList = questionBoardList = questionBoardDao.selectQuestionList(search);
 		System.out.println(questionBoardList);
 		
 		model.addAttribute("questionBoardList", questionBoardList);

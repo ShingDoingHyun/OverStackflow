@@ -111,12 +111,9 @@ public class QuestionBoardDaoImpl implements IQuestionBoardDao {
 	}
 
 	@Override
-	public QuestionBoardList selectQuestionList() {
-		// TODO Auto-generated method stub
+	public QuestionBoardList selectQuestionList(Search search) {
 		
-		int pageNumber = 0;
-		
-		int currentPageNumber = pageNumber > 0 ? pageNumber : 1; 
+		int currentPageNumber = search.getPage() > 0 ? search.getPage() : 1; 
 
 		int questionBoardTotalCount = sqlSession.selectOne(QUSETION_NAMESPACE + "selectCount");
 		System.out.println(questionBoardTotalCount);
@@ -126,7 +123,6 @@ public class QuestionBoardDaoImpl implements IQuestionBoardDao {
 		int endRow = 0;
 		
 		if (questionBoardTotalCount > 0) {
-			Search search = new Search();
 			search.setFirstRow(((currentPageNumber - 1) * QUESTION_BOARD_COUNT_PER_PAGE));
 			search.setEndRow(QUESTION_BOARD_COUNT_PER_PAGE);
 			
