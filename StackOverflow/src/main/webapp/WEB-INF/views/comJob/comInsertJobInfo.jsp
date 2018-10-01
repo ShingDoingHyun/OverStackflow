@@ -29,7 +29,7 @@
 	 list-style:none; 
 	}
 	
-    /* li > div{ display:none;}   */
+    /*  li > div{ display:none;}  */
 	
 	#accordian li >h1{ 
 	cursor:pointer;
@@ -198,7 +198,6 @@ $(function(){
 		if(!$(this).next().is(":visible"))
 		{
 			$(this).next().slideDown(); 
-			/* $(this).find('.ico_ar:eq(0)').css('transform','-');  */
 		} 
 	})
 	

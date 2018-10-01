@@ -56,10 +56,6 @@ public class QuestionBoardController {
 		
 	}
 	
-
-	
-
-
 	@RequestMapping(value = "/imageUpload", method = RequestMethod.POST)
 	@ResponseBody
 	public String profileUpload(@RequestParam("file") MultipartFile file, HttpServletRequest request) throws Exception {

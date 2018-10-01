@@ -143,7 +143,7 @@ th, td {
 						<%-- <td>${jobInfo.jobZipcode}</td> --%>
 			   </tr>
 			   <tr>
-			   		<td colspan="7"><input type="button" value="지원자 관리" onclick="">
+			   		<td colspan="7"><input type="button" value="지원자 관리" onclick="location.href='<c:url value="/comJob/manageJobAppList/${jobInfo.jobNo}"/>'">
 			   		<input type="button" value="수정" onclick="location.href='<c:url value="/comJob/updateJobInfo/${jobInfo.jobNo}"/>'">
 			   		<input type="button" class="edit" value="기간 연장" >
 			   		<input type="button" value="마감" onclick="location.href='<c:url value="/comJob/updateJobInfoPeriodForEnd/${jobInfo.jobNo}"/>'">

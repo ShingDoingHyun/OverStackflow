@@ -37,7 +37,8 @@ select comName, comAddress, comZipcode, comCall, comHomePageUrl, comChargerName,
  </select>
  
  <select id="selectJobInfoList" resultType="com.bit.op.osf.job.model.JobInfo" parameterType="java.util.HashMap">
-	 select jobNo, jobTitle, jobField, jobLocation, jobZipcode, jobWorkTime, jobPayType, jobPayAmount, DATE_FORMAT(jobDueDate ,'%Y-%m-%d') as jobDueDate, DATE_FORMAT(jobRegisterDate ,'%Y-%m-%d') as jobRegisterDate
+	 select jobNo, jobTitle, jobField, jobLocation, jobZipcode, jobWorkTime, jobPayType, jobPayAmount, 
+	 DATE_FORMAT(jobDueDate ,'%Y-%m-%d') as jobDueDate, DATE_FORMAT(jobRegisterDate ,'%Y-%m-%d') as jobRegisterDate
 	 from osf_jobInfo
 	 <if test="comId!=null">
 	 	where comId = #{comId}
@@ -136,5 +137,18 @@ select comName, comAddress, comZipcode, comCall, comHomePageUrl, comChargerName,
 		 limit #{firstRow}, #{endRow}
  </select>
  
+ <select id="selectJobAppManageList" resultType="com.bit.op.osf.job.model.JobApplication" parameterType="java.util.HashMap">
+ 	select appNo, appName, appAge, DATE_FORMAT(appBirth, '%Y-%m-%d') as appBirth, appGender, appEmail, appPhone, appCall, appAddress, appPhoto, appEduLevel, appEduName, appEduEntraDate, appEduGraduDate , appEduState , appMajor, appMinor, 
+ 	appScore, appTotalScore, appIntroduction, appAmbition , appResult, DATE_FORMAT(appInterviewDate, '%Y-%m-%d') as appInterviewDate, DATE_FORMAT(appRegisterDate ,'%Y-%m-%d') as appRegisterDate
+ 	from jobapp a, osf_jobInfo b
+ 	where a.jobNo = b.jobNo and comId=#{comId} 
+ 	<if test="jobNo!=null and jobNo!=''">
+ 	and a.jobNo=#{jobNo}
+ 	</if>
+ </select>
+ 
+ <update id="updateAppResult" parameterType="java.util.HashMap">
+ 	update jobapp set appResult = #{appResult} where appNo = #{appNo}
+ </update>
 
 </mapper>

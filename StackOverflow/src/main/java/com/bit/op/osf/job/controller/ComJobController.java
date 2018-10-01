@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bit.op.osf.job.daoImpl.ComJobDaoImpl;
 import com.bit.op.osf.job.model.ComMember;
+import com.bit.op.osf.job.model.JobApplication;
 import com.bit.op.osf.job.model.JobInfo;
 import com.bit.op.osf.job.model.JobInfoListView;
 import com.bit.op.osf.job.model.SearchJob;
@@ -174,7 +176,32 @@ public class ComJobController {
     	model.addAttribute("disting", "delete");
     	return "comJob/comJobInfoCheck";
     }
-
+    
+    //지원서 관리 목록 
+    @RequestMapping(value="/comJob/manageJobAppList/{jobNo}", method=RequestMethod.GET)
+    public String selectJobAppManageList(HttpServletRequest request, @PathVariable("jobNo") int jobNo, Model model) {
+    	String comId = "test1";
+    
+    	model.addAttribute("jobAppList", comJobDaoImpl.selectJobAppManageList(comId, jobNo));
+    	return "comJob/comManageJobAppList";
+    }
+    
+    //지원서 결과 통보
+    @ResponseBody
+    @RequestMapping(value="/comJob/updateAppResult", produces = "application/text; charset=utf8", method=RequestMethod.POST)  
+    public String updateAppResult(JobApplication jobapp, Model model) {
+    	int appNo = jobapp.getAppNo();
+    	String appResult = jobapp.getAppResult();
+    	String result = null;  	
+    	
+    	System.out.println("지원서 번호는" + appNo);
+    	
+    	if(comJobDaoImpl.updateAppResult(appNo, appResult) == null) {
+    		result = "success";
+    	}
+    	
+    	return result;
+    }
 
     /*@RequestMapping(value="/comJob/seeJobInfoListBySearch/{page}", method=RequestMethod.GET)
     public String selectJobInfoListBySearch(@PathVariable(value = "page") String pageNumberStr, Model model){ 

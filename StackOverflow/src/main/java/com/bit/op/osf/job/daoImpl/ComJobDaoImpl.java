@@ -19,9 +19,12 @@ import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bit.op.osf.job.dao.ComJobDao;
 import com.bit.op.osf.job.model.ComMember;
+import com.bit.op.osf.job.model.JobApplication;
 import com.bit.op.osf.job.model.JobInfo;
 import com.bit.op.osf.job.model.JobInfoListView;
 import com.bit.op.osf.job.model.SearchJob;
@@ -163,6 +166,22 @@ public class ComJobDaoImpl extends DaoImpl implements ComJobDao {
 		map.put("comId", comId);
 		map.put("search", search);
 		return sqlSession.selectList(NAMESPACE + "selectJobInfoListBySearch", map);
+	}
+	
+	@Override
+	public List<JobApplication> selectJobAppManageList(String comId, int jobNo){
+		Map map = new HashMap();
+		map.put("comId", comId);
+		map.put("jobNo", jobNo);
+		return sqlSession.selectList(NAMESPACE + "selectJobAppManageList", map);
+	}
+	
+	@Override
+	public String updateAppResult(int appNo, String appResult) {
+		Map map = new HashMap();
+		map.put("appNo", appNo);
+		map.put("appResult", appResult);
+		return sqlSession.selectOne(NAMESPACE + "updateAppResult", map);
 	}
 	
 	/*

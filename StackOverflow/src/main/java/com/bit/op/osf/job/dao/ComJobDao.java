@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bit.op.osf.job.model.ComMember;
+import com.bit.op.osf.job.model.JobApplication;
 import com.bit.op.osf.job.model.JobInfo;
 import com.bit.op.osf.job.model.SearchJob;
 
@@ -38,13 +39,15 @@ public interface ComJobDao {
     
     public List<JobInfo> selectJobInfoListBySearch(@Param("firstRow") int firstRow,@Param("endRow") int endRow, @Param("comId") String comId, @Param("search") SearchJob search);
 
-
+    public List<JobApplication> selectJobAppManageList(@Param("comId") String comId, @Param("jobNo") int jobNo);
+    
+    public String updateAppResult(int appNo, String appResult);
+    
    /* public JobInfo selectJobInfo(int jobSeqNum);*/
 
   /* 
 
     
-
     public int countJobInfoManage(String comId, String endedJob);
 
     public List<JobInfo> selectJobInfoManageList(String comId, int firstRow, int endRow, String endedJob);

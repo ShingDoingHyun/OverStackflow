@@ -48,6 +48,10 @@ th, td {
    font-size: 14px;
    width: 10%;
  }
+ 
+ #fav{
+   cursor: pointer;
+ }
 </style>
 </head>
 <body>
@@ -112,12 +116,12 @@ th, td {
 		    <c:forEach var="jobInfo" items="${jobInfoListView.jobInfoList}" >
 			    <tr>
 					  <%-- <td>${jobInfo.jobNo}</td> --%>
+					  	<td style="width:5%;"><img src="<c:url value='/jobimage/unfav.png'/>" width="30px;" id="fav" value="${jobInfo.jobNo}"/></td>
 					    <td style="width:20%;"><a href="<c:url value="/comJob/seeJobInfo/${jobInfo.jobNo}"/>">${jobInfo.jobTitle}</a></td>
 					    <td>${jobInfo.jobField}</td>
 					    <td>${jobInfo.jobRegisterDate}</td>
-					    
 						<td>${jobInfo.jobLocation}</td>
-						<td>${jobInfo.jobWorkTime}</td>
+						<td>${jobInfo.jobWorkTime}</td>  
 						<td>
 							<c:if test="${jobInfo.jobPayType eq 'year'}">
 								연 ${jobInfo.jobPayAmount}
@@ -137,7 +141,7 @@ th, td {
 			</c:forEach>
 			
 				<tr>
-					 <td colspan="10">
+					 <td colspan="11">
 					   <% JobInfoListView jobInfoListView = (JobInfoListView)request.getAttribute("jobInfoListView");%>
 					   <% for(int i=1; i<jobInfoListView.getPageTotalCount(); i++){ %>
 					    <a href="<%=request.getContextPath()%>/comJob/seeJobInfoList/<%=i%>">[<%=i%>]</a>
@@ -157,3 +161,24 @@ th, td {
 <!----------------------footer End--------------------------------------->
 </body>
 </html>
+
+<script>
+$(function(){
+	var comId = "test1";
+	
+	$("#fav").click(function(){
+		
+	   $.ajax ({
+		   type: "post",
+		   url: "",
+		   data: {"comId": comId, "jobNo": jobNo},
+	       dataType:"text",
+	       success: function(data) {
+	    	   alert("즐겨찾기에 추가되었습니다");
+			   $("#fav").attr("src", "<c:url value='/jobimage/fav.png'/>");
+	    	}
+	   });
+		
+	});
+});
+</script>

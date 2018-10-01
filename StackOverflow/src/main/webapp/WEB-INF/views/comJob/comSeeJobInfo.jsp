@@ -161,7 +161,7 @@
 		
 		<div id="Apply">
 		<h2>접수기간 및 방법</h2>
-			<div class="box">접수 기간</div>
+			<div class="box">접수마감 날짜</div>
 			<p>${jobInfo.jobDueDate}<p>
 			
 			<div class="box">접수 방법</div>
