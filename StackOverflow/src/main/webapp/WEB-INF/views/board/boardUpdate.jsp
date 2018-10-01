@@ -83,14 +83,14 @@
 	<!----------------------main--------------------------------------->
 	<!-- 썸머노트 부분 -->
 	<div class="main" >
-		<form action="updateQuestion" method="post">
-		<input type="hidden" name="memId" />
+		<form action="<c:url value="/updateQuestion"/>" method="post">
+		<input type="hidden" name="questionNo" value="${questionBoard.questionNo }"/>
 			<br> <br> <br>
 			<p>질문 제목</p>
-			<input type="text" size="80" name="title" /> <br> <br>
+			<input type="text" size="80" name="title" value="${questionBoard.title }"/> <br> <br>
 			<p>질문 내용</p>
 			<div>
-			<textarea id="summernote" name="content"></textarea>
+			<textarea id="summernote" name="content">${questionBoard.content }</textarea>
 			</div>
 			<br>
 			<p>태그선택</p>
@@ -104,7 +104,7 @@
     <div id="myModal" class="modal">
  
       <!-- Modal content -->
-      <div class="modal-content">
+      <div class="modal-content" style="width: 710px;">
       <span class="close">&times;</span>   
         <form>
         <input type="text" size="20" />  <button type="button" style="margin-left: 15px;" >태그검색</button>

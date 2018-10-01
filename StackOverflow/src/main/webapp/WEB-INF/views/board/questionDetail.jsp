@@ -9,6 +9,7 @@
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <link
 	href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css"
 	rel="stylesheet">
@@ -106,8 +107,8 @@ iframe {
 			<h2>${questionBoard.title }</h2>
 			<br>
 			<div style="position: absolute; right: 10px;">
-				<button>
-					<a href="<c:url value="/openWriteQuestion"/>">질문하기</a>
+				<button onclick="location.href='<c:url value='/openWriteQuestion'/>'">
+					질문하기
 				</button>
 			</div>
 			<br>
@@ -131,7 +132,7 @@ iframe {
 					<p>${questionBoard.content }</p>
 				</div>
 				<div style="margin-top: 100px;">
-					<a href="">공유</a> <a href="/openUpdateQuestion/${questionBoard.questionNo }">수정</a> <a href="">삭제</a>
+					<a href="">공유</a> <a href="<c:url value="/openUpdateQuestion/${questionBoard.questionNo }"/>">수정</a> <a href="<c:url value="/deleteQuestion/${questionBoard.questionNo }"/>">삭제</a>
 				</div>
 				<div style="width: 100%; display: inline-block;">
 					<div style="float: left; width: 50%; margin-top: 80px;" class="accordian">
@@ -144,12 +145,32 @@ iframe {
 				<div>
 					<hr>
 					<c:forEach items="${questionBoard.commentList }" var="comment">
-						<div style="margin-left: 10px;">${comment.content } - ${comment.memId } <span class="subCommentAcco">댓글</span> 수정 삭제</div>
+						<div style="margin-left: 10px;">
+							<span class="content">${comment.content }</span> - <span class="commentId">${comment.memId }</span> &nbsp;&nbsp; [ 작성시간 ${comment.regDate} 
+							<span class="subCommentAcco">댓글</span> <span class="updateComment">수정</span> <span onclick="javacript:deleteComment(${comment.commentNo }, $(this));">삭제</span> ]
+						</div>
+						<div style="display: none;">
+							<form  onSubmit="return updateComment($(this));">
+								<input type="hidden" name="commentNo" value="${comment.commentNo }">
+								<textarea name="content" style="width: 95%;">${comment.content }</textarea>
+								<br> <button type="button" class="cancelUpdate">수정취소</button> <input type="submit" value="댓글수정">
+							</form>
+						</div>
+						<div>
 						<c:forEach items="${comment.commentList }" var="comment2">
 							<div style="margin-left: 10px;">
-								&nbsp;&nbsp;&nbsp;&nbsp;-${comment2.content }- ${comment2.memId } 수정 삭제
+								&nbsp;&nbsp;&nbsp;&nbsp;- <span class="content">${comment2.content }</span> - <span class="commentId">${comment2.memId }</span> &nbsp;&nbsp; [작성시간 ${comment2.regDate} 
+								<span class="updateComment">수정</span> <span onclick="javacript:deleteComment(${comment2.commentNo }, $(this));">삭제</span> ]
+							</div>
+							<div style="display: none;">
+								<form  onSubmit="return updateComment($(this));">
+									<input type="hidden" name="commentNo" value="${comment2.commentNo }">
+									<textarea name="content" style="width: 95%;">${comment2.content }</textarea>
+									<br> <button type="button" class="cancelUpdate">수정취소</button> <input type="submit" value="댓글수정">
+								</form>
 							</div>
 						</c:forEach>
+						</div>
 						<div id="accordian">
 							<ul>
 								<li> 
@@ -246,12 +267,32 @@ iframe {
 					<div>
 						<hr>
 						<c:forEach items="${replyboard.commentList }" var="comment">
-							<div style="margin-left: 10px;">${comment.content } - ${comment.memId } <span class="subCommentAcco">댓글</span> 수정 삭제</div>
-							<c:forEach items="${comment.commentList }" var="comment2">
-								<div style="margin-left: 10px;">
-									&nbsp;&nbsp;&nbsp;&nbsp;-${comment2.content }- ${comment2.memId } 댓글 수정 삭제
-								</div>
-							</c:forEach>
+							<div style="margin-left: 10px;">
+								<span class="content">${comment.content }</span> - <span class="commentId">${comment.memId }</span> &nbsp;&nbsp; [ 작성시간 ${comment.regDate} 
+								<span class="subCommentAcco">댓글</span> <span class="updateComment">수정</span> <span onclick="javacript:deleteComment(${comment.commentNo }, $(this));">삭제</span> ]
+							</div>
+							<div style="display: none;">
+								<form  onSubmit="return updateComment($(this));">
+									<input type="hidden" name="commentNo" value="${comment.commentNo }">
+									<textarea name="content" style="width: 95%;">${comment.content }</textarea>
+									<br> <button type="button" class="cancelUpdate">수정취소</button> <input type="submit" value="댓글수정">
+								</form>
+							</div>
+							<div>
+								<c:forEach items="${comment.commentList }" var="comment2">
+									<div style="margin-left: 10px;">
+										&nbsp;&nbsp;&nbsp;&nbsp;- <span class="content">${comment2.content }</span> - <span class="commentId">${comment2.memId }</span> &nbsp;&nbsp; [ 작성시간 ${comment2.regDate} 
+										<span class="updateComment">수정</span> <span onclick="javacript:deleteComment(${comment2.commentNo }, $(this));">삭제</span> ]
+									</div>
+									<div style="display: none;">
+										<form  onSubmit="return updateComment($(this));">
+											<input type="hidden" name="commentNo" value="${comment2.commentNo }">
+											<textarea name="content" style="width: 95%;">${comment2.content }</textarea>
+											<br> <button type="button" class="cancelUpdate">수정취소</button> <input type="submit" value="댓글수정">
+										</form>
+									</div>
+								</c:forEach>
+							</div>
 							<div id="accordian">
 								<ul>
 									<li> 
@@ -321,6 +362,33 @@ iframe {
 <!-- 게시판 jQuery -->
 <script>
 
+$(document).ready(
+		//서머노트
+		function() {
+			$('#summernote').summernote({
+				lang : 'ko-KR',
+				height : 300,
+				width : 600,
+				fontNames : 
+					[ '맑은고딕', 'Arial',
+					'Arial Black',
+					'Comic Sans MS',
+					'Courier New', ],
+				fontNamesIgnoreCheck : [ '맑은고딕' ],
+				focus : true,
+				callbacks : {
+					onImageUpload : function(files, editor, welEditable) {
+										for (var i = files.length - 1; i >= 0; i--) {
+											sendFile(files[i], this);
+										}
+									}
+					}
+
+				});
+		}	
+				
+);
+
 
 $(function(){
 	//아코디언 형식
@@ -331,46 +399,31 @@ $(function(){
 			$(this).parent().next().next().find(".comment").slideDown(); 
 		} 
 	});
-});
 
-$(function(){
 	//아코디언 형식
 	$(".subCommentAcco").click(function(){
-		$(this).parent().next().next().find(".comment").slideUp();
-		if(!$(this).parent().next().next().find(".comment").is(":visible"))
+		$(this).parent().next().next().next().find(".comment").slideUp();
+		if(!$(this).parent().next().next().next().find(".comment").is(":visible"))
 		{
-			$(this).parent().next().next().find(".comment").slideDown(); 
+			$(this).parent().next().next().next().find(".comment").slideDown(); 
 		} 
 	});
+
+	$(".updateComment").click(function(){
+		$(this).parent().next().css("display", "");
+		$(this).parent().css("display", "none");
+	});
+	
+	$(".cancelUpdate").click(function(){
+		$(this).parent().parent().prev().css("display", "");
+		$(this).parent().parent().css("display", "none");
+	});
+	
+
+	
 });
 	
-	$(document)
-			.ready(
-					function() {
-						$('#summernote')
-								.summernote(
-										{
-											lang : 'ko-KR',
-											height : 300,
-											width : 600,
-											fontNames : [ '맑은고딕', 'Arial',
-													'Arial Black',
-													'Comic Sans MS',
-													'Courier New', ],
-											fontNamesIgnoreCheck : [ '맑은고딕' ],
-											focus : true,
-											callbacks : {
-												onImageUpload : function(files,
-														editor, welEditable) {
-													for (var i = files.length - 1; i >= 0; i--) {
 
-														sendFile(files[i], this);
-													}
-												}
-											}
-
-										});
-					});
 
 	function sendFile(file, el) {
 		var form_data = new FormData();
@@ -398,6 +451,50 @@ $(function(){
 		return location.href.substring(hostIndex, location.href.indexOf('/',
 				hostIndex + 1));
 	};
+	
+	function updateComment(e) {
+
+	       var queryString = e.serialize();
+
+
+	       
+ 	        $.ajax({
+	            type : 'post',
+	            url : getContextPath() +'/updateComment',
+	            data : queryString,
+	            dataType : 'text',
+	            contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
+	            success : function(data){
+	            	e.parent().css("display", "none");
+	            	e.parent().prev().css("display", "");
+	            	e.parent().prev().find(".content").text(data);
+	                
+	            }
+	        }); 
+
+	       return false;
+
+	};
+	
+	function deleteComment(commentNo, e){
+		
+		   $.ajax({
+	            type : 'post',
+	            url : getContextPath() +'/deleteComment',
+	            data : { "commentNo" : commentNo },
+	            dataType : 'text',
+	            contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
+	            success : function(data){
+	            	e.parent().find(".content").text("삭제된 댓글입니다.");
+	            	e.parent().find(".commentId").text("알 수 없는 사용자");
+	                
+	            }
+	        }); 
+		
+	};
+	
+	
+	
 </script>
 
 </html>

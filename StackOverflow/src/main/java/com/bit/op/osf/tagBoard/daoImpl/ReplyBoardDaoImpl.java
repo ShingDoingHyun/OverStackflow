@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 
 import com.bit.op.osf.tagBoard.dao.ICommentDao;
 import com.bit.op.osf.tagBoard.dao.IReplyBoardDao;
-import com.bit.op.osf.tagBoard.model.Comment;
 import com.bit.op.osf.tagBoard.model.ReplyBoard;
 
 @Repository

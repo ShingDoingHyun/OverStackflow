@@ -1,6 +1,8 @@
 package com.bit.op.osf.tagBoard.daoImpl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -40,8 +42,17 @@ public class TagDaoImpl implements ITagDao {
 
 	@Override
 	public List<Tag> selectTagNameList(String middleTag) {
-		// TODO Auto-generated method stub
+
 		return sqlSession.selectList(COMMENT_NAMESPACE + "selectTagNameList", middleTag);
+	}
+
+	@Override
+	public int insertQuestionTag(Integer tagNo, Integer questionNo) {
+		Map<String, Integer> map = new  HashMap<String, Integer>();
+		map.put("questionNo", questionNo);
+		map.put("tagNo", tagNo);
+		
+		return sqlSession.insert(COMMENT_NAMESPACE + "insertQuestionTag", map);
 	}
 
 

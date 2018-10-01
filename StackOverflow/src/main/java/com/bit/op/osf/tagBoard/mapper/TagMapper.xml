@@ -3,6 +3,9 @@
 
 <mapper namespace="com.bit.op.osf.tagBoard.mapper.TagMapper">
 
+
+
+
 	<select id="selectTagList" resultType="com.bit.op.osf.tagBoard.model.Tag">
 		select tagNo, tagMainName, tagMiddleName, tagName, tagDetail from tag;
 	</select>
@@ -16,7 +19,13 @@
 	</select>
 	
 	<select id="selectTagNameList" resultType="com.bit.op.osf.tagBoard.model.Tag" parameterType="String">
-		select DISTINCT tagName from tag where tagMiddleName= #{param};
+		select DISTINCT tagName, tagNo from tag where tagMiddleName= #{param};
 	</select>
+	
+	<insert id="insertQuestionTag" parameterType="java.util.HashMap">
+		insert into questionTag (questionNo, tagNo) value (#{questionNo}, #{tagNo} );
+	</insert>
+	
+	
 	
 </mapper>

@@ -19,7 +19,7 @@ public class ReplyBoardController {
 	@RequestMapping(value = "/insertReply", method = RequestMethod.POST)
 	public String insertReply(ReplyBoard replyBoard) {
 		
-		int result = replyBoardDao.insertReplyBoard(replyBoard);
+		replyBoardDao.insertReplyBoard(replyBoard);
 
 		return "redirect:/questionDetail/"+replyBoard.getQuestionNo();
 	}

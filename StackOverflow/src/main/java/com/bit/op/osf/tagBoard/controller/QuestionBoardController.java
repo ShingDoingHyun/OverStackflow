@@ -53,7 +53,8 @@ public class QuestionBoardController {
 	@RequestMapping(value = "/insertQuestion", method = RequestMethod.POST)
 	public String insertQuestion(QuestionBoard questionBoard) {
 		
-		//시퀀스 1로 받아오는 문제 나중에 수정...
+		System.out.println(questionBoard);
+		
 		int result = questionBoardDao.insertQuestionBoard(questionBoard);
 		
 		return "redirect:/questionDetail/"+result;
@@ -69,7 +70,14 @@ public class QuestionBoardController {
 		
 	}
 	
-	
+	@RequestMapping(value = "/updateQuestion", method = RequestMethod.POST)
+	public String updateQuestion(QuestionBoard questionBoard) {
+		
+		questionBoardDao.updateQuestionBoard(questionBoard);
+		int result = questionBoard.getQuestionNo();
+		return "redirect:/questionDetail/"+result;
+		
+	}
 	
 	
 	@RequestMapping(value = "/questionDetail/{questionBoardNo}", method = RequestMethod.GET)
@@ -81,6 +89,18 @@ public class QuestionBoardController {
 		return "board/questionDetail";
 		
 	}	
+	
+	@RequestMapping(value = "/deleteQuestion/{questionBoardNo}", method = RequestMethod.GET)
+	public String deleteQuestion(Model model, @PathVariable("questionBoardNo") int questionBoardNo) {
+		
+		
+		questionBoardDao.deleteQuestionBoard(questionBoardNo);
+		
+		return "redirect:/questionDetail/"+questionBoardNo;
+		
+	}	
+	
+	
 
 	@RequestMapping(value = "/imageUpload", method = RequestMethod.POST)
 	@ResponseBody

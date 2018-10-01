@@ -33,10 +33,10 @@
 table {
     width: 100%;
     border-collapse: collapse;
-  }
+ }
   
 th, td {
-    border-bottom: 1px solid #777777;
+   
     padding-top: 15px;
     padding-bottom: 15px;
     font-size: 12px;
@@ -68,8 +68,8 @@ th, td {
 		</div>
 
 		<div class="right">
-			<button>
-				<a href="<c:url value="/openWriteQuestion"/>">질문하기</a>
+			<button onclick="location.href='<c:url value='/openWriteQuestion'/>'">
+				질문하기
 			</button>
 		</div>
 	</div>
@@ -79,14 +79,24 @@ th, td {
 			<table width="100%">
 				<c:forEach items="${questionBoardList }" var="questionBoard">
 						<tr>
-							<td width="8%" align="center"><img src="<c:url value='/img/unFav.png'/>" width="30px" height="30px"></td>
-							<td width="8%" align="center">0<br>추천</td>
-							<td width="8%" align="center">0<br>답변</td>
-							<td width="8%" align="center">${questionBoard.view}<br>읽음</td>
-							<td width="48%"><p><a href="<c:url value="/questionDetail/${questionBoard.questionNo }"/>">${questionBoard.title }</a></p></td>
-							<td width="20%">작성시간 <fmt:formatDate value="${questionBoard.regDate}" pattern="yyyy년 MM월 dd일 HH:mm:ss"/> ${questionBoard.memId }</td>
+							<td width="8%" align="center" rowspan="2" style=" border-bottom: 1px solid #777777;"><img src="<c:url value='/img/unFav.png'/>" width="30px" height="30px"></td>
+							<td width="8%" align="center">0</td>
+							<td width="8%" align="center">0</td>
+							<td width="8%" align="center">${questionBoard.view}</td>
+							<td width="48%"><p><a href="<c:url value="/questionDetail/${questionBoard.questionNo }"/>">${questionBoard.title }</a>
+							</p></td>
+							<td width="20%" rowspan="2" style=" border-bottom: 1px solid #777777;">작성시간 <fmt:formatDate value="${questionBoard.regDate}" pattern="yyyy년 MM월 dd일 HH:mm:ss"/> ${questionBoard.memId }</td>
 						</tr>
-					
+						<tr style=" border-bottom: 1px solid #777777;">
+							<td width="8%" align="center">추천</td>
+							<td width="8%" align="center">답변</td>
+							<td width="8%" align="center">읽음</td>
+							<td width="48%">
+							<c:forEach items="${questionBoard.tagList }" var="tag">
+								<span style="background:#8B9DC3; color:white; width:50px; display:inline-block; text-align: center; border-radius: 2px;border-radius: 10px;">${tag.tagName }</span>&nbsp;
+							</c:forEach>
+							</td>
+						</tr>
 				</c:forEach>
 			</table>
 		</div>

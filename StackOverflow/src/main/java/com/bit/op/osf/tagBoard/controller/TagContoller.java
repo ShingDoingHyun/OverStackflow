@@ -1,6 +1,5 @@
 package com.bit.op.osf.tagBoard.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;

@@ -37,8 +37,8 @@
 		<property value="classpath:/mybatis-config.xml" name="configLocation" />
 		<property name="mapperLocations"> 
 			<list> 
-				<value>classpath:com/bit/op/osf/job/mapper/*.xml</value>
-				<value>classpath:com/bit/op/osf/tagBoard/mapper/*.xml</value>							
+			
+			 <value>classpath:com/bit/op/osf/**/*Mapper.xml</value>	 				
 			 </list>
 		 </property>
 	</bean>
@@ -48,7 +48,6 @@
 	</bean>
 
 	<!-- package 스캔 -->
-	<context:component-scan  base-package="com.bit.op.osf.job.daoImpl" />
-	<context:component-scan  base-package="com.bit.op.osf.tagBoard.daoImpl" />
+	<context:component-scan  base-package="com.bit.op.osf" />
 
 </beans>

@@ -1,5 +1,6 @@
 package com.bit.op.osf.tagBoard.model;
 
+import java.util.Date;
 import java.util.List;
 
 public class ReplyBoard {
@@ -9,14 +10,14 @@ public class ReplyBoard {
 	private String content;
 	private int vote;
 	private String selection;
-	private String regDate;
+	private Date regDate;
 	private List<Comment> commentList;
 
 	public ReplyBoard() {
 	}
 
 	public ReplyBoard(int replyNo, String memId, int questionNo, String content, int vote, String selection,
-			String regDate, List<Comment> commentList) {
+			Date regDate, List<Comment> commentList) {
 		super();
 		this.replyNo = replyNo;
 		this.memId = memId;
@@ -76,11 +77,11 @@ public class ReplyBoard {
 		this.selection = selection;
 	}
 
-	public String getRegDate() {
+	public Date getRegDate() {
 		return regDate;
 	}
 
-	public void setRegDate(String regDate) {
+	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
 

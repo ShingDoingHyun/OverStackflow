@@ -44,8 +44,21 @@ public class CommentDaoImpl implements ICommentDao {
 		for(Comment comment: commentList){
 			comment.setCommentList(sqlSession.selectList(COMMENT_NAMESPACE + selectSubComment, comment));
 		}
+	
 		return commentList;
 		
+	}
+
+	@Override
+	public int updateComment(Comment comment) {
+		// TODO Auto-generated method stub
+		return sqlSession.update(COMMENT_NAMESPACE + "updateComment",comment);
+	}
+
+	@Override
+	public int deleteComment(int commentNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.update(COMMENT_NAMESPACE + "deleteComment",commentNo);
 	}
 
 

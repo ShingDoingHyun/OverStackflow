@@ -16,4 +16,6 @@ public interface ITagDao {
 	
 	List<Tag> selectTagNameList(String middleTag);
 
+	int insertQuestionTag(Integer tagNo, Integer questionNo);
+
 }

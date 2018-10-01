@@ -17,5 +17,9 @@ public interface IQuestionBoardDao {
 
 	Object selectQuestionDeltail(int questionBoardNo);
 
+	int updateQuestionBoard(QuestionBoard questionBoard);
+
+	int deleteQuestionBoard(int questionBoardNo);
+
 
 }

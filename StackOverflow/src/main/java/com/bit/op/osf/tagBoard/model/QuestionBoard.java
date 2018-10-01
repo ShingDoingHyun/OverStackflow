@@ -13,9 +13,11 @@ public class QuestionBoard{
 	private int prise;
 	private int view;
 	private int fav;
+	private String tags;//글 작성시 태그 리스트를 받기 위해 사용
 	private String priseLimitDate;
 	private List<Comment> commentList;
 	private List<ReplyBoard> replyBoardList;
+	private List<Tag> tagList;
 	
 	
 	
@@ -24,7 +26,8 @@ public class QuestionBoard{
 
 
 	public QuestionBoard(int questionNo, String memId, String content, int vote, Date regDate, String title, int prise,
-			int view, int fav, String priseLimitDate, List<Comment> commentList, List<ReplyBoard> replyBoardList) {
+			int view, int fav, String tags, String priseLimitDate, List<Comment> commentList,
+			List<ReplyBoard> replyBoardList, List<Tag> tagList) {
 		super();
 		this.questionNo = questionNo;
 		this.memId = memId;
@@ -35,9 +38,21 @@ public class QuestionBoard{
 		this.prise = prise;
 		this.view = view;
 		this.fav = fav;
+		this.tags = tags;
 		this.priseLimitDate = priseLimitDate;
 		this.commentList = commentList;
 		this.replyBoardList = replyBoardList;
+		this.tagList = tagList;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "QuestionBoard [questionNo=" + questionNo + ", memId=" + memId + ", content=" + content + ", vote="
+				+ vote + ", regDate=" + regDate + ", title=" + title + ", prise=" + prise + ", view=" + view + ", fav="
+				+ fav + ", tags=" + tags + ", priseLimitDate=" + priseLimitDate + ", commentList=" + commentList
+				+ ", replyBoardList=" + replyBoardList + ", tagList=" + tagList + "]";
 	}
 
 
@@ -150,6 +165,18 @@ public class QuestionBoard{
 
 
 
+	public String getTags() {
+		return tags;
+	}
+
+
+
+	public void setTags(String tags) {
+		this.tags = tags;
+	}
+
+
+
 	public String getPriseLimitDate() {
 		return priseLimitDate;
 	}
@@ -186,15 +213,18 @@ public class QuestionBoard{
 
 
 
-	@Override
-	public String toString() {
-		return "QuestionBoard [questionNo=" + questionNo + ", memId=" + memId + ", content=" + content + ", vote="
-				+ vote + ", regDate=" + regDate + ", title=" + title + ", prise=" + prise + ", view=" + view + ", fav="
-				+ fav + ", priseLimitDate=" + priseLimitDate + ", commentList=" + commentList + ", replyBoardList="
-				+ replyBoardList + "]";
+	public List<Tag> getTagList() {
+		return tagList;
 	}
-	
+
+
+
+	public void setTagList(List<Tag> tagList) {
+		this.tagList = tagList;
+	}
+
 	
 	
 	
 }
+	
