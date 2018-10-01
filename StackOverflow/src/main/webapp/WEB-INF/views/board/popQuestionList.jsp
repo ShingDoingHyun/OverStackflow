@@ -40,7 +40,13 @@ th, td {
     padding-top: 15px;
     padding-bottom: 15px;
     font-size: 12px;
-  }
+}
+  
+td{
+     padding-top: 10px;
+    padding-bottom: 10px;
+  
+}
 </style>
 
 </head>

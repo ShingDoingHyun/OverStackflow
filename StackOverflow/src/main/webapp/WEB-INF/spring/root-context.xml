@@ -27,9 +27,9 @@
 	id="dataSource"
 	class="org.apache.commons.dbcp2.BasicDataSource"
 	p:driverClassName="com.mysql.jdbc.Driver"
-	p:url="jdbc:mysql://localhost:3306/overStackflow?characterEncoding=utf8"
-	p:username="overStackflow"
-	p:password="1234"
+	p:url="jdbc:mysql://opendb.cltt5gnz0dg0.ap-northeast-2.rds.amazonaws.com/overStackflow?characterEncoding=utf8"
+	p:username="open"
+	p:password="123456789"
 	/>
 
 	<bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactory">

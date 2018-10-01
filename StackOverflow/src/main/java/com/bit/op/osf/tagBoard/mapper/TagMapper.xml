@@ -23,9 +23,15 @@
 	</select>
 	
 	<insert id="insertQuestionTag" parameterType="java.util.HashMap">
-		insert into questionTag (questionNo, tagNo) value (#{questionNo}, #{tagNo} );
+		insert into questiontag (questionNo, tagNo) value (#{questionNo}, #{tagNo} );
 	</insert>
 	
+	<select id="selectQuestionTag" resultType="com.bit.op.osf.tagBoard.model.QuestionTag">
+		select questionNo, tagNo from questiontag where questionNo= #{param};
+	</select>
 	
+	<delete id="delectQuestionTag" parameterType="com.bit.op.osf.tagBoard.model.QuestionTag">
+		delete from questiontag where questionNo=#{questionNo} and tagNo=#{tagNo};
+	</delete>
 	
 </mapper>

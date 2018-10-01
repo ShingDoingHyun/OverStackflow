@@ -2,6 +2,7 @@ package com.bit.op.osf.tagBoard.dao;
 
 import java.util.List;
 
+import com.bit.op.osf.tagBoard.model.QuestionTag;
 import com.bit.op.osf.tagBoard.model.Tag;
 
 
@@ -17,5 +18,10 @@ public interface ITagDao {
 	List<Tag> selectTagNameList(String middleTag);
 
 	int insertQuestionTag(Integer tagNo, Integer questionNo);
+
+	List<QuestionTag> selectQuestionTag(int result);
+
+
+	void deleteQuestionTag(QuestionTag questionTag1);
 
 }

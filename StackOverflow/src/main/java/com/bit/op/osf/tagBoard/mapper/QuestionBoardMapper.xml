@@ -12,7 +12,15 @@
     </insert>
     
     <select id="selectQuestionNo" resultType="com.bit.op.osf.tagBoard.model.QuestionBoard" parameterType="int">
-    	select questionNo, memId, content, title from questionboard where questionno= #{param};
+    	select questionboard.questionNo, memId, title, content, regDate, view, tags, tagNos
+			from questionboard
+			left join (select questionNo, group_concat(tagName separator ' ') as tags , group_concat(questiontag.tagNo separator ' ') as tagNos
+				from questiontag
+				left join tag  
+					on questiontag.tagNo = tag.tagNo
+			   	group by questionNo) as b
+			on questionboard.questionNo = b.questionNo
+		where questionboard.questionNo = #{param};
     </select>
     
     <select id="selectPopQuestion" resultType="com.bit.op.osf.tagBoard.model.QuestionBoard">

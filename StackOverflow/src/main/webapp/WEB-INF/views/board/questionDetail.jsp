@@ -131,6 +131,9 @@ iframe {
 				<div>
 					<p>${questionBoard.content }</p>
 				</div>
+				<c:forEach items="${questionBoard.tagList }" var="tag" >
+					<span style="background:#8B9DC3; color:white; width:50px; display:inline-block; text-align: center; border-radius: 2px;border-radius: 10px;">${tag.tagName }</span>
+				</c:forEach>
 				<div style="margin-top: 100px;">
 					<a href="">공유</a> <a href="<c:url value="/openUpdateQuestion/${questionBoard.questionNo }"/>">수정</a> <a href="<c:url value="/deleteQuestion/${questionBoard.questionNo }"/>">삭제</a>
 				</div>

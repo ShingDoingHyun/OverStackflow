@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.bit.op.osf.tagBoard.dao.ITagDao;
+import com.bit.op.osf.tagBoard.model.QuestionTag;
 import com.bit.op.osf.tagBoard.model.Tag;
 
 @Repository
@@ -53,6 +54,18 @@ public class TagDaoImpl implements ITagDao {
 		map.put("tagNo", tagNo);
 		
 		return sqlSession.insert(COMMENT_NAMESPACE + "insertQuestionTag", map);
+	}
+
+	@Override
+	public List<QuestionTag> selectQuestionTag(int result) {
+
+		return sqlSession.selectList(COMMENT_NAMESPACE + "selectQuestionTag", result);
+	}
+
+	@Override
+	public void deleteQuestionTag(QuestionTag questionTag1) {
+		// TODO Auto-generated method stub
+		sqlSession.delete(COMMENT_NAMESPACE + "delectQuestionTag", questionTag1);
 	}
 
 

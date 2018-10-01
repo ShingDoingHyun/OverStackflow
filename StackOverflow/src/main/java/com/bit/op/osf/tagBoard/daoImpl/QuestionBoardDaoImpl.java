@@ -13,6 +13,7 @@ import com.bit.op.osf.tagBoard.dao.IQuestionBoardDao;
 import com.bit.op.osf.tagBoard.dao.IReplyBoardDao;
 import com.bit.op.osf.tagBoard.dao.ITagDao;
 import com.bit.op.osf.tagBoard.model.QuestionBoard;
+import com.bit.op.osf.tagBoard.model.QuestionTag;
 import com.bit.op.osf.tagBoard.model.Tag;
 
 @Repository
@@ -20,89 +21,101 @@ public class QuestionBoardDaoImpl implements IQuestionBoardDao {
 
 	@Inject
 	private SqlSession sqlSession;
-	
+
 	@Inject
 	private ICommentDao commentDao;
-	
+
 	@Inject
 	private IReplyBoardDao replyBoardDao;
-	
+
 	@Inject
 	private ITagDao tagDao;
-	
 
 	private static final String QUSETION_NAMESPACE = "com.bit.op.osf.tagBoard.mapper.QuestionBoardMapper.";
 
 	@Override
 	public int insertQuestionBoard(QuestionBoard questionboard) {
-		
-	
+
+		System.out.println(questionboard);
 		sqlSession.insert(QUSETION_NAMESPACE + "insertQuestion", questionboard);
+
 		int result = questionboard.getQuestionNo();
-		
-		System.out.println(questionboard.getTags());
-		String[] tagList =  questionboard.getTags().split("#");
-		System.out.println(tagList);
-		for(String tagNo : tagList) {
-			
-			if(tagNo!=null && tagNo!= "") {
-				System.out.println("태그의 값 빈값은 안나온다 : " + tagNo);
+
+		String[] tagList = questionboard.getTags().split("#");
+		for (String tagNo : tagList) {
+
+			if (tagNo != null && tagNo != "") {
 				try {
 					tagDao.insertQuestionTag(Integer.parseInt(tagNo), result);
-				}catch (Exception e) {
+				} catch (Exception e) {
 					// TODO: handle exception
 				}
 			}
 		}
-
 
 		return result;
 	}
 
 	@Override
 	public QuestionBoard selectQuestionNo(int questionNo) {
-		
-		return sqlSession.selectOne(QUSETION_NAMESPACE + "selectQuestionNo", questionNo);
+
+		QuestionBoard questionBoard = sqlSession.selectOne(QUSETION_NAMESPACE + "selectQuestionNo", questionNo);
+
+		if (questionBoard.getTags() != null && questionBoard.getTags() != "") {
+			String[] tags = questionBoard.getTags().split(" ");
+			String[] tagNos = questionBoard.getTagNos().split(" ");
+
+			List<Tag> tagList = new ArrayList<Tag>();
+			int index = 0;
+			for (String tag : tags) {
+				Tag getTag = new Tag();
+				getTag.setTagName(tag);
+				getTag.setTagNo(Integer.parseInt(tagNos[index]));
+				tagList.add(getTag);
+				index++;
+			}
+
+			questionBoard.setTagList(tagList);
+		}
+
+		return questionBoard;
 	}
 
 	@Override
 	public List<QuestionBoard> selectPopQuestionList() {
 		List<QuestionBoard> questionBoardList = sqlSession.selectList(QUSETION_NAMESPACE + "selectPopQuestion");
-		
-		for(QuestionBoard questionBoard : questionBoardList) {
-			if(questionBoard.getTags()!=null && questionBoard.getTags()!= "") {
+
+		for (QuestionBoard questionBoard : questionBoardList) {
+			if (questionBoard.getTags() != null && questionBoard.getTags() != "") {
 				String[] tags = questionBoard.getTags().split(" ");
-				
+
 				List<Tag> tagList = new ArrayList<Tag>();
-				
-				for(String tag : tags) {
+
+				for (String tag : tags) {
 					Tag getTag = new Tag();
 					getTag.setTagName(tag);
 					tagList.add(getTag);
 				}
-				
+
 				questionBoard.setTagList(tagList);
 			}
 		}
-		
+
 		return questionBoardList;
 	}
-	
+
 	@Override
 	public int updateQuestionView(int questionNo) {
-		
+
 		int result = sqlSession.update(QUSETION_NAMESPACE + "updateQuestionView", questionNo);
 		return result;
 	}
-	
-	
 
-	
 	@Override
 	public QuestionBoard selectQuestionDeltail(int questionNo) {
-		
+
 		updateQuestionView(questionNo);
-		QuestionBoard questionBoard = selectQuestionNo(questionNo);	
+		QuestionBoard questionBoard = selectQuestionNo(questionNo);
 		questionBoard.setReplyBoardList(replyBoardDao.selectReplyBoardList(questionNo));
 		questionBoard.setCommentList(commentDao.selectCommentList(questionBoard.getQuestionNo(), "question"));
 		return questionBoard;
@@ -110,9 +123,49 @@ public class QuestionBoardDaoImpl implements IQuestionBoardDao {
 
 	@Override
 	public int updateQuestionBoard(QuestionBoard questionBoard) {
-		
+
 		sqlSession.update(QUSETION_NAMESPACE + "updateQuestion", questionBoard);
+
 		int result = questionBoard.getQuestionNo();
+
+		List<QuestionTag> questionTagList = tagDao.selectQuestionTag(result);
+
+		String[] tagList = questionBoard.getTags().split("#");
+
+		for (QuestionTag questionTag : questionTagList) {
+			int check = 0;
+			int val = 0;
+			for (String tagNo : tagList) {
+				val = questionTag.getTagNo();
+				try {
+					int tagNoInt = Integer.parseInt(tagNo);
+
+					if (val == tagNoInt) {
+						check = 1;
+						break;
+					}
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+			}
+			if (check == 0) {
+				QuestionTag questionTag1 = new QuestionTag(result, val);
+				tagDao.deleteQuestionTag(questionTag1);
+			}
+		}
+
+		for (String tagNo : tagList) {
+			if (tagNo != null && tagNo != "") {
+
+				try {
+					tagDao.insertQuestionTag(Integer.parseInt(tagNo), result);
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+
+			}
+		}
+
 		return result;
 	}
 
@@ -121,6 +174,5 @@ public class QuestionBoardDaoImpl implements IQuestionBoardDao {
 
 		return sqlSession.update(QUSETION_NAMESPACE + "deleteQuestion", questionBoardNo);
 	}
-	
 
 }

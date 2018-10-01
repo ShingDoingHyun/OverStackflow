@@ -14,6 +14,7 @@ public class QuestionBoard{
 	private int view;
 	private int fav;
 	private String tags;//글 작성시 태그 리스트를 받기 위해 사용
+	private String tagNos;//글 작성시 태그 리스트를 받기 위해 사용
 	private String priseLimitDate;
 	private List<Comment> commentList;
 	private List<ReplyBoard> replyBoardList;
@@ -26,7 +27,7 @@ public class QuestionBoard{
 
 
 	public QuestionBoard(int questionNo, String memId, String content, int vote, Date regDate, String title, int prise,
-			int view, int fav, String tags, String priseLimitDate, List<Comment> commentList,
+			int view, int fav, String tags, String tagNos, String priseLimitDate, List<Comment> commentList,
 			List<ReplyBoard> replyBoardList, List<Tag> tagList) {
 		super();
 		this.questionNo = questionNo;
@@ -39,6 +40,7 @@ public class QuestionBoard{
 		this.view = view;
 		this.fav = fav;
 		this.tags = tags;
+		this.tagNos = tagNos;
 		this.priseLimitDate = priseLimitDate;
 		this.commentList = commentList;
 		this.replyBoardList = replyBoardList;
@@ -51,8 +53,8 @@ public class QuestionBoard{
 	public String toString() {
 		return "QuestionBoard [questionNo=" + questionNo + ", memId=" + memId + ", content=" + content + ", vote="
 				+ vote + ", regDate=" + regDate + ", title=" + title + ", prise=" + prise + ", view=" + view + ", fav="
-				+ fav + ", tags=" + tags + ", priseLimitDate=" + priseLimitDate + ", commentList=" + commentList
-				+ ", replyBoardList=" + replyBoardList + ", tagList=" + tagList + "]";
+				+ fav + ", tags=" + tags + ", tagNos=" + tagNos + ", priseLimitDate=" + priseLimitDate
+				+ ", commentList=" + commentList + ", replyBoardList=" + replyBoardList + ", tagList=" + tagList + "]";
 	}
 
 
@@ -177,6 +179,18 @@ public class QuestionBoard{
 
 
 
+	public String getTagNos() {
+		return tagNos;
+	}
+
+
+
+	public void setTagNos(String tagNos) {
+		this.tagNos = tagNos;
+	}
+
+
+
 	public String getPriseLimitDate() {
 		return priseLimitDate;
 	}
@@ -223,8 +237,9 @@ public class QuestionBoard{
 		this.tagList = tagList;
 	}
 
+
 	
-	
+
 	
 }
 	

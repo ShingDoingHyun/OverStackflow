@@ -93,8 +93,14 @@
 			<textarea id="summernote" name="content">${questionBoard.content }</textarea>
 			</div>
 			<br>
-			<p>태그선택</p>
-			<input type="text" size="67" id="tag" />  <button type="button" style="margin-left: 15px;"  id="myBtn">태그선택</button>  <br>
+			<button type="button" id="myBtn">태그선택</button>  
+			<div style="height:50px;" id="tags">
+			<c:forEach items="${questionBoard.tagList }" var="tag" >
+				<span class="tag" style="margin-left:10px;">#${tag.tagName }</span>
+			</c:forEach>
+			</div>
+			<input type="hidden" name="tags" value="<c:forEach items="${questionBoard.tagList }" var="tag" >#${tag.tagNo }</c:forEach>">
+			<br>
 			<br> <input type="submit" value="작성" />
 		</form>
 	</div>
@@ -225,7 +231,7 @@
 	    modal.style.display = "block";
 	    var html = '';
 	    $.ajax({
-	       	url: 'selectTagMainName',
+	       	url: getContextPath()+'/selectTagMainName',
 	        dataType:"json",
 	        success: function(data) {
 	        	$.each(data, function(index,tag){ 
@@ -250,7 +256,7 @@
 		data.css('background', '#AED6F1');
 	    var html = '';
 	    $.ajax({
-	       	url: 'selectTagMiddleName',
+	       	url: getContextPath()+'/selectTagMiddleName',
 	       	data : { "mainTag" : data.text()},
 	        dataType:"json",
 	        success: function(data) {
@@ -273,31 +279,30 @@
 		data.css('background', '#AED6F1');
 	    var html = '';
 	    $.ajax({
-	       	url: 'selectTagName',
+	       	url: getContextPath()+'/selectTagName',
 	       	data : { "middleTag" : data.text()},
 	        dataType:"json",
 	        success: function(data) {
 	        	$.each(data, function(index,tag){ 
 	        		
-	        		
-	        		var testValue = $('#tag').val();
-	        		var subValue  = String(tag.tagName);
-	        		
-
-	        		var iValue = testValue.indexOf(subValue);
-	        		
-	        		
-	        		
-	           		html += '<tr>';
-	           		if(iValue != -1){
-	           			html += '<td onclick="javascript:tagInsert($(this));" style="background:#AED6F1;">' + tag.tagName +'</td>';
+					var chk = 0;
+					$('.tag').each(function(index) {
+						
+						var testValue = $(this).text();
+		        		var subValue  = '#'+String(tag.tagName);
+		        		if(testValue == subValue){
+		        			chk=1;
+		        		}
+					});
+					
+		           	html += '<tr>';
+	           		if(chk > 0){
+	           			html += '<td onclick="javascript:tagInsert($(this));" style="background:#AED6F1;">' + tag.tagName;
 	           		}
-	           		else{
-	           			html += '<td onclick="javascript:tagInsert($(this));">' + tag.tagName +'</td>';
-	           		}
-	           		
-
-	           	  	html += '<tr>';
+	           		else{ 
+	           			html += '<td onclick="javascript:tagInsert($(this));">' + tag.tagName;
+ 	           		}
+	           	  	html += '</td><td style="display:none">'+tag.tagNo+'</td><tr>';
 	           	});
 	        	$('#name').html(html);
 	        }
@@ -305,27 +310,30 @@
 	};
 
 	function tagInsert(data) {
-		
-		var testValue = $('#tag').val();
-		var subValue  = String(data.text());
-		
-
-		var iValue = testValue.indexOf(subValue);
-		if(iValue != -1){
-			data.css('background', '');
-			$('#tag').val($('#tag').val().replace(data.text(), ''));
-		
+			var chk = 0;
+			$('.tag').each(function(index) {
+				
+				var testValue = $(this).text();
+        		var subValue  = '#'+data.text();
+        		if(testValue == subValue){
+        			chk=1;
+        			$(this).remove();
+        		}
+			});
+		console.log(data);
+		console.log(data.next());
+	 	if(chk > 0){
+			data.css('background', '');	
+			$('input[name=tags]').val($('input[name=tags]').val().replace('#'+data.next().text(),''));
 		}
-		else{
+		else{ 
 			data.css('background', '#AED6F1');
-			$('#tag').val($('#tag').val() + ' ' + data.text());
-		
-		}
-
-
-		
+			$('#tags').append('<span class="tag" style="margin-left:10px;">#'+data.text()+'</span>');
+			$('input[name=tags]').val($('input[name=tags]').val()+'#'+data.next().text());
+ 		} 
 		
 	}
+	 
 	 
 	// When the user clicks on <span> (x), close the modal
 	span.onclick = function() {

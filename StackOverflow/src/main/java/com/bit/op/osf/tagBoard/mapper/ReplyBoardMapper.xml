@@ -4,11 +4,11 @@
 <mapper namespace="com.bit.op.osf.tagBoard.mapper.ReplyBoardMapper">
 
 	<insert id="insertReply" parameterType="com.bit.op.osf.tagBoard.model.ReplyBoard"> 
-        insert into replyBoard(memId, questionNo, content) value ('test', #{questionNo}, #{content});
+        insert into replyboard(memId, questionNo, content) value ('test', #{questionNo}, #{content});
     </insert>
     
     <select id="selectReplyBoardList" parameterType="int" resultType="com.bit.op.osf.tagBoard.model.ReplyBoard">
-    	select replyNo, questionNo, vote, content, memId from replyBoard where questionNo = #{param};
+    	select replyNo, questionNo, vote, content, memId from replyboard where questionNo = #{param};
     </select>
     
 </mapper>
