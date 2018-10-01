@@ -3,6 +3,7 @@ package com.bit.op.osf.tagBoard.dao;
 import java.util.List;
 
 import com.bit.op.osf.tagBoard.model.QuestionBoard;
+import com.bit.op.osf.tagBoard.model.QuestionBoardList;
 
 public interface IQuestionBoardDao {
 
@@ -20,6 +21,8 @@ public interface IQuestionBoardDao {
 	int updateQuestionBoard(QuestionBoard questionBoard);
 
 	int deleteQuestionBoard(int questionBoardNo);
+
+	QuestionBoardList selectQuestionList();
 
 
 }

@@ -1,6 +1,7 @@
 package com.bit.op.osf.tagBoard.daoImpl;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -13,8 +14,11 @@ import com.bit.op.osf.tagBoard.dao.IQuestionBoardDao;
 import com.bit.op.osf.tagBoard.dao.IReplyBoardDao;
 import com.bit.op.osf.tagBoard.dao.ITagDao;
 import com.bit.op.osf.tagBoard.model.QuestionBoard;
+import com.bit.op.osf.tagBoard.model.QuestionBoardList;
 import com.bit.op.osf.tagBoard.model.QuestionTag;
+import com.bit.op.osf.tagBoard.model.Search;
 import com.bit.op.osf.tagBoard.model.Tag;
+
 
 @Repository
 public class QuestionBoardDaoImpl implements IQuestionBoardDao {
@@ -32,6 +36,8 @@ public class QuestionBoardDaoImpl implements IQuestionBoardDao {
 	private ITagDao tagDao;
 
 	private static final String QUSETION_NAMESPACE = "com.bit.op.osf.tagBoard.mapper.QuestionBoardMapper.";
+	
+	private static final int QUESTION_BOARD_COUNT_PER_PAGE = 5;
 
 	@Override
 	public int insertQuestionBoard(QuestionBoard questionboard) {
@@ -105,6 +111,52 @@ public class QuestionBoardDaoImpl implements IQuestionBoardDao {
 	}
 
 	@Override
+	public QuestionBoardList selectQuestionList() {
+		// TODO Auto-generated method stub
+		
+		int pageNumber = 0;
+		
+		int currentPageNumber = pageNumber > 0 ? pageNumber : 1; 
+
+		int questionBoardTotalCount = sqlSession.selectOne(QUSETION_NAMESPACE + "selectCount");
+		System.out.println(questionBoardTotalCount);
+		List<QuestionBoard> questionBoardList = null;
+		
+		int firstRow = 0;
+		int endRow = 0;
+		
+		if (questionBoardTotalCount > 0) {
+			Search search = new Search();
+			search.setFirstRow(((currentPageNumber - 1) * QUESTION_BOARD_COUNT_PER_PAGE));
+			search.setEndRow(QUESTION_BOARD_COUNT_PER_PAGE);
+			
+			questionBoardList = sqlSession.selectList(QUSETION_NAMESPACE + "selectQuestion", search);
+			
+			for (QuestionBoard questionBoard : questionBoardList) {
+				if (questionBoard.getTags() != null && questionBoard.getTags() != "") {
+					String[] tags = questionBoard.getTags().split(" ");
+
+					List<Tag> tagList = new ArrayList<Tag>();
+
+					for (String tag : tags) {
+						Tag getTag = new Tag();
+						getTag.setTagName(tag);
+						tagList.add(getTag);
+					}
+
+					questionBoard.setTagList(tagList);
+				}
+			}
+		} else {
+			currentPageNumber = 0;
+			questionBoardList = Collections.emptyList();
+		}
+
+		return new QuestionBoardList(questionBoardList, currentPageNumber, questionBoardTotalCount, QUESTION_BOARD_COUNT_PER_PAGE, firstRow, endRow);
+	}
+
+	
+	@Override
 	public int updateQuestionView(int questionNo) {
 
 		int result = sqlSession.update(QUSETION_NAMESPACE + "updateQuestionView", questionNo);
@@ -174,5 +226,6 @@ public class QuestionBoardDaoImpl implements IQuestionBoardDao {
 
 		return sqlSession.update(QUSETION_NAMESPACE + "deleteQuestion", questionBoardNo);
 	}
+
 
 }

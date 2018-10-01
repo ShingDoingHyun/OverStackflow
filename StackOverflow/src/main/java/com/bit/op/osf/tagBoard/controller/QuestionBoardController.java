@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.bit.op.osf.tagBoard.dao.IQuestionBoardDao;
 import com.bit.op.osf.tagBoard.model.QuestionBoard;
+import com.bit.op.osf.tagBoard.model.QuestionBoardList;
 
 @Controller
 public class QuestionBoardController {
@@ -39,6 +40,17 @@ public class QuestionBoardController {
 		model.addAttribute("questionBoardList", questionBoardList);
 
 		return "board/popQuestionList";
+	}
+	
+	@RequestMapping(value = "/questionList", method = RequestMethod.GET)
+	public String questionList(Model model) {
+		QuestionBoardList questionBoardList = new QuestionBoardList();
+		questionBoardList = questionBoardDao.selectQuestionList();
+		System.out.println(questionBoardList);
+		
+		model.addAttribute("questionBoardList", questionBoardList);
+
+		return "board/questionList";
 	}
 	
 	

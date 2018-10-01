@@ -74,13 +74,19 @@ td{
 		</div>
 
 		<div class="right">
-			<button onclick="location.href='<c:url value='/openWriteQuestion'/>'">
+			<button onclick="location.href='<c:url value='/openWriteQuestion'/>'" style="position: absolute; right:10px; top:111px;" >
 				질문하기
 			</button>
 		</div>
 	</div>
 	<div class="main">
 		<div class="left">
+		<p align="right">
+			<button>나의흥미</button>
+			<button>이번주인기</button>
+			<button>이번달인기</button>
+			<button>전체인기</button>
+			</p>
 			<hr>
 			<table width="100%">
 				<c:forEach items="${questionBoardList }" var="questionBoard">
