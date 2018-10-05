@@ -266,14 +266,14 @@ margin-left:300px;}
 		</div>
 		<div class="sidenav2">
 			<span class="left_select"><strong>지원관리</strong></span> <a
-				style="color: black" href="#">이력서 관리</a> <a href="#">내가 지원한 목록</a> <a
-				href="#">관심기업</a><a href="#">즐겨찾기한 채용 공고</a>
+				style="color: black" href="memberUpdate">이력서 관리</a> <a href="memberAppList">내가 지원한 목록</a> <a
+				href="memberInterestComList">관심기업</a><a href="#">즐겨찾기한 채용 공고</a>
 		</div>
 		<div class="main_2">
 			<div style="margin-top: 20px;"></div>
 			<h3>이력서 관리</h3>
 			<hr>
-			<form name="form" method="POST" enctype="multipart/form-data">
+			<form action="<c:url value='/memberUpdate'/>" name="form" method="POST" enctype="multipart/form-data">
 				<table class="insert">
 					<tr>
 						<th class="title">인적 사항</th>
@@ -292,13 +292,13 @@ margin-left:300px;}
 
 					</tr>
 					<tr>
-						<td><input type="text"></td>
-						<td><input type="text"></td>
-						<td><select>
-								<option>여자</option>
-								<option>남자</option>
+						<td><input type="text" name="appName"></td>
+						<td><input type="date" name="appBirth"></td>
+						<td><select name="appGender">
+								<option value="여자">여자</option>
+								<option value="남자">남자</option>
 						</select></td>
-						<td><input type="text"></td>
+						<td><input type="text" name="appEmail"></td>
 
 
 					</tr>
@@ -311,11 +311,11 @@ margin-left:300px;}
 
 					</tr>
 					<tr>
-						<td><input type="text"></td>
-						<td><input type="text"></td>
-						<td><input type="text"></td>
+						<td><input type="text" name="appCall"></td>
+						<td><input type="text" name="appPhone"></td>
+						<td><input type="text" name="appAddress"></td>
 						<td><input type="file" accept="image/*"
-							onchange="loadFile(event)"></td>
+							onchange="loadFile(event)" name="appPhoto"></td>
 
 					</tr>
 					<tr>
@@ -336,10 +336,15 @@ margin-left:300px;}
 
 					</tr>
 					<tr>
-						<td><input type="text"></td>
-						<td><input type="text"></td>
-						<td><input type="date"></td>
-						<td><input type="date"></td>
+						<td><select name="appEduLevel">
+						<option value="고등학교">고등학교</option>
+						<option value="대학교(2,3년)">대학교(2,3년)</option>
+						<option value="대학교(4년)">대학교(4년)</option>
+						<option value="대학원">대학원</option>
+						</select></td>
+						<td><input type="text" name="appEduName"></td>
+						<td><input type="date" name="appEntraDate"></td>
+						<td><input type="date" name="appGraduDate"></td>
 
 					</tr>
 					<tr>
@@ -348,9 +353,15 @@ margin-left:300px;}
 						<th>졸업상태</th>
 					</tr>
 					<tr>
-						<td><input type="text"></td>
-						<td><input type="text"></td>
-						<td><input type="text"></td>
+						<td><input type="text" name="appMajor"></td>
+						<td><input type="text" name="appScore"></td>
+						<td><select name="appEduState">
+								<option value="졸업">졸업</option>
+								<option value="졸업예정">졸업예정</option>
+								<option value="휴학">휴학</option>
+								<option value="중퇴">중퇴</option>
+								<option value="재학">재학</option>
+						</select></td>
 					</tr>
 					<tr>
 						<td>&nbsp;</td>
@@ -362,14 +373,14 @@ margin-left:300px;}
 						<td>&nbsp;</td>
 					</tr>
 					<tr>
-						<td colspan='5'><div id="summernote"></div></td>
+						<td colspan='5'><div id="summernote" name="appIntroduction"></div></td>
 					</tr>
 					<tr>
 						<td>&nbsp;</td>
 					</tr>
 
 					<tr>
-						<th class="title">첨부 파일</th>
+						<th class="title" >첨부 파일</th>
 					</tr>
 					<tr>
 						<td>&nbsp;</td>
@@ -378,13 +389,13 @@ margin-left:300px;}
 				</table>
 
 				<div class="insert_file">
-					<select>
-						<option>이력서</option>
-						<option>자기소개서</option>
-						<option>기타</option>
+					<select name="app_fileType">
+						<option value="이력서">이력서</option>
+						<option value="자기소개서">자기소개서</option>
+						<option value="기타">기타</option>
 
 
-					</select> <input type="file" name="files" value="" size="40"><input
+					</select> <input type="file" name="app_fileName" size="40"><input
 						type="button" value="추가" onclick="attachFile.add()"
 						style="margin-left: 10px">
 				</div>
@@ -443,7 +454,7 @@ margin-left:300px;}
 				</table>
 
 
-				<button type="button" class="btn btn-dark">저장</button>
+				<input type="submit" value="저장" class="btn btn-dark">
 				<button type="button" class="btn btn-dark">취소</button>
 			</form>
 		</div>
@@ -485,7 +496,7 @@ margin-left:300px;}
                 btn.value = '삭제';
                 btn.onclick = function() {
                     o.del(idx)
-                }
+                };
                 btn.style.marginLeft = '10px';
 
                 div.appendChild(select);

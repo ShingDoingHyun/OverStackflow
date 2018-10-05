@@ -38,7 +38,7 @@
 	<div class="main">
 		<h2>Sidenav Example</h2>
 		<p>This sidenav is always shown.</p>
-		<a href='MemberUpdate'>이력서관리(박상범)</a>
+		<a href='memberUpdate'>이력서관리(박상범)</a>
 	</div>
 	<!----------------------main End--------------------------------------->
 

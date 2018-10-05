@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bit.op.osf.member.mapper.MemberAppMapper">
+
+
+
+<insert id="insertAppInfo" parameterType="com.bit.op.osf.member.app.model.AppInfo">
+insert into app (appName, appBirth, appGender, appEmail, appPhone, appCall, appAddress,
+					appPhotoName, appEduLevel, appEduName, appEntraDate, appGraduDate, appEduState, 
+					appIntroduction) 
+value (#{appName},  #{appBirth}, #{appGender}, #{appEmail}, #{appPhone}, #{appCall},#{appPhotoName},
+					#{appAddress}, #{appEduLevel}, #{appEduName}, #{appEntraDate}, #{appGraduDate}, 
+					#{appEduState}, #{appIntroduction})
+	<selectKey keyProperty="appNO" resultType="int" order="AFTER">
+        	 SELECT LAST_INSERT_ID();
+   	</selectKey>
+</insert>
+
+<insert id="insertAppFileInfo" parameterType="com.bit.op.osf.member.app.model.AppFileInfo">
+insert into app_file (appNO, app_fileType, app_fileName ) 
+value (#{appNO}, #{app_fileType}, #{app_fileName}  )
+
+</insert>
+
+</mapper>
