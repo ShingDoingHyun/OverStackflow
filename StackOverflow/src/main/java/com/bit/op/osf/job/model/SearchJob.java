@@ -14,33 +14,24 @@ public class SearchJob {
     public SearchJob() {
     }
     
-    
-
 	public String getOrder() {
 		return order;
 	}
-
 	public void setOrder(String order) {
 		this.order = order;
 	}
-
 	public String getJobTitle() {
 		return jobTitle;
 	}
 	public void setJobTitle(String jobTitle) {
 		this.jobTitle = jobTitle;
 	}
-
 	public String[] getJobTypeList() {
 		return jobTypeList;
 	}
-
-
 	public void setJobTypeList(String[] jobTypeList) {
 		this.jobTypeList = jobTypeList;
 	}
-
-
 	public String getJobLocation() {
 		return jobLocation;
 	}

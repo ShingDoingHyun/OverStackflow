@@ -133,7 +133,7 @@ select comName, comAddress, comZipcode, comCall, comHomePageUrl, comChargerName,
  		<if test="comId!=null and comId!=''">
 	 	 and comId = #{comId}
 	 	</if>
-		 order by #{order} desc
+		 order by #{search.order} desc
 		 limit #{firstRow}, #{endRow}
  </select>
  

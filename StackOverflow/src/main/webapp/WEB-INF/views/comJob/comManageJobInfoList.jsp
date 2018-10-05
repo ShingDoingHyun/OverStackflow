@@ -83,24 +83,24 @@ th, td {
 	
 	 <div class="left">
  	 	<div class="leftup">
-	     <form action="<%=request.getContextPath()%>/comJob/manageJobInfoList/1" method="get">
+	     <form action="<%=request.getContextPath()%>/comJob/manageJobInfoList/1" name="searchForm" method="get">
 	  		<label>제목</label>
-	 		<input type="text" name="jobTitle" id="jobTitle" value="${search.jobTitle eq null? '' : search.jobTitle}"><br>
+	 		<input type="text" name="jobTitle" value="${search.jobTitle eq null? '' : search.jobTitle}"><br>
 	 		
 	 		<label>고용 형태</label>
-	 		 <input type="checkbox" name="jobType" class="jobType" value="permanent" ${search.jobTypeList[0] eq 'permanent'? 'checked' : ''}>정규직
-			 <input type="checkbox" name="jobType" class="jobType" value="contract" ${search.jobTypeList[0] || search.jobTypeList[1] eq 'contract'? 'checked' : ''}>계약직
-			 <input type="checkbox" name="jobType" class="jobType" value="intern" ${search.jobTypeList[0] || search.jobTypeList[1] || search.jobTypeList[2] eq 'intern'? 'checked' : ''}>인턴직
+	 		 <input type="checkbox" name="jobType" value="permanent" ${search.jobTypeList[0] eq 'permanent'? 'checked' : ''}>정규직
+			 <input type="checkbox" name="jobType" value="contract" ${search.jobTypeList[0] || search.jobTypeList[1] eq 'contract'? 'checked' : ''}>계약직
+			 <input type="checkbox" name="jobType" value="intern" ${search.jobTypeList[0] || search.jobTypeList[1] || search.jobTypeList[2] eq 'intern'? 'checked' : ''}>인턴직
 			 <input type="checkbox" name="jobType" value="partTimeJob" ${search.jobTypeList[0] || search.jobTypeList[1] || search.jobTypeList[2] || search.jobTypeList[3] eq 'partTimeJob'? 'checked' : ''}>아르바이트<br>
 			 
 			<label>근무 지역</label> 
-		     <input type="text" name="jobLocation" id="jobLocation" value="${search.jobLocation eq null? '' : search.jobLocation}"><br>
+		     <input type="text" name="jobLocation" value="${search.jobLocation eq null? '' : search.jobLocation}"><br>
 		     
 		     <label>급여 조건</label>
-			 <input type="radio" name="jobPayType" id="jobPayType" value="year" ${jobInfo.jobPayType eq 'year'? 'checked' : ''}>연(Year)
-			 <input type="radio" name="jobPayType" id="jobPayType" value="month" ${jobInfo.jobPayType eq 'month'? 'checked' : ''}>월(Month)
-			 <input type="radio" name="jobPayType" id="jobPayType" value="day" ${jobInfo.jobPayType eq 'day'? 'checked' : ''}>일(Day)
-			 <input type="text" name="jobPayAmount" id="jobPayAmount" value="${search.jobPayAmount eq null? '' : search.jobPayAmount}"><br>
+			 <input type="radio" name="jobPayType" value="year" ${jobInfo.jobPayType eq 'year'? 'checked' : ''}>연(Year)
+			 <input type="radio" name="jobPayType" value="month" ${jobInfo.jobPayType eq 'month'? 'checked' : ''}>월(Month)
+			 <input type="radio" name="jobPayType" value="day" ${jobInfo.jobPayType eq 'day'? 'checked' : ''}>일(Day)
+			 <input type="text" name="jobPayAmount" value="${search.jobPayAmount eq null? '' : search.jobPayAmount}"><br>
 			 
 			 <label>관련 태그</label>
 			 <input type="text" name="jobTagList">
@@ -203,38 +203,10 @@ $(function(){
 	});
 	
  	$("#select").change(function(){
-		var jobTitle = $("#jobTitle").val();
-		var jobTypeList = [];
-		var jobLocation = $("#jobLocation").val();
-		var jobPayType = $("#jobPayType").val();
-		var jobPayAmount = $("#jobPayAmount").val();
+ 		
 		var order = $(this).val();
-		var page = ${page};
 		$("#order").attr("value", order);
-		alert("되어라");
-		alert(jobTitle);
-		alert(jobLocation);
-		alert(jobPayType);
-		alert(jobPayAmount);
-		alert(order);
-/* 		alert($(".jobType"));
-		for(var i=0; i<$(".jobType").length; i++){
-			jobTypeList.push($(".jobType").eq(i).val());
-		} */
-		
-		$.ajax({
-			type: "GET",
-			url: "${pageContext.request.contextPath}/comJob/manageJobInfoList/"+page+"",
-			dataType: "json",
-			data: {"jobTitle": jobTitle, "jobLocation": jobLocation, 
-				"jobPayType": jobPayType, "jobPayAmount":jobPayAmount, "order": order},
-			sccuess: function(){
-				alert("성공!");
-			},
-			error: function(){
-				alert("오류 발생");
-			}
-		});
+		documnet.searchForm.submit();
 	}); 
 });
 
