@@ -16,8 +16,31 @@
 				class="hover" href=""><i class="fas fa-trophy"></i></a> <a
 				class="hover" href=""><i class="fas fa-question-circle"></i></a> <a
 				class="hover" href=""><i class="fas fa-comment-alt"></i></a> 
-				<input	type="button" class="login" value="Log IN"> 
-				<input	type="button" class="signup" value="Sign Up"><a href=""></a>
+				<!-- 로그인이 되어 있지 않으면 memInfo가 세션에 없다. 그러므로 memInfo는 널값. 이 경우 sing up/log in 출력 -->
+			   <c:if test="${memInfo == null && comInfo == null}">
+			  <input type="button" class="login" value="Log IN" onclick="location.href='<c:url value="/memLoginForm"/>'"> 
+			  <input type="button" class="signup" value="Sign Up" onclick="location.href='<c:url value="/joinChoiceForm"/>'">
+			  </c:if>
+			  
+			  <!-- 로그인이 되어있는 경우 세션에 있던 memInfo,comInfo 를 제거해줌  -->
+			  
+			  <c:if test="${memInfo != null}">
+			  ${memInfo.memberId}
+			  <input type="button" class="logout" value="Logout" onclick="location.href='<c:url value="/logout"/>'"> 
+			  </c:if>
+			  	  <c:if test="${memInfo ne null }">
+			  	<img style="width:200px" src="<c:url value='/resources/uploadFile/memberPhoto/${memInfo.memberPhoto}'/>">
+			  </c:if>
+			
+			
+			     <c:if test="${comInfo != null}">
+			   ${comInfo.comId}
+			  <input type="button" class="logout" value="Logout" onclick="location.href='<c:url value="/logout"/>'"> 
+			  </c:if>
+			  
+			  	<c:if test="${comInfo ne null }">
+			  	<img style="width:200px" src="<c:url value='/resources/uploadFile/comPhoto/${comInfo.comPhoto}'/>">
+			  </c:if>
 		</div>
 	</div>
 </div>

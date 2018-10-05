@@ -36,6 +36,9 @@
 		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
 
+	<!-- SHA 빈 등록 -->
+	<bean id="sha" class="com.bit.op.osf.member.SHA256.SHA256"></bean>
+
 	<!-- package 스캔 -->
 	<context:component-scan  base-package="com.bit.op.osf" />
 

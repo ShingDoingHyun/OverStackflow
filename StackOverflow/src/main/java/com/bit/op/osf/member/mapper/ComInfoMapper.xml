@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bit.op.osf.member.mapper.ComInfoMapper">
+
+	<insert id="insertCom" parameterType="com.bit.op.osf.member.model.ComRegInfo">
+		insert into com(comId, comPwd, comNum,comName, comAddress, comPhoto, comHomePageUrl,comChargerName, comChargerEmail,comChargerPhone)
+		values(#{comId},#{comPwd},#{comNum},#{comName},#{comAddress},#{comPhoto},#{comHomePageUrl},#{comChargerName},#{comChargerEmail},#{comChargerPhone})
+	</insert>
+
+	<select id="selectId"	resultType="com.bit.op.osf.member.model.ComRegInfo" parameterType="String">
+		select comId, comPwd, comNum, comName, comAddress, comPhoto,comHomePageUrl, comChargerName,comChargerEmail,comChargerPhone from com where comId = #{Id}
+	</select>
+</mapper>

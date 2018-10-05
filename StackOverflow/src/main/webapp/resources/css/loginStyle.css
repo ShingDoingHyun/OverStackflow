@@ -1,0 +1,110 @@
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body {
+    background: white;
+    font-family: 'open sans', sans-serif;
+}
+
+.forms {
+    background: #fff;
+    box-shadow: 0 0 3px #000;
+    margin: 30px auto;
+    max-width: 500px;
+    overflow: hidden;
+    position: relative;
+    padding: 0;
+}
+
+.forms form {
+    padding: 48px;
+}
+
+#signup {
+    display: none;
+}
+
+.forms .tab-group {
+    list-style: none;
+    padding: 10px;
+    margin: 0;
+}
+
+.forms .tab-group:after {
+    content: "";
+    margin: 2
+    display: table;
+    clear: both;
+}
+
+.forms .tab-group li a {
+    display: block;
+    text-decoration: none;
+    padding: 10px;
+    background: white;
+    color: black;
+    font-size: 20px;
+    float: left;
+    width: 50%;
+    text-align: center;
+    border-top: 3px solid transparent;
+    -moz-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+    -webkit-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+}
+
+.input {
+    width: 400px;
+    height: 50px;
+    font-size: 15px;
+    padding-left: 15px;
+    margin-top:15px;
+}
+
+#loginBtn {
+    width: 400px;
+    height: 55px;
+    background:black;
+    color: white;
+    font-size: 20px;
+    margin-top: 15px;
+}
+
+#signBtn {
+    width: 400px;
+    height: 55px;
+    background:orange;
+    color: white;
+    font-size: 20px;
+    margin-top: 15px;
+}
+#checkDiv {
+    height: 50px;
+    display: inline;
+    margin-top:15px;
+}
+
+#signUpDiv {
+    display: inline;
+    float: right;
+    margin-right: 30px;
+}
+
+a {
+    text-decoration: none;
+    margin-top:10px;
+    margin-bottom: 20px;
+    
+}
+
+.forms .tab-group li a:hover {
+    background: #dedfdf;
+    color: #666;
+}
+
