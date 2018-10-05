@@ -133,7 +133,12 @@ select comName, comAddress, comZipcode, comCall, comHomePageUrl, comChargerName,
  		<if test="comId!=null and comId!=''">
 	 	 and comId = #{comId}
 	 	</if>
-		 order by #{search.order} desc
+	 	<if test="search.order == 'jobRegisterDate'">
+	 	 order by jobRegisterDate desc
+	 	</if>
+	 	<if test="search.order == 'jobTitle'">
+	 	 order by jobTitle asc
+	 	</if>
 		 limit #{firstRow}, #{endRow}
  </select>
  

@@ -115,12 +115,12 @@ td{
 			</table>
 			<p style='text-align: center'>
 				
-<%-- 				<c:if test="${param.page > 9 }">
+ 				<c:if test="${param.page > 9 }">
 					<<
 				</c:if>
-				<c:set var="count" value="${questionBoardList.pageTotalCount /10}" /> --%>
+				<c:set var="count" value="${questionBoardList.pageTotalCount /10}" />
 				
-				<c:forEach begin="1" end="" var="i">
+				<c:forEach begin="1" end="${questionBoardList.pageTotalCount}" var="i">
 					<a href="<c:url value='/questionList?page=${ i}'/>"style="display: inline;">${ i}</a>
 				</c:forEach>
 				

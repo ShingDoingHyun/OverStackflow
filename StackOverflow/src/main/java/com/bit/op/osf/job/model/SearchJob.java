@@ -1,5 +1,6 @@
 package com.bit.op.osf.job.model;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class SearchJob {
@@ -12,8 +13,20 @@ public class SearchJob {
     /*private List<Tag> jobTagList;*/
     
     public SearchJob() {
+    	
     }
-    
+
+	public SearchJob(String jobTitle, String[] jobTypeList, String jobLocation, String jobPayType, String jobPayAmount,
+			String order) {
+		super();
+		this.jobTitle = jobTitle;
+		this.jobTypeList = jobTypeList;
+		this.jobLocation = jobLocation;
+		this.jobPayType = jobPayType;
+		this.jobPayAmount = jobPayAmount;
+		this.order = order;
+	}
+
 	public String getOrder() {
 		return order;
 	}
@@ -53,24 +66,27 @@ public class SearchJob {
 	
 	public boolean check(){
 		
-		if(jobTitle != null) {
+		if(jobTitle != null && jobTitle != "") {
 			return true;
-		}else if(jobTypeList!=null){
+		}else if(jobTypeList!=null ){
 			return true;
-		}else if(jobLocation!=null){
+		}else if(jobLocation!=null && jobLocation!= "" ){
 			return true;
-		}else if(jobPayType!=null) {
+		}else if(jobPayType!=null && jobPayType!="" ) {
 			return true;
-		}else if(jobPayAmount!=null){
+		}else if(jobPayAmount!=null && jobPayAmount!=""){
+			return true;
+		}else if(order!=null && order!="") {
 			return true;
 		}
 		return false;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "SearchJob [jobTitle=" + jobTitle + ", jobTypeList=" + jobTypeList + ", jobLocation=" + jobLocation
-				+ ", jobPayType=" + jobPayType + ", jobPayAmount=" + jobPayAmount + "]";
+		return "SearchJob [jobTitle=" + jobTitle + ", jobTypeList=" + Arrays.toString(jobTypeList) + ", jobLocation="
+				+ jobLocation + ", jobPayType=" + jobPayType + ", jobPayAmount=" + jobPayAmount + ", order=" + order
+				+ "]";
 	}
-
+	
 }

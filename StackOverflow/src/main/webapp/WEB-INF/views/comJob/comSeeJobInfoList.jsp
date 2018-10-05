@@ -6,6 +6,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/index.css" type="text/css" media="all" />
 <title>채용 공고 목록</title>
@@ -79,7 +80,7 @@ th, td {
 
 	 <div class="left">
 	 	<div class="leftup">
-	 		<form action="<%=request.getContextPath()%>/comJob/seeJobInfoList/1" method="get">
+	 		<form action="<%=request.getContextPath()%>/comJob/seeJobInfoList/1" id="searchForm" method="get">
 	 		<label>제목</label>
 	 		<input type="text" name="jobTitle" value="${search.jobTitle eq null? '' : search.jobTitle}"><br>
 	 		
@@ -101,10 +102,18 @@ th, td {
 			 <label>관련 태그</label>
 			 <input type="text" name="jobTagList">
 			 <input type="button" value="태그선택"  onclick=""><br>
+			 <input type="hidden" name="order" id="order">
 			 
 			 <input type="submit" value="검색">
 			 </form>
 	    </div>
+	    <div>
+			<select id="select" style="float:right;">
+				<option value="jobRegisterDate" ${search.order eq 'jobRegisterDate'? 'selected' : ''}>등록날짜순</option> 
+				<option value="jobTitle"  ${search.order eq 'jobTitle'? 'selected' : ''}>이름순</option>
+			</select>
+	    </div>
+	
 	 
 	   <div>
 		<c:if test ="${jobInfoListView == null}">
@@ -164,21 +173,15 @@ th, td {
 
 <script>
 $(function(){
-	var comId = "test1";
 	
-	$("#fav").click(function(){
-		
-	   $.ajax ({
-		   type: "post",
-		   url: "",
-		   data: {"comId": comId, "jobNo": jobNo},
-	       dataType:"text",
-	       success: function(data) {
-	    	   alert("즐겨찾기에 추가되었습니다");
-			   $("#fav").attr("src", "<c:url value='/jobimage/fav.png'/>");
-	    	}
-	   });
-		
-	});
+	$("#select").change(function(){
+ 		
+		var order = $(this).val();
+		$("#order").attr("value", order);
+		document.getElementById("searchForm").submit();
+		/* $("#searchForm").submit(); */
+		/* documnet.searchForm.submit(); */
+	}); 
+	
 });
 </script>

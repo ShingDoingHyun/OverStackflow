@@ -83,12 +83,11 @@ public class ComJobDaoImpl extends DaoImpl implements ComJobDao {
         	currentPageNumber = pageNumber;
         }
         
-        /*System.out.println(search);*/
+        if(search.getOrder() == null) {
+        	search.setOrder("jobRegisterDate");
+        }
+        
         System.out.println(comId);
-     /*   System.out.println(order);
-        if(order==null) {
-        	order = "jobRegisterDate";
-        }*/
 
         if(search.check()) {
         	jobInfoTotalCount = countJobInfoBySearch(comId, search);

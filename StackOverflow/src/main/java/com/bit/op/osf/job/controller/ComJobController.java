@@ -77,6 +77,7 @@ public class ComJobController {
     	}
     	search.setJobTypeList(jobTypeList);
     	System.out.println(search);
+    	System.out.println(search.getOrder());
 
     	//페이지설정
     	if(pageNumberStr!=null) {
@@ -120,7 +121,7 @@ public class ComJobController {
     	}
     	search.setJobTypeList(jobTypeList);
     	System.out.println(search);
-          
+
         model.addAttribute("jobInfoListView", comJobDaoImpl.selectJobInfoListPage(pageNumber, comId, search));
         model.addAttribute("search", search);
         return "comJob/comManageJobInfoList";

@@ -11,6 +11,9 @@ public class QuestionBoardList {
 	private int questionBoardCountPerPage;
 	private int firstRow;
 	private int endRow;
+	private boolean prev;
+	private boolean next;
+	
 	
 
 	public QuestionBoardList() {}
@@ -38,6 +41,24 @@ public class QuestionBoardList {
 				pageTotalCount++;
 			}
 		}
+		int startPage = 0;
+		prev =  currentPageNumber == 9 ? false : true;
+		
+		int a = pageTotalCount - currentPageNumber;
+		if(a> 10) {
+			next = true;
+		}else {
+			int result1 = pageTotalCount/10;
+			int result2 = currentPageNumber/10;
+			
+			if(result1>result2) {
+				next = true;
+			}else {
+				next = false;
+			}
+			
+		}
+		/*next =  currentPageNumber == pageTotalCount ? false : true;*/
 	}
 
 
@@ -103,6 +124,22 @@ public class QuestionBoardList {
 
 	public void setEndRow(int endRow) {
 		this.endRow = endRow;
+	}
+
+	public boolean isPrev() {
+		return prev;
+	}
+
+	public void setPrev(boolean prev) {
+		this.prev = prev;
+	}
+
+	public boolean isNext() {
+		return next;
+	}
+
+	public void setNext(boolean next) {
+		this.next = next;
 	}
 	
 	

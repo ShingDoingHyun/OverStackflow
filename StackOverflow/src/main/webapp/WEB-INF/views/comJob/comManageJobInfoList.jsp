@@ -83,7 +83,7 @@ th, td {
 	
 	 <div class="left">
  	 	<div class="leftup">
-	     <form action="<%=request.getContextPath()%>/comJob/manageJobInfoList/1" name="searchForm" method="get">
+	     <form action="<%=request.getContextPath()%>/comJob/manageJobInfoList/1" id="searchForm" method="get">
 	  		<label>제목</label>
 	 		<input type="text" name="jobTitle" value="${search.jobTitle eq null? '' : search.jobTitle}"><br>
 	 		
@@ -114,15 +114,15 @@ th, td {
 		
 		<div>
 			<select id="select" style="float:right;">
-				<option value="jobRegisterDate">등록날짜순</option> 
-				<option value="jobTitle">이름순</option>
+				<option value="jobRegisterDate" ${search.order eq 'jobRegisterDate'? 'selected' : ''}>등록날짜순</option> 
+				<option value="jobTitle"  ${search.order eq 'jobTitle'? 'selected' : ''}>이름순</option>
 			</select>
 	    </div>
 	
 	 	
 	 	<div>
 		<c:if test="${jobInfoListView == null}">
-		<p>등록된 회원정보가 없습니다<p>
+		<p>등록된 정보가 없습니다<p>
 		</c:if>
 		
 		<c:if test="${jobInfoListView != null}">
@@ -206,10 +206,18 @@ $(function(){
  		
 		var order = $(this).val();
 		$("#order").attr("value", order);
-		documnet.searchForm.submit();
+		document.getElementById("searchForm").submit();
+		/* $("#searchForm").submit(); */
+		/* documnet.searchForm.submit(); */
 	}); 
 });
 
+
+/* function submit(){
+	var order = $(this).val();
+	$("#order").attr("value", order);
+	documnet.searchForm.submit();
+} */
 
 function updateClick(e){ 
 	alert("정말로 마감하시겠습니까?");
