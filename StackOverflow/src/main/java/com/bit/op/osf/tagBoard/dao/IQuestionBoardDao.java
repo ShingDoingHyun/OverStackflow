@@ -25,5 +25,7 @@ public interface IQuestionBoardDao {
 
 	QuestionBoardList selectQuestionList(Search search);
 
+	List<QuestionBoard> selectVisitQuestion(List<QuestionBoard> vistiQuestion);
+
 
 }

@@ -6,8 +6,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 
-<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+
 <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+
+
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <link
@@ -29,6 +33,9 @@
 <!-- include summernote-ko-KR -->
 <script
 	src="<%=request.getContextPath()%>/summernote/lang/summernote-ko-KR.js"></script>
+	
+	
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.cookie.js"></script>	
 </head>
 
 <style>
@@ -394,6 +401,8 @@ $(document).ready(
 
 
 $(function(){
+	
+	
 	//아코디언 형식
 	$(".accordian").click(function(){
 		$(this).parent().next().next().find(".comment").slideUp();
@@ -446,7 +455,7 @@ $(function(){
 				$('#summernote').summernote('insertImage',getContextPath() + img_name);
 			}
 		});
-	}
+	};
 
 	function getContextPath() {
 		var hostIndex = location.href.indexOf(location.host)
@@ -495,6 +504,107 @@ $(function(){
 	        }); 
 		
 	};
+	
+	
+$(function(){
+
+	 	var list = new cookieList("visitQuestion");
+	 	
+	 	var cookies  = [];
+	 	var cookie = null;
+	 	cookies = getCookie('visitQuestion').split(',');
+	 	
+	 	console.log(cookies.length);
+	 	
+	 	
+	 	for(var index in cookies){
+	 		
+	 		if(cookies[index]==${questionBoard.questionNo}){
+	 			console.log(cookies[index]);
+	 			console.log(index);
+	 			if(index < cookies.length-1){
+	 				cookie = getCookie('visitQuestion').replace(${questionBoard.questionNo}+",", "");
+	 			}
+	 			else{
+	 				cookie = getCookie('visitQuestion').replace(","+${questionBoard.questionNo}, "");
+	 			}
+	 			list.clear();
+	 			list = new cookieList("visitQuestion");
+
+	 			var cookies2  = []; 
+	 			cookies2  = cookie.split(',');
+	 			
+	 			console.log(cookie);
+	 			console.log(cookies2);
+	 			for(var index2 in cookies2){
+	 				console.log(cookies2[index2]);
+	 				list.add(cookies2[index2]);
+	 			} 
+	 			break;
+	 		}
+	 	}
+	 	
+	 	if(${questionBoard.questionNo} != getCookie('visitQuestion')){
+	  		list.add(${questionBoard.questionNo}); 
+	 	}
+	 	/*	 	
+	 	var cookies  = [];
+	 	cookies = getCookie('visitQuestion').split(',');
+	 	
+ 	 	var check = false;
+	 	
+	 	for(var index in cookies){
+	 		console.log(cookies[index]);
+	 		if(cookies[index]==${questionBoard.questionNo}){
+	 			check=true;
+	 			break;
+	 		}
+	 	}
+	 	
+	 	if(check===false){
+	 		list.add(${questionBoard.questionNo});
+	 	} */
+		
+		  
+});
+
+function getCookie(cName) {
+    cName = cName + '=';
+    var cookieData = document.cookie;
+    var start = cookieData.indexOf(cName);
+    var cValue = '';
+    if(start != -1){
+        start += cName.length;
+        var end = cookieData.indexOf(';', start);
+        if(end == -1)end = cookieData.length;
+        cValue = cookieData.substring(start, end);
+    }
+    return unescape(cValue);
+};
+
+var deleteCookie = function(name) {
+	  document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+};
+
+var cookieList = function(cookieName){
+	
+	 var cookie = $.cookie(cookieName);
+	 var items = cookie ? cookie.split(/,/) : new Array();
+	 return {
+	  "add" : function(val){
+	   items.push(val);
+	   $.cookie(cookieName,items.join(','), {path:'/'});
+	  },
+	  "clear" : function(){
+	   items = null;
+	   $.cookie(cookieName, null, {path:'/'});
+	  },
+	  "items" : function(){
+	   return items; 
+	  }
+	};
+};
+	
 	
 	
 	

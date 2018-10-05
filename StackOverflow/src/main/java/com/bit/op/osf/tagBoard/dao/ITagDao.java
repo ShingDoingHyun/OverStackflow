@@ -21,7 +21,6 @@ public interface ITagDao {
 
 	List<QuestionTag> selectQuestionTag(int result);
 
-
 	void deleteQuestionTag(QuestionTag questionTag1);
 
 }

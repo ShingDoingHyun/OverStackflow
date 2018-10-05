@@ -37,12 +37,11 @@ public class QuestionBoardDaoImpl implements IQuestionBoardDao {
 
 	private static final String QUSETION_NAMESPACE = "com.bit.op.osf.tagBoard.mapper.QuestionBoardMapper.";
 	
-	private static final int QUESTION_BOARD_COUNT_PER_PAGE = 5;
+	private static final int QUESTION_BOARD_COUNT_PER_PAGE = 10;
 
 	@Override
 	public int insertQuestionBoard(QuestionBoard questionboard) {
 
-		System.out.println(questionboard);
 		sqlSession.insert(QUSETION_NAMESPACE + "insertQuestion", questionboard);
 
 		int result = questionboard.getQuestionNo();
@@ -94,13 +93,16 @@ public class QuestionBoardDaoImpl implements IQuestionBoardDao {
 		for (QuestionBoard questionBoard : questionBoardList) {
 			if (questionBoard.getTags() != null && questionBoard.getTags() != "") {
 				String[] tags = questionBoard.getTags().split(" ");
+				String[] tagNos = questionBoard.getTagNos().split(" ");
 
 				List<Tag> tagList = new ArrayList<Tag>();
-
+				int index = 0;
 				for (String tag : tags) {
 					Tag getTag = new Tag();
 					getTag.setTagName(tag);
+					getTag.setTagNo(Integer.parseInt(tagNos[index]));
 					tagList.add(getTag);
+					index++;
 				}
 
 				questionBoard.setTagList(tagList);
@@ -115,8 +117,8 @@ public class QuestionBoardDaoImpl implements IQuestionBoardDao {
 		
 		int currentPageNumber = search.getPage() > 0 ? search.getPage() : 1; 
 
-		int questionBoardTotalCount = sqlSession.selectOne(QUSETION_NAMESPACE + "selectCount");
-		System.out.println(questionBoardTotalCount);
+		int questionBoardTotalCount = sqlSession.selectOne(QUSETION_NAMESPACE + "selectCount", search);
+
 		List<QuestionBoard> questionBoardList = null;
 		
 		int firstRow = 0;
@@ -131,13 +133,16 @@ public class QuestionBoardDaoImpl implements IQuestionBoardDao {
 			for (QuestionBoard questionBoard : questionBoardList) {
 				if (questionBoard.getTags() != null && questionBoard.getTags() != "") {
 					String[] tags = questionBoard.getTags().split(" ");
+					String[] tagNos = questionBoard.getTagNos().split(" ");
 
 					List<Tag> tagList = new ArrayList<Tag>();
-
+					int index = 0;
 					for (String tag : tags) {
 						Tag getTag = new Tag();
 						getTag.setTagName(tag);
+						getTag.setTagNo(Integer.parseInt(tagNos[index]));
 						tagList.add(getTag);
+						index++;
 					}
 
 					questionBoard.setTagList(tagList);
@@ -222,6 +227,17 @@ public class QuestionBoardDaoImpl implements IQuestionBoardDao {
 
 		return sqlSession.update(QUSETION_NAMESPACE + "deleteQuestion", questionBoardNo);
 	}
+	
+	
+	
+	@Override
+	public List<QuestionBoard> selectVisitQuestion(List<QuestionBoard> vistiQuestion) {
+		for(QuestionBoard question : vistiQuestion) {
+			question.setTitle(sqlSession.selectOne(QUSETION_NAMESPACE + "selectVisitQuestion", question.getQuestionNo()));
+		}	
+		return vistiQuestion;
+	}
+	
 
 
 }

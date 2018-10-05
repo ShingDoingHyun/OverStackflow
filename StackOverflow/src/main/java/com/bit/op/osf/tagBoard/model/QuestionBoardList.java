@@ -32,7 +32,6 @@ public class QuestionBoardList {
 
 
 	private void calculatePageTotalCount() {
-		System.out.println(pageTotalCount +"="+ questionBoardTotalCount +"/"+ questionBoardCountPerPage);
 		if (questionBoardTotalCount == 0) {
 			pageTotalCount = 0;
 		} else {

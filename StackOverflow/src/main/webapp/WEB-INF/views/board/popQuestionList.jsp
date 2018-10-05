@@ -5,8 +5,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.cookie.js"></script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
@@ -95,7 +97,7 @@ td{
 							<td width="8%" align="center">0</td>
 							<td width="8%" align="center">0</td>
 							<td width="8%" align="center">${questionBoard.view}</td>
-							<td width="48%"><p><a href="<c:url value="/questionDetail/${questionBoard.questionNo }"/>">${questionBoard.title }</a>
+							<td width="48%"><p><a href="<c:url value='/questionDetail/${questionBoard.questionNo }'/>">${questionBoard.title }</a>
 							</p></td>
 							<td width="20%" rowspan="2" style=" border-bottom: 1px solid #777777;">작성시간 <fmt:formatDate value="${questionBoard.regDate}" pattern="yyyy년 MM월 dd일 HH:mm:ss"/> ${questionBoard.memId }</td>
 						</tr>
@@ -105,12 +107,28 @@ td{
 							<td width="8%" align="center">읽음</td>
 							<td width="48%">
 							<c:forEach items="${questionBoard.tagList }" var="tag">
-								<span style="background:#8B9DC3; color:white; width:50px; display:inline-block; text-align: center; border-radius: 2px;border-radius: 10px;">${tag.tagName }</span>&nbsp;
+								<span style="background:#8B9DC3; color:white; width:50px; display:inline-block; text-align: center; border-radius: 2px;border-radius: 10px;">
+									<a href="<c:url value='/questionList?tagNo=${tag.tagNo }'/>" style="color:white;">${tag.tagName }</a>
+								</span>&nbsp;
 							</c:forEach>
 							</td>
 						</tr>
 				</c:forEach>
 			</table>
+		</div>
+		<div class="right">
+			<div style="border:1px solid black; width:300px; height:200px;margin-left:80px; margin-top:63px">
+			<p style="text-align: center; border-bottom:1px solid black; padding: 10px 0 10px 0; margin-top: 0; margin-bottom:0;">흥미태그</p>
+			</div>
+			<div style="border:1px solid black; width:300px; height:200px;margin-left:80px; margin-top:30px">
+			<p style="text-align: center; border-bottom:1px solid black; padding: 10px 0 10px 0; margin-top: 0; margin-bottom:0;">즐겨찾기한 질문</p>
+			</div>
+			<div style="border:1px solid black; width:300px; height:200px;margin-left:80px; margin-top:30px">
+			<p style="text-align: center; border-bottom:1px solid black; padding: 10px 0 10px 0; margin-top: 0; margin-bottom:0;">방문한 페이지</p>
+			<c:forEach items="${visitQuestionBoard }" var="visitQuestion">
+				<div style="border-bottom: 1px solid #333333; margin-top:3px; margin-bottom:3px;"><a href="<c:url value='/questionDetail/${visitQuestion.questionNo }'/>">${ visitQuestion.title}</a></div>
+			</c:forEach>
+			</div>
 		</div>
 	</div>
 	<!----------------------main End--------------------------------------->
@@ -123,6 +141,65 @@ td{
 </body>
 
 <script>
+
+
+$(function(){
+
+
+ 	var list = new cookieList("visitQuestion");
+	console.log(getCookie('visitQuestion')); 
+ 	
+});
+
+function getCookie(cName) {
+cName = cName + '=';
+var cookieData = document.cookie;
+var start = cookieData.indexOf(cName);
+var cValue = '';
+if(start != -1){
+    start += cName.length;
+    var end = cookieData.indexOf(';', start);
+    if(end == -1)end = cookieData.length;
+    cValue = cookieData.substring(start, end);
+}
+return unescape(cValue);
+};
+
+var deleteCookie = function(name) {
+  document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+};
+
+var cookieList = function(cookieName){
+ var cookie = $.cookie(cookieName);
+ var items = cookie ? cookie.split(/,/) : new Array();
+ return {
+  "add" : function(val){
+   items.push(val);
+   $.cookie(cookieName,items.join(','));
+  },
+  "clear" : function(){
+   items = null;
+   $.cookie(cookieName, null);
+  },
+  "items" : function(){
+   return items; 
+  }
+};
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </script>
 </html>
