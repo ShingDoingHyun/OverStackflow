@@ -2,6 +2,9 @@ package com.bit.op.osf.tagBoard.dao;
 
 import java.util.List;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+
 import com.bit.op.osf.tagBoard.model.QuestionBoard;
 import com.bit.op.osf.tagBoard.model.QuestionBoardList;
 import com.bit.op.osf.tagBoard.model.Search;
@@ -25,7 +28,7 @@ public interface IQuestionBoardDao {
 
 	QuestionBoardList selectQuestionList(Search search);
 
-	List<QuestionBoard> selectVisitQuestion(List<QuestionBoard> vistiQuestion);
+	List<QuestionBoard> selectVisitQuestion(Cookie[] cookies);
 
 
 }

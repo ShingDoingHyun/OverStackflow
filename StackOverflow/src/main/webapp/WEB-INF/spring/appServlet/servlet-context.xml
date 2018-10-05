@@ -20,6 +20,7 @@
 	<resources mapping="/logo/**" location="/resources/logo/" />
 	<resources mapping="/image/**" location="/resources/image/" />
 	<resources mapping="/jobimage/**" location="/resources/jobimage/" />
+	<resources mapping="/js/**" location="/resources/js/" />
 
 
 

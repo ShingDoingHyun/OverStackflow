@@ -47,38 +47,26 @@ public class QuestionBoardController {
 
 
 		if(cookies.length> 0) {
-			
-			List<QuestionBoard> vistiQuestionBoardList = new ArrayList<QuestionBoard>();
-			for(int i=0; i < cookies.length; i++) {
 	
-				if(cookies[i].getName().equals("visitQuestion")) {
-					String[] visitQuestionArr = cookies[i].getValue().split("%2C");
-					
-					List<String> list = Arrays.asList(visitQuestionArr);			
-					Collections.reverse(list);			
-					visitQuestionArr = list.toArray(new String[list.size()]);
-					
-					int lenght = visitQuestionArr.length < 5 ? visitQuestionArr.length : 5;
-					for(int index=0; index < lenght; i++) {
-						QuestionBoard question = new QuestionBoard();
-						question.setQuestionNo(Integer.parseInt(visitQuestionArr[index++]));
-						vistiQuestionBoardList.add(question);
-					}
-					
-				}
-			}
-			model.addAttribute("visitQuestionBoard", questionBoardDao.selectVisitQuestion(vistiQuestionBoardList));
+			model.addAttribute("visitQuestionBoard", questionBoardDao.selectVisitQuestion(cookies));
 		}
 		
 		return "board/popQuestionList";
 	}
 	
 	@RequestMapping(value = "/questionList", method = RequestMethod.GET)
-	public String questionList(Model model, Search search) {
+	public String questionList(Model model, Search search, HttpServletRequest request) {
 		QuestionBoardList questionBoardList = questionBoardDao.selectQuestionList(search);
 		
 		model.addAttribute("questionBoardList", questionBoardList);
 
+		Cookie[] cookies = request.getCookies();
+
+
+		if(cookies.length> 0) {
+	
+			model.addAttribute("visitQuestionBoard", questionBoardDao.selectVisitQuestion(cookies));
+		}
 		return "board/questionList";
 	}
 	

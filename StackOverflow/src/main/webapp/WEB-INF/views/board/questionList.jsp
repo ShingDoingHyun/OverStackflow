@@ -49,6 +49,46 @@ td{
     padding-bottom: 10px;
   
 }
+
+/* The Modal (background) */
+.modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 10000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+    
+        /* Modal Content/Box */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 50%; /* Could be more or less, depending on screen size */                          
+        }
+        /* The Close Button */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        #mainName, #middleName, #name{
+			cursor:pointer;
+		}
 </style>
 
 </head>
@@ -86,10 +126,11 @@ td{
 		<form action="<c:url value='/questionList'/>" method="get">
 			<input type="text" name="keyword" size="100" value="${param.keyword}">
 			<input type="hidden" name="order" value="${param.order}">
-			<input type="hidden" name="tagNo" value="${param.tagNo}">
-			
-			<input type="submit" value="검색">
+			<input type="hidden" name="tagNo" value="${param.tagNo}"><input type="submit" value="검색">	
 		</form>
+			<button type="button" id="myBtn">태그선택</button>  
+			<div style="height:50px;" id="tags"></div>
+			<input type="hidden" name="tags">
 		
 		<p align="right">
 			<button onclick="location.href='<c:url value='/questionList?order=regDate&keyword=${param.keyword }&tagNo=${param.tagNo }'/>'">최신순</button>
@@ -164,7 +205,83 @@ td{
 			</c:forEach>
 			</div>
 		</div>
+		
+		      <!-- Modal content -->
+      <div class="modal-content"  style="width: 710px;">
+      <span class="close">&times;</span>   
+        <form>
+        <input type="text" size="20" />  <button type="button" style="margin-left: 15px;" >태그검색</button>
+        </form>    
+        <br>
+        <form>
+        	<table border="1px">
+        		<tr>
+        			<td style="width:250px; text-align: center;">대분류</td>
+        			<td style="width:250px; text-align: center;">중분류</td>
+        			<td style="width:250px; text-align: center;">태그</td>	
+        		</tr>
+        		<tr>
+	        		<td style="height:200px;" valign="top">
+	        			<table id="mainName">
+						</table>
+					</td>
+	        		<td style="height:200px;" valign="top">
+						<table id="middleName">
+						</table>
+					</td>
+	        		<td style="height:200px;" valign="top">
+						<table id="name">
+						</table>
+					</td>
+        		</tr>
+        
+        
+        	</table>
+        </form>                                                      
+        
+      </div>
 	</div>
+	
+	
+	   <!-- The Modal -->
+    <div id="myModal" class="modal">
+ 
+      <!-- Modal content -->
+      <div class="modal-content"  style="width: 710px;">
+      <span class="close">&times;</span>   
+        <form>
+        <input type="text" size="20" />  <button type="button" style="margin-left: 15px;" >태그검색</button>
+        </form>    
+        <br>
+        <form>
+        	<table border="1px">
+        		<tr>
+        			<td style="width:250px; text-align: center;">대분류</td>
+        			<td style="width:250px; text-align: center;">중분류</td>
+        			<td style="width:250px; text-align: center;">태그</td>	
+        		</tr>
+        		<tr>
+	        		<td style="height:200px;" valign="top">
+	        			<table id="mainName">
+						</table>
+					</td>
+	        		<td style="height:200px;" valign="top">
+						<table id="middleName">
+						</table>
+					</td>
+	        		<td style="height:200px;" valign="top">
+						<table id="name">
+						</table>
+					</td>
+        		</tr>
+        
+        
+        	</table>
+        </form>                                                      
+        
+      </div>
+      </div>
+	
 	<!----------------------main End--------------------------------------->
 
 
@@ -172,61 +289,141 @@ td{
 	<%@ include file="../commons/footer.jspf"%>
 	<!----------------------footer End--------------------------------------->
 
+
+
 </body>
 
 <script>
 
-$(function(){
+//모달부분
+
+var modal = document.getElementById('myModal');
+	   
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+ 
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];                                          
+ 
+// When the user clicks on the button, open the modal 
+btn.onclick = function() {
+    modal.style.display = "block";
+    var html = '';
+    $.ajax({
+       	url: 'selectTagMainName',
+        dataType:"json",
+        success: function(data) {
+        	$.each(data, function(index,tag){ 
+           			
+           		html += '<tr>';
+
+           	  	html += '<td onclick="javascript:mainTagClick($(this));">' + tag.tagMainName +'</td>';
+
+           	  	html += '<tr>';
+           	});
+        	$('#mainName').html(html);
+        	$('#middleName').html('');
+        	$('#name').html('');
+        }
+     });
+
+};
 
 
-	 	var list = new cookieList("visitQuestion");
-	 	
-		/* list.add("asd");    */ 
-		
-	 	/* deleteCookie('cookieTest');  */
-	 	var cookies = getCookie('visitQuestion').split(',');
-		console.log(cookies);
-		  
-});
+function mainTagClick(data) {
+	data.parent().siblings().children().css('background', '');
+	data.css('background', '#AED6F1');
+    var html = '';
+    $.ajax({
+       	url: 'selectTagMiddleName',
+       	data : { "mainTag" : data.text()},
+        dataType:"json",
+        success: function(data) {
+        	$.each(data, function(index,tag){ 
+           			
+           		html += '<tr>';
 
-function getCookie(cName) {
-    cName = cName + '=';
-    var cookieData = document.cookie;
-    var start = cookieData.indexOf(cName);
-    var cValue = '';
-    if(start != -1){
-        start += cName.length;
-        var end = cookieData.indexOf(';', start);
-        if(end == -1)end = cookieData.length;
-        cValue = cookieData.substring(start, end);
+           	  	html += '<td onclick="javascript:middleTagClick($(this));">' + tag.tagMiddleName +'</td>';
+
+           	  	html += '<tr>';
+           	});
+        	$('#middleName').html(html);
+        	$('#name').html('');
+        }
+     });
+};
+
+function middleTagClick(data) {
+	data.parent().siblings().children().css('background', '');
+	data.css('background', '#AED6F1');
+    var html = '';
+    $.ajax({
+       	url: 'selectTagName',
+       	data : { "middleTag" : data.text()},
+        dataType:"json",
+        success: function(data) {
+        	$.each(data, function(index,tag){ 
+        		
+				var chk = 0;
+				$('.tag').each(function(index) {
+					
+					var testValue = $(this).text();
+	        		var subValue  = '#'+String(tag.tagName);
+	        		if(testValue == subValue){
+	        			chk=1;
+	        		}
+				});
+				
+	           	html += '<tr>';
+           		if(chk > 0){
+           			html += '<td onclick="javascript:tagInsert($(this));" style="background:#AED6F1;">' + tag.tagName;
+           		}
+           		else{ 
+           			html += '<td onclick="javascript:tagInsert($(this));">' + tag.tagName;
+	           		}
+           	  	html += '</td><td style="display:none">'+tag.tagNo+'</td><tr>';
+           	});
+        	$('#name').html(html);
+        }
+     });
+};
+
+function tagInsert(data) {
+		var chk = 0;
+		$('.tag').each(function(index) {
+			
+			var testValue = $(this).text();
+    		var subValue  = '#'+data.text();
+    		if(testValue == subValue){
+    			chk=1;
+    			$(this).remove();
+    		}
+		});
+	console.log(data);
+	console.log(data.next());
+ 	if(chk > 0){
+		data.css('background', '');	
+		$('input[name=tags]').val($('input[name=tags]').val().replace('#'+data.next().text(),''));
+	}
+	else{ 
+		data.css('background', '#AED6F1');
+		$('#tags').append('<span class="tag" style="margin-left:10px;">#'+data.text()+'</span>');
+		$('input[name=tags]').val($('input[name=tags]').val()+'#'+data.next().text());
+		} 
+	
+}
+ 
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+     modal.style.display = "none";
+}
+ 
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+         modal.style.display = "none";
     }
-    return unescape(cValue);
 };
-
-var deleteCookie = function(name) {
-	  document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-};
-
-var cookieList = function(cookieName){
-	 var cookie = $.cookie(cookieName);
-	 var items = cookie ? cookie.split(/,/) : new Array();
-	 return {
-	  "add" : function(val){
-	   items.push(val);
-	   $.cookie(cookieName,items.join(','));
-	  },
-	  "clear" : function(){
-	   items = null;
-	   $.cookie(cookieName, null);
-	  },
-	  "items" : function(){
-	   return items; 
-	  }
-	};
-};
-
-
-
 
 
 </script>

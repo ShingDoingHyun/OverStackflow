@@ -547,24 +547,7 @@ $(function(){
 	 	if(${questionBoard.questionNo} != getCookie('visitQuestion')){
 	  		list.add(${questionBoard.questionNo}); 
 	 	}
-	 	/*	 	
-	 	var cookies  = [];
-	 	cookies = getCookie('visitQuestion').split(',');
-	 	
- 	 	var check = false;
-	 	
-	 	for(var index in cookies){
-	 		console.log(cookies[index]);
-	 		if(cookies[index]==${questionBoard.questionNo}){
-	 			check=true;
-	 			break;
-	 		}
-	 	}
-	 	
-	 	if(check===false){
-	 		list.add(${questionBoard.questionNo});
-	 	} */
-		
+
 		  
 });
 

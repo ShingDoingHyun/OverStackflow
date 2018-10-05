@@ -1,10 +1,13 @@
 package com.bit.op.osf.tagBoard.daoImpl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
@@ -231,11 +234,32 @@ public class QuestionBoardDaoImpl implements IQuestionBoardDao {
 	
 	
 	@Override
-	public List<QuestionBoard> selectVisitQuestion(List<QuestionBoard> vistiQuestion) {
-		for(QuestionBoard question : vistiQuestion) {
+	public List<QuestionBoard> selectVisitQuestion(Cookie[] cookies) {
+
+		List<QuestionBoard> vistiQuestionBoardList = new ArrayList<QuestionBoard>();
+		for(int i=0; i < cookies.length; i++) {
+
+			if(cookies[i].getName().equals("visitQuestion")) {
+				String[] visitQuestionArr = cookies[i].getValue().split("%2C");
+				
+				List<String> list = Arrays.asList(visitQuestionArr);			
+				Collections.reverse(list);			
+				visitQuestionArr = list.toArray(new String[list.size()]);
+				
+				int lenght = visitQuestionArr.length < 5 ? visitQuestionArr.length : 5;
+				for(int index=0; index < lenght; i++) {
+					QuestionBoard question = new QuestionBoard();
+					question.setQuestionNo(Integer.parseInt(visitQuestionArr[index++]));
+					vistiQuestionBoardList.add(question);
+				}
+				
+			}
+		}
+
+		for(QuestionBoard question : vistiQuestionBoardList) {
 			question.setTitle(sqlSession.selectOne(QUSETION_NAMESPACE + "selectVisitQuestion", question.getQuestionNo()));
 		}	
-		return vistiQuestion;
+		return vistiQuestionBoardList;
 	}
 	
 
