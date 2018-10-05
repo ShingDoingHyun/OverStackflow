@@ -51,6 +51,14 @@ th, td {
   float: left;
  }
  
+ #accordian tr:nth-child(2n){
+ 	display: none;
+ }
+ 
+ #accordian tr:nth-child(2n+1){
+ 	cursor:pointer;
+ }
+
  
 </style>
 </head>
@@ -77,23 +85,37 @@ th, td {
 	 <h2>지원서 관리</h2>
 	</div>
 	
-
 	<div>
 		<c:if test ="${jobAppList == null}">
 		<p>등록된 회원정보가 없습니다<p>
 		</c:if>
 		
 		<c:if test = "${jobAppList != null}">
-		<table width="100%">
-		    <c:forEach var="jobApp" items="${jobAppList}" >
-			    <tr>
-					    <td >${jobApp.appResult}</td>
-					    <td>${jobApp.appInterviewDate}</td>
-					    <td>${jobApp.appName}(${jobApp.appGender}, ${jobApp.appAge}세)</td>
-						<td style="width:20%;">${jobApp.appEduName}(${jobApp.appMajor}, ${jobApp.appMinor})</td>
-						<td></td>  
-						<td>${jobApp.appRegisterDate}</td>
-			   <tr>
+		<table width="100%"  id="accordian">
+		    <c:forEach var="jobApp" items="${jobAppList}" varStatus="status" >
+			    <tr> 
+					 <td>
+		    		   <c:if test="${jobApp.appResult == 'passFinal'}">
+		  				<span style="color:blue" id="appResultTitle${status.count}"> 최종 합격 </span>
+		  				</c:if>
+		  				<c:if test="${jobApp.appResult == 'passDocu'}">
+		  				<span style="color:green" id="appResultTitle${status.count}"> 서류 합격 </span>
+		  				</c:if>
+		  				<c:if test="${jobApp.appResult == 'failure'}">
+		  				<span style="color:red" id="appResultTitle${status.count}"> 불합격 </span>
+		  				</c:if>
+		  				<c:if test="${jobApp.appResult == '-'}">
+		  				<span style="color:gray" id="appResultTitle${status.count}"> 미평가 </span>
+		  				</c:if>
+		  			 </td>
+				    <td><span id="appInterviewDateTitle${status.count}">${jobApp.appInterviewDate}</span></td>
+				    <td>${jobApp.appName}(${jobApp.appGender}, ${jobApp.appAge}세)</td>
+					<td style="width:20%;">${jobApp.appEduName}(${jobApp.appMajor}, ${jobApp.appMinor})</td>
+					<td></td>  
+					<td>${jobApp.appRegisterDate}</td>
+			   </tr>
+			   
+			   <!-- 이력서 내용 -->
 			   <tr>
 			    	  <td colspan="6">
 			    	  	 <div class="appcontent">
@@ -121,11 +143,52 @@ th, td {
 							  	입사 포부<br>
 							  	${jobApp.appAmbition}<br>
 							  	
-							  	결과 통보: <form onsubmit="updateAppResult($(this))" accept-charset="utf-8">
-							  					<input type="hidden" name="appNo" value="${jobApp.appNo}">
-							  					<input type="text" name="appResult" class="appResult"><input type="submit" value="확인">
-							  			   </form><br>
-								면접 날짜 지정: <input type="date"><input type="button" value="확인"><br>
+							  	<!-- 면접 결과 -->
+					  	 		<c:if test="${jobApp.appResult == '-'}">
+					  			   결과 통보:
+					  			</c:if>
+					  			<c:if test="${jobApp.appResult != '-'}">
+					  				결과 수정:   		
+					  				<c:if test="${jobApp.appResult == 'passFinal'}">
+					  				<span style="color:blue" id="appResult${status.count}">최종 합격</span>
+					  				</c:if>
+					  				<c:if test="${jobApp.appResult == 'passDocu'}">
+					  				<span style="color:green" id="appResult${status.count}">서류 합격</span>
+					  				</c:if>
+					  				<c:if test="${jobApp.appResult == 'failure'}">
+					  				<span style="color:red" id="appResult${status.count}">불합격</span>
+					  				</c:if>
+					  			</c:if>		
+					  				<form onsubmit="return updateAppResult($(this), ${status.count})" accept-charset="utf-8" >
+					  					<input type="hidden" name="appNo" value="${jobApp.appNo}">
+					  					<select name="appResult">
+					  					  <option value="passFinal">최종 합격</option>
+					  					  <option value="passDocu">서류 합격</option>
+					  					  <option value="failure">불합격</option>
+						  				</select>
+						  				<input type="submit" value="확인">
+					  			 	</form>
+					  			<c:if test="${jobApp.appResultDate != null}">
+					  			<span id="appResultDate${status.count}">결과 통보일: ${jobApp.appResultDate}</span>
+					  			</c:if>
+
+
+								<br>
+							    <!-- 면접 날짜 -->
+							    <c:if test="${jobApp.appInterviewDateDate == null}">
+					  			   면접 날짜 지정: 
+					  			</c:if>
+					  			<c:if test="${jobApp.appInterviewDateDate != null}">
+								   면접 날짜 수정: <span style="color:red" id="appInterviewDate${status.count}">${jobApp.appInterviewDate}</span>
+								</c:if>
+								<form onsubmit="return updateAppInterviewDate($(this), ${status.count})" accept-charset="utf-8" >
+									<input type="hidden" name="appNo" value="${jobApp.appNo}">
+									<input type="date" name="appInterviewDate"><input type="submit" value="확인">
+								</form>
+								<c:if test="${jobApp.appInterviewDateDate != null}">
+								   면접 날짜 통보일: <span id="appInterviewDateDate${status.count}">${jobApp.appInterviewDateDate}</span>
+								</c:if>
+								<br>
 							  </div>
 					 	 </div>
 					 </td>
@@ -134,7 +197,6 @@ th, td {
 		</table>
 		</c:if>
 	 </div>
-	</div>
 </div>
 
 <!----------------------main end--------------------------------------->
@@ -144,29 +206,56 @@ th, td {
 <!----------------------footer End--------------------------------------->
 
 <script>
-function updateAppResult(e){
-	
-	alert(e.serialize());
-	alert(1);
+
+//면접 결과 통보
+$(function(){
+	//아코디언 형식
+	$("#accordian").find("tr:nth-child(2n+1)").click(function(){
+		$(this).next().slideUp();
+		/* $('.ico_ar').css('transform','none'); */
+		if(!$(this).next().is(":visible"))
+		{
+			$(this).next().slideDown(); 
+		} 
+	})
+});
+
+function updateAppResult(e,index){
+
 	var queryString = e.serialize();
-	
-	alert(2);
-	
+
 	$.ajax({
 		type: "POST",
 		url: getContextPath()  + "/comJob/updateAppResult",
 		data: queryString,
-		dataType: "text", 
+		dataType: "json", 
 		contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
-		success : function(result){
-			if(result == "success"){
-			alert("결과가 통보되었습니다.");
+		cache: false,
+		success : function(data){
+		 	if(data.appResult == "passFinal"){
+				alert("결과가 통보되었습니다.");
+				$("#appResult"+index).text("최종 합격").css("color", "blue");
+				$("#appResultTitle"+index).text("최종 합격").css("color", "blue");
+				$("#appResultDate"+index).text("결과 통보일: " + data.appResultDate);
+				
+			}else if(data.appResult == "passDocu"){
+				alert("결과가 통보되었습니다.");
+				$("#appResult"+index).text("서류 합격").css("color", "green");
+				$("#appResultTitle"+index).text("서류 합격").css("color", "green");
+				$("#appResultDate"+index).text("결과 통보일: " + data.appResultDate);
+
+			}else if(data.appResult == "failure"){
+				alert("결과가 통보되었습니다.");
+				$("#appResult"+index).text("불합격").css("color", "red");
+				$("#appResultTitle"+index).text("불합격").css("color", "red");
+				$("#appResultDate"+index).text("결과 통보일: " + data.appResultDate);
+				
 			}else{
-			alert("결과 통보에 실패했습니다. 다시 시도해주세요.");
-			}
+				alert("결과 통보에 실패했습니다. 다시 시도해주세요.");  
+			}  
         },
-        error:function(){
-        	alert("오류발생");
+        error:function(data){
+        	alert("오류가 발생했습니다. 다시 시도해주세요.");
         }
 	});
 	return false;
@@ -175,6 +264,35 @@ function updateAppResult(e){
 function getContextPath() {
 	var hostIndex = location.href.indexOf( location.host ) + location.host.length;
 	return location.href.substring( hostIndex, location.href.indexOf("/", hostIndex + 1) );
+};
+
+//면접 날짜 수정
+function updateAppInterviewDate(e, index){
+	
+	var queryString = e.serialize();
+		
+		$.ajax({
+			type: "POST",
+			url: getContextPath()  + "/comJob/updateAppInterviewDate",
+			data: queryString,
+			dataType: "json", 
+			contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
+			cache: false,
+			success : function(data){
+				if(data.appInterviewDate !=null){
+					alert("면접 날짜가 통보되었습니다.");
+					$("#appInterviewDate"+index).text(data.appInterviewDate);
+					$("#appInterviewDateTitle"+index).text(data.appInterviewDate);
+					if(data.appInterviewDateDate !=null){
+						$("#appInterviewDateDate"+index).text(data.appInterviewDateDate);
+					}
+				}
+	        },
+	        error:function(){
+	        	alert("오류가 발생했습니다. 다시 시도해주세요.");
+	        }
+		});
+	return false;
 };
 </script>
 </body>

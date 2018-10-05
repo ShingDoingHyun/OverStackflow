@@ -29,5 +29,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/HB04-19/Desktop/jackson-core-asl.jar (1)/jackson-core-asl.jar"/>
+	<classpathentry kind="lib" path="C:/Users/HB04-19/Desktop/jackson-core-asl.jar (1)/jackson-mapper-asl.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

@@ -1,7 +1,9 @@
 package com.bit.op.osf.job.controller;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
@@ -25,6 +27,8 @@ import com.bit.op.osf.job.model.JobApplication;
 import com.bit.op.osf.job.model.JobInfo;
 import com.bit.op.osf.job.model.JobInfoListView;
 import com.bit.op.osf.job.model.SearchJob;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
 public class ComJobController {
@@ -72,7 +76,9 @@ public class ComJobController {
       	  jobTypeList = request.getParameterValues("jobType");
     	}
     	search.setJobTypeList(jobTypeList);
+    	System.out.println(search);
 
+    	//페이지설정
     	if(pageNumberStr!=null) {
     		pageNumber =Integer.parseInt(pageNumberStr);
     	}
@@ -80,6 +86,7 @@ public class ComJobController {
     	System.out.println(search);
     	model.addAttribute("jobInfoListView", comJobDaoImpl.selectJobInfoListPage(pageNumber, comId, search));
     	model.addAttribute("search", search);
+    	model.addAttribute("page", pageNumber);
     	
     	/*model.addAttribute("memberListView", );*/
     	return "comJob/comSeeJobInfoList";
@@ -96,15 +103,24 @@ public class ComJobController {
     }
     
     //채용 공고 관리 페이지
-    @RequestMapping(value="/comJob/manageJobInfoList/{page}")
-    public String selectJobInfoManageList(@PathVariable("page") String pageNumberStr, HttpServletRequest request, SearchJob search, Model model){
+    @RequestMapping(value="/comJob/manageJobInfoList/{page}", method=RequestMethod.GET)
+    public String selectJobInfoManageList(@PathVariable("page") String pageNumberStr, HttpServletRequest request ,SearchJob search, Model model){
     	String comId = "test1";
     	int pageNumber =1;
-        
+    	String[] jobTypeList = null;
+    	
+        //페이징 설정
         if(pageNumberStr!=null) {
         	pageNumber =Integer.parseInt(pageNumberStr);
         }
         
+    	//jobTypeList
+    	if(request.getParameter("jobType")!=null) {
+      	  jobTypeList = request.getParameterValues("jobType");
+    	}
+    	search.setJobTypeList(jobTypeList);
+    	System.out.println(search);
+          
         model.addAttribute("jobInfoListView", comJobDaoImpl.selectJobInfoListPage(pageNumber, comId, search));
         model.addAttribute("search", search);
         return "comJob/comManageJobInfoList";
@@ -189,18 +205,52 @@ public class ComJobController {
     //지원서 결과 통보
     @ResponseBody
     @RequestMapping(value="/comJob/updateAppResult", produces = "application/text; charset=utf8", method=RequestMethod.POST)  
-    public String updateAppResult(JobApplication jobapp, Model model) {
+    public String updateAppResult(JobApplication jobapp) throws JsonProcessingException {
+    	//넘겨주는 데이터
     	int appNo = jobapp.getAppNo();
     	String appResult = jobapp.getAppResult();
-    	String result = null;  	
+    	Date appResultDate = new Date();
+    	//받는 데이터
+    	JobApplication returnApp = null;  	
+    	Map<String, String> result = new HashMap<String, String>();
     	
-    	System.out.println("지원서 번호는" + appNo);
+    	System.out.println(appResultDate);
     	
-    	if(comJobDaoImpl.updateAppResult(appNo, appResult) == null) {
-    		result = "success";
+    	if(comJobDaoImpl.updateAppResult(appNo, appResult, appResultDate) == null) {
+    		returnApp = comJobDaoImpl.selectAppResult(appNo);
     	}
     	
-    	return result;
+    	result.put("appResult", returnApp.getAppResult());
+    	result.put("appResultDate", returnApp.getAppResultDate());
+    	
+    	String data = new ObjectMapper().writeValueAsString(result);
+    	System.out.println("결과는" + data);
+    	return data; 
+    }
+    
+    //지원서 면접날짜 통보
+    @ResponseBody
+    @RequestMapping(value="/comJob/updateAppInterviewDate", produces = "application/text; charset=utf8", method=RequestMethod.POST)  
+    public String updateAppInterviewDate(JobApplication jobapp) throws JsonProcessingException {
+    	//넘겨주는 데이터
+    	int appNo = jobapp.getAppNo();
+    	String appInterviewDate = jobapp.getAppInterviewDate();
+        Date appInterviewDateDate = new Date();
+        //받는 데이터
+        JobApplication returnApp = null;  	
+        Map<String, String> result = new HashMap<String, String>();
+        
+        System.out.println(appInterviewDateDate);
+    	if(comJobDaoImpl.updateAppInterviewDate(appNo, appInterviewDate, appInterviewDateDate) == null) {
+    		returnApp = comJobDaoImpl.selectAppInterviewDate(appNo);
+    	}
+
+    	result.put("appInterviewDate", returnApp.getAppInterviewDate());
+    	result.put("appInterviewDateDate", returnApp.getAppInterviewDateDate());
+    	
+    	String data = new ObjectMapper().writeValueAsString(result);
+    	System.out.println("결과2는" + data);
+    	return data;
     }
 
     /*@RequestMapping(value="/comJob/seeJobInfoListBySearch/{page}", method=RequestMethod.GET)

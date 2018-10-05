@@ -26,8 +26,25 @@ public class JobApplication {
     private String appIntroduction;
     private String appAmbition;
     private String appResult;
+    private String appResultDate;
     private String appInterviewDate;
+    private String appInterviewDateDate;
     private String appRegisterDate;
+    
+    
+    
+	public String getAppResultDate() {
+		return appResultDate;
+	}
+	public void setAppResultDate(String appResultDate) {
+		this.appResultDate = appResultDate;
+	}
+	public String getAppInterviewDateDate() {
+		return appInterviewDateDate;
+	}
+	public void setAppInterviewDateDate(String appInterviewDateDate) {
+		this.appInterviewDateDate = appInterviewDateDate;
+	}
 	public int getAppNo() {
 		return appNo;
 	}

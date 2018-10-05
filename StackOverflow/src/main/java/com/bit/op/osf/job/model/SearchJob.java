@@ -8,11 +8,21 @@ public class SearchJob {
     private String jobLocation;
     private String jobPayType;
     private String jobPayAmount;
+    private String order;
     /*private List<Tag> jobTagList;*/
     
     public SearchJob() {
     }
     
+    
+
+	public String getOrder() {
+		return order;
+	}
+
+	public void setOrder(String order) {
+		this.order = order;
+	}
 
 	public String getJobTitle() {
 		return jobTitle;

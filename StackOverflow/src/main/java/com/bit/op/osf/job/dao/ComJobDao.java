@@ -41,9 +41,15 @@ public interface ComJobDao {
 
     public List<JobApplication> selectJobAppManageList(@Param("comId") String comId, @Param("jobNo") int jobNo);
     
-    public String updateAppResult(int appNo, String appResult);
+    public String updateAppResult(@Param("appNo") int appNo,@Param("appResult") String appResult, @Param("appResultDate") Date appResultDate);
     
-   /* public JobInfo selectJobInfo(int jobSeqNum);*/
+    public String updateAppInterviewDate(@Param("appNo") int appNo,@Param("appInterviewDate") String appInterviewDate,@Param("appInterviewDateDate") Date appInterviewDateDate);
+    
+    public JobApplication selectAppResult(int appNo);
+    
+    public JobApplication selectAppInterviewDate(@Param("appNo") int appNo);
+    
+    /* public JobInfo selectJobInfo(int jobSeqNum);*/
 
   /* 
 

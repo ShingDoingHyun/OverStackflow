@@ -85,6 +85,10 @@ public class ComJobDaoImpl extends DaoImpl implements ComJobDao {
         
         /*System.out.println(search);*/
         System.out.println(comId);
+     /*   System.out.println(order);
+        if(order==null) {
+        	order = "jobRegisterDate";
+        }*/
 
         if(search.check()) {
         	jobInfoTotalCount = countJobInfoBySearch(comId, search);
@@ -177,11 +181,32 @@ public class ComJobDaoImpl extends DaoImpl implements ComJobDao {
 	}
 	
 	@Override
-	public String updateAppResult(int appNo, String appResult) {
+	public String updateAppResult(int appNo, String appResult, Date appResultDate) {
 		Map map = new HashMap();
 		map.put("appNo", appNo);
 		map.put("appResult", appResult);
+		map.put("appResultDate", appResultDate);
 		return sqlSession.selectOne(NAMESPACE + "updateAppResult", map);
+	}
+	
+	@Override
+	public String updateAppInterviewDate(int appNo, String appInterviewDate, Date appInterviewDateDate) {
+		Map map = new HashMap();
+		map.put("appNo", appNo);
+		map.put("appInterviewDate", appInterviewDate);
+		map.put("appInterviewDateDate", appInterviewDateDate);
+		return sqlSession.selectOne(NAMESPACE + "updateAppInterviewDate", map);
+		
+	}
+	
+	@Override
+	public JobApplication selectAppResult(int appNo) {
+		return sqlSession.selectOne(NAMESPACE + "selectAppResult", appNo); 
+	}
+	
+	@Override
+	public JobApplication selectAppInterviewDate(int appNo) {
+		return sqlSession.selectOne(NAMESPACE + "selectAppInterviewDate", appNo); 
 	}
 	
 	/*
