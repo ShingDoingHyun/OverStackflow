@@ -90,6 +90,16 @@ li > div{ display:none;}
 iframe {
 	width: 90%;
 }
+
+/* 프로필 영역 css  */
+.profile{
+	float: right; 
+	width: 250px; 
+	height:90px; 
+	border-radius: 5px; 
+	background: #eeeeee; 
+	margin-right: 10px
+}
 </style>
 <body>
 
@@ -114,7 +124,7 @@ iframe {
 			<h2>${questionBoard.title }</h2>
 			<br>
 			<div style="position: absolute; right: 10px;">
-				<button onclick="location.href='<c:url value='/openWriteQuestion'/>'">
+				<button id="writeBtn" >
 					질문하기
 				</button>
 			</div>
@@ -148,8 +158,8 @@ iframe {
 					<div style="float: left; width: 50%; margin-top: 80px;" class="accordian">
 						댓글작성
 					</div>
-					<div style="float: right; width: 50%;">
-						작성자 프로필 부분
+					<div class="profile">
+						<img style="width:100px" src="<c:url value='/resources/uploadFile/memberPhoto/${memInfo.memberPhoto}'/>">${memInfo.memberId}
 					</div>
 				</div>
 				<div>
@@ -270,9 +280,9 @@ iframe {
 						<div style="float: left; width: 50%; margin-top: 80px;" class="accordian">
 							댓글작성
 						</div>
-						<div style="float: right; width: 50%;">
-							작성자 프로필 부분
-						</div>
+					<div class="profile">
+						<img style="width:100px" src="<c:url value='/resources/uploadFile/memberPhoto/${memInfo.memberPhoto}'/>">${memInfo.memberId}
+					</div>
 					</div>
 					<div>
 						<hr>
@@ -513,15 +523,10 @@ $(function(){
 	 	var cookies  = [];
 	 	var cookie = null;
 	 	cookies = getCookie('visitQuestion').split(',');
-	 	
-	 	console.log(cookies.length);
-	 	
-	 	
+	 	 	
 	 	for(var index in cookies){
 	 		
 	 		if(cookies[index]==${questionBoard.questionNo}){
-	 			console.log(cookies[index]);
-	 			console.log(index);
 	 			if(index < cookies.length-1){
 	 				cookie = getCookie('visitQuestion').replace(${questionBoard.questionNo}+",", "");
 	 			}
@@ -534,8 +539,6 @@ $(function(){
 	 			var cookies2  = []; 
 	 			cookies2  = cookie.split(',');
 	 			
-	 			console.log(cookie);
-	 			console.log(cookies2);
 	 			for(var index2 in cookies2){
 	 				console.log(cookies2[index2]);
 	 				list.add(cookies2[index2]);
@@ -587,7 +590,16 @@ var cookieList = function(cookieName){
 	  }
 	};
 };
-	
+$("#writeBtn").click(function() {
+	if(${memInfo == null}){
+		alert("로그인 후 이용하세요");
+	}
+	else{
+		location.href= getContextPath()+'/openWriteQuestion';
+	}
+});
+
+
 	
 	
 	

@@ -5,8 +5,6 @@ package com.bit.op.osf.tagBoard.controller;
 
 import java.io.FileOutputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -111,9 +109,11 @@ public class QuestionBoardController {
 	
 	@RequestMapping(value = "/questionDetail/{questionBoardNo}", method = RequestMethod.GET)
 	public String questionDetail(Model model, @PathVariable("questionBoardNo") int questionBoardNo) {
+		QuestionBoard questionBoard = questionBoardDao.selectQuestionDeltail(questionBoardNo);
 		
-		
-		model.addAttribute("questionBoard", questionBoardDao.selectQuestionDeltail(questionBoardNo));
+		model.addAttribute("questionBoard", questionBoard);
+		//멤버 셀렉트 후 가져온걸 처리...
+		/*model.addAttribute("memberInfo", questionBoard.getMemId());*/
 		
 		return "board/questionDetail";
 		

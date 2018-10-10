@@ -5,7 +5,7 @@
 <mapper namespace="com.bit.op.osf.tagBoard.mapper.QuestionBoardMapper">
 
 	<insert id="insertQuestion" parameterType="com.bit.op.osf.tagBoard.model.QuestionBoard"> 
-        insert into questionboard(memId, content, title) value ('test', #{content}, #{title});
+        insert into questionboard(memId, content, title) value (#{memId}, #{content}, #{title});
         <selectKey keyProperty="questionNo" resultType="int" order="AFTER">
         	 SELECT LAST_INSERT_ID();
     	</selectKey>

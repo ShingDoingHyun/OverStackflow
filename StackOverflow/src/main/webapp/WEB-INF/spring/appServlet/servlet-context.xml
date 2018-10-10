@@ -19,6 +19,7 @@
 	<resources mapping="/summernote/**" location="/resources/summernote/" />
 	<resources mapping="/logo/**" location="/resources/logo/" />
 	<resources mapping="/image/**" location="/resources/image/" />
+	<resources mapping="/img/**" location="/resources/img/" />
 	<resources mapping="/jobimage/**" location="/resources/jobimage/" />
 	<resources mapping="/js/**" location="/resources/js/" />
 

@@ -1,7 +1,8 @@
 @charset "UTF-8";
 <style>
 body {
-	margin: 0;
+	margin: 0 auto;
+	
 }
 
 .header {
@@ -97,7 +98,7 @@ a:hover, a:active  {
 
 .main {
 	margin-left: 150px;
-	width: 100%;
+	width: 90%;
 	/* Same as the width of the sidenav */
 
 }
@@ -187,7 +188,7 @@ li {
 
 .headerBox .right {
 	float: right;
-	width: 300px;
+	text-align: right;
 }
 
 .headerBox .left {
@@ -199,4 +200,13 @@ li {
 	margin: 0 20px;
 	line-height: 50px;
 }
+
+.photo2 {
+    width: 70px; height: 70px;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 50%;
+}
+
+
 </style>

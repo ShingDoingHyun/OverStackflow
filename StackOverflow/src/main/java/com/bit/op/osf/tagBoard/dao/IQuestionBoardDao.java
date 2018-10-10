@@ -20,7 +20,7 @@ public interface IQuestionBoardDao {
 
 	int updateQuestionView(int questionNo);
 
-	Object selectQuestionDeltail(int questionBoardNo);
+	QuestionBoard selectQuestionDeltail(int questionBoardNo);
 
 	int updateQuestionBoard(QuestionBoard questionBoard);
 

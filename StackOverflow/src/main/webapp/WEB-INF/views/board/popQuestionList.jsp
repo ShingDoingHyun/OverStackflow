@@ -18,6 +18,7 @@
 
 
 <style>
+
 .main {
 	display: inline-block;
 	height: 100%;
@@ -70,13 +71,13 @@ td{
 		<div class="left">
 			<div>
 				<h2>인기질문</h2>
-				<br> <br>
+				<br> <br> 
 
 			</div>
 		</div>
 
 		<div class="right">
-			<button onclick="location.href='<c:url value='/openWriteQuestion'/>'" style="position: absolute; right:10px; top:111px;" >
+			<button id="writeBtn"  style="position: absolute; right:10px; top:111px;" >
 				질문하기
 			</button>
 		</div>
@@ -187,10 +188,21 @@ var cookieList = function(cookieName){
 };
 };
 
+function getContextPath() {
+	var hostIndex = location.href.indexOf( location.host ) + location.host.length;
+	return location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
+};
+	
 
 
-
-
+$("#writeBtn").click(function() {
+	if(${memInfo == null}){
+		alert("로그인 후 이용하세요");
+	}
+	else{
+		location.href= getContextPath()+'/openWriteQuestion';
+	}
+});
 
 
 
