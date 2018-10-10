@@ -30,8 +30,9 @@
 </head>
 
  <%
+ 
     String clientId = "2LiTXcNGWvrdztpMNXZd";//애플리케이션 클라이언트 아이디값";
-    String redirectURI = URLEncoder.encode("http://localhost/login/callback", "UTF-8");
+    String redirectURI = URLEncoder.encode("http://localhost/op/", "UTF-8");
     SecureRandom random = new SecureRandom();
     String state = new BigInteger(130, random).toString();
     String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
@@ -72,20 +73,18 @@
                     <div style="display:inline-block">or</div>
                     <div id="a" style="border-top:1px solid gray; width:186px;display:inline-block"></div>
                 </div><br>
-                <label for="snslogin"><font size="2">회원가입 또는 SNS으로 로그인 </font></label><br><br>
+                <label for="snslogin"><font size="2">SNS으로 로그인 </font></label><br><br>
             </div>
             
             
             	<div class="form-group text-center"> 
-			  <a href="<%=apiURL%>"><img height="50px" src="img/naver_Green.PNG" style="height:55px;width:400px;"/></a>
+			  <a href="<%=apiURL%>"><img height="50px" src="resources/img/naver_Green.png" style="height:55px;width:400px;"/></a>
 			</div>
-			
-             <div id="loginDiv"><input type="submit" id="signBtn" value="OverStakFlow로 회원가입"/></div>
             <br>
             
-            <p class="text-p"> <a href="#">계정을잊으셨나요?</a> </p>
+          <!--  <div class=""><a href="#">계정을잊으셨나요?</a></div> -->
             
-            <div id="signUpDiv"><span><a href="signUp.jsp">회원가입</a></span></div>
+            <div id="signUpDiv"><span><a href="../op/joinChoiceForm">회원가입</a></span></div>
         </div>
     </form>
       <form action="comLoginForm" method="post" id="signup">
@@ -104,10 +103,10 @@
 
             <div id="loginDiv"><input type="submit" id="loginBtn" value="로그인" /></div>
             <div id="footer"><br>
-                <div id="checkDiv"><input type="checkbox" name="remember" value="1">아이디 저장</div>
-                <div id="signUpDiv"><span><a href="signUp.jsp">회원가입</a></span></div>
+                <div id="checkDiv"><input type="checkbox" name="remember" value="1"> 아이디 저장</div>
+                <div id="signUpDiv"><span><a href="../op/joinChoiceForm">회원가입</a></span></div>
             </div>
-                        <p class="text-p"> <a href="#">계정을잊으셨나요?</a> </p>
+                    <!--     <p class="text-p"> <a href="#">계정을잊으셨나요?</a> </p> -->
         </div>
     </form>
 </div>

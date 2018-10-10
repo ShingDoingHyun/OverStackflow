@@ -14,7 +14,7 @@
     String clientSecret = "TK17WpmELN";//애플리케이션 클라이언트 시크릿값";
     String code = request.getParameter("code");
     String state = request.getParameter("state");	
-    String redirectURI = URLEncoder.encode("http://localhost/login/loginform", "UTF-8");
+    String redirectURI = URLEncoder.encode("http://localhost/op/", "UTF-8");
     String apiURL;
     apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&";
     apiURL += "client_id=" + clientId;
@@ -50,7 +50,7 @@
       System.out.println(e);
     }
 
-       response.sendRedirect("/login/loginform");   
+       response.sendRedirect("op/memLoginForm");   
   %>
 
   </body>

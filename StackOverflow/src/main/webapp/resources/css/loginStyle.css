@@ -70,16 +70,16 @@ body {
 #loginBtn {
     width: 400px;
     height: 55px;
-    background:black;
+    background:#fb8c00;
     color: white;
     font-size: 20px;
     margin-top: 15px;
 }
 
 #signBtn {
-    width: 400px;
+    width:400px;
     height: 55px;
-    background:orange;
+    background:#fb8c00;
     color: white;
     font-size: 20px;
     margin-top: 15px;
@@ -103,8 +103,8 @@ a {
     
 }
 
-.forms .tab-group li a:hover {
+/* .forms .tab-group li a:hover {
     background: #dedfdf;
     color: #666;
 }
-
+ */
