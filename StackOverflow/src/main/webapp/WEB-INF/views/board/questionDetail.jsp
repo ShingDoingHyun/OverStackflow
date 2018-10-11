@@ -136,16 +136,30 @@ iframe {
 		<div class="mainLeft">
 			<div style="float: left; width: 15%;">
 				<br> 
+				<c:if test="${memberVote > 0}">
+				<a href="javascript:changeVote('${questionBoard.questionNo }','0');">
+					<img src="<c:url value='/img/voteUp.png'/>" width="30px" height="20px" class="upVote">
+				</a>
+				</c:if>
+				<c:if test="${memberVote <= 0}">
 				<a href="javascript:changeVote('${questionBoard.questionNo }','1');">
 					<img src="<c:url value='/img/unVoteUp.png'/>" width="30px" height="20px" class="upVote">
 				</a>
+				</c:if>
 				<br>
 				<br>
 				<div style="width: 30px; text-align: center;" class="vote">${questionBoard.vote }</div>
-				<br> 
+				<br>
+				<c:if test="${memberVote >= 0}"> 
 				<a href="javascript:changeVote('${questionBoard.questionNo }','-1');">
 					<img src="<c:url value='/img/unVoteDown.png'/>" width="30px" height="20px" class="downVote">
 				</a>
+				</c:if>
+				<c:if test="${memberVote < 0}"> 
+				<a href="javascript:changeVote('${questionBoard.questionNo }','0');">
+					<img src="<c:url value='/img/voteDown.png'/>" width="30px" height="20px" class="downVote">
+				</a>
+				</c:if>
 				<br>
 				<br>
 				<a href="javascript:checkFavQuestion('${questionBoard.questionNo }');">
@@ -687,10 +701,12 @@ var changeVote = function(questionNo, vote){
 	            success : function(data){
 	            	if(vote>0){
 	            		$(".upVote").parent().attr("href","javascript:changeVote('${questionBoard.questionNo }','0');");
+	            		$(".downVote").parent().attr("href","javascript:changeVote('${questionBoard.questionNo }','-1');");
 						$(".upVote").attr("src",getContextPath()+"/img/voteUp.png");    
 						$(".downVote").attr("src",getContextPath()+"/img/unVoteDown.png");    
 	            	}
 	            	else if(vote<0){
+	            		$(".upVote").parent().attr("href","javascript:changeVote('${questionBoard.questionNo }','1');");
 	            		$(".downVote").parent().attr("href","javascript:changeVote('${questionBoard.questionNo }','0');");
 	            		$(".upVote").attr("src",getContextPath()+"/img/unVoteUp.png");    
 						$(".downVote").attr("src",getContextPath()+"/img/voteDown.png"); 

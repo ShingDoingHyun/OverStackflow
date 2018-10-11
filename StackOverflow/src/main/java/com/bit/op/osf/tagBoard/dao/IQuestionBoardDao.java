@@ -34,5 +34,7 @@ public interface IQuestionBoardDao {
 
 	int chageVote(QuestionBoard questionBoard);
 
+	int selectMemberQuestionVote(QuestionBoard questionBoard, HttpServletRequest request);
+
 
 }

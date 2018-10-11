@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.core.env.SystemEnvironmentPropertySource;
 import org.springframework.stereotype.Repository;
 
 import com.bit.op.osf.member.model.MemRegInfo;
@@ -86,8 +87,9 @@ public class QuestionBoardDaoImpl implements IQuestionBoardDao {
 				Map map = new HashMap();
 				map.put("questionNo", questionBoard.getQuestionNo());
 				map.put("memberId", memInfo.getMemberId());	
-				int result = sqlSession.selectOne(QUSETION_NAMESPACE + "selectFavQuestion", map) != null ? 1 : 0;
-				questionBoard.setFav(result);
+
+				questionBoard.setFav(sqlSession.selectOne(QUSETION_NAMESPACE + "selectFavQuestion", map) != null ? 1 : 0);
+
 			}
 			
 			//태그설정
@@ -141,8 +143,8 @@ public class QuestionBoardDaoImpl implements IQuestionBoardDao {
 					Map map = new HashMap();
 					map.put("questionNo", questionBoard.getQuestionNo());
 					map.put("memberId", memInfo.getMemberId());	
-					int result = sqlSession.selectOne(QUSETION_NAMESPACE + "selectFavQuestion", map) != null ? 1 : 0;
-					questionBoard.setFav(result);
+
+					questionBoard.setFav(sqlSession.selectOne(QUSETION_NAMESPACE + "selectFavQuestion", map) != null ? 1 : 0);
 				}
 				
 				
@@ -302,8 +304,8 @@ public class QuestionBoardDaoImpl implements IQuestionBoardDao {
 			Map map = new HashMap();
 			map.put("questionNo", questionBoard.getQuestionNo());
 			map.put("memberId", memInfo.getMemberId());	
-			int result = sqlSession.selectOne(QUSETION_NAMESPACE + "selectFavQuestion", map) != null ? 1 : 0;
-			questionBoard.setFav(result);
+
+			questionBoard.setFav(sqlSession.selectOne(QUSETION_NAMESPACE + "selectFavQuestion", map) != null ? 1 : 0);
 		}
 		
 		
@@ -342,7 +344,7 @@ public class QuestionBoardDaoImpl implements IQuestionBoardDao {
 
 	@Override
 	public int chageVote(QuestionBoard questionBoard) {
-		if(questionBoard.getView() != 0){
+		if(questionBoard.getVote() != 0){
 			sqlSession.insert(QUSETION_NAMESPACE + "voteUpDown", questionBoard);
 		}else {
 			sqlSession.delete(QUSETION_NAMESPACE + "deleteVoteUpDown", questionBoard);
@@ -353,6 +355,26 @@ public class QuestionBoardDaoImpl implements IQuestionBoardDao {
 		sqlSession.update(QUSETION_NAMESPACE + "questionVoteUpdate", questionBoard);
 		return qustionVote;
 		
+	}
+
+
+
+	@Override
+	public int selectMemberQuestionVote(QuestionBoard questionBoard, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		MemRegInfo memInfo =  (MemRegInfo) session.getAttribute("memInfo");
+		
+		//즐겨찾기
+		if(memInfo!=null) {
+			Map map = new HashMap();
+			map.put("questionNo", questionBoard.getQuestionNo());
+			map.put("memberId", memInfo.getMemberId());	
+			System.out.println(questionBoard.getQuestionNo());
+			System.out.println(memInfo.getMemberId());
+			return sqlSession.selectOne(QUSETION_NAMESPACE + "selectVoteQuestion", map);
+		}
+		
+		return 0;
 	}
 
 	

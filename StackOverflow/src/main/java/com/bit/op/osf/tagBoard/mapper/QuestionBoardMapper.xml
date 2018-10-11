@@ -129,12 +129,23 @@
     </delete>
     
     <select id="questionVoteCheck" resultType="int" parameterType="com.bit.op.osf.tagBoard.model.QuestionBoard">
-		select count(*) from memquestionvote where questionNo=#{questionNo};
+		select  
+		COALESCE((select COALESCE(count(*),0) from memquestionvote where questionNo=#{questionNo} group by voteUpDown having voteUpDown='up'),0) -
+		COALESCE((select count(*) from memquestionvote where questionNo=#{questionNo} group by voteUpDown having voteUpDown='down'),0) as count;
     </select>
-     
-
-     
+    
     <update id="questionVoteUpdate"  parameterType="com.bit.op.osf.tagBoard.model.QuestionBoard">
     	update questionboard set vote= #{vote} where questionNo = #{questionNo};
     </update>
+    
+    <select id="selectVoteQuestion" resultType="int" parameterType="java.util.HashMap">
+		select  
+			COALESCE(
+				(select case 
+				when voteUpDown = 'up' then 1 
+				when voteUpDown = 'down' then -1  
+				end as vote from memquestionvote 
+				where questionNo=#{questionNo} and memberId = #{memberId}),0)
+				as count;
+    </select>
 </mapper>
