@@ -257,7 +257,7 @@ margin-left:300px;}
 
 		<div class="bluebTabDesign">
 			<ul>
-				<li><a href="#"><span>프로필</span></a></li>
+				<li><a href="<c:url value='/memberProfile'/>"><span>프로필</span></a></li>
 				<li><a href="#"><span>활동정보</span></a></li>
 				<li class="selected"><a href="#"><span>지원관리</span></a></li>
 				<li><a href="#"><span>프로필 설정</span></a></li>

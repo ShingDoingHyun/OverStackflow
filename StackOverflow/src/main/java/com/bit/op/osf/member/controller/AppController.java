@@ -22,7 +22,7 @@ public class AppController {
 	@Inject
 	private AppImpl appImpl;
 	
-	
+
 	
 	@RequestMapping(value = "/memberUpdate", method = RequestMethod.GET)
 	public String openUpdateAppInfo() {
@@ -34,8 +34,6 @@ public class AppController {
 		
 		int result = appImpl.insertAppInfo(appInfo);
 		
-
-
 		
 		
 		System.out.println(result);
