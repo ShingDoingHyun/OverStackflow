@@ -12,7 +12,7 @@
     </insert>
     
     <select id="selectQuestionNo" resultType="com.bit.op.osf.tagBoard.model.QuestionBoard" parameterType="int">
-    	select questionboard.questionNo, memId, title, content, regDate, view, tags, tagNos
+    	select questionboard.questionNo, memId, title, content, regDate, view, tags, tagNos, vote
 			from questionboard
 			left join (select questionNo, group_concat(tagName separator ' ') as tags , group_concat(questiontag.tagNo separator ' ') as tagNos
 				from questiontag
@@ -86,4 +86,55 @@
 	    select title from questionboard where questionNo = #{questionNo}
     </select>
         
+        
+    <delete id="deleteFavQuestion"  parameterType="com.bit.op.osf.tagBoard.model.QuestionBoard">  	
+    	delete from favquestion where questionno = #{questionNo} and memId = #{memId};
+    </delete>
+    
+    <insert id="insertFavQuestion"  parameterType="com.bit.op.osf.tagBoard.model.QuestionBoard">  	
+    	insert into favquestion(questionNo, memId) value (#{questionNo}, #{memId});
+    </insert>
+    
+    
+    <select id="selectFavQuestion" resultType="int" parameterType="java.util.HashMap">
+    	select questionNo from favquestion where questionNo=#{questionNo} and memId=#{memberId};
+    </select>
+    
+    
+     <select id="selectFavQuestionList" resultType="com.bit.op.osf.tagBoard.model.QuestionBoard" parameterType="com.bit.op.osf.member.model.MemRegInfo">
+	     select questionboard.questionNo, title from questionboard 
+	     	join favquestion on questionboard.questionNo = favquestion.questionNo 
+	     		where favquestion.memId=#{memberId}  
+	     	order by favDate desc
+	     limit 0,5;
+    </select>
+    
+    <insert id="voteUpDown" parameterType="com.bit.op.osf.tagBoard.model.QuestionBoard"> 
+        INSERT INTO memquestionvote 
+        (questionNo, memberId, voteDate, voteUpDown) 
+        <if test="vote gt 0">
+	        VALUE (#{questionNo}, #{memId}, now(), 'up') 
+	        on DUPLICATE KEY 
+	        UPDATE voteDate = now(), voteUpDown='up'
+        </if>
+        <if test="vote lt 0">
+	        VALUE (#{questionNo}, #{memId}, now(), 'down') 
+	        on DUPLICATE KEY 
+	        UPDATE voteDate = now(), voteUpDown='down'
+        </if>;
+    </insert>
+    
+    <delete id="deleteVoteUpDown" parameterType="com.bit.op.osf.tagBoard.model.QuestionBoard">
+     	delete from memquestionvote where questionNo = #{questionNo} and memberId = #{memId};
+    </delete>
+    
+    <select id="questionVoteCheck" resultType="int" parameterType="com.bit.op.osf.tagBoard.model.QuestionBoard">
+		select count(*) from memquestionvote where questionNo=#{questionNo};
+    </select>
+     
+
+     
+    <update id="questionVoteUpdate"  parameterType="com.bit.op.osf.tagBoard.model.QuestionBoard">
+    	update questionboard set vote= #{vote} where questionNo = #{questionNo};
+    </update>
 </mapper>

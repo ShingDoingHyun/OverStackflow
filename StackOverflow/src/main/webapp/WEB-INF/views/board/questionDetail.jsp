@@ -98,7 +98,8 @@ iframe {
 	height:90px; 
 	border-radius: 5px; 
 	background: #eeeeee; 
-	margin-right: 10px
+	margin-right: 10px;
+	
 }
 </style>
 <body>
@@ -135,31 +136,43 @@ iframe {
 		<div class="mainLeft">
 			<div style="float: left; width: 15%;">
 				<br> 
-				<a href=""><img src="<c:url value='/img/unVoteUp.png'/>" width="30px" height="20px"></a>
+				<a href="javascript:changeVote('${questionBoard.questionNo }','1');">
+					<img src="<c:url value='/img/unVoteUp.png'/>" width="30px" height="20px" class="upVote">
+				</a>
 				<br>
 				<br>
-				<div style="width: 30px; text-align: center;">${questionBoard.vote }</div>
+				<div style="width: 30px; text-align: center;" class="vote">${questionBoard.vote }</div>
 				<br> 
-				<a href=""><img src="<c:url value='/img/unVoteDown.png'/>" width="30px" height="20px"></a><br>
+				<a href="javascript:changeVote('${questionBoard.questionNo }','-1');">
+					<img src="<c:url value='/img/unVoteDown.png'/>" width="30px" height="20px" class="downVote">
+				</a>
 				<br>
-				<a href=""><img src="<c:url value='/img/unFav.png'/>" width="30px" height="30px"></a>
+				<br>
+				<a href="javascript:checkFavQuestion('${questionBoard.questionNo }');">
+					<c:if test="${questionBoard.fav > 0}">
+						<img src="<c:url value='/img/fav.png'/>" width="30px" height="30px" class="fav">
+					</c:if>
+					<c:if test="${questionBoard.fav <= 0}">
+						<img src="<c:url value='/img/unFav.png'/>" width="30px" height="30px" class="fav">
+					</c:if>				
+				</a>
 			</div>
 			<div style="float: right; width: 85%;">
 				<div>
 					<p>${questionBoard.content }</p>
 				</div>
 				<c:forEach items="${questionBoard.tagList }" var="tag" >
-					<span style="background:#8B9DC3; color:white; width:50px; display:inline-block; text-align: center; border-radius: 2px;border-radius: 10px;">${tag.tagName }</span>
+					<a href="<c:url value='/questionList?tagNo=${tag.tagNo }'/>" style="color:white;"><span style="background:#8B9DC3; color:white; width:50px; display:inline-block; text-align: center; border-radius: 2px;border-radius: 10px;">${tag.tagName }</span></a>
 				</c:forEach>
 				<div style="margin-top: 100px;">
-					<a href="">공유</a> <a href="<c:url value="/openUpdateQuestion/${questionBoard.questionNo }"/>">수정</a> <a href="<c:url value="/deleteQuestion/${questionBoard.questionNo }"/>">삭제</a>
+					<a href="">공유</a> <a href="javascript:loginCheck('${questionBoard.memId }', 'openUpdateQuestion/${questionBoard.questionNo }');">수정</a> <a href="javascript:deleteQuestion('${questionBoard.memId }', '/deleteQuestion/${questionBoard.questionNo }');">삭제</a>
 				</div>
 				<div style="width: 100%; display: inline-block;">
 					<div style="float: left; width: 50%; margin-top: 80px;" class="accordian">
 						댓글작성
 					</div>
 					<div class="profile">
-						<img style="width:100px" src="<c:url value='/resources/uploadFile/memberPhoto/${memInfo.memberPhoto}'/>">${memInfo.memberId}
+						<img class='photo2' src="<c:url value='/resources/uploadFile/memberPhoto/${memberInfo.memberPhoto}'/>"> ${memberInfo.memberId}
 					</div>
 				</div>
 				<div>
@@ -196,7 +209,7 @@ iframe {
 								<li> 
 									<div class="comment">
 										<form action="<c:url value="/insertComment"/>" method="post">
-											<input type="hidden" name="memId" value="test">
+											<input type="hidden" name="memId" value="${memInfo.memberId }">
 											<input type="hidden" name="questionNo" value="${questionBoard.questionNo }">
 											<input type="hidden" name="upperCommentNo" value="${comment.commentNo }">
 											<textarea name="content" style="width: 95%;"></textarea>
@@ -214,7 +227,7 @@ iframe {
 						<li> 
 							<div class="comment">
 								<form action="<c:url value="/insertComment"/>" method="post">
-									<input type="hidden" name="memId" value="test">
+									<input type="hidden" name="memId" value="${memInfo.memberId }">
 									<input type="hidden" name="questionNo" value="${questionBoard.questionNo }">
 									<textarea name="content" style="width: 95%;"></textarea>
 									<br> <input type="submit" value="댓글작성" />
@@ -228,9 +241,8 @@ iframe {
 
 				<p>답글작성</p>
 				<form action="<c:url value="/insertReply"/>" method="post">
-					<input type="hidden" name="memId" value="text" /> <input
-						type="hidden" name="questionNo"
-						value="${questionBoard.questionNo }">
+					<input type="hidden" name="memId" value="${memInfo.memberId }" /> 
+					<input type="hidden" name="questionNo" value="${questionBoard.questionNo }">
 					<textarea id="summernote" name="content"></textarea>
 					<br> <input type="submit" value="작성" />
 
@@ -274,14 +286,14 @@ iframe {
 						<p>${replyboard.content }</p>
 					</div>
 					<div style="margin-top: 100px;">
-						<a href="">공유</a> <a href="">수정</a> <a href="">삭제</a>
+						<a href="">공유</a> <a href="javascript:loginCheck('${replyboard.memId }', 'openUpdateQuestion/${replyboard.questionNo }');">수정</a> <a href="javascript:deleteQuestion('${replyboard.memId }', '/deleteQuestion/${replyboard.questionNo }');">삭제</a>
 					</div>
 					<div style="width: 100%; display: inline-block;">
 						<div style="float: left; width: 50%; margin-top: 80px;" class="accordian">
 							댓글작성
 						</div>
 					<div class="profile">
-						<img style="width:100px" src="<c:url value='/resources/uploadFile/memberPhoto/${memInfo.memberPhoto}'/>">${memInfo.memberId}
+						<img class='photo2' src="<c:url value='/resources/uploadFile/memberPhoto/${replyboard.memberPhoto}'/>"> ${replyboard.memId}
 					</div>
 					</div>
 					<div>
@@ -432,8 +444,14 @@ $(function(){
 	});
 
 	$(".updateComment").click(function(){
-		$(this).parent().next().css("display", "");
-		$(this).parent().css("display", "none");
+		var commentId = $(this).parent().find(".commentId").text();
+		if('${memInfo.memberId}' !== commentId){
+			alert("권한이 없습니다.");
+		}
+		else{
+			$(this).parent().next().css("display", "");
+			$(this).parent().css("display", "none");
+		}
 	});
 	
 	$(".cancelUpdate").click(function(){
@@ -499,19 +517,26 @@ $(function(){
 	};
 	
 	function deleteComment(commentNo, e){
-		
-		   $.ajax({
-	            type : 'post',
-	            url : getContextPath() +'/deleteComment',
-	            data : { "commentNo" : commentNo },
-	            dataType : 'text',
-	            contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
-	            success : function(data){
-	            	e.parent().find(".content").text("삭제된 댓글입니다.");
-	            	e.parent().find(".commentId").text("알 수 없는 사용자");
-	                
-	            }
-	        }); 
+		var commentId = e.parent().find(".commentId").text();
+		if('${memInfo.memberId}' !== commentId){
+			alert("권한이 없습니다.");
+		}else{
+			if(confirm("정말로 삭제하시겠습니까? ") === true){
+			   $.ajax({
+		            type : 'post',
+		            url : getContextPath() +'/deleteComment',
+		            data : { "commentNo" : commentNo },
+		            dataType : 'text',
+		            contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
+		            success : function(data){
+		            	e.parent().find(".content").text("삭제된 댓글입니다.");
+		            	e.parent().find(".commentId").text("알 수 없는 사용자");
+		                
+		            }
+		        }); 
+			}
+			
+		}
 		
 	};
 	
@@ -540,7 +565,7 @@ $(function(){
 	 			cookies2  = cookie.split(',');
 	 			
 	 			for(var index2 in cookies2){
-	 				console.log(cookies2[index2]);
+	 	
 	 				list.add(cookies2[index2]);
 	 			} 
 	 			break;
@@ -590,6 +615,7 @@ var cookieList = function(cookieName){
 	  }
 	};
 };
+
 $("#writeBtn").click(function() {
 	if(${memInfo == null}){
 		alert("로그인 후 이용하세요");
@@ -600,8 +626,89 @@ $("#writeBtn").click(function() {
 });
 
 
+
+var loginCheck = function (id, url) {
 	
+	if(id !== '${memInfo.memberId}'){
+		alert("권한이 없습니다.");
+	}
+	else{
+		location.href= getContextPath()+'/'+url;
+	}
+};
+
+
+var deleteQuestion = function (id, url) {
 	
+	if(id !== '${memInfo.memberId}'){
+		alert("권한이 없습니다.");
+	}
+	else{
+		if(confirm("정말로 삭제하시겠습니까? ") === true){
+			location.href= getContextPath()+'/'+url;
+		}
+	}
+};
+
+
+
+	
+var checkFavQuestion = function(questionNo){
+	if(${memInfo.memberId == null}){
+		alert("권한이 없습니다.");
+	} 
+	else{ 
+		   $.ajax({
+	            type : 'post',
+	            url : getContextPath() +'/checkQuestionFav',
+	            data : { "memId" : '${memInfo.memberId}' ,  "questionNo": questionNo},
+	            dataType : 'text',
+	            contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
+	            success : function(data){
+
+					$(".fav").attr("src",getContextPath()+"/img/"+data);
+	                
+	            }
+	        }); 
+	}
+}
+
+var changeVote = function(questionNo, vote){
+	if(${memInfo.memberId == null}){
+		alert("권한이 없습니다.");
+	} 
+	else{ 
+		   $.ajax({
+	            type : 'post',
+	            url : getContextPath() +'/changeVote',
+	            data : { "memId" : '${memInfo.memberId}' ,  "questionNo": questionNo, "vote" : vote},
+	            dataType : 'text',
+	            contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
+	            success : function(data){
+	            	if(vote>0){
+	            		$(".upVote").parent().attr("href","javascript:changeVote('${questionBoard.questionNo }','0');");
+						$(".upVote").attr("src",getContextPath()+"/img/voteUp.png");    
+						$(".downVote").attr("src",getContextPath()+"/img/unVoteDown.png");    
+	            	}
+	            	else if(vote<0){
+	            		$(".downVote").parent().attr("href","javascript:changeVote('${questionBoard.questionNo }','0');");
+	            		$(".upVote").attr("src",getContextPath()+"/img/unVoteUp.png");    
+						$(".downVote").attr("src",getContextPath()+"/img/voteDown.png"); 
+	            	}
+	            	else{
+	            		$(".upVote").parent().attr("href","javascript:changeVote('${questionBoard.questionNo }','1');");
+	            		$(".downVote").parent().attr("href","javascript:changeVote('${questionBoard.questionNo }','-1');");
+	            		$(".upVote").attr("src",getContextPath()+"/img/unVoteUp.png"); 
+	            		$(".downVote").attr("src",getContextPath()+"/img/unVoteDown.png"); 
+	            	}
+	            	$(".vote").text(data);  
+	            	
+	            }
+	        }); 
+	}
+	
+}
+
 	
 </script>
 

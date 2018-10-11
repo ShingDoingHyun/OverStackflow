@@ -10,10 +10,20 @@
             <span id="icon_search"><i class="fas fa-search"></i> </span>
         </div>
 
+<!--  이미지 동그랗게 보임 -->
         <div class="right">
             <c:if test="${memInfo ne null }">
-                      <img class='photo2' src="<c:url value='/resources/uploadFile/memberPhoto/${memInfo.memberPhoto}'/>">
+                      <a href="<c:url value='/memberProfile'/>"><img class='photo2' src="<c:url value='/resources/uploadFile/memberPhoto/${memInfo.memberPhoto}'/>"></a>
+                      
             </c:if>
+               
+               
+               <c:if test="${comInfo ne null }">
+                    <a href="<c:url value='/memberProfile'/>"><img class='photo2' src="<c:url value='/resources/uploadFile/comPhoto/${comInfo.comPhoto}'/>"></a>
+                    
+              </c:if>
+              
+              
             <!-- 로그인이 되어 있지 않으면 memInfo가 세션에 없다. 그러므로 memInfo는 널값. 이 경우 sing up/log in 출력 -->
 
             <c:if test="${memInfo == null && comInfo == null}">
@@ -28,18 +38,13 @@
               ${memInfo.memberId}
               <input type="button" class="logout" value="Logout" onclick="location.href='<c:url value="/logout"/>'">
               </c:if>
-              
-
-            
-            
+             
+                 
                  <c:if test="${comInfo != null}">
                ${comInfo.comId}
               <input type="button" class="logout" value="Logout" onclick="location.href='<c:url value="/logout"/>'">
               </c:if>
-              
-                  <c:if test="${comInfo ne null }">
-                  <img style="width:200px" src="<c:url value='/resources/uploadFile/comPhoto/${comInfo.comPhoto}'/>">
-              </c:if>
+             
         </div>
     </div>
 </div>

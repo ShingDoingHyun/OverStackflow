@@ -6,6 +6,7 @@ import java.util.List;
 public class ReplyBoard {
 	private int replyNo;
 	private String memId;
+	private String memberPhoto;
 	private int questionNo;
 	private String content;
 	private int vote;
@@ -16,11 +17,14 @@ public class ReplyBoard {
 	public ReplyBoard() {
 	}
 
-	public ReplyBoard(int replyNo, String memId, int questionNo, String content, int vote, String selection,
-			Date regDate, List<Comment> commentList) {
+
+
+	public ReplyBoard(int replyNo, String memId, String memberPhoto, int questionNo, String content, int vote,
+			String selection, Date regDate, List<Comment> commentList) {
 		super();
 		this.replyNo = replyNo;
 		this.memId = memId;
+		this.memberPhoto = memberPhoto;
 		this.questionNo = questionNo;
 		this.content = content;
 		this.vote = vote;
@@ -28,6 +32,8 @@ public class ReplyBoard {
 		this.regDate = regDate;
 		this.commentList = commentList;
 	}
+
+
 
 	public int getReplyNo() {
 		return replyNo;
@@ -43,6 +49,14 @@ public class ReplyBoard {
 
 	public void setMemId(String memId) {
 		this.memId = memId;
+	}
+
+	public String getMemberPhoto() {
+		return memberPhoto;
+	}
+
+	public void setMemberPhoto(String memberPhoto) {
+		this.memberPhoto = memberPhoto;
 	}
 
 	public int getQuestionNo() {

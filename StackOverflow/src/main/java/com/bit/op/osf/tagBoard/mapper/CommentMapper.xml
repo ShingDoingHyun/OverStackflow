@@ -4,7 +4,7 @@
 <mapper namespace="com.bit.op.osf.tagBoard.mapper.CommentMapper">
 
 	<insert id="insertComment" parameterType="com.bit.op.osf.tagBoard.model.Comment">
-		insert into comment(questionNo, replyNo, memId, upperCommentNo, content) value (#{questionNo}, #{replyNo}, 'test', #{upperCommentNo}, #{content});
+		insert into comment(questionNo, replyNo, memId, upperCommentNo, content) value (#{questionNo}, #{replyNo}, #{memId}, #{upperCommentNo}, #{content});
 	</insert>
 	
 	<select id="selectCommentList" resultType="com.bit.op.osf.tagBoard.model.Comment" parameterType="int">

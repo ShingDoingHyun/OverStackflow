@@ -176,8 +176,16 @@
 			<table width="100%">
 				<c:forEach items="${questionBoardList.questionBoardList }" var="questionBoard">
 						<tr>
-							<td width="8%" align="center" rowspan="2" style=" border-bottom: 1px solid #777777;"><img src="<c:url value='/img/unFav.png'/>" width="30px" height="30px"></td>
-							<td width="8%" align="center">0</td>
+							<td width="8%" align="center" rowspan="2" style=" border-bottom: 1px solid #777777;">
+							<c:if test="${questionBoard.fav > 0}">
+								<img src="<c:url value='/img/fav.png'/>" width="30px" height="30px">
+							</c:if>
+							<c:if test="${questionBoard.fav <= 0}">
+								<img src="<c:url value='/img/unFav.png'/>" width="30px" height="30px">
+							</c:if>
+							</td>
+							</td>
+							<td width="8%" align="center">${questionBoard.vote}</td>
 							<td width="8%" align="center">0</td>
 							<td width="8%" align="center">${questionBoard.view}</td>
 							<td width="48%"><p><a href="<c:url value="/questionDetail/${questionBoard.questionNo }"/>">${questionBoard.title }</a>
@@ -224,6 +232,9 @@
 			</div>
 			<div style="border:1px solid black; width:300px; height:200px;margin-left:80px; margin-top:30px">
 			<p style="text-align: center; border-bottom:1px solid black; padding: 10px 0 10px 0; margin-top: 0; margin-bottom:0;">즐겨찾기한 질문</p>
+			<c:forEach items="${favQuestionList }" var="favQuestionList">
+				<div style="border-bottom: 1px solid #333333; margin-top:3px; margin-bottom:3px;"><a href="<c:url value='/questionDetail/${favQuestionList.questionNo }'/>">${ favQuestionList.title}</a></div>
+			</c:forEach>
 			</div>
 			<div style="border:1px solid black; width:300px; height:200px;margin-left:80px; margin-top:30px">
 			<p style="text-align: center; border-bottom:1px solid black; padding: 10px 0 10px 0; margin-top: 0; margin-bottom:0;">방문한 페이지</p>
