@@ -23,4 +23,10 @@ value (#{appNO}, #{app_fileType}, #{app_fileName}  )
 
 </insert>
 
+ <insert id="insertAppJobInfo" parameterType="com.bit.op.osf.member.app.model.AppJobInfo">
+insert into appjob (appNO, appjobName, appjobInfo, appjobClass, appjobMonth, appjobSal ) 
+value (#{appNO}, #{appjobName}, #{appjobInfo}, #{appjobClass},#{appjobMonth}, #{appjobSal}  )
+
+</insert> 
+
 </mapper>

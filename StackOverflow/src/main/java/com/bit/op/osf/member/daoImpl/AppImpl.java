@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.bit.op.osf.job.daoImpl.DaoImpl;
 import com.bit.op.osf.member.app.model.AppFileInfo;
 import com.bit.op.osf.member.app.model.AppInfo;
+import com.bit.op.osf.member.app.model.AppJobInfo;
 import com.bit.op.osf.member.dao.AppDao;
 
 @Repository
@@ -34,6 +35,13 @@ public class AppImpl extends DaoImpl implements AppDao {
 		}
 		return 1; 
 		
+	}
+	@Override
+	public int insertAppJobInfo(List<AppJobInfo> appJobInfoList) {
+		for(AppJobInfo appJobInfo : appJobInfoList) {
+			sqlSession.insert(NAMESPACE + "insertAppJobInfo", appJobInfo);
+		}
+		return 1;
 	}
 
 }
