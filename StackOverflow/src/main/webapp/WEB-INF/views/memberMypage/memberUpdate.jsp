@@ -221,8 +221,10 @@ body {
 	border: 1px solid gray;
 	width: 1200px;
 }
-.btn btn-dark{
-margin-left:300px;}
+
+.btn btn-dark {
+	margin-left: 300px;
+}
 </style>
 </head>
 
@@ -260,20 +262,22 @@ margin-left:300px;}
 				<li><a href="<c:url value='/memberProfile'/>"><span>프로필</span></a></li>
 				<li><a href="#"><span>활동정보</span></a></li>
 				<li class="selected"><a href="#"><span>지원관리</span></a></li>
-				<li><a href="#"><span>프로필 설정</span></a></li>
+				<li><a href="<c:url value='/memberProSet'/>"><span>프로필 설정</span></a></li>
 
 			</ul>
 		</div>
 		<div class="sidenav2">
 			<span class="left_select"><strong>지원관리</strong></span> <a
-				style="color: black" href="memberUpdate">이력서 관리</a> <a href="memberAppList">내가 지원한 목록</a> <a
-				href="memberInterestComList">관심기업</a><a href="#">즐겨찾기한 채용 공고</a>
+				style="color: black" href="memberUpdate">이력서 관리</a> <a
+				href="memberAppList">내가 지원한 목록</a> <a href="memberInterestComList">관심기업</a><a
+				href="memberInterestAppComList">즐겨찾기한 채용 공고</a>
 		</div>
 		<div class="main_2">
 			<div style="margin-top: 20px;"></div>
 			<h3>이력서 관리</h3>
 			<hr>
-			<form action="<c:url value='/memberUpdate'/>" name="form" method="POST" enctype="multipart/form-data">
+			<form action="<c:url value='/memberUpdate'/>" name="form"
+				method="POST" enctype="multipart/form-data">
 				<table class="insert">
 					<tr>
 						<th class="title">인적 사항</th>
@@ -293,7 +297,7 @@ margin-left:300px;}
 					</tr>
 					<tr>
 						<td><input type="text" name="appName"></td>
-						<td><input type="date" name="appBirth"></td>
+						<td><input type="date" name="appBirth" value="1994-10-06"></td>
 						<td><select name="appGender">
 								<option value="여자">여자</option>
 								<option value="남자">남자</option>
@@ -337,14 +341,14 @@ margin-left:300px;}
 					</tr>
 					<tr>
 						<td><select name="appEduLevel">
-						<option value="고등학교">고등학교</option>
-						<option value="대학교(2,3년)">대학교(2,3년)</option>
-						<option value="대학교(4년)">대학교(4년)</option>
-						<option value="대학원">대학원</option>
+								<option value="고등학교">고등학교</option>
+								<option value="대학교(2,3년)">대학교(2,3년)</option>
+								<option value="대학교(4년)">대학교(4년)</option>
+								<option value="대학원">대학원</option>
 						</select></td>
 						<td><input type="text" name="appEduName"></td>
-						<td><input type="date" name="appEntraDate"></td>
-						<td><input type="date" name="appGraduDate"></td>
+						<td><input type="date" name="appEntraDate" value="2014-01-07"></td>
+						<td><input type="date" name="appGraduDate" value="2015-10-06"></td>
 
 					</tr>
 					<tr>
@@ -380,7 +384,7 @@ margin-left:300px;}
 					</tr>
 
 					<tr>
-						<th class="title" >첨부 파일</th>
+						<th class="title">첨부 파일</th>
 					</tr>
 					<tr>
 						<td>&nbsp;</td>
@@ -422,33 +426,36 @@ margin-left:300px;}
 						<th>연봉</th>
 					</tr>
 					<tr>
-						<td><input type="text"></td>
-						<td><input type="text"></td>
-						<td><input type="text"></td>
-						<td><input type="number" class="count1" name="count">개월</td>
-						<td><input type="text"></td>
+						<td><input type="text" name="appJobInfoList[0].appjobName"></td>
+						<td><input type="text" name="appJobInfoList[0].appjobInfo"></td>
+						<td><input type="text" name="appJobInfoList[0].appjobClass"></td>
+						<td><input type="number" class="count1" name="appJobInfoList[0].appjobMonth" value="0" >개월</td>
+						<td><input type="text" name="appJobInfoList[0].appjobSal"></td>
 					</tr>
 					<tr>
-						<td><input type="text"></td>
-						<td><input type="text"></td>
-						<td><input type="text"></td>
-						<td><input type="number" class="count2" name="count">개월</td>
-						<td><input type="text"></td>
+						<td><input type="text" name="appJobInfoList[1].appjobName"></td>
+						<td><input type="text" name="appJobInfoList[1].appjobInfo"></td>
+						<td><input type="text" name="appJobInfoList[1].appjobClass"></td>
+						<td><input type="number" class="count1" name="appJobInfoList[1].appjobMonth" value="0" >개월</td>
+						<td><input type="text" name="appJobInfoList[1].appjobSal"></td>
 					</tr>
-					<tr>
-						<td><input type="text"></td>
-						<td><input type="text"></td>
-						<td><input type="text"></td>
-						<td><input type="number" class="count3" name="count">개월</td>
-						<td><input type="text"></td>
+							<tr>
+						<td><input type="text" name="appJobInfoList[2].appjobName"></td>
+						<td><input type="text" name="appJobInfoList[2].appjobInfo"></td>
+						<td><input type="text" name="appJobInfoList[2].appjobClass"></td>
+						<td><input type="number" class="count1" name="appJobInfoList[2].appjobMonth" value="0" >개월</td>
+						<td><input type="text" name="appJobInfoList[2].appjobSal"></td>
 					</tr>
-					<tr>
-						<td><input type="text"></td>
-						<td><input type="text"></td>
-						<td><input type="text"></td>
-						<td><input type="number" class="count4" name="count">개월</td>
-						<td><input type="text"></td>
+					
+							<tr>
+						<td><input type="text" name="appJobInfoList[3].appjobName"></td>
+						<td><input type="text" name="appJobInfoList[3].appjobInfo"></td>
+						<td><input type="text" name="appJobInfoList[3].appjobClass"></td>
+						<td><input type="number" class="count1" name="appJobInfoList[3].appjobMonth" value="0" >개월</td>
+						<td><input type="text" name="appJobInfoList[3].appjobSal"></td>
 					</tr>
+					
+
 
 
 				</table>
@@ -473,7 +480,9 @@ margin-left:300px;}
                 div.id = 'file' + o.idx;
                 div.className = 'insert_file';
 
-                var select = document.all ? document.createElement("<select>") : document.createElement('select');
+                var select = document.all ? document.createElement('<select name="app_fileType">') : document.createElement('select');
+                select.name='app_fileType';
+                
                 var array = ["이력서", "자기소개서", "기타"];
                 for (var i = 0; i < array.length; i++) {
                     var option = document.createElement("option");
@@ -482,9 +491,9 @@ margin-left:300px;}
                     select.appendChild(option);
 
                 }
-                var file = document.all ? document.createElement('<input name="files">') : document.createElement('input');
+                var file = document.all ? document.createElement('<input name="app_fileName">') : document.createElement('input');
                 file.type = 'file';
-                file.name = 'files';
+                file.name = 'app_fileName';
                 file.size = '40';
                
                 file.id = 'fileField' + o.idx;
@@ -518,25 +527,61 @@ margin-left:300px;}
     </script>
 
 	<!-- 경력개월수 -->
-	<script>
+	
+	     <script>
+        
+       
+  
+ 
         window.onload = function(){
        
-            $("input[name='count']").click(function(){             
+            $("input[name='appjobMonth']").click(function(){
+
+    
                 var sale = 12; // 12달로 나눠야함
                       var total = 0;
+                
+
+                
+                $("input[name='appjobMonth']").each(function(index) { 
+      
+                  
+                    var num =  Number($(this).val());
+                      total += num;
+                  
+                });
+
+                /* alert("최종"+total); */
+               
+                var result = parseInt(total / sale); //몫( 년)
+                var result2 = total % 12; // 나머지 (개월)
+                $('#jobtotal').text(result+"년"+result2+"개월"); 
+               
+            });  
+        }
+    </script>
+	
+
+	<!-- <script>
+        window.onload = function(){
+             var sale = 12; // 12달로 나눠야함
+             var total = 0;
+        	 var result = parseInt(total / sale); //몫( 년)
+             var result2 = total % 12; // 나머지 (개월)
              
-                $("input[name='count']").each(function(index) { 
+            $("input[name='appjobMonth']").click(function(){             
+             
+                $("input[name='appjobMonth']").each(function(index) { 
                     var num =  Number($(this).val());
                       total += num;
                 });
 
                 /* alert("최종"+total); */
-                var result = parseInt((total / sale)); //몫( 년)
-                var result2 = total % 12; // 나머지 (개월)
+               
                 $('#jobtotal').text("(총"+result+"년"+result2+"개월 )");               
             });  
         }
-    </script>
+    </script> -->
 	<!-- 서머노트 -->
 	<script>
 		$(document).ready(function() {

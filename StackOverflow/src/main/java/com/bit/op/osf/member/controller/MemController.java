@@ -67,9 +67,20 @@ public class MemController {
 	public String Loginform(Model model) {
 		return "login/loginform";
 	}
-
-	@RequestMapping(value = "/memLoginForm", method = RequestMethod.POST)
-	public String memberLogin(@RequestParam("memberId") String id, @RequestParam("memberPwd") String pw, Model model,
+	
+	//프로필 사진 클릭 프로필정보로 이동 
+		@RequestMapping(value = "/memberProfile", method = RequestMethod.GET)
+		public String Profile() {
+				return "/memberMypage/memberProfile"; 
+		}
+		
+		@RequestMapping(value = "/memberProSet", method = RequestMethod.GET)
+		public String Profile4() {
+				return "/memberMypage/memberProSet"; 
+		}
+		
+	   @RequestMapping(value = "/memLoginForm", method = RequestMethod.POST)
+	   public String memberLogin(@RequestParam("memberId") String id, @RequestParam("memberPwd") String pw, Model model,
 			HttpServletRequest request) {
 
 		// 2-1.세션 만들기
@@ -105,16 +116,5 @@ public class MemController {
 	 return "redirect:/";
 	}
 	
-	//프로필 사진 클릭 프로필정보로 이동 
-	@RequestMapping(value = "/memberProfile", method = RequestMethod.GET)
-	public String Profile() {
-		
-		return "/memberMypage/memberProfile"; 
-	}
-	
-//	@RequestMapping(value = "/memberProfile", method = RequestMethod.GET)
-//	public String Profile1() {
-//		
-//		return "/memberMypage/memberUpdate"; 
-//	}
+
 }
