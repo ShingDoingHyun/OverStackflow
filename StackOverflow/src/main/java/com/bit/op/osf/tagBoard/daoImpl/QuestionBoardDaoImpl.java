@@ -3,15 +3,20 @@ package com.bit.op.osf.tagBoard.daoImpl;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.core.env.SystemEnvironmentPropertySource;
 import org.springframework.stereotype.Repository;
 
+import com.bit.op.osf.member.model.MemRegInfo;
 import com.bit.op.osf.tagBoard.dao.ICommentDao;
 import com.bit.op.osf.tagBoard.dao.IQuestionBoardDao;
 import com.bit.op.osf.tagBoard.dao.IReplyBoardDao;
@@ -21,6 +26,7 @@ import com.bit.op.osf.tagBoard.model.QuestionBoardList;
 import com.bit.op.osf.tagBoard.model.QuestionTag;
 import com.bit.op.osf.tagBoard.model.Search;
 import com.bit.op.osf.tagBoard.model.Tag;
+import com.mysql.fabric.xmlrpc.base.Member;
 
 
 @Repository
@@ -64,36 +70,29 @@ public class QuestionBoardDaoImpl implements IQuestionBoardDao {
 		return result;
 	}
 
+
+	
 	@Override
-	public QuestionBoard selectQuestionNo(int questionNo) {
-
-		QuestionBoard questionBoard = sqlSession.selectOne(QUSETION_NAMESPACE + "selectQuestionNo", questionNo);
-
-		if (questionBoard.getTags() != null && questionBoard.getTags() != "") {
-			String[] tags = questionBoard.getTags().split(" ");
-			String[] tagNos = questionBoard.getTagNos().split(" ");
-
-			List<Tag> tagList = new ArrayList<Tag>();
-			int index = 0;
-			for (String tag : tags) {
-				Tag getTag = new Tag();
-				getTag.setTagName(tag);
-				getTag.setTagNo(Integer.parseInt(tagNos[index]));
-				tagList.add(getTag);
-				index++;
-			}
-
-			questionBoard.setTagList(tagList);
-		}
-
-		return questionBoard;
-	}
-
-	@Override
-	public List<QuestionBoard> selectPopQuestionList() {
+	public List<QuestionBoard> selectPopQuestionList(HttpServletRequest request) {
 		List<QuestionBoard> questionBoardList = sqlSession.selectList(QUSETION_NAMESPACE + "selectPopQuestion");
 
+		
+		HttpSession session = request.getSession();
+		MemRegInfo memInfo =  (MemRegInfo) session.getAttribute("memInfo");
+		
 		for (QuestionBoard questionBoard : questionBoardList) {
+			
+			//즐겨찾기
+			if(memInfo!=null) {
+				Map map = new HashMap();
+				map.put("questionNo", questionBoard.getQuestionNo());
+				map.put("memberId", memInfo.getMemberId());	
+
+				questionBoard.setFav(sqlSession.selectOne(QUSETION_NAMESPACE + "selectFavQuestion", map) != null ? 1 : 0);
+
+			}
+			
+			//태그설정
 			if (questionBoard.getTags() != null && questionBoard.getTags() != "") {
 				String[] tags = questionBoard.getTags().split(" ");
 				String[] tagNos = questionBoard.getTagNos().split(" ");
@@ -107,16 +106,20 @@ public class QuestionBoardDaoImpl implements IQuestionBoardDao {
 					tagList.add(getTag);
 					index++;
 				}
-
+			
 				questionBoard.setTagList(tagList);
 			}
+			
 		}
 
 		return questionBoardList;
 	}
 
 	@Override
-	public QuestionBoardList selectQuestionList(Search search) {
+	public QuestionBoardList selectQuestionList(Search search, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		MemRegInfo memInfo =  (MemRegInfo) session.getAttribute("memInfo");
 		
 		int currentPageNumber = search.getPage() > 0 ? search.getPage() : 1; 
 
@@ -134,6 +137,17 @@ public class QuestionBoardDaoImpl implements IQuestionBoardDao {
 			questionBoardList = sqlSession.selectList(QUSETION_NAMESPACE + "selectQuestion", search);
 			
 			for (QuestionBoard questionBoard : questionBoardList) {
+				
+				//즐겨찾기
+				if(memInfo!=null) {
+					Map map = new HashMap();
+					map.put("questionNo", questionBoard.getQuestionNo());
+					map.put("memberId", memInfo.getMemberId());	
+
+					questionBoard.setFav(sqlSession.selectOne(QUSETION_NAMESPACE + "selectFavQuestion", map) != null ? 1 : 0);
+				}
+				
+				
 				if (questionBoard.getTags() != null && questionBoard.getTags() != "") {
 					String[] tags = questionBoard.getTags().split(" ");
 					String[] tagNos = questionBoard.getTagNos().split(" ");
@@ -168,10 +182,10 @@ public class QuestionBoardDaoImpl implements IQuestionBoardDao {
 	}
 
 	@Override
-	public QuestionBoard selectQuestionDeltail(int questionNo) {
+	public QuestionBoard selectQuestionDeltail(int questionNo, HttpServletRequest request) {
 
 		updateQuestionView(questionNo);
-		QuestionBoard questionBoard = selectQuestionNo(questionNo);
+		QuestionBoard questionBoard = selectQuestionNo(questionNo, request);
 		questionBoard.setReplyBoardList(replyBoardDao.selectReplyBoardList(questionNo));
 		questionBoard.setCommentList(commentDao.selectCommentList(questionBoard.getQuestionNo(), "question"));
 		return questionBoard;
@@ -261,6 +275,108 @@ public class QuestionBoardDaoImpl implements IQuestionBoardDao {
 		}	
 		return vistiQuestionBoardList;
 	}
+
+	@Override
+	public int changeFavQuestion(QuestionBoard questionBoard) {
+		int a = sqlSession.delete(QUSETION_NAMESPACE + "deleteFavQuestion", questionBoard);
+		System.out.println(a+":결과");
+		if(a<=0) {
+			sqlSession.insert(QUSETION_NAMESPACE + "insertFavQuestion", questionBoard);
+			return 1;
+		}else {		
+			return 0;
+		}
+	}
+	
+	
+	
+	
+	
+	public QuestionBoard selectQuestionNo(int questionNo, HttpServletRequest request) {
+
+		QuestionBoard questionBoard = sqlSession.selectOne(QUSETION_NAMESPACE + "selectQuestionNo", questionNo);
+		
+		HttpSession session = request.getSession();
+		MemRegInfo memInfo =  (MemRegInfo) session.getAttribute("memInfo");
+		
+		//즐겨찾기
+		if(memInfo!=null) {
+			Map map = new HashMap();
+			map.put("questionNo", questionBoard.getQuestionNo());
+			map.put("memberId", memInfo.getMemberId());	
+
+			questionBoard.setFav(sqlSession.selectOne(QUSETION_NAMESPACE + "selectFavQuestion", map) != null ? 1 : 0);
+		}
+		
+		
+		if (questionBoard.getTags() != null && questionBoard.getTags() != "") {
+			String[] tags = questionBoard.getTags().split(" ");
+			String[] tagNos = questionBoard.getTagNos().split(" ");
+
+			List<Tag> tagList = new ArrayList<Tag>();
+			int index = 0;
+			for (String tag : tags) {
+				Tag getTag = new Tag();
+				getTag.setTagName(tag);
+				getTag.setTagNo(Integer.parseInt(tagNos[index]));
+				tagList.add(getTag);
+				index++;
+			}
+
+			questionBoard.setTagList(tagList);
+		}
+
+		return questionBoard;
+	}
+
+
+
+	@Override
+	public List<QuestionBoard> selectFavQuestionList(HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		MemRegInfo memInfo =  (MemRegInfo) session.getAttribute("memInfo");
+		
+		return sqlSession.selectList(QUSETION_NAMESPACE + "selectFavQuestionList", memInfo);
+	}
+
+
+
+	@Override
+	public int chageVote(QuestionBoard questionBoard) {
+		if(questionBoard.getVote() != 0){
+			sqlSession.insert(QUSETION_NAMESPACE + "voteUpDown", questionBoard);
+		}else {
+			sqlSession.delete(QUSETION_NAMESPACE + "deleteVoteUpDown", questionBoard);
+		}
+	
+		int qustionVote  = sqlSession.selectOne(QUSETION_NAMESPACE + "questionVoteCheck", questionBoard);
+		questionBoard.setVote(qustionVote);
+		sqlSession.update(QUSETION_NAMESPACE + "questionVoteUpdate", questionBoard);
+		return qustionVote;
+		
+	}
+
+
+
+	@Override
+	public int selectMemberQuestionVote(QuestionBoard questionBoard, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		MemRegInfo memInfo =  (MemRegInfo) session.getAttribute("memInfo");
+		
+		//즐겨찾기
+		if(memInfo!=null) {
+			Map map = new HashMap();
+			map.put("questionNo", questionBoard.getQuestionNo());
+			map.put("memberId", memInfo.getMemberId());	
+			System.out.println(questionBoard.getQuestionNo());
+			System.out.println(memInfo.getMemberId());
+			return sqlSession.selectOne(QUSETION_NAMESPACE + "selectVoteQuestion", map);
+		}
+		
+		return 0;
+	}
+
 	
 
 

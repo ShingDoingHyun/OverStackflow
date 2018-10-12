@@ -174,10 +174,20 @@
 			</p>
 			<hr>
 			<table width="100%">
-				<c:forEach items="${questionBoardList.questionBoardList }" var="questionBoard">
+				<c:forEach items="${questionBoardList.questionBoardList }" var="questionBoard" varStatus="status">
 						<tr>
-							<td width="8%" align="center" rowspan="2" style=" border-bottom: 1px solid #777777;"><img src="<c:url value='/img/unFav.png'/>" width="30px" height="30px"></td>
-							<td width="8%" align="center">0</td>
+							<td width="8%" align="center" rowspan="2" style=" border-bottom: 1px solid #777777;">
+							<a href="javascript:checkFavQuestion('${questionBoard.questionNo }', '${status.index}');">
+								<c:if test="${questionBoard.fav > 0}">
+									<img src="<c:url value='/img/fav.png'/>" width="30px" height="30px" class="fav${status.index}" name="fav">
+								</c:if>
+								<c:if test="${questionBoard.fav <= 0}">
+									<img src="<c:url value='/img/unFav.png'/>" width="30px" height="30px" class="fav${status.index}" name="unFav">
+								</c:if>
+							</a>
+							</td>
+							</td>
+							<td width="8%" align="center">${questionBoard.vote}</td>
 							<td width="8%" align="center">0</td>
 							<td width="8%" align="center">${questionBoard.view}</td>
 							<td width="48%"><p><a href="<c:url value="/questionDetail/${questionBoard.questionNo }"/>">${questionBoard.title }</a>
@@ -224,6 +234,13 @@
 			</div>
 			<div style="border:1px solid black; width:300px; height:200px;margin-left:80px; margin-top:30px">
 			<p style="text-align: center; border-bottom:1px solid black; padding: 10px 0 10px 0; margin-top: 0; margin-bottom:0;">즐겨찾기한 질문</p>
+			<div id="favList">
+			<c:forEach items="${favQuestionList }" var="favQuestionList">
+				<div style="border-bottom: 1px solid #333333; margin-top:3px; margin-bottom:3px;">
+					<a href="<c:url value='/questionDetail/${favQuestionList.questionNo }'/>">${ favQuestionList.title}</a>
+				</div>
+			</c:forEach>
+			</div>
 			</div>
 			<div style="border:1px solid black; width:300px; height:200px;margin-left:80px; margin-top:30px">
 			<p style="text-align: center; border-bottom:1px solid black; padding: 10px 0 10px 0; margin-top: 0; margin-bottom:0;">방문한 페이지</p>
@@ -481,6 +498,38 @@
 		}
 	});
 
+
+	var checkFavQuestion = function(questionNo, value){
+		if(${memInfo.memberId == null}){
+			alert("권한이 없습니다.");
+		} 
+		else{ 
+			   $.ajax({
+		            type : 'post',
+		            url : getContextPath() +'/checkQuestionFav',
+		            data : { "memId" : '${memInfo.memberId}' ,  "questionNo": questionNo},
+		            dataType : 'json',
+		            contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
+		            success : function(data){
+		            		
+		            	if($(".fav"+value).attr("name")=="fav"){
+		            		$(".fav"+value).attr("src",getContextPath()+"/img/unFav.png"); 
+		            		$(".fav"+value).attr("name", "unFav")
+		            	}else{
+		              		$(".fav"+value).attr("src",getContextPath()+"/img/fav.png");
+		            		$(".fav"+value).attr("name", "fav")
+		            	}
+		            	
+		            	$("#favList").html("");
+			           	$.each( data, function( key, value ) {
+			           		$("#favList").append('<div style="border-bottom: 1px solid #333333; margin-top:3px; margin-bottom:3px;"><a href="<c:url value="/questionDetail/'+value.questionNo+'"/>">'+value.title+'</a></div>');
+			           	});
+		                
+		            }
+		        }); 
+			   
+		}
+	};
 
 
 		

@@ -5,11 +5,14 @@ package com.bit.op.osf.tagBoard.controller;
 
 import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +23,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.bit.op.osf.member.daoImpl.MemberInfoImpl;
+import com.bit.op.osf.member.model.MemRegInfo;
 import com.bit.op.osf.tagBoard.dao.IQuestionBoardDao;
 import com.bit.op.osf.tagBoard.model.QuestionBoard;
 import com.bit.op.osf.tagBoard.model.QuestionBoardList;
@@ -32,39 +37,50 @@ public class QuestionBoardController {
 	@Inject
 	private IQuestionBoardDao questionBoardDao;
 	
+	@Inject
+	private MemberInfoImpl memberInfoImpl;
 
 	
 	@RequestMapping(value = "/popQuestionList", method = RequestMethod.GET)
 	public String popQuestionList(Model model, HttpServletRequest request) {
+		
 		List<QuestionBoard> questionBoardList = new ArrayList<QuestionBoard>();
-		questionBoardList = questionBoardDao.selectPopQuestionList();
+		List<QuestionBoard> favQuestionList = new ArrayList<QuestionBoard>();
 		
-		model.addAttribute("questionBoardList", questionBoardList);
+		questionBoardList = questionBoardDao.selectPopQuestionList(request);
+		favQuestionList = questionBoardDao.selectFavQuestionList(request);
 		
-		Cookie[] cookies = request.getCookies();
-
-
-		if(cookies.length> 0) {
 	
+		Cookie[] cookies = request.getCookies();
+		if(cookies.length> 0) {
 			model.addAttribute("visitQuestionBoard", questionBoardDao.selectVisitQuestion(cookies));
 		}
+		
+		
+		model.addAttribute("questionBoardList", questionBoardList);
+		model.addAttribute("favQuestionList", favQuestionList);
 		
 		return "board/popQuestionList";
 	}
 	
 	@RequestMapping(value = "/questionList", method = RequestMethod.GET)
 	public String questionList(Model model, Search search, HttpServletRequest request) {
-		QuestionBoardList questionBoardList = questionBoardDao.selectQuestionList(search);
 		
-		model.addAttribute("questionBoardList", questionBoardList);
+		List<QuestionBoard> favQuestionList = new ArrayList<QuestionBoard>();
+		
+		QuestionBoardList questionBoardList = questionBoardDao.selectQuestionList(search, request);
+		favQuestionList = questionBoardDao.selectFavQuestionList(request);
 
+		
+		
 		Cookie[] cookies = request.getCookies();
-
-
 		if(cookies.length> 0) {
-	
 			model.addAttribute("visitQuestionBoard", questionBoardDao.selectVisitQuestion(cookies));
 		}
+		
+		model.addAttribute("questionBoardList", questionBoardList);
+		model.addAttribute("favQuestionList", favQuestionList);
+		
 		return "board/questionList";
 	}
 	
@@ -89,9 +105,9 @@ public class QuestionBoardController {
 	}
 
 	@RequestMapping(value = "/openUpdateQuestion/{questionBoardNo}", method = RequestMethod.GET)
-	public String openUpdateQuestion(Model model, @PathVariable("questionBoardNo") int questionBoardNo) {		
+	public String openUpdateQuestion(Model model, @PathVariable("questionBoardNo") int questionBoardNo, HttpServletRequest request) {		
 		
-		model.addAttribute("questionBoard", questionBoardDao.selectQuestionDeltail(questionBoardNo));
+		model.addAttribute("questionBoard", questionBoardDao.selectQuestionDeltail(questionBoardNo, request));
 		
 		return "board/boardUpdate";
 		
@@ -108,12 +124,18 @@ public class QuestionBoardController {
 	
 	
 	@RequestMapping(value = "/questionDetail/{questionBoardNo}", method = RequestMethod.GET)
-	public String questionDetail(Model model, @PathVariable("questionBoardNo") int questionBoardNo) {
-		QuestionBoard questionBoard = questionBoardDao.selectQuestionDeltail(questionBoardNo);
+	public String questionDetail(Model model, @PathVariable("questionBoardNo") int questionBoardNo, HttpServletRequest request) {
+		QuestionBoard questionBoard = questionBoardDao.selectQuestionDeltail(questionBoardNo, request);
 		
 		model.addAttribute("questionBoard", questionBoard);
-		//멤버 셀렉트 후 가져온걸 처리...
-		/*model.addAttribute("memberInfo", questionBoard.getMemId());*/
+		
+		
+		model.addAttribute("memberInfo", memberInfoImpl.selectMember(questionBoard.getMemId(), null));
+		int  a = questionBoardDao.selectMemberQuestionVote(questionBoard, request);
+		System.out.println(a+"뭐냐");
+		model.addAttribute("memberVote", a);
+		
+		
 		
 		return "board/questionDetail";
 		
@@ -128,6 +150,26 @@ public class QuestionBoardController {
 		return "redirect:/questionDetail/"+questionBoardNo;
 		
 	}	
+	
+	@RequestMapping(value = "/checkQuestionFav", method = RequestMethod.POST)
+	@ResponseBody
+	public List<QuestionBoard> checkQuestionFav(QuestionBoard questionBoard, HttpServletRequest request ) {
+		
+		int result = questionBoardDao.changeFavQuestion(questionBoard);
+	
+		return questionBoardDao.selectFavQuestionList(request);
+
+		
+	}
+	
+	@RequestMapping(value = "/changeVote", method = RequestMethod.POST)
+	@ResponseBody
+	public String chageVote(QuestionBoard questionBoard) {
+		
+		int result = questionBoardDao.chageVote(questionBoard);
+		return result+"";
+		
+	}
 	
 	
 	@RequestMapping(value = "/imageUpload", method = RequestMethod.POST)
@@ -146,4 +188,5 @@ public class QuestionBoardController {
 
 		return "/image/"+imgName;
 	}
+	
 }

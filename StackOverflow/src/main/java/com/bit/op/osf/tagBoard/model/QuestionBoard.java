@@ -7,7 +7,7 @@ public class QuestionBoard{
 	private int questionNo;
 	private String memId;
 	private String content;
-	private int vote;
+	private int vote;	//추천 넘길 시 -1은 다운 1은 업
 	private Date regDate;
 	private String title;
 	private int prise;

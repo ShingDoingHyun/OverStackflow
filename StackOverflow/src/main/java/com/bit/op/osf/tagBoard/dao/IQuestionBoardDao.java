@@ -14,21 +14,27 @@ public interface IQuestionBoardDao {
 
 	int insertQuestionBoard(QuestionBoard questionboard);
 
-	QuestionBoard selectQuestionNo(int questionNo);
-
-	List<QuestionBoard> selectPopQuestionList();
+	List<QuestionBoard> selectPopQuestionList(HttpServletRequest request);
 
 	int updateQuestionView(int questionNo);
 
-	QuestionBoard selectQuestionDeltail(int questionBoardNo);
+	QuestionBoard selectQuestionDeltail(int questionBoardNo, HttpServletRequest request);
 
 	int updateQuestionBoard(QuestionBoard questionBoard);
 
 	int deleteQuestionBoard(int questionBoardNo);
 
-	QuestionBoardList selectQuestionList(Search search);
+	QuestionBoardList selectQuestionList(Search search, HttpServletRequest request);
 
 	List<QuestionBoard> selectVisitQuestion(Cookie[] cookies);
+
+	int changeFavQuestion(QuestionBoard questionBoard);
+
+	List<QuestionBoard> selectFavQuestionList(HttpServletRequest request);
+
+	int chageVote(QuestionBoard questionBoard);
+
+	int selectMemberQuestionVote(QuestionBoard questionBoard, HttpServletRequest request);
 
 
 }

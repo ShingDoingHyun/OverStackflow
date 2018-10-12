@@ -39,5 +39,11 @@ public class ReplyBoardDaoImpl implements IReplyBoardDao {
 		}
 		return replyBoardList;
 	}
+
+	@Override
+	public void deleteReplyBoard(int replynBoardNo) {
+		sqlSession.update(COMMENT_NAMESPACE + "deleteReplyBoard", replynBoardNo);
+		
+	}
 	
 }

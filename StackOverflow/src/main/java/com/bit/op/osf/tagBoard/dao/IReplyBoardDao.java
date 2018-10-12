@@ -10,4 +10,6 @@ public interface IReplyBoardDao {
 
 	List<ReplyBoard> selectReplyBoardList(int questionNo);
 
+	void deleteReplyBoard(int replynBoardNo);
+
 }
