@@ -34,4 +34,23 @@
 		delete from questiontag where questionNo=#{questionNo} and tagNo=#{tagNo};
 	</delete>
 	
+	<select id="seleteMemFavTag" resultType="int" parameterType="com.bit.op.osf.tagBoard.model.MemFavTag">
+		select  
+			COALESCE(
+				(select count(*) from memfavtag where memId = #{memId} and tagNo = #{tagNo}),0)
+			as count;
+	</select>
+	
+	<insert id="insertMemFavTag" parameterType="com.bit.op.osf.tagBoard.model.MemFavTag">
+		insert into memfavtag (memId, tagNo) value (#{memId}, #{tagNo} );
+	</insert>
+	
+	<delete id="deleteMemFavTag" parameterType="com.bit.op.osf.tagBoard.model.MemFavTag">
+		delete from memfavtag where memId = #{memId} and tagNo = #{tagNo};
+	</delete>
+	
+	<select id="selectMemFavTagList" resultType="com.bit.op.osf.tagBoard.model.Tag" parameterType="com.bit.op.osf.member.model.MemRegInfo">
+		select tag.tagNo, tag.tagName from tag, memfavtag where tag.tagNo = memfavtag.tagNo and memfavtag.memId=#{memberId};
+	</select>
+	
 </mapper>

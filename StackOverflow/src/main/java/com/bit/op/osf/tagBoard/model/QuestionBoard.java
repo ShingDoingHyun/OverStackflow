@@ -13,6 +13,7 @@ public class QuestionBoard{
 	private int prise;
 	private int view;
 	private int fav;
+	private int replyCount; //답글 수
 	private String tags;//글 작성시 태그 리스트를 받기 위해 사용
 	private String tagNos;//글 작성시 태그 리스트를 받기 위해 사용
 	private String priseLimitDate;
@@ -20,15 +21,20 @@ public class QuestionBoard{
 	private List<ReplyBoard> replyBoardList;
 	private List<Tag> tagList;
 	
-	
+	@Override
+	public String toString() {
+		return "QuestionBoard [questionNo=" + questionNo + ", memId=" + memId + ", content=" + content + ", vote="
+				+ vote + ", regDate=" + regDate + ", title=" + title + ", prise=" + prise + ", view=" + view + ", fav="
+				+ fav + ", replyCount=" + replyCount + ", tags=" + tags + ", tagNos=" + tagNos + ", priseLimitDate="
+				+ priseLimitDate + ", commentList=" + commentList + ", replyBoardList=" + replyBoardList + ", tagList="
+				+ tagList + "]";
+	}
 	
 	public QuestionBoard() {}
-
-
-
+	
 	public QuestionBoard(int questionNo, String memId, String content, int vote, Date regDate, String title, int prise,
-			int view, int fav, String tags, String tagNos, String priseLimitDate, List<Comment> commentList,
-			List<ReplyBoard> replyBoardList, List<Tag> tagList) {
+			int view, int fav, int replyCount, String tags, String tagNos, String priseLimitDate,
+			List<Comment> commentList, List<ReplyBoard> replyBoardList, List<Tag> tagList) {
 		super();
 		this.questionNo = questionNo;
 		this.memId = memId;
@@ -39,6 +45,7 @@ public class QuestionBoard{
 		this.prise = prise;
 		this.view = view;
 		this.fav = fav;
+		this.replyCount = replyCount;
 		this.tags = tags;
 		this.tagNos = tagNos;
 		this.priseLimitDate = priseLimitDate;
@@ -46,200 +53,102 @@ public class QuestionBoard{
 		this.replyBoardList = replyBoardList;
 		this.tagList = tagList;
 	}
-
-
-
-	@Override
-	public String toString() {
-		return "QuestionBoard [questionNo=" + questionNo + ", memId=" + memId + ", content=" + content + ", vote="
-				+ vote + ", regDate=" + regDate + ", title=" + title + ", prise=" + prise + ", view=" + view + ", fav="
-				+ fav + ", tags=" + tags + ", tagNos=" + tagNos + ", priseLimitDate=" + priseLimitDate
-				+ ", commentList=" + commentList + ", replyBoardList=" + replyBoardList + ", tagList=" + tagList + "]";
-	}
-
-
-
 	public int getQuestionNo() {
 		return questionNo;
 	}
-
-
-
 	public void setQuestionNo(int questionNo) {
 		this.questionNo = questionNo;
 	}
-
-
-
 	public String getMemId() {
 		return memId;
 	}
-
-
-
 	public void setMemId(String memId) {
 		this.memId = memId;
 	}
-
-
-
 	public String getContent() {
 		return content;
 	}
-
-
-
 	public void setContent(String content) {
 		this.content = content;
 	}
-
-
-
 	public int getVote() {
 		return vote;
 	}
-
-
-
 	public void setVote(int vote) {
 		this.vote = vote;
 	}
-
-
-
 	public Date getRegDate() {
 		return regDate;
 	}
-
-
-
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
-
-
-
 	public String getTitle() {
 		return title;
 	}
-
-
-
 	public void setTitle(String title) {
 		this.title = title;
 	}
-
-
-
 	public int getPrise() {
 		return prise;
 	}
-
-
-
 	public void setPrise(int prise) {
 		this.prise = prise;
 	}
-
-
-
 	public int getView() {
 		return view;
 	}
-
-
-
 	public void setView(int view) {
 		this.view = view;
 	}
-
-
-
 	public int getFav() {
 		return fav;
 	}
-
-
-
 	public void setFav(int fav) {
 		this.fav = fav;
 	}
-
-
-
+	public int getReplyCount() {
+		return replyCount;
+	}
+	public void setReplyCount(int replyCount) {
+		this.replyCount = replyCount;
+	}
 	public String getTags() {
 		return tags;
 	}
-
-
-
 	public void setTags(String tags) {
 		this.tags = tags;
 	}
-
-
-
 	public String getTagNos() {
 		return tagNos;
 	}
-
-
-
 	public void setTagNos(String tagNos) {
 		this.tagNos = tagNos;
 	}
-
-
-
 	public String getPriseLimitDate() {
 		return priseLimitDate;
 	}
-
-
-
 	public void setPriseLimitDate(String priseLimitDate) {
 		this.priseLimitDate = priseLimitDate;
 	}
-
-
-
 	public List<Comment> getCommentList() {
 		return commentList;
 	}
-
-
-
 	public void setCommentList(List<Comment> commentList) {
 		this.commentList = commentList;
 	}
-
-
-
 	public List<ReplyBoard> getReplyBoardList() {
 		return replyBoardList;
 	}
-
-
-
 	public void setReplyBoardList(List<ReplyBoard> replyBoardList) {
 		this.replyBoardList = replyBoardList;
 	}
-
-
-
 	public List<Tag> getTagList() {
 		return tagList;
 	}
-
-
-
 	public void setTagList(List<Tag> tagList) {
 		this.tagList = tagList;
 	}
-
-
-	
-
 	
 }
 	

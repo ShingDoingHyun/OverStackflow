@@ -1,5 +1,7 @@
 package com.bit.op.osf.tagBoard.model;
 
+import java.util.List;
+
 public class Search {
 	private int firstRow;
 	private int endRow;
@@ -8,10 +10,13 @@ public class Search {
 	private String keyword;
 	private String tagNo;
 	private String tagName;
+	private List<Tag> tagList;
 	
 	public Search() {}
 
-	public Search(int firstRow, int endRow, int page, String order, String keyword, String tagNo, String tagName) {
+
+	public Search(int firstRow, int endRow, int page, String order, String keyword, String tagNo, String tagName,
+			List<Tag> tagList) {
 		super();
 		this.firstRow = firstRow;
 		this.endRow = endRow;
@@ -20,7 +25,9 @@ public class Search {
 		this.keyword = keyword;
 		this.tagNo = tagNo;
 		this.tagName = tagName;
+		this.tagList = tagList;
 	}
+
 
 	public int getFirstRow() {
 		return firstRow;
@@ -74,6 +81,14 @@ public class Search {
 
 	public void setTagName(String tagName) {
 		this.tagName = tagName;
+	}
+
+	public List<Tag> getTagList() {
+		return tagList;
+	}
+
+	public void setTagList(List<Tag> tagList) {
+		this.tagList = tagList;
 	}
 	
 	

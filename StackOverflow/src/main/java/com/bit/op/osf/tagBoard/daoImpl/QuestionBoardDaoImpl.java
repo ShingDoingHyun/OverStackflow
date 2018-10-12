@@ -73,8 +73,8 @@ public class QuestionBoardDaoImpl implements IQuestionBoardDao {
 
 	
 	@Override
-	public List<QuestionBoard> selectPopQuestionList(HttpServletRequest request) {
-		List<QuestionBoard> questionBoardList = sqlSession.selectList(QUSETION_NAMESPACE + "selectPopQuestion");
+	public List<QuestionBoard> selectPopQuestionList(HttpServletRequest request, Search search) {
+		List<QuestionBoard> questionBoardList = sqlSession.selectList(QUSETION_NAMESPACE + "selectPopQuestion", search);
 
 		
 		HttpSession session = request.getSession();

@@ -23,8 +23,32 @@
 		where questionboard.questionNo = #{param};
     </select>
     
-    <select id="selectPopQuestion" resultType="com.bit.op.osf.tagBoard.model.QuestionBoard">
-	    select questionboard.questionNo, memId, title, regDate, view, tags, tagNos, vote
+    <select id="selectPopQuestion" resultType="com.bit.op.osf.tagBoard.model.QuestionBoard" parameterType="com.bit.op.osf.tagBoard.model.Search">
+    
+    
+    	select queboard.questionNo, queboard.memId, queboard.title, queboard.regDate, queboard.view, tags, tagNos, queboard.vote,
+	    	(select count(*) from replyboard where queboard.questionNo = replyboard.questionNo ) as replyCount
+			from (select distinct qboard.questionNo, qboard.memId, qboard.title, qboard.regDate, qboard.view, qboard.vote from questionboard as qboard, questiontag as qtag
+				<if test="tagList != null and tagList != ''">
+				where qboard.questionNo = qtag.questionNo and 
+				qtag.tagNo IN  
+				<foreach collection="tagList" item="tag" index="index"  open="(" close=")" separator=" , ">
+		            #{tag.tagNo, jdbcType=VARCHAR}
+		        </foreach>
+				</if>
+				) as queboard
+			left join (
+				select questiontag.questionNo, group_concat( tag.tagName separator ' ') as tags , group_concat(questiontag.tagNo separator ' ') as tagNos
+					from questiontag
+					left join tag  
+						on questiontag.tagNo = tag.tagNo
+					group by questiontag.questionNo) as b
+			on queboard.questionNo = b.questionNo
+		order by view desc limit 0,99;
+    
+    
+<!-- 	    select questionboard.questionNo, memId, title, regDate, view, tags, tagNos, vote,
+	    	(select count(*) from replyboard where questionboard.questionNo = replyboard.questionNo) as replyCount
 			from questionboard
 			left join (select questionNo, group_concat(tagName separator ' ') as tags , group_concat(questiontag.tagNo separator ' ') as tagNos
 				from questiontag
@@ -32,11 +56,12 @@
 					on questiontag.tagNo = tag.tagNo
 			   	group by questionNo) as b
 			on questionboard.questionNo = b.questionNo
-		order by view desc limit 0,99;
+		order by view desc limit 0,99; -->
     </select>
    
     <select id="selectQuestion" resultType="com.bit.op.osf.tagBoard.model.QuestionBoard" parameterType="com.bit.op.osf.tagBoard.model.Search">
-	    select questionboard.questionNo, memId, title, regDate, view, tags, tagNos, vote
+	    select questionboard.questionNo, memId, title, regDate, view, tags, tagNos, vote,
+	    	(select count(*) from replyboard where questionboard.questionNo = replyboard.questionNo) as replyCount
 			from questionboard
 			left join (select questionNo, group_concat(tagName separator ' ') as tags , group_concat(questiontag.tagNo separator ' ') as tagNos
 				from questiontag
