@@ -163,11 +163,13 @@ iframe {
 				<br>
 				<br>
 				<a href="javascript:checkFavQuestion('${questionBoard.questionNo }');">
+				
+				
 					<c:if test="${questionBoard.fav > 0}">
-						<img src="<c:url value='/img/fav.png'/>" width="30px" height="30px" class="fav">
+						<img src="<c:url value='/img/fav.png'/>" width="30px" height="30px" class="fav" name="fav">
 					</c:if>
 					<c:if test="${questionBoard.fav <= 0}">
-						<img src="<c:url value='/img/unFav.png'/>" width="30px" height="30px" class="fav">
+						<img src="<c:url value='/img/unFav.png'/>" width="30px" height="30px" class="fav" name="unFav">
 					</c:if>				
 				</a>
 			</div>
@@ -292,8 +294,6 @@ iframe {
 					<div style="width: 30px; text-align: center;">${replyboard.vote }</div>
 					<br> 
 					<a href=""><img src="<c:url value='/img/unVoteDown.png'/>" width="30px" height="20px"></a><br>
-					<br>
-					<a href=""><img src="<c:url value='/img/unFav.png'/>" width="30px" height="30px"></a>
 				</div>
 				<div style="float: right; width: 85%;">
 					<div>
@@ -676,16 +676,24 @@ var checkFavQuestion = function(questionNo){
 	            type : 'post',
 	            url : getContextPath() +'/checkQuestionFav',
 	            data : { "memId" : '${memInfo.memberId}' ,  "questionNo": questionNo},
-	            dataType : 'text',
+	            dataType : 'json',
 	            contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
 	            success : function(data){
 
-					$(".fav").attr("src",getContextPath()+"/img/"+data);
+	            	if($(".fav").attr("name")=="fav"){
+	            		$(".fav").attr("src",getContextPath()+"/img/unFav.png");
+	            		$(".fav").attr("name", "unFav")
+	            	}else{
+
+	            		$(".fav").attr("src",getContextPath()+"/img/fav.png");
+	            		$(".fav").attr("name", "fav")
+	            	}
+	            	
 	                
 	            }
 	        }); 
 	}
-}
+};
 
 var changeVote = function(questionNo, vote){
 	if(${memInfo.memberId == null}){
@@ -723,7 +731,7 @@ var changeVote = function(questionNo, vote){
 	        }); 
 	}
 	
-}
+};
 
 	
 </script>

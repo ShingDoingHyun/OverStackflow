@@ -153,14 +153,11 @@ public class QuestionBoardController {
 	
 	@RequestMapping(value = "/checkQuestionFav", method = RequestMethod.POST)
 	@ResponseBody
-	public String checkQuestionFav(QuestionBoard questionBoard) {
+	public List<QuestionBoard> checkQuestionFav(QuestionBoard questionBoard, HttpServletRequest request ) {
 		
 		int result = questionBoardDao.changeFavQuestion(questionBoard);
-		if(result > 0) {
-			return "fav.png";
-		}else {
-			return "unFav.png";
-		}
+	
+		return questionBoardDao.selectFavQuestionList(request);
 
 		
 	}
@@ -192,5 +189,4 @@ public class QuestionBoardController {
 		return "/image/"+imgName;
 	}
 	
-
 }
