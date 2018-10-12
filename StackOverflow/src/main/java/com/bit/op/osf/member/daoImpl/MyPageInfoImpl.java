@@ -24,7 +24,7 @@ public class MyPageInfoImpl extends DaoImpl implements MyPageInfoDao {
 
 	
 
-	private static final String MYPAGEINFO_NAMESPACE = "com.bit.op.osf.member.mapper.MypageInfoMapper.";
+	private static final String MYPAGEINFO_NAMESPACE = "com.bit.op.osf.member.mapper.MyPageInfoMapper.";
 
 
 /*
@@ -47,7 +47,11 @@ public class MyPageInfoImpl extends DaoImpl implements MyPageInfoDao {
 	@Override
 	public List<ReplyBoard> selectAnswerInfo(String memId) throws Exception {
 		// TODO Auto-generated method stub   sqlSession.selectList(QUSETION_NAMESPACE + "selectQuestion", search);
-		return null;
+		//  selectReplyMember
+		
+		List<ReplyBoard>  replyBoards = sqlSession.selectList(MYPAGEINFO_NAMESPACE+"selectReplyMember", memId);
+		System.out.println("selectAnswerInfo==="+replyBoards);
+		return replyBoards;
 	}
 
 
