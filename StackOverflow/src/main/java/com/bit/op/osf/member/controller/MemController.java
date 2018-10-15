@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.bit.op.osf.member.SHA256.SHA256;
 import com.bit.op.osf.member.dao.MemberInfoDao;
 import com.bit.op.osf.member.dao.MyPageInfoDao;
-import com.bit.op.osf.member.daoImpl.MemberInfoImpl;
 import com.bit.op.osf.member.model.MemRegInfo;
+import com.bit.op.osf.tagBoard.model.QuestionBoard;
 import com.bit.op.osf.tagBoard.model.ReplyBoard;
 
 @Controller
@@ -74,16 +74,20 @@ public class MemController {
 		return "login/loginform";
 	}
 	
-	//프로필 사진 클릭 프로필정보로 이동 
 		@RequestMapping(value = "/memberProfile", method = RequestMethod.GET)
 		public String Profile(HttpSession session) throws Exception {
 			
 			MemRegInfo memInfo = (MemRegInfo)session.getAttribute("memInfo");
 			String memId=  memInfo.getMemberId();
 			
-			List<ReplyBoard> replyBoards=   myPageInfoDao.selectAnswerInfo(memId);
 			
+			List<ReplyBoard> replyBoards  =  myPageInfoDao.selectAnswerInfo(memId);
 			session.setAttribute("replyBoards", replyBoards);
+			
+			List<QuestionBoard> questionBoards  =  myPageInfoDao.selectQuestionInfo(memId);
+			session.setAttribute("questionBoards", questionBoards);
+			
+			
 				return "/memberMypage/memberProfile"; 
 		}
 		

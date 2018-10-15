@@ -11,10 +11,5 @@
 		select memberId, memberPwd, memberName, memberNickname, memberPhoto, memberBirth,memberGender, memberPhone from member where memberId = #{id}
 	</select>
 	
-<!-- 	<select id="selectId" parameterType="com.bit.op.osf.tagBoard.model.ReplyBoard"  parameterType="String>
-	  select content from member where memberId = #{memId}
-	</select>
-	 -->
-	
 	
 </mapper>
