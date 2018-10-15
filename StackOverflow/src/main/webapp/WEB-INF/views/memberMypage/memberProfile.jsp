@@ -362,37 +362,35 @@ text-align:flot;
 </div>
  
         </div>
+       
 
         <div id="mainbar-full" class="user-show-new">
 
             <div id="user-panel-answers" class="user-panel">
                 <div class="subheader p0 grid ai-center" style="min-height: 36px;">
                     <h3 class="grid--cell mb0 mr-auto px2 profile-section-title">    
-                       <a href="http://localhost/op/questionDetail/5">
+                   <!--     <a href="http://localhost/op/questionDetail/5"> -->
                             답변 <span>(0)</span>
                         </a></h3>
                     <div class="grid--cell subtabs user-panel-subtabs" >
-                        <a href="javascript:void(0)" class="d-flex ai-center fs-caption bbw2 youarehere" data-sort-id="votes">
-                            최신
-                        </a>
-                        <a href="javascript:void(0)" class="d-flex ai-center fs-caption bbw2" data-sort-id="newest">
-                            투표
-                        </a>
+                        <a href="javascript:void(0)" class="d-flex ai-center fs-caption bbw2 youarehere" data-sort-id="votes"> 최신 </a>
+                        <a href="javascript:void(0)" class="d-flex ai-center fs-caption bbw2" data-sort-id="newest">투표</a>
                     </div>
                 </div>
+               
 		
+		<!-- 답변  -->
                 <div class="user-panel-content">
- 
-                    <c:forEach items="${replyBoards }" var="rboard" varStatus="status">
-
-                    <div class="empty">${rboard.content }</div>
-               </c:forEach> 
-            	</div>
+                 <c:forEach items="${replyBoards}" var="rboard" varStatus="status">
+				     <div class="empty">${rboard.content}</div>           
+				 </c:forEach>
+                </div>
                 <div class="user-panel-footer">
                 </div>
             </div>
             
             
+            <!-- 질문  -->
              <div id="user-panel-questions" class="user-panel">
                 <div class="subheader p0 grid ai-center" style="min-height: 36px;">
                     <h3 class="grid--cell mb0 mr-auto px2 profile-section-title">     <a href="/users/10257271/jam?tab=questions">
@@ -410,9 +408,9 @@ text-align:flot;
 
 
                 <div class="user-panel-content">
-                    <div class="empty">
-                        당신이 모르는  <a href="/questions/how-to-ask">질문</a> 
-                    </div>
+                    <c:forEach items="${questionBoards}" var="qboard" varStatus="status">
+				    <div class="empty"><a href="../op/questionDetail/${qboard.questionNo}">${qboard.content}</a></div>           
+				 </c:forEach>
                 </div>
                 <div class="user-panel-footer">
                 </div>
@@ -494,7 +492,6 @@ text-align:flot;
 
 	</div>
 	
-
 
 
 

@@ -11,7 +11,7 @@ import com.bit.op.osf.tagBoard.model.ReplyBoard;
 public interface MyPageInfoDao {
 	public List<ReplyBoard> selectAnswerInfo(String memId) throws Exception;
 	
-	
-	
+
 	public List<QuestionBoard> selectQuestionInfo(String memId) throws Exception;
+	
 }
