@@ -70,7 +70,8 @@ public class QuestionBoardController {
 		List<QuestionBoard> favQuestionList = new ArrayList<QuestionBoard>();
 		List<Tag> fagTagList = new ArrayList<Tag>();
 		
-		QuestionBoardList questionBoardList = questionBoardDao.selectQuestionList(search, request);
+		MemRegInfo memInfo =  (MemRegInfo)  request.getSession().getAttribute("memInfo");
+		QuestionBoardList questionBoardList = questionBoardDao.selectQuestionList(search, memInfo);
 		favQuestionList = questionBoardDao.selectFavQuestionList(request);
 		fagTagList = tagDao.selectMemFavTagList(request);
 		

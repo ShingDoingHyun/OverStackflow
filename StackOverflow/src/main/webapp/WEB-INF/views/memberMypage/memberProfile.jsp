@@ -367,7 +367,8 @@ text-align:flot;
 
             <div id="user-panel-answers" class="user-panel">
                 <div class="subheader p0 grid ai-center" style="min-height: 36px;">
-                    <h3 class="grid--cell mb0 mr-auto px2 profile-section-title">       <a href="http://localhost/op/questionDetail/5">
+                    <h3 class="grid--cell mb0 mr-auto px2 profile-section-title">    
+                       <a href="http://localhost/op/questionDetail/5">
                             답변 <span>(0)</span>
                         </a></h3>
                     <div class="grid--cell subtabs user-panel-subtabs" >
@@ -381,6 +382,12 @@ text-align:flot;
                 </div>
 		
                 <div class="user-panel-content">
+                
+                 qwqwwq====  ${replyBoards} 
+                
+                
+                
+                
                     <div class="empty">너는<a href="/questions/how-to-answer">어떠한질문에도</a> 대답하지않았다능</div>
                 </div>
                 <div class="user-panel-footer">

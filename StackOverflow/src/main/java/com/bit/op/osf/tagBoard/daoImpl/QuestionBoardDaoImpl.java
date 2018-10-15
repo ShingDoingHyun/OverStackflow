@@ -116,10 +116,9 @@ public class QuestionBoardDaoImpl implements IQuestionBoardDao {
 	}
 
 	@Override
-	public QuestionBoardList selectQuestionList(Search search, HttpServletRequest request) {
+	public QuestionBoardList selectQuestionList(Search search, MemRegInfo memInfo) {
 		
-		HttpSession session = request.getSession();
-		MemRegInfo memInfo =  (MemRegInfo) session.getAttribute("memInfo");
+	
 		
 		int currentPageNumber = search.getPage() > 0 ? search.getPage() : 1; 
 
@@ -169,8 +168,8 @@ public class QuestionBoardDaoImpl implements IQuestionBoardDao {
 			currentPageNumber = 0;
 			questionBoardList = Collections.emptyList();
 		}
-
-		return new QuestionBoardList(questionBoardList, currentPageNumber, questionBoardTotalCount, QUESTION_BOARD_COUNT_PER_PAGE, firstRow, endRow);
+		QuestionBoardList  temp= new QuestionBoardList(questionBoardList, currentPageNumber, questionBoardTotalCount, QUESTION_BOARD_COUNT_PER_PAGE, firstRow, endRow);
+		return temp;
 	}
 
 	
