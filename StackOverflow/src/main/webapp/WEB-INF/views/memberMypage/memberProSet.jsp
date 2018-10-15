@@ -17,6 +17,8 @@
 <link rel="stylesheet" href="css/index.css" type="text/css" media="all" />
 </head>
 <style>
+
+
 .bluebTabDesign {
 	padding: 0 0 0px 0px;
 }
@@ -112,6 +114,10 @@
 	background-color: #fff;
 	color: #2390ff;
 }
+.main_2 {
+	margin-Left: 20px;
+}
+
 </style>
 <body>
 	<!----------------------header--------------------------------------->
@@ -124,16 +130,25 @@
 	<%@ include file="/WEB-INF/views/commons/left.jspf"%>
 	<!----------------------left menu End--------------------------------------->
 	
+
+	<div class="main" style="margin-bottom:65%;">
+
+		<div style="margin-top: 20px;"></div>
+
+		<div class="bluebTabDesign">
+			<ul>
+				<li><a href="<c:url value='/memberProfile'/>"><span>프로필</span></a></li>
+				<li><a href="<c:url value='/memberUpdate'/>"><span>지원관리</span></a></li>
+				<li class="selected"><a href="#"><span>프로필 설정</span></a></li>
+
+			</ul>
+		</div>
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+			<div class="main_2">
+			<div style="margin-top: 20px;"></div>
+			<h3>프로필수정</h3>
+			
+		</div>
 	
 	
 	
