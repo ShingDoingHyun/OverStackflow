@@ -23,38 +23,59 @@
 		where questionboard.questionNo = #{param};
     </select>
     
-    <select id="selectPopQuestion" resultType="com.bit.op.osf.tagBoard.model.QuestionBoard">
-	    select questionboard.questionNo, memId, title, regDate, view, tags, tagNos, vote
-			from questionboard
-			left join (select questionNo, group_concat(tagName separator ' ') as tags , group_concat(questiontag.tagNo separator ' ') as tagNos
-				from questiontag
-				left join tag  
-					on questiontag.tagNo = tag.tagNo
-			   	group by questionNo) as b
-			on questionboard.questionNo = b.questionNo
+    <select id="selectPopQuestion" resultType="com.bit.op.osf.tagBoard.model.QuestionBoard" parameterType="com.bit.op.osf.tagBoard.model.Search">
+    	select queboard.questionNo, queboard.memId, queboard.title, queboard.regDate, queboard.view, tags, tagNos, queboard.vote,
+	    	(select count(*) from replyboard where queboard.questionNo = replyboard.questionNo ) as replyCount
+			from (select distinct qboard.questionNo, qboard.memId, qboard.title, qboard.regDate, qboard.view, qboard.vote from questionboard as qboard, questiontag as qtag
+				<if test="tagList != null">
+				where qboard.questionNo = qtag.questionNo and 
+				qtag.tagNo IN  
+				<foreach collection="tagList" item="tag" index="index"  open="(" close=")" separator=" , ">
+		         #{tag.tagNo}
+		        </foreach>
+				</if>
+				) as queboard
+			left join (
+				select questiontag.questionNo, group_concat( tag.tagName separator ' ') as tags , group_concat(questiontag.tagNo separator ' ') as tagNos
+					from questiontag
+					left join tag  
+						on questiontag.tagNo = tag.tagNo
+					group by questiontag.questionNo) as b
+			on queboard.questionNo = b.questionNo
+				<if test="tagNo != null and tagNo != ''">
+				join (select questionNo, tagNo from questiontag where tagNo=#{tagNo}) as c
+				on queboard.questionNo = c.questionNo
+				</if>
 		order by view desc limit 0,99;
     </select>
    
     <select id="selectQuestion" resultType="com.bit.op.osf.tagBoard.model.QuestionBoard" parameterType="com.bit.op.osf.tagBoard.model.Search">
-	    select questionboard.questionNo, memId, title, regDate, view, tags, tagNos, vote
-			from questionboard
+    	select queboard.questionNo, memId, title, regDate, view, tags, tagNos, vote,
+	    	(select count(*) from replyboard where queboard.questionNo = replyboard.questionNo) as replyCount
+			from (
+				select distinct qboard.questionNo, qboard.memId, qboard.title, qboard.regDate, qboard.view, qboard.vote from questionboard as qboard, questiontag as qtag
+				<if test="tagList != null">
+				where qboard.questionNo = qtag.questionNo and 
+				qtag.tagNo IN  
+				<foreach collection="tagList" item="tag" index="index"  open="(" close=")" separator=" , ">
+		         #{tag.tagNo}
+		        </foreach>
+				</if>
+				) as queboard
 			left join (select questionNo, group_concat(tagName separator ' ') as tags , group_concat(questiontag.tagNo separator ' ') as tagNos
 				from questiontag
 				left join tag  
 					on questiontag.tagNo = tag.tagNo
 			   	group by questionNo) as b
-			on questionboard.questionNo = b.questionNo
-				<if test="tagNo != null and tagNo != ''">
-				join (select questionNo, tagNo from questiontag where tagNo=#{tagNo}) as c
-				on questionboard.questionNo = c.questionNo
-				</if>
+			on queboard.questionNo = b.questionNo
 			<where>
-				<if test="keyword != null">
+				<if test="keyword != null and keyword != ''">
 					title like CONCAT('%',#{keyword},'%')
 				</if>
 			</where>
 		<if test="order != null and order != '' ">order by ${order} desc</if>
 		limit #{firstRow}, #{endRow};
+    
     </select>
     
     <update id="updateQuestionView"  parameterType="int">
@@ -70,10 +91,19 @@
     </update>
     
     <select id="selectCount" resultType="int" parameterType="com.bit.op.osf.tagBoard.model.Search">
-	    select count(*) from questionboard
+	    select count(*) from (
+				select distinct qboard.questionNo, qboard.memId, qboard.title, qboard.regDate, qboard.view, qboard.vote from questionboard as qboard, questiontag as qtag
+				<if test="tagList != null">
+				where qboard.questionNo = qtag.questionNo and 
+				qtag.tagNo IN  
+				<foreach collection="tagList" item="tag" index="index"  open="(" close=")" separator=" , ">
+		         #{tag.tagNo}
+		        </foreach>
+				</if>
+				) as queboard
 	    <if test="tagNo != null and tagNo != ''">
 			join (select questionNo, tagNo from questiontag where tagNo=#{tagNo}) as c
-			on questionboard.questionNo = c.questionNo
+			on queboard.questionNo = c.questionNo
 		</if>
 	   <where>
 		   <if test="keyword != null">

@@ -73,8 +73,8 @@ public class QuestionBoardDaoImpl implements IQuestionBoardDao {
 
 	
 	@Override
-	public List<QuestionBoard> selectPopQuestionList(HttpServletRequest request) {
-		List<QuestionBoard> questionBoardList = sqlSession.selectList(QUSETION_NAMESPACE + "selectPopQuestion");
+	public List<QuestionBoard> selectPopQuestionList(HttpServletRequest request, Search search) {
+		List<QuestionBoard> questionBoardList = sqlSession.selectList(QUSETION_NAMESPACE + "selectPopQuestion", search);
 
 		
 		HttpSession session = request.getSession();
@@ -119,7 +119,7 @@ public class QuestionBoardDaoImpl implements IQuestionBoardDao {
 	public QuestionBoardList selectQuestionList(Search search, MemRegInfo memInfo) {
 		
 	
-		
+		System.out.println(search);
 		int currentPageNumber = search.getPage() > 0 ? search.getPage() : 1; 
 
 		int questionBoardTotalCount = sqlSession.selectOne(QUSETION_NAMESPACE + "selectCount", search);

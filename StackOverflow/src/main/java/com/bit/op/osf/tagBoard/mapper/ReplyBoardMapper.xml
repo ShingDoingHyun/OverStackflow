@@ -8,7 +8,7 @@
     </insert>
     
     <select id="selectReplyBoardList" parameterType="int" resultType="com.bit.op.osf.tagBoard.model.ReplyBoard">
-    	select replyNo, questionNo, vote, content, replyboard.memId, memberPhoto from replyboard join member  on replyboard.memId = member.memberId where questionNo = #{param};
+    	select replyNo, questionNo, vote, content, replyboard.memId, memberPhoto from replyboard  left join member  on replyboard.memId = member.memberId where questionNo = #{param};
     </select>
     
     <update id="deleteQuestion" parameterType="int">

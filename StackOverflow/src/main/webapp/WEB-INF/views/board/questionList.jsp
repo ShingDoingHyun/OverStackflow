@@ -150,21 +150,27 @@
 	</div>
 	<div class="main">
 		<div class="left">
-		<form action="<c:url value='/questionList'/>" method="get">
+		<form action="<c:url value='/questionList'/>" method="get" id="searchForm">
 			<input type="text" name="keyword" size="100" value="${param.keyword}">
 			<input type="hidden" name="order" value="${param.order}">
-			<input type="hidden" name="tagNo" value="${param.tagNo}"><input type="submit" value="검색">	
+			
+			<input type="hidden" name="page" value="${param.page == null ? 0 :  param.page}">
+		
+	
+			<button onclick="searchForm();">검색</button>	 
 		</form>
-			<button type="button" id="myBtn">태그선택</button>  
-			<div style="height:50px;" id="tags"></div>
-			<input type="hidden" name="tags">
+			<button type="button" class="tagMenu" id="searchTag">태그선택</button>  
+			<div style="height:50px;" id="tags">
+			<c:forEach items="${searchTagList }" var="tag" varStatus="status">
+			<span class="tag" style="margin-left:10px;">#${tag.tagName}</span>
+			</c:forEach>
+			</div>
+			<input type="hidden" name="tags" value="${param.tagLists }">	
 		
 		<p align="right">
-			<button onclick="location.href='<c:url value='/questionList?order=regDate&keyword=${param.keyword }&tagNo=${param.tagNo }'/>'">최신순</button>
-			<button onclick="location.href='<c:url value='/questionList?order=view&keyword=${param.keyword }&tagNo=${param.tagNo }'/>'">많이본</button>
-			<button onclick="location.href='<c:url value='/questionList?order=vote&keyword=${param.keyword }&tagNo=${param.tagNo }'/>'">인기순</button>
-			<button onclick="location.href='<c:url value='/questionList?order=pi&keyword=${param.keyword }&tagNo=${param.tagNo }'/>'">현상금</button>
-			<button onclick="location.href='<c:url value='/questionList?order=non&keyword=${param.keyword }&tagNo=${param.tagNo }'/>'">채택안됨</button>
+			<button onclick="searchForm('order','regDate')">최신순</button>
+			<button onclick="searchForm('order','view')">많이본</button>
+			<button onclick="searchForm('order','vote')">인기순</button>
 			<select>
 				<option value="10">10</option>
 				<option value="30">30</option>
@@ -201,7 +207,7 @@
 							<td width="48%">
 							<c:forEach items="${questionBoard.tagList }" var="tag">
 								<span style="background:#8B9DC3; width:50px; display:inline-block; text-align: center; border-radius: 2px;border-radius: 10px;">
-									<a href="<c:url value='/questionList?tagNo=${tag.tagNo }'/>" style="color:white;">${tag.tagName }</a>
+									<a href="<c:url value='/popQuestionList?tagNo=${tag.tagNo }'/>" style="color:white;">${tag.tagName }</a>
 								</span>&nbsp;
 							</c:forEach>
 							</td>
@@ -216,7 +222,8 @@
 				<c:set var="count" value="${questionBoardList.pageTotalCount /10}" />
 				
 				<c:forEach begin="1" end="${questionBoardList.pageTotalCount}" var="i">
-					<a href="<c:url value='/questionList?page=${ i}&order=${param.order}&keyword=${param.keyword}&tagNo=${param.tagNo }'/>"style="display: inline;">${ i}</a>
+					<a href="javascript:searchForm('paging', '${ i}' );">${ i}</a>
+<%-- 					<a href="<c:url value='/questionList?page=${ i}&order=${param.order}&keyword=${param.keyword}'/>"style="display: inline;">${ i}</a> --%>
 				</c:forEach>
 				
 <%-- 				
@@ -229,19 +236,27 @@
 			</p>
 		</div>
 		<div class="right">
-			<div style="border:1px solid black; width:300px; height:200px;margin-left:80px; margin-top:63px">
-			<p style="text-align: center; border-bottom:1px solid black; padding: 10px 0 10px 0; margin-top: 0; margin-bottom:0;">흥미태그</p>
-			</div>
-			<div style="border:1px solid black; width:300px; height:200px;margin-left:80px; margin-top:30px">
-			<p style="text-align: center; border-bottom:1px solid black; padding: 10px 0 10px 0; margin-top: 0; margin-bottom:0;">즐겨찾기한 질문</p>
-			<div id="favList">
-			<c:forEach items="${favQuestionList }" var="favQuestionList">
-				<div style="border-bottom: 1px solid #333333; margin-top:3px; margin-bottom:3px;">
-					<a href="<c:url value='/questionDetail/${favQuestionList.questionNo }'/>">${ favQuestionList.title}</a>
+			<p style="margin-top: 30px">
+			<c:if test="${memInfo != null}">
+				<div style="border:1px solid black; width:300px; height:200px;margin-left:80px; margin-top:30px" class="tagMenu" id="favTag">
+					<p style="text-align: center; border-bottom:1px solid black; padding: 10px 0 10px 0; margin-top: 0; margin-bottom:0;">흥미태그</p>
+						<div id="favTags">
+						<c:forEach items="${fagTagList }" var="fagTag">
+							<span class="favTag" style="margin-left:10px;">#${ fagTag.tagName}</span>
+						</c:forEach> 		
+					</div>
 				</div>
-			</c:forEach>
-			</div>
-			</div>
+				<div style="border:1px solid black; width:300px; height:200px;margin-left:80px; margin-top:30px">
+					<p style="text-align: center; border-bottom:1px solid black; padding: 10px 0 10px 0; margin-top: 0; margin-bottom:0;">즐겨찾기한 질문</p>
+					<div id="favList">
+					<c:forEach items="${favQuestionList }" var="favQuestionList">
+						<div style="border-bottom: 1px solid #333333; margin-top:3px; margin-bottom:3px;">
+							<a href="<c:url value='/questionDetail/${favQuestionList.questionNo }'/>">${ favQuestionList.title}</a>
+						</div>
+					</c:forEach>
+					</div>
+				</div>
+			</c:if>
 			<div style="border:1px solid black; width:300px; height:200px;margin-left:80px; margin-top:30px">
 			<p style="text-align: center; border-bottom:1px solid black; padding: 10px 0 10px 0; margin-top: 0; margin-bottom:0;">방문한 페이지</p>
 			<c:forEach items="${visitQuestionBoard }" var="visitQuestion">
@@ -285,7 +300,7 @@
 					</td>
         		</tr>
         
-        
+         
         	</table>
         </form>                                                      
         
@@ -363,15 +378,22 @@
 	
 	var modal = document.getElementById('myModal');
 		   
-	// Get the button that opens the modal
-	var btn = document.getElementById("myBtn");
+
 	 
 	// Get the <span> element that closes the modal
 	var span = document.getElementsByClassName("close")[0];                                          
 	 
 	// When the user clicks on the button, open the modal 
-	btn.onclick = function() {
+	$(".tagMenu").click(function() {
+		var type = "";
+		if($(this).attr("id")=="searchTag"){
+			type="search";
+		}
+		else if($(this).attr("id")=="favTag"){
+			type="fav";
+		}
 	    modal.style.display = "block";
+	    
 	    var html = '';
 	    $.ajax({
 	       	url: 'selectTagMainName',
@@ -381,7 +403,7 @@
 	           			
 	           		html += '<tr>';
 
-	           	  	html += '<td onclick="javascript:mainTagClick($(this));">' + tag.tagMainName +'</td>';
+	           	  	html += '<td onclick="javascript:mainTagClick($(this), \''+type+'\');">' + tag.tagMainName +'</td>';
 
 	           	  	html += '<tr>';
 	           	});
@@ -391,10 +413,10 @@
 	        }
 	     });
 
-	};
+	});
 	
 
-	function mainTagClick(data) {
+	function mainTagClick(data, type) {
 		data.parent().siblings().children().css('background', '');
 		data.css('background', '#AED6F1');
 	    var html = '';
@@ -407,7 +429,7 @@
 	           			
 	           		html += '<tr>';
 
-	           	  	html += '<td onclick="javascript:middleTagClick($(this));">' + tag.tagMiddleName +'</td>';
+	           	  	html += '<td onclick="javascript:middleTagClick($(this), \''+type+'\');">' + tag.tagMiddleName +'</td>';
 
 	           	  	html += '<tr>';
 	           	});
@@ -417,7 +439,7 @@
 	     });
 	};
 	
-	function middleTagClick(data) {
+	function middleTagClick(data, type) {
 		data.parent().siblings().children().css('background', '');
 		data.css('background', '#AED6F1');
 	    var html = '';
@@ -429,7 +451,11 @@
 	        	$.each(data, function(index,tag){ 
 	        		
 					var chk = 0;
-					$('.tag').each(function(index) {
+					var tagClsType = "";
+					
+					if(type=="search") tagClsType = "tag";
+					else if(type=="fav") tagClsType = "favTag";
+					$('.'+tagClsType+'').each(function(index) {
 						
 						var testValue = $(this).text();
 		        		var subValue  = '#'+String(tag.tagName);
@@ -440,10 +466,10 @@
 					
 		           	html += '<tr>';
 	           		if(chk > 0){
-	           			html += '<td onclick="javascript:tagInsert($(this));" style="background:#AED6F1;">' + tag.tagName;
+	           			html += '<td onclick="javascript:tagInsert($(this), \''+type+'\');" style="background:#AED6F1;">' + tag.tagName;
 	           		}
 	           		else{ 
-	           			html += '<td onclick="javascript:tagInsert($(this));">' + tag.tagName;
+	           			html += '<td onclick="javascript:tagInsert($(this), \''+type+'\');">' + tag.tagName;
  	           		}
 	           	  	html += '</td><td style="display:none">'+tag.tagNo+'</td><tr>';
 	           	});
@@ -452,28 +478,63 @@
 	     });
 	};
 
-	function tagInsert(data) {
-			var chk = 0;
+	function tagInsert(data, type) {
+		var chk = 0;
+			
+		if(type=="search"){	
 			$('.tag').each(function(index) {
-				
-				var testValue = $(this).text();
-        		var subValue  = '#'+data.text();
-        		if(testValue == subValue){
-        			chk=1;
-        			$(this).remove();
-        		}
+					
+					var testValue = $(this).text();
+	        		var subValue  = '#'+data.text();
+	        		if(testValue == subValue){
+	        			chk=1;
+	        			$(this).remove();
+	        		}
 			});
-		console.log(data);
-		console.log(data.next());
-	 	if(chk > 0){
-			data.css('background', '');	
-			$('input[name=tags]').val($('input[name=tags]').val().replace('#'+data.next().text(),''));
+	
+		 	if(chk > 0){
+				data.css('background', '');	
+				$('input[name=tags]').val($('input[name=tags]').val().replace('#'+data.next().text(),''));
+			}
+			else{ 
+				data.css('background', '#AED6F1');
+				$('#tags').append('<span class="tag" style="margin-left:10px;">#'+data.text()+'</span>');
+				$('input[name=tags]').val($('input[name=tags]').val()+'#'+data.next().text());
+	 		} 
+	 	
 		}
-		else{ 
+		
+		else if(type=="fav"){
+			$.ajax({
+				type : 'post',
+		       	url: 'updateMemFavTag',
+		       	data : { "tagNo" : data.next().text()},
+		        dataType:"test",
+		        success: function(data) {
+		        	
+		        }
+		   }); 
+			
+			$('.favTag').each(function(index) {
+	
+				var testValue = $(this).text();
+				var subValue  = '#'+data.text();
+	
+				if(testValue == subValue){
+					chk=1;
+					$(this).remove();
+				    	
+				}
+			});
+	
+			if(chk > 0){
+			data.css('background', '');	
+			}
+			else{ 
 			data.css('background', '#AED6F1');
-			$('#tags').append('<span class="tag" style="margin-left:10px;">#'+data.text()+'</span>');
-			$('input[name=tags]').val($('input[name=tags]').val()+'#'+data.next().text());
- 		} 
+			$('#favTags').append('<span class="favTag" style="margin-left:10px;">#'+data.text()+'</span>');
+			} 
+		}
 		
 	}
 	 
@@ -503,7 +564,7 @@
 		if(${memInfo.memberId == null}){
 			alert("권한이 없습니다.");
 		} 
-		else{ 
+		else{  
 			   $.ajax({
 		            type : 'post',
 		            url : getContextPath() +'/checkQuestionFav',
@@ -528,11 +589,43 @@
 		            }
 		        }); 
 			   
-		}
+		} 
 	};
 
-
+	var searchForm = function(type, value) {
 		
+		if(type=="order"){
+		$('input[name=order]').val(value);
+		
+		}
+		else if(type=="paging"){
+			$('input[name=page]').val(value);
+		}
 
-</script>
+		if($('input[name="tags"]').val()!= null){
+			
+			var tagNoList = $('input[name="tags"]').val().split('#');
+
+			for(var i=1 ;i < tagNoList.length; i++){
+
+				$('#searchForm').append('<input type="hidden" name="tagList['+(i-1)+'].tagNo" value="'+tagNoList[i]+'">');
+			}
+			$('#searchForm').append('<input type="hidden" name="tagLists" value="'+$('input[name="tags"]').val()+'">');
+		}
+
+		$('#searchForm').submit();
+		
+	};
+		
+	
+	
+	$(function(){
+		
+		
+	});
+
+</script> 
+
+
+
 </html>

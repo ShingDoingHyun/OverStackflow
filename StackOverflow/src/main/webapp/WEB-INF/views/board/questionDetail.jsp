@@ -256,7 +256,7 @@ iframe {
 				<br>
 
 				<p>답글작성</p>
-				<form action="<c:url value="/insertReply"/>" method="post">
+				<form action="<c:url value="/insertReply"/>" onsubmit="return replyInsert();" method="post">
 					<input type="hidden" name="memId" value="${memInfo.memberId }" /> 
 					<input type="hidden" name="questionNo" value="${questionBoard.questionNo }">
 					<textarea id="summernote" name="content"></textarea>
@@ -733,6 +733,16 @@ var changeVote = function(questionNo, vote){
 	
 };
 
+var replyInsert = function(){
+
+		if(${memInfo.memberId == null}){
+			alert("로그인 후 이용하세요.");
+			return false;
+		} 
+		else{ 
+			return true;
+		}
+};
 	
 </script>
 

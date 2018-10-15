@@ -15,7 +15,7 @@ public interface IQuestionBoardDao {
 
 	int insertQuestionBoard(QuestionBoard questionboard);
 
-	List<QuestionBoard> selectPopQuestionList(HttpServletRequest request);
+	List<QuestionBoard> selectPopQuestionList(HttpServletRequest request, Search search);
 
 	int updateQuestionView(int questionNo);
 
