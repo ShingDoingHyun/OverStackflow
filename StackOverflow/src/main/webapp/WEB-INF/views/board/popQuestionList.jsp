@@ -1,37 +1,90 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE HTML>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Novus Admin Panel an Admin Panel Category Flat Bootstrap Responsive Website Template | Home :: w3layouts</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Novus Admin Panel Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- Bootstrap Core CSS -->
+<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+<!-- Custom CSS -->
+<link href="css/style.css" rel='stylesheet' type='text/css' />
+<!-- font CSS -->
+<!-- font-awesome icons -->
+<link href="css/font-awesome.css" rel="stylesheet"> 
+<!-- //font-awesome icons -->
+ <!-- js-->
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/modernizr.custom.js"></script>
+<!--webfonts-->
+<link href='//fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
+<!--//webfonts--> 
+<!--animate-->
+<link href="css/animate.css" rel="stylesheet" type="text/css" media="all">
+<script src="js/wow.min.js"></script>
+	<script>
+		 new WOW().init();
+	</script>
+<!--//end-animate-->
+<!-- chart -->
+<script src="js/Chart.js"></script>
+<!-- //chart -->
+<!--Calender-->
+<link rel="stylesheet" href="css/clndr.css" type="text/css" />
+<script src="js/underscore-min.js" type="text/javascript"></script>
+<script src= "js/moment-2.2.1.js" type="text/javascript"></script>
+<script src="js/clndr.js" type="text/javascript"></script>
+<script src="js/site.js" type="text/javascript"></script>
+<!--End Calender-->
+<!-- Metis Menu -->
+<script src="js/metisMenu.min.js"></script>
+<script src="js/custom.js"></script>
+<link href="css/custom.css" rel="stylesheet">
+<!--//Metis Menu -->
 
-<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.cookie.js"></script>
+
+
+
+<!-- 우리가 추가한 스타일 등등 -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.cookie.js"></script>
+<%-- <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+
+
 
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/index.css" type="text/css"
 	media="all" />
+--%>
 
-
-<style>
+<style> 
 
 .main {
 	display: inline-block;
+	width: 100%;
 	height: 100%;
 }
 
 .left {
 	float: left;
-	width: 70%;
+	width: 80%;
 }
 
 .right {
 	float: right;
-	width: 30%;
+	width: 20%;
 }
 table {
     width: 100%;
@@ -40,16 +93,16 @@ table {
   
 th, td {
    
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding-top: 20px;
+    padding-bottom: 20px;
     font-size: 12px;
 }
   
 td{
-     padding-top: 10px;
-    padding-bottom: 10px;
+     padding-top: 20px;
+    padding-bottom: 20px;
   
-}
+} 
 
 
 /* The Modal (background) */
@@ -93,163 +146,206 @@ td{
 }
 </style>
 
-</head>
-<body>
-	<!----------------------header--------------------------------------->
-
-	<%@ include file="../commons/header.jspf"%>
-	<!----------------------header End--------------------------------------->
 
 
-	<!----------------------left menu--------------------------------------->
-	<%@ include file="../commons/left.jspf"%>
-	<!----------------------left menu End--------------------------------------->
+<!-- 우리가 추가한 스타일 등등  end-->
 
 
+</head> 
+<body class="cbp-spmenu-push">
+	<div class="main-content">
+	
+		<!--left-fixed -navigation-->
+			<%@ include file="../commons/bleft.jspf" %>
+		<!--left-fixed -navigation-->
+		
+		<!-- header-starts -->
+			<%@ include file="../commons/bheader.jspf" %>
+		<!-- //header-ends -->
+		
+		
+		
+		
+		
+		<!-- main content start-->
+		<div id="page-wrapper">
+		<h2>인기질문</h2>
+		<br>
+		<br>
+			<div class="main-page">
+			
 
-	<!----------------------main--------------------------------------->
-	<div class="main">
-		<div class="left">
-			<div>
-				<h2>인기질문</h2>
-				<br> <br> 
-
-			</div>
-		</div>
-
-		<div class="right">
-			<button id="writeBtn"  style="position: absolute; right:10px; top:111px;" >
-				질문하기
-			</button>
-		</div>
-	</div>
-	<div class="main">
-		<div class="left">
-		<p align="right">
-			<button id="favTagQuestionBtn">나의흥미</button>
-			<button>이번주인기</button>
-			<button>이번달인기</button>
-			<button>전체인기</button>
-			</p>
-			<hr>
-			<table width="100%">
-				<c:forEach items="${questionBoardList }" var="questionBoard" varStatus="status">
-						<tr>
-							<td width="8%" align="center" rowspan="2" style=" border-bottom: 1px solid #777777;">
-							<a href="javascript:checkFavQuestion('${questionBoard.questionNo }', '${status.index}');">
-								<c:if test="${questionBoard.fav > 0}">
-									<img src="<c:url value='/img/fav.png'/>" width="30px" height="30px" class="fav${status.index}" name="fav">
-								</c:if>
-								<c:if test="${questionBoard.fav <= 0}">
-									<img src="<c:url value='/img/unFav.png'/>" width="30px" height="30px" class="fav${status.index}" name="unFav">
-								</c:if>
-							</a>
-							</td>
-							<td width="8%" align="center">${questionBoard.vote}</td>
-							<td width="8%" align="center">${questionBoard.replyCount}</td>
-							<td width="8%" align="center">${questionBoard.view}</td>
-							<td width="48%"><p><a href="<c:url value='/questionDetail/${questionBoard.questionNo }'/>">${questionBoard.title }</a>
-							</p></td>
-							<td width="20%" rowspan="2" style=" border-bottom: 1px solid #777777;">작성시간 <fmt:formatDate value="${questionBoard.regDate}" pattern="yyyy년 MM월 dd일 HH:mm:ss"/> ${questionBoard.memId }</td>
-						</tr>
-						<tr style=" border-bottom: 1px solid #777777;">
-							<td width="8%" align="center">추천</td>
-							<td width="8%" align="center">답변</td>
-							<td width="8%" align="center">읽음</td>
-							<td width="48%">
-							<c:forEach items="${questionBoard.tagList }" var="tag">
-								<span style="background:#8B9DC3; color:white; width:50px; display:inline-block; text-align: center; border-radius: 2px;border-radius: 10px;">
-									<a href="<c:url value='/popQuestionList?tagNo=${tag.tagNo }'/>" style="color:white;">${tag.tagName }</a>
-								</span>&nbsp;
-							</c:forEach>
-							</td>
-						</tr>
-				</c:forEach> 
-			</table>
-		</div>
-		<div class="right">
-			<p style="margin-top: 30px">
-			<c:if test="${memInfo != null}">
-				<div style="border:1px solid black; width:300px; height:200px;margin-left:80px; margin-top:30px" class="modalLoad" id="favTag">
-					<p style="text-align: center; border-bottom:1px solid black; padding: 10px 0 10px 0; margin-top: 0; margin-bottom:0;">흥미태그</p>
-					<form id="favTagForm" action="<c:url value='/popQuestionList'/>" method="get">
-						<div id="tags">
-							<c:forEach items="${fagTagList }" var="fagTag" varStatus="status">
-								<span class="tag" style="margin-left:10px;">#${ fagTag.tagName}</span>
-								<input type="hidden" name="tagList%5B0%5D.tagNo" value="${fagTag.tagNo }">
+				<div class="main">
+					<div class="left">
+					<p align="right">
+						<button id="favTagQuestionBtn">나의흥미</button>
+						<button>이번주인기</button>
+						<button>이번달인기</button>
+						<button>전체인기</button>
+						</p>
+						<hr>
+						<table width="100%">
+							<c:forEach items="${questionBoardList }" var="questionBoard" varStatus="status">
+									<tr>
+										<td width="8%" align="center" rowspan="2" style=" border-bottom: 1px solid #777777;">
+										<a href="javascript:checkFavQuestion('${questionBoard.questionNo }', '${status.index}');">
+											<c:if test="${questionBoard.fav > 0}">
+												<img src="<c:url value='/img/fav.png'/>" width="30px" height="30px" class="fav${status.index}" name="fav">
+											</c:if>
+											<c:if test="${questionBoard.fav <= 0}">
+												<img src="<c:url value='/img/unFav.png'/>" width="30px" height="30px" class="fav${status.index}" name="unFav">
+											</c:if>
+										</a>
+										</td>
+										<td width="8%" align="center">${questionBoard.vote}</td>
+										<td width="8%" align="center">${questionBoard.replyCount}</td>
+										<td width="8%" align="center">${questionBoard.view}</td>
+										<td width="48%"><p><a href="<c:url value='/questionDetail/${questionBoard.questionNo }'/>">${questionBoard.title }</a>
+										</p></td>
+										<td width="20%" rowspan="2" style=" border-bottom: 1px solid #777777;">작성시간 <fmt:formatDate value="${questionBoard.regDate}" pattern="yyyy년 MM월 dd일 HH:mm:ss"/> ${questionBoard.memId }</td>
+									</tr>
+									<tr style=" border-bottom: 1px solid #777777;">
+										<td width="8%" align="center">추천</td>
+										<td width="8%" align="center">답변</td>
+										<td width="8%" align="center">읽음</td>
+										<td width="48%">
+										<c:forEach items="${questionBoard.tagList }" var="tag">
+											<span style="background:#8B9DC3; color:white; width:50px; display:inline-block; text-align: center; border-radius: 2px;border-radius: 10px;">
+												<a href="<c:url value='/popQuestionList?tagNo=${tag.tagNo }'/>" style="color:white;">${tag.tagName }</a>
+											</span>&nbsp;
+										</c:forEach>
+										</td>
+									</tr>
 							</c:forEach> 
+						</table>
+					</div>
+					<div class="right">
+					
+						<div style="margin-top: 100px">
+							<button id="writeBtn"  style="position: absolute; right:10px; top:111px;" >
+								질문하기
+							</button>
 						</div>
-					</form> 
-				</div>
+						<c:if test="${memInfo != null}">
+							<div style="border:1px solid black; width:300px; height:200px;margin-left:20px; margin-top:30px" class="modalLoad" id="favTag">
+								<p style="text-align: center; border-bottom:1px solid black; padding: 10px 0 10px 0; margin-top: 0; margin-bottom:0;">흥미태그</p>
+								<form id="favTagForm" action="<c:url value='/popQuestionList'/>" method="get">
+									<div id="tags">
+										<c:forEach items="${fagTagList }" var="fagTag" varStatus="status">
+											<span class="tag" style="margin-left:10px;">#${ fagTag.tagName}</span>
+											<input type="hidden" name="tagList["+${status}"].tagNo" value="${fagTag.tagNo }">
+										</c:forEach> 
+									</div>
+								</form> 
+							</div>
+							
+							<div style="border:1px solid black; width:300px; height:200px;margin-left:20px; margin-top:30px">
+								<p style="text-align: center; border-bottom:1px solid black; padding: 10px 0 10px 0; margin-top: 0; margin-bottom:0;">즐겨찾기한 질문</p>
+								<div id="favList">
+								<c:forEach items="${favQuestionList }" var="favQuestionList">
+									<div style="border-bottom: 1px solid #333333; margin-top:3px; margin-bottom:3px;">
+										<a href="<c:url value='/questionDetail/${favQuestionList.questionNo }'/>">${ favQuestionList.title}</a>
+									</div>
+								</c:forEach>
+								</div>
+							</div>
+						</c:if>
 				
-				<div style="border:1px solid black; width:300px; height:200px;margin-left:80px; margin-top:30px">
-					<p style="text-align: center; border-bottom:1px solid black; padding: 10px 0 10px 0; margin-top: 0; margin-bottom:0;">즐겨찾기한 질문</p>
-					<div id="favList">
-					<c:forEach items="${favQuestionList }" var="favQuestionList">
-						<div style="border-bottom: 1px solid #333333; margin-top:3px; margin-bottom:3px;">
-							<a href="<c:url value='/questionDetail/${favQuestionList.questionNo }'/>">${ favQuestionList.title}</a>
+						<div style="border:1px solid black; width:300px; height:200px;margin-left:20px; margin-top:30px">
+						<p style="text-align: center; border-bottom:1px solid black; padding: 10px 0 10px 0; margin-top: 0; margin-bottom:0;">방문한 페이지</p>
+						<c:forEach items="${visitQuestionBoard }" var="visitQuestion">
+							<div style="border-bottom: 1px solid #333333; margin-top:3px; margin-bottom:3px;"><a href="<c:url value='/questionDetail/${visitQuestion.questionNo }'/>">${ visitQuestion.title}</a></div>
+						</c:forEach>
 						</div>
-					</c:forEach>
 					</div>
 				</div>
-			</c:if>
-	
-			<div style="border:1px solid black; width:300px; height:200px;margin-left:80px; margin-top:30px">
-			<p style="text-align: center; border-bottom:1px solid black; padding: 10px 0 10px 0; margin-top: 0; margin-bottom:0;">방문한 페이지</p>
-			<c:forEach items="${visitQuestionBoard }" var="visitQuestion">
-				<div style="border-bottom: 1px solid #333333; margin-top:3px; margin-bottom:3px;"><a href="<c:url value='/questionDetail/${visitQuestion.questionNo }'/>">${ visitQuestion.title}</a></div>
-			</c:forEach>
+		
+		
+			   <!-- The Modal -->
+			    <div id="favTagModal" class="modal">
+			 
+			      <!-- Modal content -->
+			      <div class="modal-content"  style="width: 710px;">
+			      <span class="close">&times;</span>   
+			        <form>
+			        <input type="text" size="20" />  <button type="button" style="margin-left: 15px;" >태그검색</button>
+			        </form>    
+			        <br>
+			        <form>
+			        	<table border="1px">
+			        		<tr>
+			        			<td style="width:250px; text-align: center;">대분류</td>
+			        			<td style="width:250px; text-align: center;">중분류</td>
+			        			<td style="width:250px; text-align: center;">태그</td>	
+			        		</tr>
+			        		<tr>
+				        		<td style="height:200px;" valign="top">
+				        			<table id="mainName">
+									</table>
+								</td>
+				        		<td style="height:200px;" valign="top">
+									<table id="middleName">
+									</table>
+								</td>
+				        		<td style="height:200px;" valign="top">
+									<table id="name">
+									</table>
+								</td>
+			        		</tr>
+			        
+			        
+			        	</table>
+			        </form>                                                      
+			        
+			      </div>
+			 
+			    </div>
+					
 			</div>
+			
 		</div>
+		
+		<!--footer-->
+		<%@ include file="../commons/bfooter.jspf" %>
+        <!--//footer-->
+        
 	</div>
-	
-	
-		   <!-- The Modal -->
-    <div id="favTagModal" class="modal">
- 
-      <!-- Modal content -->
-      <div class="modal-content"  style="width: 710px;">
-      <span class="close">&times;</span>   
-        <form>
-        <input type="text" size="20" />  <button type="button" style="margin-left: 15px;" >태그검색</button>
-        </form>    
-        <br>
-        <form>
-        	<table border="1px">
-        		<tr>
-        			<td style="width:250px; text-align: center;">대분류</td>
-        			<td style="width:250px; text-align: center;">중분류</td>
-        			<td style="width:250px; text-align: center;">태그</td>	
-        		</tr>
-        		<tr>
-	        		<td style="height:200px;" valign="top">
-	        			<table id="mainName">
-						</table>
-					</td>
-	        		<td style="height:200px;" valign="top">
-						<table id="middleName">
-						</table>
-					</td>
-	        		<td style="height:200px;" valign="top">
-						<table id="name">
-						</table>
-					</td>
-        		</tr>
-        
-        
-        	</table>
-        </form>                                                      
-        
-      </div>
- 
-    </div>
-	<!----------------------main End--------------------------------------->
+	<!-- Classie -->
+		<script src="js/classie.js"></script>
+		<script>
+			var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
+				showLeftPush = document.getElementById( 'showLeftPush' ),
+				body = document.body;
+				
+			showLeftPush.onclick = function() {
+				classie.toggle( this, 'active' );
+				classie.toggle( body, 'cbp-spmenu-push-toright' );
+				classie.toggle( menuLeft, 'cbp-spmenu-open' );
+				disableOther( 'showLeftPush' );
+			};
+			
 
-
-	<!----------------------footer--------------------------------------->
-	<%@ include file="../commons/footer.jspf"%>
-	<!----------------------footer End--------------------------------------->
-
+			function disableOther( button ) {
+				if( button !== 'showLeftPush' ) {
+					classie.toggle( showLeftPush, 'disabled' );
+				}
+			}
+		</script>
+		
+	<!--scrolling js-->
+	<script src="js/jquery.nicescroll.js"></script>
+	<script src="js/scripts.js"></script>
+	<!--//scrolling js-->
+	<!-- Bootstrap Core JavaScript -->
+   <script src="js/bootstrap.js"> </script> 
+   
+   
+   
+   
+   
+   
+   
+   
 </body>
 
 <script>
