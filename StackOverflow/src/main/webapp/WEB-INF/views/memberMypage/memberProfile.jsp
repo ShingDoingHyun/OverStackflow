@@ -382,14 +382,12 @@ text-align:flot;
                 </div>
 		
                 <div class="user-panel-content">
-                
-                 qwqwwq====  ${replyBoards} 
-                
-                
-                
-                
-                    <div class="empty">너는<a href="/questions/how-to-answer">어떠한질문에도</a> 대답하지않았다능</div>
-                </div>
+ 
+                    <c:forEach items="${replyBoards }" var="rboard" varStatus="status">
+
+                    <div class="empty">${rboard.content }</div>
+               </c:forEach> 
+            	</div>
                 <div class="user-panel-footer">
                 </div>
             </div>

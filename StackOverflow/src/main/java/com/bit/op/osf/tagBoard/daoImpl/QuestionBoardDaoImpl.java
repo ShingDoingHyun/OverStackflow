@@ -119,7 +119,7 @@ public class QuestionBoardDaoImpl implements IQuestionBoardDao {
 	public QuestionBoardList selectQuestionList(Search search, MemRegInfo memInfo) {
 		
 	
-		
+		System.out.println(search);
 		int currentPageNumber = search.getPage() > 0 ? search.getPage() : 1; 
 
 		int questionBoardTotalCount = sqlSession.selectOne(QUSETION_NAMESPACE + "selectCount", search);

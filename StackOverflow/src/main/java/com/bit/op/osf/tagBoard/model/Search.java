@@ -90,6 +90,15 @@ public class Search {
 	public void setTagList(List<Tag> tagList) {
 		this.tagList = tagList;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Search [firstRow=" + firstRow + ", endRow=" + endRow + ", page=" + page + ", order=" + order
+				+ ", keyword=" + keyword + ", tagNo=" + tagNo + ", tagName=" + tagName + ", tagList=" + tagList + "]";
+	}
+	
+	
 	
 	
 }

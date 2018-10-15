@@ -15,6 +15,7 @@ import com.bit.op.osf.member.model.MemRegInfo;
 import com.bit.op.osf.tagBoard.dao.ITagDao;
 import com.bit.op.osf.tagBoard.model.MemFavTag;
 import com.bit.op.osf.tagBoard.model.QuestionTag;
+import com.bit.op.osf.tagBoard.model.Search;
 import com.bit.op.osf.tagBoard.model.Tag;
 
 @Repository
@@ -26,9 +27,9 @@ public class TagDaoImpl implements ITagDao {
 	private static final String COMMENT_NAMESPACE = "com.bit.op.osf.tagBoard.mapper.TagMapper.";
 	
 	@Override
-	public List<Tag> selectTagList(){
+	public List<Tag> selectTagList(Search search){
 		
-		return sqlSession.selectList(COMMENT_NAMESPACE + "selectTagList");
+		return sqlSession.selectList(COMMENT_NAMESPACE + "selectTagList", search);
 		
 	}
 	
@@ -97,6 +98,12 @@ public class TagDaoImpl implements ITagDao {
 		MemRegInfo memInfo =  (MemRegInfo) session.getAttribute("memInfo");
 		
 		return sqlSession.selectList(COMMENT_NAMESPACE + "selectMemFavTagList", memInfo);
+	}
+
+	@Override
+	public Object selectTagListBySearch(Search search) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

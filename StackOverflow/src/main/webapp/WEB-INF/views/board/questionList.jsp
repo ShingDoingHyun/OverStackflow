@@ -150,21 +150,27 @@
 	</div>
 	<div class="main">
 		<div class="left">
-		<form action="<c:url value='/questionList'/>" method="get">
+		<form action="<c:url value='/questionList'/>" method="get" id="searchForm">
 			<input type="text" name="keyword" size="100" value="${param.keyword}">
 			<input type="hidden" name="order" value="${param.order}">
-			<input type="hidden" name="tagNo" value="${param.tagNo}"><input type="submit" value="검색">	
+			
+			<input type="hidden" name="page" value="${param.page == null ? 0 :  param.page}">
+		
+	
+			<button onclick="searchForm();">검색</button>	 
 		</form>
 			<button type="button" class="tagMenu" id="searchTag">태그선택</button>  
-			<div style="height:50px;" id="tags"></div>
-			<input type="hidden" name="tags">
+			<div style="height:50px;" id="tags">
+			<c:forEach items="${searchTagList }" var="tag" varStatus="status">
+			<span class="tag" style="margin-left:10px;">#${tag.tagName}</span>
+			</c:forEach>
+			</div>
+			<input type="hidden" name="tags" value="${param.tagLists }">	
 		
 		<p align="right">
-			<button onclick="location.href='<c:url value='/questionList?order=regDate&keyword=${param.keyword }&tagNo=${param.tagNo }'/>'">최신순</button>
-			<button onclick="location.href='<c:url value='/questionList?order=view&keyword=${param.keyword }&tagNo=${param.tagNo }'/>'">많이본</button>
-			<button onclick="location.href='<c:url value='/questionList?order=vote&keyword=${param.keyword }&tagNo=${param.tagNo }'/>'">인기순</button>
-			<button onclick="location.href='<c:url value='/questionList?order=pi&keyword=${param.keyword }&tagNo=${param.tagNo }'/>'">현상금</button>
-			<button onclick="location.href='<c:url value='/questionList?order=non&keyword=${param.keyword }&tagNo=${param.tagNo }'/>'">채택안됨</button>
+			<button onclick="searchForm('order','regDate')">최신순</button>
+			<button onclick="searchForm('order','view')">많이본</button>
+			<button onclick="searchForm('order','vote')">인기순</button>
 			<select>
 				<option value="10">10</option>
 				<option value="30">30</option>
@@ -201,7 +207,7 @@
 							<td width="48%">
 							<c:forEach items="${questionBoard.tagList }" var="tag">
 								<span style="background:#8B9DC3; width:50px; display:inline-block; text-align: center; border-radius: 2px;border-radius: 10px;">
-									<a href="<c:url value='/questionList?tagNo=${tag.tagNo }'/>" style="color:white;">${tag.tagName }</a>
+									<a href="<c:url value='/popQuestionList?tagNo=${tag.tagNo }'/>" style="color:white;">${tag.tagName }</a>
 								</span>&nbsp;
 							</c:forEach>
 							</td>
@@ -216,7 +222,8 @@
 				<c:set var="count" value="${questionBoardList.pageTotalCount /10}" />
 				
 				<c:forEach begin="1" end="${questionBoardList.pageTotalCount}" var="i">
-					<a href="<c:url value='/questionList?page=${ i}&order=${param.order}&keyword=${param.keyword}&tagNo=${param.tagNo }'/>"style="display: inline;">${ i}</a>
+					<a href="javascript:searchForm('paging', '${ i}' );">${ i}</a>
+<%-- 					<a href="<c:url value='/questionList?page=${ i}&order=${param.order}&keyword=${param.keyword}'/>"style="display: inline;">${ i}</a> --%>
 				</c:forEach>
 				
 <%-- 				
@@ -293,7 +300,7 @@
 					</td>
         		</tr>
         
-        
+         
         	</table>
         </form>                                                      
         
@@ -557,7 +564,7 @@
 		if(${memInfo.memberId == null}){
 			alert("권한이 없습니다.");
 		} 
-		else{ 
+		else{  
 			   $.ajax({
 		            type : 'post',
 		            url : getContextPath() +'/checkQuestionFav',
@@ -582,11 +589,43 @@
 		            }
 		        }); 
 			   
-		}
+		} 
 	};
 
-
+	var searchForm = function(type, value) {
 		
+		if(type=="order"){
+		$('input[name=order]').val(value);
+		
+		}
+		else if(type=="paging"){
+			$('input[name=page]').val(value);
+		}
 
-</script>
+		if($('input[name="tags"]').val()!= null){
+			
+			var tagNoList = $('input[name="tags"]').val().split('#');
+
+			for(var i=1 ;i < tagNoList.length; i++){
+
+				$('#searchForm').append('<input type="hidden" name="tagList['+(i-1)+'].tagNo" value="'+tagNoList[i]+'">');
+			}
+			$('#searchForm').append('<input type="hidden" name="tagLists" value="'+$('input[name="tags"]').val()+'">');
+		}
+
+		$('#searchForm').submit();
+		
+	};
+		
+	
+	
+	$(function(){
+		
+		
+	});
+
+</script> 
+
+
+
 </html>

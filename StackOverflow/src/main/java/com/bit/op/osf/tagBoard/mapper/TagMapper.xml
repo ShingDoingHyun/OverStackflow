@@ -6,9 +6,18 @@
 
 
 
-	<select id="selectTagList" resultType="com.bit.op.osf.tagBoard.model.Tag">
-		select tagNo, tagMainName, tagMiddleName, tagName, tagDetail from tag;
+	<select id="selectTagList" resultType="com.bit.op.osf.tagBoard.model.Tag" parameterType="com.bit.op.osf.tagBoard.model.Search">
+		select tagNo, tagMainName, tagMiddleName, tagName, tagDetail from tag
+			<if test="tagList != null">
+				where
+				tagNo IN  
+					<foreach collection="tagList" item="tag" index="index"  open="(" close=")" separator=" , ">
+			         #{tag.tagNo}
+			        </foreach>
+			</if>
+				;
 	</select>
+	
 	
 	<select id="selectTagMainNameList" resultType="com.bit.op.osf.tagBoard.model.Tag">
 		select DISTINCT tagMainName from tag;

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.bit.op.osf.member.daoImpl.MemberInfoImpl;
+import com.bit.op.osf.member.model.MemRegInfo;
 import com.bit.op.osf.tagBoard.dao.IQuestionBoardDao;
 import com.bit.op.osf.tagBoard.dao.ITagDao;
 
@@ -69,13 +70,17 @@ public class QuestionBoardController {
 		
 		List<QuestionBoard> favQuestionList = new ArrayList<QuestionBoard>();
 		List<Tag> fagTagList = new ArrayList<Tag>();
+		List<Tag> searchTagList = new ArrayList<Tag>();
 		
-		MemRegInfo memInfo =  (MemRegInfo)  request.getSession().getAttribute("memInfo");
+		MemRegInfo memInfo =  (MemRegInfo)request.getSession().getAttribute("memInfo");
 		QuestionBoardList questionBoardList = questionBoardDao.selectQuestionList(search, memInfo);
 		favQuestionList = questionBoardDao.selectFavQuestionList(request);
 		fagTagList = tagDao.selectMemFavTagList(request);
 		
-		
+		if(search.getTagList() !=null) {
+			searchTagList = tagDao.selectTagList(search);
+			model.addAttribute("searchTagList", searchTagList);
+		}
 		Cookie[] cookies = request.getCookies();
 		if(cookies.length> 0) {
 			model.addAttribute("visitQuestionBoard", questionBoardDao.selectVisitQuestion(cookies));
@@ -84,6 +89,7 @@ public class QuestionBoardController {
 		model.addAttribute("questionBoardList", questionBoardList);
 		model.addAttribute("favQuestionList", favQuestionList);
 		model.addAttribute("fagTagList", fagTagList);
+	
 		
 		return "board/questionList";
 	}

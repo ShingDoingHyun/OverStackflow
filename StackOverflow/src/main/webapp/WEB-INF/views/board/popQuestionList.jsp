@@ -159,7 +159,7 @@ td{
 							<td width="48%">
 							<c:forEach items="${questionBoard.tagList }" var="tag">
 								<span style="background:#8B9DC3; color:white; width:50px; display:inline-block; text-align: center; border-radius: 2px;border-radius: 10px;">
-									<a href="<c:url value='/questionList?tagNo=${tag.tagNo }'/>" style="color:white;">${tag.tagName }</a>
+									<a href="<c:url value='/popQuestionList?tagNo=${tag.tagNo }'/>" style="color:white;">${tag.tagName }</a>
 								</span>&nbsp;
 							</c:forEach>
 							</td>
@@ -176,10 +176,10 @@ td{
 						<div id="tags">
 							<c:forEach items="${fagTagList }" var="fagTag" varStatus="status">
 								<span class="tag" style="margin-left:10px;">#${ fagTag.tagName}</span>
-								<input type="hidden" name="tagList[${status.index}].tagNo" value="${fagTag.tagNo }">
+								<input type="hidden" name="tagList%5B0%5D.tagNo" value="${fagTag.tagNo }">
 							</c:forEach> 
 						</div>
-					</form>
+					</form> 
 				</div>
 				
 				<div style="border:1px solid black; width:300px; height:200px;margin-left:80px; margin-top:30px">
