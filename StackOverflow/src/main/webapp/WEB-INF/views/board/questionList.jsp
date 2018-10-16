@@ -373,54 +373,9 @@ td{
    
 </body>
 
-<!-- 게시판 jQuery -->
+
 <script>
-	$(document).ready(
-			function() {
-				$('#summernote').summernote(
-						{
-							lang : 'ko-KR',
-							height : 300,
-							width : 600,
-							fontNames : [ '맑은고딕', 'Arial', 'Arial Black',
-									'Comic Sans MS', 'Courier New', ],
-							fontNamesIgnoreCheck : [ '맑은고딕' ],
-							focus : true,
-							callbacks: {
-								onImageUpload: function(files, editor, welEditable) {
-						            for (var i = files.length - 1; i >= 0; i--) {
 
-						            	sendFile(files[i], this);
-						            }
-						        }
-							}
-							
-						});
-			});
-	
-	
-	function sendFile(file, el) {
-		var form_data = new FormData();
-		form_data.append('file', file);
-      	
-
-      	$.ajax({
-        	data: form_data,
-        	type: "POST",
-        	url: 'imageUpload',
-        	cache: false,
-        	contentType: false,
-        	enctype: 'multipart/form-data',
-        	processData: false,
-        	dataType:"text",
-        	success: function(img_name) {
-
-        		$('#summernote').summernote('insertImage', getContextPath()+img_name);
-        	}
-      	});
-    };
-	
-	
 	function getContextPath() {
 		var hostIndex = location.href.indexOf( location.host ) + location.host.length;
 		return location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );

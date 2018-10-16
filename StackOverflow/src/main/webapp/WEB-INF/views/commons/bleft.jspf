@@ -17,6 +17,9 @@
 								<li>
 									<a href="<c:url value="/questionList"/>">질문검색</a>
 								</li>
+								<li>
+									<a href="javascript: writeQuestion();">질문작성</a>
+								</li>
 							</ul>
 							<!-- /nav-second-level -->
 						</li>
@@ -53,3 +56,18 @@
 				</nav>
 			</div>
 		</div>
+		
+		
+		
+		
+		<script>
+		var writeQuestion = function() {
+			if(${memInfo == null}){
+				alert("로그인 후 이용하세요");
+			}
+			else{
+				location.href= getContextPath()+'/openWriteQuestion';
+			}
+		};
+		
+		</script>
