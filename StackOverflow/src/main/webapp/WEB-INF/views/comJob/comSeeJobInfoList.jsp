@@ -6,9 +6,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/index.css" type="text/css" media="all" />
+<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.cookie.js"></script>	
 <title>채용 공고 목록</title>
 <style>
 .main {
@@ -75,6 +76,33 @@ th, td {
 	<div class="right">
 	  <input type="button" value="채용 공고 관리" onclick="location.href='<c:url value="/comJob/manageJobInfoList/1"/>'">
 	  <input type="button" value="새로운 채용 공고 작성" onclick="location.href='<c:url value="/comJob/writeJobInfo"/>'">
+	 
+     <div style="border:1px solid black; width:300px; height:200px;margin-left:80px; margin-top:63px">
+     <p style="text-align: center; border-bottom:1px solid black; padding: 10px 0 10px 0; margin-top: 0; margin-bottom:0; font-size: 14px;">나의 채용 공고</p>
+       <c:if test="${myJobInfoListView != null}">	
+     	<c:forEach var="myJobInfo" items="${myJobInfoListView.jobInfoList}">
+     	 <td style="width:20%;"><a href="<c:url value="/comJob/seeJobInfo/${myJobInfo.jobNo}"/>" style="font-size:14px;">${myJobInfo.jobTitle}</a></td><br>
+     	</c:forEach>
+       </c:if>
+     </div>
+     <div style="border:1px solid black; width:300px; height:200px;margin-left:80px; margin-top:30px">
+     <p style="text-align: center; border-bottom:1px solid black; padding: 10px 0 10px 0; margin-top: 0; margin-bottom:0; font-size: 14px;">즐겨찾기한 채용 공고</p>
+     	<div id="jobFavList">
+     	<c:if test="${myFavJobInfoList != null}">	
+	     	<c:forEach var="myFavJobInfo" items="${myFavJobInfoList}">
+	     	 <td style="width:20%;"><a href="<c:url value="/comJob/seeJobInfo/${myFavJobInfo.jobNo}"/>" style="font-size:14px;">${myFavJobInfo.jobTitle}</a></td><br>
+	     	</c:forEach>
+     	</c:if>
+     	</div>
+     </div>
+     <div style="border:1px solid black; width:300px; height:200px;margin-left:80px; margin-top:30px">
+     <p style="text-align: center; border-bottom:1px solid black; padding: 10px 0 10px 0; margin-top: 0; margin-bottom:0; font-size: 14px;">방문한 채용공고</p>
+   	    <c:if test="${visitJobInfoList != null}">	
+	     	<c:forEach var="visitJobInfo" items="${visitJobInfoList}">
+	     	 <td style="width:20%;"><a href="<c:url value="/comJob/seeJobInfo/${visitJobInfo.jobNo}"/>" style="font-size:14px;">${visitJobInfo.jobTitle}</a></td><br>
+	     	</c:forEach>
+     	</c:if>
+     </div>
     </div>
 
 
@@ -116,16 +144,40 @@ th, td {
 	
 	 
 	   <div>
+	   	<table width="100%">
+	   		<tr> 
+	   			<td style="width:5%;"></td>
+	   			<td style="width:20%;">채용공고 제목</td>
+	   			<td>모집분야</td>
+	   			<td>등록일</td>
+	   			<td>근무 지역</td>
+	   			<td>근무 시간</td>
+	   			<td>급여 조건</td>
+	   			<td>마감일</td>
+	   			
+	   		</tr>
+	   	</table>
 		<c:if test ="${jobInfoListView == null}">
 		<p>등록된 회원정보가 없습니다<p>
 		</c:if>
 		
 		<c:if test = "${jobInfoListView != null}">
 		<table width="100%">
-		    <c:forEach var="jobInfo" items="${jobInfoListView.jobInfoList}" >
+		    <c:forEach var="jobInfo" items="${jobInfoListView.jobInfoList}" varStatus="status">
+		    	<c:if test="${jobInfo.endedJob == 'N'}" >
 			    <tr>
 					  <%-- <td>${jobInfo.jobNo}</td> --%>
-					  	<td style="width:5%;"><img src="<c:url value='/jobimage/unfav.png'/>" width="30px;" id="fav" value="${jobInfo.jobNo}"/></td>
+					    <!-- 즐겨찾기 -->
+					  	<td style="width:5%;">
+						  	<a href="javascript:clickFav('${jobInfo.jobNo}','${status.index}');">
+						  		<c:if test="${jobInfo.favJobInfo > 0}">
+						  		 <img src="<c:url value='/img/fav.png'/>" width="30px;" style="cursor:pointer;" class="fav${status.index}" name="fav"/>
+						  		</c:if>
+						  		<c:if test="${jobInfo.favJobInfo <= 0}">
+						  		 <img src="<c:url value='/img/unFav.png'/>" width="30px;" style="cursor:pointer;" class="fav${status.index}" name="unFav"/>
+						  		</c:if>
+						  	</a>
+					  	</td>
 					    <td style="width:20%;"><a href="<c:url value="/comJob/seeJobInfo/${jobInfo.jobNo}"/>">${jobInfo.jobTitle}</a></td>
 					    <td>${jobInfo.jobField}</td>
 					    <td>${jobInfo.jobRegisterDate}</td>
@@ -144,9 +196,12 @@ th, td {
 								일 ${jobInfo.jobPayAmount}
 							</c:if>
 						</td>
+					
 						<td>${jobInfo.jobDueDate}</td>
-						<%-- <td>${jobInfo.jobZipcode}</td> --%>
-			   <tr>
+	
+						<%-- <td>${jobInfo.jobZipcode}</td>  --%>
+				</tr>
+				</c:if>
 			</c:forEach>
 			
 				<tr>
@@ -183,5 +238,92 @@ $(function(){
 		/* documnet.searchForm.submit(); */
 	}); 
 	
+	
+	
 });
+
+var clickFav = function(jobNo, value){
+    /* var value = parseInt(value) + parseInt(1);  */
+	var comId = "${comInfo.comId}";
+	if( comId == null || comId == "" ){
+		alert("로그인 후 이용해주세요.");
+	}else{
+		$.ajax({
+			type: "POST",
+			url: getContextPath()+ "/comJob/checkJobInfoFav",
+			data: {"comId": comId, "jobNo": jobNo},
+			dataType: "json",
+			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+			success: function(data){
+				 if($(".fav"+value).attr("name")=="fav"){
+	                    $(".fav"+value).attr("src" , getContextPath()+"/img/unFav.png");
+	                    $(".fav"+value).attr("name", "unFav");
+	                 }else{
+	                    $(".fav"+value).attr("src" , getContextPath()+"/img/fav.png");
+	                    $(".fav"+value).attr("name", "fav");    
+	                 }
+				 
+				 $("#jobFavList").html("");
+					$.each( data, function( key, value ) {
+						$("#jobFavList").css("border", "none");
+		           		$("#jobFavList").append("<a href='<c:url value='/comJob/seeJobInfo/"+value.jobNo+"'/>' style='font-size:14px;'>"+value.jobTitle+"</a><br>");
+		           	});  
+		    }, 
+			error:function(){
+				alert("오류 발생. 잠시후 다시 시도해주세요.");
+			}
+		}); 
+	}
+};
+
+function getContextPath() {
+	var hostIndex = location.href.indexOf( location.host ) + location.host.length;
+	return location.href.substring( hostIndex, location.href.indexOf("/", hostIndex + 1) );
+};
+
+
+//쿠키 사용
+$(function(){
+ 	var list = new cookieList("visitJobInfo");
+	console.log(getCookie("visitJobInfo")); 
+
+});
+
+function getCookie(cName) {
+	   cName = cName + "=";
+	   var cookieData = document.cookie;
+	   var start = cookieData.indexOf(cName);
+	   var cValue = "";
+	   if(start != -1){
+	       start += cName.length;
+	       var end = cookieData.indexOf(';', start);
+	       if(end == -1)end = cookieData.length;
+	       cValue = cookieData.substring(start, end);
+	   }
+	   return unescape(cValue);
+};
+
+var deleteCookie = function(name) {
+    document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+};
+
+var cookieList = function(cookieName){
+    
+    var cookie = $.cookie(cookieName);
+    var items = cookie ? cookie.split(/,/) : new Array();
+    return {
+     "add" : function(val){
+      items.push(val);
+      $.cookie(cookieName,items.join(','), {path:'/'});
+     },
+     "clear" : function(){
+      items = null;
+      $.cookie(cookieName, null, {path:'/'});
+     },
+     "items" : function(){
+      return items;
+     }
+   };
+};
+
 </script>

@@ -79,6 +79,9 @@ th, td {
 	  <button>
 	  	<a href="<c:url value="/comJob/writeJobInfo"/>">새로운 채용 공고 작성</a>
 	  </button>
+	  <button>
+	  	<a href="<c:url value="/comJob/manageJobAppList/0"/>">지원자 관리</a>
+	  </button>
     </div>
 	
 	 <div class="left">
@@ -127,6 +130,16 @@ th, td {
 		
 		<c:if test="${jobInfoListView != null}">
 		<table width="100%">
+			<tr>
+				<td style="width:20%;">채용공고 제목</td>
+				<td>모집분야</td>
+				<td>등록일</td>
+				<td>근무 지역</td>
+				<td>근무 시간</td>
+				<td>급여 조건</td>
+				<td>마감일</td>
+			</tr>
+		
 		    <c:forEach var="jobInfo" items="${jobInfoListView.jobInfoList}" >
 			    <tr>
 					  <%-- <td>${jobInfo.jobNo}</td> --%>
@@ -149,7 +162,13 @@ th, td {
 								일 ${jobInfo.jobPayAmount}
 							</c:if>
 						</td>
-						<td>${jobInfo.jobDueDate}</td>
+						<c:if test="${jobInfo.endedJob == 'N'}">
+						<td><span class="end">${jobInfo.jobDueDate}</span></td>
+						</c:if>
+						<c:if test="${jobInfo.endedJob == 'Y'}">
+						<td><span class="end" style="color:red; text-align:center;">마감</span></td>
+						</c:if> 
+						<%-- <td>${jobInfo.jobDueDate}</td> --%>
 						<%-- <td>${jobInfo.jobZipcode}</td> --%>
 			   </tr>
 			   <tr>

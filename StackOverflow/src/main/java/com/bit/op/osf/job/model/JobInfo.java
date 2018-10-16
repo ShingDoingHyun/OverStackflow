@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 public class JobInfo {
+	
     private int jobNo;
     private String comId;
     private String jobTitle;
@@ -29,7 +30,8 @@ public class JobInfo {
     private String jobChargerEmail;
     private String jobEtc;
     private String jobRegisterDate;
-    private List<Tag> jobTagList;
+    private int favJobInfo;
+    /*private List<Tag> jobTagList;*/
     private String endedJob;
     
     private String comName;
@@ -37,7 +39,14 @@ public class JobInfo {
     private String comZipcode;
     private String comPhoto;
     
-    
+
+	public int getFavJobInfo() {
+		return favJobInfo;
+	}
+
+	public void setFavJobInfo(int favJobInfo) {
+		this.favJobInfo = favJobInfo;
+	}
 
 	public String getJobChargerSendEmail() {
 		return jobChargerSendEmail;

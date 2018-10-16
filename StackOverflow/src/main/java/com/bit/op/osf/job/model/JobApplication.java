@@ -2,7 +2,11 @@ package com.bit.op.osf.job.model;
 
 import java.util.Date;
 
+import com.oracle.webservices.internal.api.databinding.DatabindingMode;
+
 public class JobApplication {
+	private int jobNo;
+	private String jobTitle;
     private int appNo;
     private String memberId;
     private String appName;
@@ -30,9 +34,49 @@ public class JobApplication {
     private String appInterviewDate;
     private String appInterviewDateDate;
     private String appRegisterDate;
-    
-    
-    
+
+    public static class appEduLevel{
+    	private String appEduLevel;
+    	private int appEduCount;
+    	
+		public appEduLevel() {
+		}
+
+		public appEduLevel(String appEduLevel, int appEduCount) {
+			super();
+			this.appEduLevel = appEduLevel;
+			this.appEduCount = appEduCount;
+		}
+
+		public String getAppEduLevel() {
+			return appEduLevel;
+		}
+
+		public void setAppEduLevel(String appEduLevel) {
+			this.appEduLevel = appEduLevel;
+		}
+
+		public int getAppEduCount() {
+			return appEduCount;
+		}
+
+		public void setAppEduCount(int appEduCount) {
+			this.appEduCount = appEduCount;
+		}
+    }
+
+	public int getJobNo() {
+		return jobNo;
+	}
+	public void setJobNo(int jobNo) {
+		this.jobNo = jobNo;
+	}
+	public String getJobTitle() {
+		return jobTitle;
+	}
+	public void setJobTitle(String jobTitle) {
+		this.jobTitle = jobTitle;
+	}
 	public String getAppResultDate() {
 		return appResultDate;
 	}

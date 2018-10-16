@@ -39,16 +39,7 @@ public interface ComJobDao {
     
     public List<JobInfo> selectJobInfoListBySearch(@Param("firstRow") int firstRow,@Param("endRow") int endRow, @Param("comId") String comId, @Param("search") SearchJob search);
 
-    public List<JobApplication> selectJobAppManageList(@Param("comId") String comId, @Param("jobNo") int jobNo);
-    
-    public String updateAppResult(@Param("appNo") int appNo,@Param("appResult") String appResult, @Param("appResultDate") Date appResultDate);
-    
-    public String updateAppInterviewDate(@Param("appNo") int appNo,@Param("appInterviewDate") String appInterviewDate,@Param("appInterviewDateDate") Date appInterviewDateDate);
-    
-    public JobApplication selectAppResult(int appNo);
-    
-    public JobApplication selectAppInterviewDate(@Param("appNo") int appNo);
-    
+    public void setEndedJob();
     /* public JobInfo selectJobInfo(int jobSeqNum);*/
 
   /* 
