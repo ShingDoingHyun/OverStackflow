@@ -126,7 +126,7 @@ public class AppController {
 	    	}
 	    	
 	    	System.out.println(search);
-	    	model.addAttribute("jobInfoListView", comJobDaoImpl.selectJobInfoListPage(pageNumber, comId, search));
+	    	model.addAttribute("jobInfoListView", comJobDaoImpl.selectJobInfoListPage(pageNumber, comId, search, request));
 	    	model.addAttribute("search", search);
 	    	model.addAttribute("page", pageNumber);
 	    	
@@ -150,7 +150,7 @@ public class AppController {
 	    	}
 	    	
 	    	System.out.println(search);
-	    	model.addAttribute("jobInfoListView", comJobDaoImpl.selectJobInfoListPage(pageNumber, comId, search));
+	    	model.addAttribute("jobInfoListView", comJobDaoImpl.selectJobInfoListPage(pageNumber, comId, search, request));
 	    	model.addAttribute("search", search);
 	    	model.addAttribute("page", pageNumber);
 	    	
