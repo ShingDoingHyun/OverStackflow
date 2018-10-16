@@ -120,7 +120,9 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 	                    <div style="border-top:1px solid gray; width:182px; display:inline-block"></div>
 	                    <div style="display:inline-block">or</div>
 	                    <div id="a" style="border-top:1px solid gray; width:186px;display:inline-block"></div>
-	                </div><br>
+	                
+	              </div><br>
+	              
 	                <label for="snslogin"><font size="2">SNS으로 로그인 </font></label><br><br>
 	            </div>
 	            
