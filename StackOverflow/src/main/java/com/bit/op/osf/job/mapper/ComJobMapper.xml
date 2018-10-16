@@ -5,7 +5,7 @@
 <mapper namespace="com.bit.op.osf.job.mapper.ComJobMapper">
 
 <select id="selectComMember" resultType="com.bit.op.osf.job.model.ComMember" parameterType="String">
-select comName, comAddress, comZipcode, comCall, comHomePageUrl, comChargerName, comChargerEmail, comIntroduction, comBenefits from commember where comId = #{comId}
+	select comName, comAddress, comZipcode, comCall, comHomePageUrl, comChargerName, comChargerEmail, comIntroduction, comBenefits from commember where comId = #{comId}
 </select>
 
 <insert id="insertJobInfo" parameterType="com.bit.op.osf.job.model.JobInfo" > 
@@ -38,12 +38,12 @@ select comName, comAddress, comZipcode, comCall, comHomePageUrl, comChargerName,
  
  <select id="selectJobInfoList" resultType="com.bit.op.osf.job.model.JobInfo" parameterType="java.util.HashMap">
 	 select jobNo, jobTitle, jobField, jobLocation, jobZipcode, jobWorkTime, jobPayType, jobPayAmount, 
-	 DATE_FORMAT(jobDueDate ,'%Y-%m-%d') as jobDueDate, DATE_FORMAT(jobRegisterDate ,'%Y-%m-%d') as jobRegisterDate
+	 DATE_FORMAT(jobDueDate ,'%Y-%m-%d') as jobDueDate, DATE_FORMAT(jobRegisterDate ,'%Y-%m-%d') as jobRegisterDate, endedJob
 	 from jobinfo
 	 <if test="comId!=null">
 	 	where comId = #{comId}
 	 </if>
-	 order by #{order} desc
+	 order by jobRegisterDate desc
 	 limit #{firstRow}, #{endRow}
  </select>
  
@@ -87,6 +87,7 @@ select comName, comAddress, comZipcode, comCall, comHomePageUrl, comChargerName,
 	select count(distinct a.jobNo)
 	from jobinfo a, jobtype b
 	where a.jobNo = b.jobNo
+		 and endedJob = 'N'
 		<if test="search!=null and search.jobTitle!=null and search.jobTitle!=''">
  		 and (jobTitle like '%'||#{search.jobTitle}||'%' or jobRequiredTask like '%'||#{search.jobTitle}||'%')
  		</if>
@@ -110,7 +111,7 @@ select comName, comAddress, comZipcode, comCall, comHomePageUrl, comChargerName,
 </select>
  
  <select id="selectJobInfoListBySearch" resultType="com.bit.op.osf.job.model.JobInfo" parameterType="java.util.HashMap">
-	 select distinct a.jobNo as jobNo, jobTitle, jobField, jobLocation, jobZipcode, jobWorkTime, jobPayType, jobPayAmount, DATE_FORMAT(jobDueDate ,'%Y-%m-%d') as jobDueDate, DATE_FORMAT(jobRegisterDate ,'%Y-%m-%d') as jobRegisterDate
+	 select distinct a.jobNo as jobNo, jobTitle, jobField, jobLocation, jobZipcode, jobWorkTime, jobPayType, jobPayAmount, DATE_FORMAT(jobDueDate ,'%Y-%m-%d') as jobDueDate, DATE_FORMAT(jobRegisterDate ,'%Y-%m-%d') as jobRegisterDate, endedJob
 	 from jobinfo a, jobtype b
 	 where a.jobNo = b.jobNo
 		 <if test="search.jobTitle!=null and search.jobTitle!=''">
@@ -142,31 +143,45 @@ select comName, comAddress, comZipcode, comCall, comHomePageUrl, comChargerName,
 		 limit #{firstRow}, #{endRow}
  </select>
  
- <select id="selectJobAppManageList" resultType="com.bit.op.osf.job.model.JobApplication" parameterType="java.util.HashMap">
- 	select appNo, appName, appAge, DATE_FORMAT(appBirth, '%Y-%m-%d') as appBirth, appGender, appEmail, appPhone, appCall, appAddress, appPhoto, appEduLevel, appEduName, appEduEntraDate, appEduGraduDate , appEduState , appMajor, appMinor, 
- 	appScore, appTotalScore, appIntroduction, appAmbition , appResult, DATE_FORMAT(appResultDate, '%Y-%m-%d') as appResultDate, DATE_FORMAT(appInterviewDate, '%Y-%m-%d') as appInterviewDate, DATE_FORMAT(appInterviewDateDate, '%Y-%m-%d') as appInterviewDateDate, 
- 	DATE_FORMAT(appRegisterDate ,'%Y-%m-%d') as appRegisterDate
- 	from jobapp a, jobinfo b
- 	where a.jobNo = b.jobNo and comId=#{comId} 
- 	<if test="jobNo!=null and jobNo!=''">
- 	and a.jobNo=#{jobNo}
- 	</if>
+ <delete id="deleteFavJobInfo" parameterType="com.bit.op.osf.job.model.JobInfo">
+ 	delete from favjobinfo where jobNo=#{jobNo} and comId=#{comId}
+ </delete>
+ 
+ <insert id="insertFavJobInfo" parameterType="com.bit.op.osf.job.model.JobInfo">
+ 	insert into favjobinfo(jobNo, comId) values (#{jobNo}, #{comId})
+ </insert>
+ 
+ <select id="selectFavJobInfoList" resultType="com.bit.op.osf.job.model.JobInfo" parameterType="com.bit.op.osf.member.model.ComRegInfo">
+ 	select a.jobNo as jobNo, jobTitle
+ 	from jobinfo a, favjobinfo b
+ 	where a.jobNo = b.jobNo 
+ 	and b.comId = #{comId}
+ 	order by favDate desc
  </select>
  
- <update id="updateAppResult" parameterType="java.util.HashMap">
- 	update jobapp set appResult = #{appResult}, appResultDate = #{appResultDate} where appNo = #{appNo}
+ <!-- 채용공고 즐겨찾기 only JobNo -->
+ <select id="selectFavJob" resultType="com.bit.op.osf.job.model.JobInfo" parameterType="java.util.HashMap">
+ 	select jobNo from favjobinfo where jobNo = #{jobNo} and comId=#{comId}
+ </select>
+ 
+ <!-- 쿠키 불러오기 only JobTitle-->
+ <select id="selectVisitJobInfo" resultType="String" parameterType="Integer">
+ 	select jobTitle from jobinfo where jobNo = #{jobNo}
+ </select>
+ 
+ <!-- 마감 모드로 자동 변경 -->
+ <update id="updateEndedDateForAuto">
+ 	update jobinfo set endedJob = 'Y' <![CDATA[where jobDueDate <= curdate()]]> 
  </update>
  
- <update id="updateAppInterviewDate" parameterType="java.util.HashMap">
- 	update jobapp set appInterviewDate = #{appInterviewDate}, appInterviewDateDate = #{appInterviewDateDate} where appNo = #{appNo}
+ <update id="updateEndedDateForY" parameterType="Integer">
+ 	update jobinfo set endedJob = 'Y' where jobNo = #{jobNo}
  </update>
+
  
- <select id="selectAppResult" resultType="com.bit.op.osf.job.model.JobApplication" parameterType="Integer">
- 	select appResult, appResultDate from jobapp where appNo = #{appNo}
- </select>
- 
- <select id="selectAppInterviewDate" resultType="com.bit.op.osf.job.model.JobApplication" parameterType="Integer">
- 	select DATE_FORMAT(appInterviewDate, '%Y-%m-%d') as appInterviewDate, DATE_FORMAT(appInterviewDateDate, '%Y-%m-%d') as appInterviewDateDate from jobapp where appNo = #{appNo}
- </select>
+ <!-- 마감 모드 취소 변경 -->
+ <update id="updateEndedDateForN" parameterType="Integer">
+ 	update jobinfo set endedJob = 'N' where jobNo = #{jobNo}
+ </update>
 
 </mapper>

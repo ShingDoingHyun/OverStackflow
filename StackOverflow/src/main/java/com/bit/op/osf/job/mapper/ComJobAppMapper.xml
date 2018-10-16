@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bit.op.osf.job.mapper.ComJobAppMapper">
+
+ <select id="selectJobAppManageList" resultType="com.bit.op.osf.job.model.JobApplication" parameterType="java.util.HashMap">
+ 	select a.jobNo as jobNo, jobTitle, appNo, appName, appAge, DATE_FORMAT(appBirth, '%Y-%m-%d') as appBirth, appGender, appEmail, appPhone, appCall, appAddress, appPhoto, appEduLevel, appEduName, appEduEntraDate, appEduGraduDate , appEduState , appMajor, appMinor, 
+ 	appScore, appTotalScore, appIntroduction, appAmbition , appResult, DATE_FORMAT(appResultDate, '%Y-%m-%d') as appResultDate, DATE_FORMAT(appInterviewDate, '%Y-%m-%d') as appInterviewDate, DATE_FORMAT(appInterviewDateDate, '%Y-%m-%d') as appInterviewDateDate, 
+ 	DATE_FORMAT(appRegisterDate ,'%Y-%m-%d') as appRegisterDate
+ 	from jobapp a, jobinfo b
+ 	where a.jobNo = b.jobNo and comId=#{comId} 
+ 	<if test="jobNo!=null and jobNo!=0 and jobNo!=''">
+ 	and a.jobNo=#{jobNo}
+ 	</if>
+ 	<if test="appResult != null and appResult != 'all'">
+ 	and appResult = #{appResult}
+ 	</if>
+ </select>
+ 
+ <update id="updateAppResult" parameterType="java.util.HashMap">
+ 	update jobapp set appResult = #{appResult}, appResultDate = #{appResultDate} where appNo = #{appNo}
+ </update>
+ 
+ <update id="updateAppInterviewDate" parameterType="java.util.HashMap">
+ 	update jobapp set appInterviewDate = #{appInterviewDate}, appInterviewDateDate = #{appInterviewDateDate} where appNo = #{appNo}
+ </update>
+ 
+ <select id="selectAppResult" resultType="com.bit.op.osf.job.model.JobApplication" parameterType="Integer">
+ 	select appResult, appResultDate from jobapp where appNo = #{appNo}
+ </select>
+ 
+ <select id="selectAppInterviewDate" resultType="com.bit.op.osf.job.model.JobApplication" parameterType="Integer">
+ 	select DATE_FORMAT(appInterviewDate, '%Y-%m-%d') as appInterviewDate, DATE_FORMAT(appInterviewDateDate, '%Y-%m-%d') as appInterviewDateDate from jobapp where appNo = #{appNo}
+ </select>
+ 
+ <select id="selectJobInfoListForApp" resultType="com.bit.op.osf.job.model.JobInfo" parameterType="String">
+ 	select distinct a.jobNo as jobNo, jobTitle, DATE_FORMAT(jobRegisterDate ,'%Y-%m-%d') as jobRegisterDate
+ 	from jobapp a, jobinfo b
+ 	where a.jobNo = b.jobNo
+ 	and comId = #{value}
+ </select>
+ 
+ <select id="countJobAppByJobNo" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+ 	select count(*) 
+ 	from jobapp a, jobinfo b
+ 	where a.jobNo = b.jobNo
+ 	<if test ="comId != null and comId != ''">
+ 	and comId = #{comId}
+ 	</if>
+ 	<if test="appResult !=null and appResult != 'all' and appResult != ''">
+ 	and appResult = #{appResult}
+ 	</if>
+ 	<if test="jobNo!=null and jobNo!=0 and jobNo!=''">
+ 	group by a.jobNo 
+ 	having a.jobNo=#{jobNo}
+ 	</if>
+ </select>
+ 
+ <select id="countJobAge" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+ 	select round(avg(appAge), 1) 
+ 	from jobapp a, jobinfo b
+ 	where a.jobNo = b.jobNo
+ 	<if test ="comId != null and comId != ''">
+ 	and comId = #{comId}
+ 	</if>
+ 	<if test="appResult !=null and appResult != 'all' and appResult != ''">
+ 	and appResult = #{appResult}
+ 	</if>
+ 	<if test="jobNo!=null and jobNo!=0 and jobNo!=''">
+ 	group by a.jobNo 
+ 	having a.jobNo=#{jobNo}
+ 	</if>
+ </select> 
+ 
+ <select id="countFnum" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+ 	select count(*)
+ 	from jobapp a, jobinfo b
+ 	where a.jobNo = b.jobNo
+ 	and appGender = 'F'
+ 	<if test ="comId != null and comId != ''">
+ 	and comId = #{comId}
+ 	</if>
+ 	<if test="appResult !=null and appResult != 'all' and appResult != ''">
+ 	and appResult = #{appResult}
+ 	</if>
+ 	<if test="jobNo!=null and jobNo!=0 and jobNo!=''">
+ 	group by a.jobNo 
+ 	having a.jobNo=#{jobNo}
+ 	</if>
+ </select>
+ 
+  <select id="countMnum" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+ 	select count(*)
+ 	from jobapp a, jobinfo b
+ 	where a.jobNo = b.jobNo
+ 	and appGender = 'M'
+ 	<if test ="comId != null and comId != ''">
+ 	and comId = #{comId}
+ 	</if>
+ 	<if test="appResult !=null and appResult != 'all' and appResult != ''">
+ 	and appResult = #{appResult}
+ 	</if>
+ 	<if test="jobNo!=null and jobNo!=0 and jobNo!=''">
+ 	group by a.jobNo 
+ 	having a.jobNo=#{jobNo}
+ 	</if>
+ </select>
+ 
+ 
+ <select id="countEduLevel" resultType="com.bit.op.osf.job.model.JobApplication$appEduLevel" parameterType="java.util.HashMap">
+ 	select appEduLevel , count(*) as appEduCount
+	from jobapp a, jobinfo b
+	where a.jobNo = b.jobNo
+	<if test ="comId != null and comId != ''">
+ 	and comId = #{comId}
+ 	</if>
+ 	<if test="jobNo!=null and jobNo!=0 and jobNo!=''">
+	and a.jobNo = #{jobNo}
+ 	</if>
+ 	<if test="appResult !=null and appResult != 'all' and appResult != ''">
+ 	and appResult = #{appResult}
+ 	</if>
+	group by appEduLevel; 
+ </select> 
+ 
+ 
+
+</mapper>

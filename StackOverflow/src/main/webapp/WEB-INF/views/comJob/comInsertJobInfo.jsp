@@ -67,7 +67,7 @@
 <!----------------------main--------------------------------------->
 
 <div class="main">
-	<form action="<%=request.getContextPath()%>/comJob/writeJobInfo" method="post" >
+	<form action="<%=request.getContextPath()%>/comJob/writeJobInfo" method="post" name="jobForm" >
 	<div id="accordian">
 	 	<h1 id="title"> 채용 공고 작성</h1>
 		<ul>
@@ -87,10 +87,10 @@
 					 <input type="checkbox" name="jobType" value="partTimeJob">아르바이트<br>
 					 
 					 <label>담당 업무</label>
-					 <textarea  name="jobRequiredTask"></textarea><br>
+					 <textarea name="jobRequiredTask" ></textarea><br>
 					 
 					 <label>지원 자격</label>
-					 <textarea name="jobQualification"></textarea><br>
+					 <textarea name="jobQualification" ></textarea><br>
 					 
 					 <label>관련 태그</label>
 					 <input type="text" name="jobTagList">
@@ -117,7 +117,7 @@
 					 <input type="text" name="jobPayAmount"><br>
 					 
 					 <label>복리 후생</label>
-					 <textarea name="jobBenefits"></textarea><br>
+					 <textarea name="jobBenefits" ></textarea><br>
 					</div>
 			</li>
 			
@@ -200,6 +200,14 @@ $(function(){
 			$(this).next().slideDown(); 
 		} 
 	})
+	
+	var str1 = document.jobForm.jobRequiredTask.val();
+	var str2 = document.jobForm.jobQualification.val();
+	var str3 = document.jobForm.jobBenefits.val();
+	var str5 = document.jobForm.jobEtc.val();
+	
+	alert(str1);
+	alert(str2);
 	
 	$(".summernote").summernote({
 				lang : "ko-KR",

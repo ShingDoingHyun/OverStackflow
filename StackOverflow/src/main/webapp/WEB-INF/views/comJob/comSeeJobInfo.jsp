@@ -7,6 +7,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/index.css" type="text/css" media="all" />
 <title>채용 공고 상세보기</title>
+<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.cookie.js"></script>	
 <style>
 .main {
     display: inline-block;
@@ -23,7 +25,15 @@
 	float:right;
 	width:10%;
 	height:1000px;
-	border: 1px solid black;
+}
+
+.rightbar a{
+	position:fixed;
+	bottom:10px;
+}
+
+.rightbar a:hover{
+	opacity: 0.5;
 }
 
 .centerup{
@@ -38,6 +48,7 @@
 	padding-left: 30px;
 	padding-top: 20px;
 	padding-bottom: 30px;
+	margin-top: 2px;
 }
 
 .center div h2{
@@ -49,6 +60,17 @@
  	padding: 3px;
  	font-weight: bold;
 }
+
+.index{
+	padding: 2%;
+	margin-right: 5%;
+	border-bottom: 3px solid gray;
+}
+
+.index:hover{
+	border-bottom: 3px solid orange;
+}
+
 </style>
 </head>
 <body>
@@ -66,22 +88,30 @@
 <div class="main">
 
    <div class="rightbar">
-   
+   	  <a href="#mainofmain"><img src="http://icons.iconarchive.com/icons/graphicloads/100-flat-2/256/arrow-up-icon.png" width="30%"></a>
    </div>
 	
-   <div class="mainofmain">
+   <div class="mainofmain" id="mainofmain">
 	<div class="centerup">
 		<c:if test="${jobInfo.comPhoto!=null}">
 		<img src="<c:url value="/resources/jobimage/${jobInfo.comPhoto}"/>" width="6%;">
 		</c:if>
 		<div>
-		<h1>${jobInfo.jobTitle}</h1> 
+		<h1>${jobInfo.jobTitle}
+		<c:if test="${jobInfo.endedJob == 'Y'}">
+			<span style="color:red; font-size:15px;">이 채용공고는 마감되었습니다.</span>
+		</c:if></h1>  
 		${jobInfo.comName}<br>
 		${jobInfo.jobField} <br> 
 		${jobInfo.comCall}
 		${jobInfo.jobLocation} <br> 
-		${jobInfo.jobRegisterDate}
-		${jobInfo.endedJob}
+		${jobInfo.jobRegisterDate}<br>
+		
+		<a href="#Qualification" class="index">모집부문 및 자격요건</a>
+		<a href="#Condition" class="index">근무조건 및 환경</a>
+		<a href="#Content" class="index">내용</a>
+		<a href="#Company" class="index">기업정보</a>
+		<a href="#Apply" class="index">접수기간 및 방법</a>	
 		</div>
 	</div>
 
@@ -165,6 +195,7 @@
 			<p>${jobInfo.jobDueDate}<p>
 			
 			<div class="box">접수 방법</div>
+			<c:if test="${jobInfo.endedJob == 'N'}">
 			<p><c:if test="${jobInfo.jobApplyType eq 'homepageURL'}">
 				 <input type="button" value="지원하기" onclick="location.href='<c:url value="${jobInfo.jobHomePageUrl}"/>'">
 				</c:if>
@@ -177,7 +208,10 @@
 				<p>${jobInfo.jobEtc}</p>
 				</c:if>
 				</p>
-
+			</c:if>
+			<c:if test="${jobInfo.endedJob == 'Y'}">
+				<span style="color:red; font-size:15px;">이 채용공고는 마감되었습니다.</span>
+			</c:if><br><br>
 			<div class="box">담당자</div>
 			<p>${jobInfo.jobChargerName} | 	${jobInfo.jobChargerEmail}<p>
 
@@ -193,5 +227,78 @@
 <!----------------------footer--------------------------------------->
 	<%@ include file="../commons/footer.jspf" %>
 <!----------------------footer End--------------------------------------->
+
+<script>
+$(function(){
+	var jobNo = parseInt(${jobInfo.jobNo});
+ 	var list = new cookieList("visitJobInfo");
+ 	
+ 	var cookies  = [];
+ 	var cookie = null;
+ 	cookies = getCookie("visitJobInfo").split(",");
+ 	for(var index in cookies){
+ 		
+ 		if(cookies[index]== jobNo){
+ 			if(index < cookies.length-1){
+ 				cookie = getCookie("visitJobInfo").replace(jobNo+",", "");
+ 			} 
+ 			else{
+ 				cookie = getCookie("visitJobInfo").replace(","+jobNo, "");
+ 			}
+ 			list.clear();
+ 			list = new cookieList("visitJobInfo");
+
+ 			var cookies2  = []; 
+ 			cookies2  = cookie.split(",");
+ 			
+ 			for(var index2 in cookies2){
+ 				list.add(cookies2[index2]);
+ 			} 
+ 			break;
+ 		}
+ 	}
+ 	
+ 	if(jobNo != getCookie("visitJobInfo")){
+  		list.add(jobNo); 
+ 	}
+});
+
+function getCookie(cName) {
+cName = cName + "=";
+var cookieData = document.cookie;
+var start = cookieData.indexOf(cName);
+var cValue = "";
+if(start != -1){
+    start += cName.length;
+    var end = cookieData.indexOf(";", start);
+    if(end == -1)end = cookieData.length;
+    cValue = cookieData.substring(start, end);
+}
+return unescape(cValue);
+};
+
+var deleteCookie = function(name) {
+  document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+};
+
+var cookieList = function(cookieName){
+
+ var cookie = $.cookie(cookieName);
+ var items = cookie ? cookie.split(/,/) : new Array();
+ return {
+  "add" : function(val){
+   items.push(val);
+   $.cookie(cookieName,items.join(','), {path:'/'});
+  },
+  "clear" : function(){
+   items = null;
+   $.cookie(cookieName, null, {path:'/'});
+  },
+  "items" : function(){
+   return items; 
+  }
+};
+};
+</script>
 </body>
 </html>

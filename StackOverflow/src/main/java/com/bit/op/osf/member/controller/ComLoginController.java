@@ -29,6 +29,11 @@ public class ComLoginController {
 	public String Loginform(Model model) {
 		return "login/loginform";
 	}
+	
+	@RequestMapping(value = "/comProfile", method = RequestMethod.GET)
+	public String Profile() {
+			return "/comMypage/comProfile"; 
+	}
 
 	@RequestMapping(value = "/comLoginForm", method = RequestMethod.POST)
 	public String comLogin(@RequestParam("comId") String id, @RequestParam("comPw") String pw, Model model,

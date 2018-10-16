@@ -41,5 +41,34 @@
 
 	<!-- package 스캔 -->
 	<context:component-scan  base-package="com.bit.op.osf" />
+	
+	<!-- 채용 부분 마감 트리거 등록 -->
+	<bean id="testJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="ComJobDaoImpl"/>
+		<property name="targetMethod" value="setEndedJob"/>
+		<property name="concurrent" value="false"/>
+	</bean>
+
+	<!-- 테스트용  트리거-->
+	<bean id="testJobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+	    <property name="jobDetail" ref="testJob" />
+	    <property name="startDelay" value="60000" /><!-- 시작하고 1분후에 실행한다. (milisecond) -->
+	    <property name="repeatInterval" value="6000000" />  <!-- 매 24시간마다 실행한다.864000000 (milisecond) -->
+	</bean>	
+	
+	<bean id="testJobScheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+	    <property name="triggers">
+	        <list><ref bean="testJobTrigger" /></list>
+	    </property>
+	      <property name="quartzProperties">
+        <props>
+            <prop key="org.quartz.threadPool.class">org.quartz.simpl.SimpleThreadPool</prop>
+            <prop key="org.quartz.threadPool.threadCount">3</prop>
+            <prop key="org.quartz.threadPool.threadPriority">4</prop>
+            <prop key="org.quartz.jobStore.class">org.quartz.simpl.RAMJobStore</prop>
+            <prop key="org.quartz.jobStore.misfireThreshold">60000</prop>
+        </props>
+    </property>
+	</bean>
 
 </beans>
