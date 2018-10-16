@@ -362,6 +362,7 @@ $(function() {
 	       	data : { "middleTag" : data.text()},
 	        dataType:"json",
 	        success: function(data) {
+	        	html += '<tr id="tagNameInput" style="display:none;"><td><input type="text" name="tagNameInput"></td></tr>';
 	        	$.each(data, function(index,tag){ 
 	        		
 					var chk = 0;
@@ -384,7 +385,7 @@ $(function() {
 	           	  	html += '</td><td style="display:none">'+tag.tagNo+'</td><tr>';
 	           	});
 	        	
-	        	html += '<tr><td onclick="javascript:makeTag();">태그추가<td><tr>';
+	        	html += '<tr><td onclick="javascript:makeTag();" id="tagNameAdd">태그추가</td></tr>';
 	        	
 	        	
 	        	$('#name').html(html);
@@ -431,12 +432,14 @@ $(function() {
 	
 	
 	function makeTag(){
-		console.log($("#name"));
+		/* $("#name").prepend('<tr><td onclick="javascript:makeTag();">태그추가</td></tr>'); */
+		$("#tagNameAdd").hide();
+		$("#tagNameInput").show();
 	}
 	
 
 
 
 
-</script> 
+</script>
 </html>

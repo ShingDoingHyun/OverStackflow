@@ -7,7 +7,7 @@
 				<!--toggle button end-->
 				<!--logo -->
 				<div class="logo">
-					<img src="<c:url value='/logo/logo.png'/>" width="200px" height="75px">
+					<a href="<c:url value="/"/>" style="margin: 0; padding:0;"><img src="<c:url value='/logo/logo.png'/>" width="200px" height="75px"></a>
 				</div>
 				<!--//logo-->
 				<!--search-box-->
