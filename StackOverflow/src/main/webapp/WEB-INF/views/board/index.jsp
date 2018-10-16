@@ -52,11 +52,11 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 	<div class="main-content">
 	
 		<!--left-fixed -navigation-->
-			<%@ include file="commons/bleft.jspf" %>
+			<%@ include file="../commons/bleft.jspf" %>
 		<!--left-fixed -navigation-->
 		
 		<!-- header-starts -->
-			<%@ include file="commons/bheader.jspf" %>
+			<%@ include file="../commons/bheader.jspf" %>
 		<!-- //header-ends -->
 		
 		
@@ -84,7 +84,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 		
 		
 		
-		<%@ include file="commons/bfooter.jspf" %>
+		<%@ include file="../commons/bfooter.jspf" %>
         <!--//footer-->
 	</div>
 	<!-- Classie -->

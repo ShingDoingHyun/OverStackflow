@@ -40,11 +40,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 <script src="js/Chart.js"></script>
 <!-- //chart -->
 <!--Calender-->
-<link rel="stylesheet" href="css/clndr.css" type="text/css" />
-<script src="js/underscore-min.js" type="text/javascript"></script>
-<script src= "js/moment-2.2.1.js" type="text/javascript"></script>
-<script src="js/clndr.js" type="text/javascript"></script>
-<script src="js/site.js" type="text/javascript"></script>
+
 <!--End Calender-->
 <!-- Metis Menu -->
 <script src="js/metisMenu.min.js"></script>
@@ -59,17 +55,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.cookie.js"></script>
-<script
-	src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-<%-- <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 
 
-
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/index.css" type="text/css"
-	media="all" />
---%>
 
 <style> 
 

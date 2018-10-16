@@ -9,13 +9,13 @@
 							<a href="index.html" class="active"><i class="fa fa-home nav_icon"></i>홈</a>
 						</li>
 						<li>
-							<a href="<c:url value="/popQuestionList"/>"><i class="fa fa-cogs nav_icon"></i>질문게시판 <span class="nav-badge">12</span> <span class="fa arrow"></span></a>
+							<a href="<c:url value="/popQuestionList"/>"><i class="fa fa-cogs nav_icon"></i>질문게시판 <span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level collapse">
 								<li>
-									<a href="grids.html">Grid System</a>
+									<a href="<c:url value="/popQuestionList"/>">인기질문</a>
 								</li>
 								<li>
-									<a href="media.html">Media Objects</a>
+									<a href="<c:url value="/questionList"/>">질문검색</a>
 								</li>
 							</ul>
 							<!-- /nav-second-level -->
