@@ -316,7 +316,6 @@ text-align:flot;
 		<div class="bluebTabDesign">
 			<ul>
 				<li class="selected"><a href="#"><span>프로필</span></a></li>
-				<li><a href="#"><span>활동정보</span></a></li>
 				<li><a href="<c:url value='/memberUpdate'/>"><span>지원관리</span></a></li>
 				<li><a href="<c:url value='/memberProSet'/>"><span>프로필 설정</span></a></li>
 
@@ -369,20 +368,19 @@ text-align:flot;
             <div id="user-panel-answers" class="user-panel">
                 <div class="subheader p0 grid ai-center" style="min-height: 36px;">
                     <h3 class="grid--cell mb0 mr-auto px2 profile-section-title">    
-                   <!--     <a href="http://localhost/op/questionDetail/5"> -->
-                            답변 <span>(0)</span>
+                            답변 
                         </a></h3>
-                    <div class="grid--cell subtabs user-panel-subtabs" >
+                   <!--  <div class="grid--cell subtabs user-panel-subtabs" >
                         <a href="javascript:void(0)" class="d-flex ai-center fs-caption bbw2 youarehere" data-sort-id="votes"> 최신 </a>
                         <a href="javascript:void(0)" class="d-flex ai-center fs-caption bbw2" data-sort-id="newest">투표</a>
-                    </div>
+                    </div> -->
                 </div>
                
 		
 		<!-- 답변  -->
                 <div class="user-panel-content">
                  <c:forEach items="${replyBoards}" var="rboard" varStatus="status">
-				     <div class="empty">${rboard.content}</div>           
+				     <div class="empty"><a href="../op/questionDetail/${rboard.questionNo}">${rboard.content}</a></div>           
 				 </c:forEach>
                 </div>
                 <div class="user-panel-footer">
@@ -394,15 +392,15 @@ text-align:flot;
              <div id="user-panel-questions" class="user-panel">
                 <div class="subheader p0 grid ai-center" style="min-height: 36px;">
                     <h3 class="grid--cell mb0 mr-auto px2 profile-section-title">     <a href="/users/10257271/jam?tab=questions">
-                            질문 <span>(0)</span>
+                            질문<!--  <span>(0)</span> -->
                         </a></h3>
                     <div class="grid--cell subtabs user-panel-subtabs">
                         <a href="javascript:void(0)" class="d-flex ai-center fs-caption bbw2 youarehere" data-sort-id="votes">
                             최신
                         </a>
-                        <a href="javascript:void(0)" class="d-flex ai-center fs-caption bbw2" data-sort-id="newest">
+                    <!--     <a href="javascript:void(0)" class="d-flex ai-center fs-caption bbw2" data-sort-id="newest">
                             투표
-                        </a>
+                        </a> -->
                     </div>
                 </div>
 
@@ -419,7 +417,7 @@ text-align:flot;
             <div id="user-panel-tags" class="user-panel">
                 <div class="subheader p0 grid ai-center" style="min-height: 36px;">
                     <h3 class="grid--cell mb0 mr-auto px2 profile-section-title">      <a href="/users/10257271/jam?tab=tags">
-                            태그 <span>(0)</span>
+                            태그<!--  <span>(0)</span> -->
                         </a></h3>
                 </div>
 
@@ -435,58 +433,16 @@ text-align:flot;
                <div id="user-panel-reputation" class="user-panel">
                 <div class="subheader p0 grid ai-center" style="min-height: 36px;">
                     <h3 class="grid--cell mb0 mr-auto px2 profile-section-title">    <a href="/users/10257271/jam?tab=reputation">
-                            평판 <span>(0)</span>
+                            평판 <!-- <span>(0)</span> -->
                         </a></h3>
 
                 </div>
 
-                <div class="user-panel-content">
-
-
-
-                    <div class="empty">
-                        최근 평판이 <a href="/help/whats-reputation">변경되었습니다</a> </div>
-
-                </div>
-
-                <div class="user-panel-footer">
-
-                </div>
+         
             </div>
-          
-            <div id="user-panel-accounts" class="user-panel">
-                <div class="subheader p0 grid ai-center" style="min-height: 36px;">
-                    <h3 class="grid--cell mb0 mr-auto px2 profile-section-title">        <a href="https://stackexchange.com/users/14198814/jam?tab=accounts">
-                            계정 <span>(0)</span>
-                        </a></h3>
-                </div>
 
-                <div class="user-panel-content">
-
-                    <table class="user-accounts lines">
-                        <tbody>
-                            <tr>
-                                <td class="icon-cell">
-                                    <div class="favicon favicon-stackoverflow favicon" title="Stack Overflow"></div>
-                                </td>
-                                <td>
-                                    <a class="site-hyperlink" href="https://stackoverflow.com/users/10257271/">Stack Overflow</a>
-                                </td>
-                                <td class="reputation">
-                                    <span class="reputation-score">1</span> rep
-                                </td>
-                                <td class="badges">
-
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                </div>
-
-                <div class="user-panel-footer">
-                </div>
-            </div>
+           
+           
    
    </div>
 
