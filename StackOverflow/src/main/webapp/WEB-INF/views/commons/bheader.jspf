@@ -31,9 +31,22 @@
     height: 35px;
     }
     
+       .logout{
+    font-weight: normal;
+    background: none;
+    border: 1px solid #07c;
+    border-radius: 3px;
+    box-shadow: #66bfff;
+    color: #07C;
+    background-color: transparent;
+       width: 90px;
+    height: 35px;
+    }
+    
 
     
     </style>
+    <body>
 <div class="sticky-header header-section ">
 			<div class="header-left">
 				<!--toggle button start-->
@@ -62,13 +75,48 @@
 					<div class="clearfix"> </div>
 				</div>
 				<!--notification menu end -->
-				<div class="profile_details" style="margin-top: 20px; margin-right: 30px;">		
+		<div class="profile_details" style="margin-top: 20px; margin-right: 30px;">	
+		
 				
+				
+				  <!-- 로그인이 되어 있지 않으면 memInfo가 세션에 없다. 그러므로 memInfo는 널값. 이 경우 sing up/log in 출력 -->
+				  
 				  <c:if test="${memInfo == null && comInfo == null}">
               
               <input type="button" class="login" value="Log IN" onclick="location.href='<c:url value="/memLoginForm"/>'">
               <input type="button" class="signup" value="Sign Up" onclick="location.href='<c:url value="/joinChoiceForm"/>'">
               </c:if>
+              
+              
+              
+               <!-- 로그인이 되어있는 경우 세션에 있던 memInfo,comInfo 를 제거해줌  -->
+              
+              <c:if test="${memInfo != null}">
+              ${memInfo.memberId}
+              <input type="button" class="logout" value="Logout" onclick="location.href='<c:url value="/logout"/>'">
+              </c:if>
+             
+                 
+                 <c:if test="${comInfo != null}">
+               ${comInfo.comId}
+              <input type="button" class="logout" value="Logout" onclick="location.href='<c:url value="/logout"/>'">
+              </c:if>
+              
+              	<!--  이미지 동그랗게 보임 -->
+              	
+    <div class="right">
+     <c:if test="${memInfo ne null }">
+      <a href="<c:url value='/memberProfile'/>"><img class='photo2' src="<c:url value='/resources/uploadFile/memberPhoto/${memInfo.memberPhoto}'/>"></a>    
+     </c:if>
+
+       <c:if test="${comInfo ne null }">
+        <a href="<c:url value='/comProfile'/>"><img class='photo2' src="<c:url value='/resources/uploadFile/comPhoto/${comInfo.comPhoto}'/>"></a> 
+         </c:if> 
+</div>
+              
+              
+              
+              
 					<!-- <ul>
 						<li class="dropdown profile_details_drop">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -95,3 +143,4 @@
 			</div>
 			<div class="clearfix"> </div>	
 		</div>
+		</body>

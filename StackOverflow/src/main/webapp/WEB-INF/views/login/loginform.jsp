@@ -118,7 +118,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 	
 	            <div id="loginDiv"><input type="submit" id="loginBtn" value="로그인" /></div><br>
 	            <div id="footer">
-	                <div id="checkDiv"><input type="checkbox" name="remember" value="1">아이디 저장</div>
+	                <div id="checkDiv"><input type="checkbox" name="remember" value="1" style="margin-right: 5px;">아이디 저장</div>
 	                <div style="float:left;">
 	                    <div style="border-top:1px solid gray; width:182px; display:inline-block"></div>
 	                    <div style="display:inline-block">or</div>
@@ -152,7 +152,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 	
 	            <div id="loginDiv"><input type="submit" id="loginBtn" value="로그인" /></div>
 	            <div id="footer"><br>
-	                <div id="checkDiv"><input type="checkbox" name="remember" value="1"> 아이디 저장</div>
+	                <div id="checkDiv"><input type="checkbox" name="remember" value="1" style="margin-right: 5px;">아이디 저장</div>
 	                <div id="signUpDiv"><span><a href="../op/joinChoiceForm">회원가입</a></span></div>
 	            </div>
 	           
