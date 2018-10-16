@@ -31,6 +31,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 <!--//webfonts--> 
 <!--animate-->
 <link href="css/animate.css" rel="stylesheet" type="text/css" media="all">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="js/wow.min.js"></script>
 	<script>
 		 new WOW().init();
@@ -101,14 +102,14 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
             font-weight: 100;
             color: #8e8e8e;
             padding-left: 15px;
-        }
+        } 
  
         #pwdBox img,
         #pwdCheckBox img {
             float: right;
             margin-right: 10px;
             margin-top: 3px;
-        }
+        } 
  
         #pwdCheckBox {
             margin-bottom: 5px;
@@ -117,7 +118,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
             margin-bottom: 30px;
         }
  
-        #birth input {
+/*         #birth input {
             font-size: 15px;
             width: 116px;
             height: 27px;
@@ -128,7 +129,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
             border: 1px solid rgb(218, 218, 218);
  
             margin-bottom: 5px;
-        }
+        } */
  
         #birth input:nth-child(1) {
             margin-right: 5px;
@@ -272,9 +273,43 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
     #blah{
 		width:150px;
 	}
-/* 	h5{
-float:auto;
-} */
+
+ .box2{
+            width: 245px;
+            background: rgb(255, 255, 255);
+            border: 1px solid rgb(218, 218, 218);
+            padding: 10px;
+            margin-top: 8px;
+            margin-bottom: 5px;
+        }
+ 
+   #idBox span2 {
+            font-family: Dotum;
+            font-weight: 100;
+            color: #8e8e8e;
+            padding-left: 15px;
+        }
+        
+    
+        input[type=radio] {
+            display: none;
+        }
+
+        input[type=radio]+label {
+            display: block;
+        }
+
+        .gender-box>div {
+            width: 223px;
+            height: 50px;
+            background: white;
+            border: 1px solid #D9D9D9;
+            display: inline-block;
+            float: left;
+            text-align: center;
+            line-height: 50px;
+            color: grey;
+        }
 </style>
 <script type="text/javascript">
         
@@ -342,19 +377,19 @@ float:auto;
 
       <form action="memJoinFormTest" method="POST" enctype="multipart/form-data">
 
-                <span style="margin-left: 250px;margin-bottom:0px;margin-top: 0px;">*는 필수 입력 정보입니다</span>
+                <span><h5 style="margin-left: 270px; margin-bottom:0px; margin-top: 0px;">*는 필수 입력 정보입니다.</h5></span>
                 <div id="idBox" class="box" style="padding-bottom:10px">
-              <input type="text" name="memberId" placeholder="아이디 *" class="input" style="width:250px;">
+              <input type="text" name="memberId" placeholder="아이디 *" class="input" maxlength="20" style="width:250px;">
                    <span style="padding-left:0px;">@overstackflow.com</span>
               </div>
                 
                 <p id="redCheck_id" class="redCheck"></p>
         <div id="idBox" class="box" style="padding-bottom:10px">
-	<input type="password" name="memberPwd" class="input" placeholder="비밀번호(6~16자의 영문,숫자,특수기호)*"><br>
+	<input type="password" name="memberPwd" class="input" maxlength="16" placeholder="비밀번호(6~16자의 영문,숫자,특수기호)*"><br>
 	</div>
 	
 	 <div id="idBox" class="box" style="padding-bottom:10px">
-	<input type="password" name="memberPwd2" class="input" placeholder="비밀번호확인"><br>
+	<input type="password" name="memberPwd2" class="input" maxlength="16" placeholder="비밀번호확인"><br>
 	</div>
 	
 	 <div id="idBox" class="box" style="padding-bottom:10px">
@@ -365,19 +400,26 @@ float:auto;
 	<input type="text" name="memberNickname" class="input" placeholder="닉네임*"><br>
 	</div>
 	
-	<br><div><span>사진 업로드</span></div>
+	<div style="margin-top: 30px;"><span>사진 업로드</span></div> 
+	<div id="idBox" class="box2" style="padding-bottom:10px">
 	<input type="file" id="imgInp" name="memberPhotoFile">
-	
-	<div style= float: right;">
+	</div>
+	<div style="border:1px; width: 200px;height: 180px;margin-left: 280px;margin-top: -90px;">
 	<img id="blah" src="#" alt="your image"/><br>
 	</div>
+
 	
+          <label style="margin-top: 0px;">성별</label>
+                <div id="sex">
+                    <input type="radio" id="male" name="memberGender" value="남자">
+                    <label for="male">남자</label>
+                    <input type="radio" id="female" name="memberGender" value="여자">
+                    <label for="female">여자</label>
+                </div>
 	
-	성별 <input type="radio" name="memberGender" value="남"> 남
-	<input type="radio" name="memberGender" value="여"> 여 <br>
-	
-	
+	<div>
 	휴대폰번호 <input type="text" name="memberPhone" class="input" placeholder="휴대폰 번호 -없이"><br> 
+	</div>
 	
 	생년월일<input type="Date" name="memberBirth"><br>
 	
@@ -427,6 +469,7 @@ float:auto;
 					classie.toggle( showLeftPush, 'disabled' );
 				}
 			}
+			
 		</script>
 	<!--scrolling js-->
 	<script src="js/jquery.nicescroll.js"></script>

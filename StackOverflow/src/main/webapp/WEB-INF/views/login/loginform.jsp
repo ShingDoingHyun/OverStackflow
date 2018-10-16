@@ -123,8 +123,10 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 	                </div><br>
 	                <label for="snslogin"><font size="2">SNS으로 로그인 </font></label><br><br>
 	            </div>
+	            
+	            <!-- sns로그인 네이버 -->
 	            <div class="form-group text-center"> 
-			  <a href="<%=apiURL%>"><img height="50px" src="resources/img/naver_Green.png" style="height:55px;width:400px;"/></a>
+			  <a href="<%=apiURL%>"><img height="50px" src="resources/img/naver_Green.png" style="height:55px;width:330px;"/></a>
 			</div>
 	            
 	            <br>

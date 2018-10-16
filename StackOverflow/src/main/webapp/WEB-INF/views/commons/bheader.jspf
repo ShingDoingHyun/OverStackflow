@@ -3,10 +3,10 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
     
-    
+
+    <link href="css/loginStyle.css" rel="stylesheet" tyoe="text/css" media="all">
     
     <style>
-    
     .login{
     font-weight: normal;
     background: none;
@@ -15,11 +15,11 @@
     box-shadow: #66bfff;
     color: #07C;
     background-color: transparent;
-        width: 90px;
+   width: 90px;
     height: 35px;
     }
     
-      .signup{
+   .signup{
     font-weight: normal;
     background: none;
     border: 1px solid #07c;
@@ -31,7 +31,7 @@
     height: 35px;
     }
     
-       .logout{
+   .logout{
     font-weight: normal;
     background: none;
     border: 1px solid #07c;
@@ -110,7 +110,7 @@
 							</a>
 							<ul class="dropdown-menu drp-mnu">
 								<li> <a href="#"><i class="fa fa-cog"></i> Settings</a> </li> 
-								<li> <a href="#"><i class="fa fa-user"></i> Profile</a> </li> 
+								<li> <a href="<c:url value='/memberProfile'/>"><i class="fa fa-user"></i> Profile</a> </li> 
 								<li> <a onclick="location.href='<c:url value="/logout"/>'"><i class="fa fa-sign-out"></i> Logout</a> </li>
 							</ul>
 						</li>
@@ -132,7 +132,7 @@
 							</a>
 							<ul class="dropdown-menu drp-mnu">
 								<li> <a href="#"><i class="fa fa-cog"></i> Settings</a> </li> 
-								<li> <a href="#"><i class="fa fa-user"></i> Profile</a> </li> 
+								<li> <a href="<c:url value='/comProfile'/>"><i class="fa fa-user"></i> Profile</a> </li> 
 								<li> <a onclick="location.href='<c:url value="/logout"/>'"><i class="fa fa-sign-out"></i> Logout</a> </li>
 							</ul>
 						</li>
