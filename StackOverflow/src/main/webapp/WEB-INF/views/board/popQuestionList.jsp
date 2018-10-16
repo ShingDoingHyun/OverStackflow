@@ -350,7 +350,7 @@ td{
 
 <script>
 
-/* 
+
 //모달부분
 
 var modal = document.getElementById('favTagModal');
@@ -601,7 +601,7 @@ var checkFavQuestion = function(questionNo, value){
 $("#favTagQuestionBtn").click(function() {
 	$("#favTagForm").submit();
 });
- */
+ 
 
 </script>
 </html>

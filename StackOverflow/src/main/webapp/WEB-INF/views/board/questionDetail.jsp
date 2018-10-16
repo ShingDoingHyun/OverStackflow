@@ -54,10 +54,10 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 <!-- 우리가 추가한 스타일 등등 -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+<!-- 
 <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-
+ -->
 </head>
 
 <style>
@@ -136,6 +136,8 @@ iframe {
 	
 	
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.cookie.js"></script>	
+
+
 <!-- 우리가 추가한 스타일 등등  end-->
 
 
