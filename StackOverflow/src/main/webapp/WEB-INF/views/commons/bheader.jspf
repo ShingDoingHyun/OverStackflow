@@ -7,10 +7,7 @@
 				<!--toggle button end-->
 				<!--logo -->
 				<div class="logo">
-					<a href="index.html">
-						<h1>NOVUS</h1>
-						<span>AdminPanel</span>
-					</a>
+					<img src="<c:url value='/logo/logo.png'/>" width="200px" height="75px">
 				</div>
 				<!--//logo-->
 				<!--search-box-->

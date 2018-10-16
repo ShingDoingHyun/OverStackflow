@@ -133,6 +133,9 @@ td{
 #mainName, #middleName, #name {
 	cursor: pointer;
 }
+a {
+ color: black;
+}
 </style>
 
 
@@ -249,7 +252,7 @@ td{
 							<br>
 						</p>
 					</div>
-					<div class="right">
+					<div class="right" style="font-size: 14px">
 						<div style="margin-top: 100px">
 							<button id="writeBtn"  style="position: absolute; right:10px; top:111px;" >
 								질문하기

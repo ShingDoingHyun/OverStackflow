@@ -233,6 +233,14 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 
 <!-- 게시판 jQuery -->
 <script>
+
+$(function() {
+	$(".leftQuestion").addClass("active");
+	$(".leftQuestion ul").addClass("in");
+	$("#leftQuestion3").addClass("active");
+});
+	
+
 	$(document).ready(
 			function() {
 				$('#summernote').summernote(
@@ -376,7 +384,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 	           	  	html += '</td><td style="display:none">'+tag.tagNo+'</td><tr>';
 	           	});
 	        	
-	        	html += '<tr><td onclick="t">태그추가<td><tr>';
+	        	html += '<tr><td onclick="javascript:makeTag();">태그추가<td><tr>';
 	        	
 	        	
 	        	$('#name').html(html);
@@ -421,9 +429,14 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 	    }
 	};
 	
+	
+	function makeTag(){
+		console.log($("#name"));
+	}
+	
 
 
-		
 
-</script>
+
+</script> 
 </html>

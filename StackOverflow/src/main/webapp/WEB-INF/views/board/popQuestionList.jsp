@@ -144,9 +144,11 @@ td{
 #mainName, #middleName, #name {
 	cursor: pointer;
 }
+
+a {
+ color: black;
+}
 </style>
-
-
 
 <!-- 우리가 추가한 스타일 등등  end-->
 
@@ -219,7 +221,7 @@ td{
 							</c:forEach> 
 						</table>
 					</div>
-					<div class="right">
+					<div class="right" style="font-size: 14px">
 					
 						<div style="margin-top: 100px">
 							<button id="writeBtn"  style="position: absolute; right:10px; top:111px;" >
@@ -250,7 +252,7 @@ td{
 								</div>
 							</div>
 						</c:if>
-			<!-- 	border-bottom: 1px solid #333333;  -->
+				<!-- 	border-bottom: 1px solid #333333;  -->
 						<div style="border:1px solid black; width:300px; height:200px;margin-left:20px; margin-top:30px">
 						<p style="text-align: center; border-bottom:1px solid black; padding: 10px 0 10px 0; margin-top: 0; margin-bottom:0;">방문한 페이지</p>
 						<c:forEach items="${visitQuestionBoard }" var="visitQuestion">

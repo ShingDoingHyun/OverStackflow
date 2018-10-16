@@ -8,8 +8,8 @@
 						<li>
 							<a href="<c:url value="/"/>" class="active"><i class="fa fa-home nav_icon"></i>홈</a>
 						</li>
-						<li>
-							<a href="<c:url value="/popQuestionList"/>"><i class="fa fa-cogs nav_icon"></i>질문게시판 <span class="fa arrow"></span></a>
+						<li class="leftQuestion">
+							<a href="<c:url value="/popQuestionList"/>" class="leftQuestion"><i class="fa fa-cogs nav_icon"></i>질문게시판 <span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level collapse">
 								<li>
 									<a href="<c:url value="/popQuestionList"/>">인기질문</a>
@@ -18,7 +18,7 @@
 									<a href="<c:url value="/questionList"/>">질문검색</a>
 								</li>
 								<li>
-									<a href="javascript: writeQuestion();">질문작성</a>
+									<a href="javascript: writeQuestion();" id="leftQuestion3">질문작성</a>
 								</li>
 							</ul>
 							<!-- /nav-second-level -->
@@ -69,5 +69,13 @@
 				location.href= getContextPath()+'/openWriteQuestion';
 			}
 		};
+		
+		
+		function getContextPath() {
+			var hostIndex = location.href.indexOf( location.host ) + location.host.length;
+			return location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
+		};
+			
+			
 		
 		</script>
