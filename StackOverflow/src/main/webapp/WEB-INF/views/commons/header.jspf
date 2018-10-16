@@ -19,7 +19,7 @@
                
                
                <c:if test="${comInfo ne null }">
-                    <a href="<c:url value='/memberProfile'/>"><img class='photo2' src="<c:url value='/resources/uploadFile/comPhoto/${comInfo.comPhoto}'/>"></a>
+                    <a href="<c:url value='/comProfile'/>"><img class='photo2' src="<c:url value='/resources/uploadFile/comPhoto/${comInfo.comPhoto}'/>"></a>
                     
               </c:if>
               

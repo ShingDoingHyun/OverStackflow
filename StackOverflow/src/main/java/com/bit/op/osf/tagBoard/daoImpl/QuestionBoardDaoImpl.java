@@ -73,8 +73,8 @@ public class QuestionBoardDaoImpl implements IQuestionBoardDao {
 
 	
 	@Override
-	public List<QuestionBoard> selectPopQuestionList(HttpServletRequest request) {
-		List<QuestionBoard> questionBoardList = sqlSession.selectList(QUSETION_NAMESPACE + "selectPopQuestion");
+	public List<QuestionBoard> selectPopQuestionList(HttpServletRequest request, Search search) {
+		List<QuestionBoard> questionBoardList = sqlSession.selectList(QUSETION_NAMESPACE + "selectPopQuestion", search);
 
 		
 		HttpSession session = request.getSession();
@@ -116,11 +116,10 @@ public class QuestionBoardDaoImpl implements IQuestionBoardDao {
 	}
 
 	@Override
-	public QuestionBoardList selectQuestionList(Search search, HttpServletRequest request) {
+	public QuestionBoardList selectQuestionList(Search search, MemRegInfo memInfo) {
 		
-		HttpSession session = request.getSession();
-		MemRegInfo memInfo =  (MemRegInfo) session.getAttribute("memInfo");
-		
+	
+		System.out.println(search);
 		int currentPageNumber = search.getPage() > 0 ? search.getPage() : 1; 
 
 		int questionBoardTotalCount = sqlSession.selectOne(QUSETION_NAMESPACE + "selectCount", search);
@@ -169,8 +168,8 @@ public class QuestionBoardDaoImpl implements IQuestionBoardDao {
 			currentPageNumber = 0;
 			questionBoardList = Collections.emptyList();
 		}
-
-		return new QuestionBoardList(questionBoardList, currentPageNumber, questionBoardTotalCount, QUESTION_BOARD_COUNT_PER_PAGE, firstRow, endRow);
+		QuestionBoardList  temp= new QuestionBoardList(questionBoardList, currentPageNumber, questionBoardTotalCount, QUESTION_BOARD_COUNT_PER_PAGE, firstRow, endRow);
+		return temp;
 	}
 
 	

@@ -10,4 +10,6 @@
 	<select id="selectId" resultType="com.bit.op.osf.member.model.MemRegInfo" parameterType="String">
 		select memberId, memberPwd, memberName, memberNickname, memberPhoto, memberBirth,memberGender, memberPhone from member where memberId = #{id}
 	</select>
+	
+	
 </mapper>

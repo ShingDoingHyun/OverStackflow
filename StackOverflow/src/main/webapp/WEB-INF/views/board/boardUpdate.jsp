@@ -1,18 +1,61 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE HTML>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>write</title>
+<title>Novus Admin Panel an Admin Panel Category Flat Bootstrap Responsive Website Template | Home :: w3layouts</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Novus Admin Panel Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- Bootstrap Core CSS -->
+<link href="<%=request.getContextPath()%>/css/bootstrap.css" rel='stylesheet' type='text/css' />
+<!-- Custom CSS -->
+<link href="<%=request.getContextPath()%>/css/style.css" rel='stylesheet' type='text/css' />
+<!-- font CSS -->
+<!-- font-awesome icons -->
+<link href="<%=request.getContextPath()%>/css/font-awesome.css" rel="stylesheet"> 
+<!-- //font-awesome icons -->
+ <!-- js-->
+<script src="<%=request.getContextPath()%>/js/jquery-1.11.1.min.js"></script>
+<script src="<%=request.getContextPath()%>/js/modernizr.custom.js"></script>
+<!--webfonts-->
+<link href='//fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
+<!--//webfonts--> 
+<!--animate-->
+<link href="<%=request.getContextPath()%>/css/animate.css" rel="stylesheet" type="text/css" media="all">
+<script src="<%=request.getContextPath()%>/js/wow.min.js"></script>
+	<script>
+		 new WOW().init();
+	</script>
+<!--//end-animate-->
+<!-- chart -->
+<script src="<%=request.getContextPath()%>/cjs/Chart.js"></script>
+<!-- //chart -->
+<!--Calender-->
 
-<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+<!--End Calender-->
+<!-- Metis Menu -->
+<script src="<%=request.getContextPath()%>/js/metisMenu.min.js"></script>
+<script src="<%=request.getContextPath()%>/js/custom.js"></script>
+<link href="<%=request.getContextPath()%>/css/custom.css" rel="stylesheet">
+<!--//Metis Menu -->
+
+
+<!-- 우리가 추가한 스타일 등등 -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+
+
+
+
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
-<link rel="stylesheet" href="<%= request.getContextPath() %>/css/index.css" type="text/css" media="all" />
 
 
 <link href="<%=request.getContextPath()%>/summernote/summernote.css" rel="stylesheet">
@@ -20,7 +63,6 @@
 
 <!-- include summernote-ko-KR -->
 <script src="<%=request.getContextPath()%>/summernote/lang/summernote-ko-KR.js"></script>
-
 
 </head>
 <style>
@@ -67,100 +109,134 @@
 
 
 </style>
-<body>
 
-	<!----------------------header--------------------------------------->
+<!-- 우리가 추가한 스타일 등등 end-->
 
-	<%@ include file="../commons/header.jspf"%>
-	<!----------------------header End--------------------------------------->
-
-
-	<!----------------------left menu--------------------------------------->
-	<%@ include file="../commons/left.jspf"%>
-	<!----------------------left menu End--------------------------------------->
-
-
-	<!----------------------main--------------------------------------->
-	<!-- 썸머노트 부분 -->
-	<div class="main" >
-		<form action="<c:url value="/updateQuestion"/>" method="post">
-		<input type="hidden" name="questionNo" value="${questionBoard.questionNo }"/>
-			<br> <br> <br>
-			<p>질문 제목</p>
-			<input type="text" size="80" name="title" value="${questionBoard.title }"/> <br> <br>
-			<p>질문 내용</p>
-			<div>
-			<textarea id="summernote" name="content">${questionBoard.content }</textarea>
+</head> 
+<body class="cbp-spmenu-push">
+	<div class="main-content">
+	
+		<!--left-fixed -navigation-->
+			<%@ include file="../commons/bleft.jspf" %>
+		<!--left-fixed -navigation-->
+		
+		<!-- header-starts -->
+			<%@ include file="../commons/bheader.jspf" %>
+		<!-- //header-ends -->
+		
+		
+		
+		
+		
+		<!-- main content start-->
+		<div id="page-wrapper">
+		<h2>질문수정</h2>
+			
+			<div class="main-page">
+		<!-- 썸머노트 부분 -->
+				<div class="main" >
+					<form action="<c:url value="/updateQuestion"/>" method="post">
+					<input type="hidden" name="questionNo" value="${questionBoard.questionNo }"/>
+						<br> <br> <br>
+						<p>질문 제목</p>
+						<input type="text" size="80" name="title" value="${questionBoard.title }"/> <br> <br>
+						<p>질문 내용</p>
+						<div>
+						<textarea id="summernote" name="content">${questionBoard.content }</textarea>
+						</div>
+						<br>
+						<button type="button" id="myBtn">태그선택</button>  
+						<div style="height:50px;" id="tags">
+						<c:forEach items="${questionBoard.tagList }" var="tag" >
+							<span class="tag" style="margin-left:10px;">#${tag.tagName }</span>
+						</c:forEach>
+						</div>
+						<input type="hidden" name="tags" value="<c:forEach items="${questionBoard.tagList }" var="tag" >#${tag.tagNo }</c:forEach>">
+						<br>
+						<br> <input type="submit" value="작성" />
+					</form>
+				</div>
+				
+				
+				    <!-- The Modal -->
+			    <div id="myModal" class="modal">
+			 
+			      <!-- Modal content -->
+			      <div class="modal-content" style="width: 710px;">
+			      <span class="close">&times;</span>   
+			        <form>
+			        <input type="text" size="20" />  <button type="button" style="margin-left: 15px;" >태그검색</button>
+			        </form>    
+			        <br>
+			        <form>
+			        	<table border="1">
+			        		<tr>
+			        			<td style="width:250px; text-align: center;">대분류</td>
+			        			<td style="width:250px; text-align: center;">중분류</td>
+			        			<td style="width:250px; text-align: center;">태그</td>	
+			        		</tr>
+			        		<tr>
+				        		<td style="height:200px;" valign="top">
+				        			<table id="mainName">
+									</table>
+								</td>
+				        		<td style="height:200px;" valign="top">
+									<table id="middleName">
+									</table>
+								</td>
+				        		<td style="height:200px;" valign="top">
+									<table id="name">
+									</table>
+								</td>
+			        		</tr>
+			        
+			        
+			        	</table>
+			        </form>                                                      
+			        
+			      </div>
+			 
+			    </div>
 			</div>
-			<br>
-			<button type="button" id="myBtn">태그선택</button>  
-			<div style="height:50px;" id="tags">
-			<c:forEach items="${questionBoard.tagList }" var="tag" >
-				<span class="tag" style="margin-left:10px;">#${tag.tagName }</span>
-			</c:forEach>
-			</div>
-			<input type="hidden" name="tags" value="<c:forEach items="${questionBoard.tagList }" var="tag" >#${tag.tagNo }</c:forEach>">
-			<br>
-			<br> <input type="submit" value="작성" />
-		</form>
+		</div>
+			
+		<!--footer-->
+	
+		
+		<%@ include file="../commons/bfooter.jspf" %>
+        <!--//footer-->
 	</div>
-	
-	
-	    <!-- The Modal -->
-    <div id="myModal" class="modal">
- 
-      <!-- Modal content -->
-      <div class="modal-content" style="width: 710px;">
-      <span class="close">&times;</span>   
-        <form>
-        <input type="text" size="20" />  <button type="button" style="margin-left: 15px;" >태그검색</button>
-        </form>    
-        <br>
-        <form>
-        	<table border="1px">
-        		<tr>
-        			<td style="width:250px; text-align: center;">대분류</td>
-        			<td style="width:250px; text-align: center;">중분류</td>
-        			<td style="width:250px; text-align: center;">태그</td>	
-        		</tr>
-        		<tr>
-	        		<td style="height:200px;" valign="top">
-	        			<table id="mainName">
-						</table>
-					</td>
-	        		<td style="height:200px;" valign="top">
-						<table id="middleName">
-						</table>
-					</td>
-	        		<td style="height:200px;" valign="top">
-						<table id="name">
-						</table>
-					</td>
-        		</tr>
-        
-        
-        	</table>
-        </form>                                                      
-        
-      </div>
- 
-    </div>
-	
+	<!-- Classie -->
+		<script src="<%=request.getContextPath()%>/js/classie.js"></script>
+		<script>
+			var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
+				showLeftPush = document.getElementById( 'showLeftPush' ),
+				body = document.body;
+				
+			showLeftPush.onclick = function() {
+				classie.toggle( this, 'active' );
+				classie.toggle( body, 'cbp-spmenu-push-toright' );
+				classie.toggle( menuLeft, 'cbp-spmenu-open' );
+				disableOther( 'showLeftPush' );
+			};
+			
 
-
-	<!----------------------main End--------------------------------------->
-
-
-	<!----------------------footer----------------------------------------->
-	<%@ include file="../commons/footer.jspf"%>
-	<!----------------------footer End--------------------------------------->
-
-
-
-
-
+			function disableOther( button ) {
+				if( button !== 'showLeftPush' ) {
+					classie.toggle( showLeftPush, 'disabled' );
+				}
+			}
+		</script>
+	<!--scrolling js-->
+	<script src="<%=request.getContextPath()%>/js/jquery.nicescroll.js"></script>
+	<script src="<%=request.getContextPath()%>/js/scripts.js"></script>
+	<!--//scrolling js-->
+	<!-- Bootstrap Core JavaScript -->
+   <script src="<%=request.getContextPath()%>/js/bootstrap.js"> </script> 
 </body>
+
 <!-- 게시판 jQuery -->
+
 <script>
 	$(document).ready(
 			function() {

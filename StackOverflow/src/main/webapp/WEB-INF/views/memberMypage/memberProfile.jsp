@@ -1,6 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-        <%@ page import="java.net.URLEncoder" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.net.URLEncoder" %>
 <%@ page import="java.security.SecureRandom" %>
 <%@ page import="java.math.BigInteger" %>
 <%@ page import="java.io.BufferedReader" %>
@@ -9,14 +8,6 @@
 <%@ page import="java.net.URL" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-	<%-- <!----------------------header--------------------------------------->
-		<%@ include file="../commons/header.jspf" %>
-		<!----------------------header End--------------------------------------->
-	
-		<!----------------------left menu--------------------------------------->
-		<%@ include file="../commons/left.jspf" %>
-		<!----------------------left menu End---------------------------------------> --%>
-		
 		
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -30,6 +21,7 @@
 
 
 <style>
+
 .bluebTabDesign {
 	padding: 0 0 0px 0px;
 }
@@ -128,8 +120,9 @@
 
 
 .main_2 {
-	margin-Left: 140px;
+	margin-Left: 20px;
 }
+
  body.user-page #content * {
         box-sizing: border-box;
     }
@@ -159,7 +152,7 @@
         width: calc((100% - 30px) / 2);
         float: left;
         margin-bottom: 30px;
-        margin-top: 20px;
+        margin-top: 60px;
     }
 
     .container {
@@ -285,11 +278,15 @@ border-color: #F48024;
     border-bottom-width: 2px !important;
 }
  
-  .ProfileMain{
-    border: 1px solid black;
-    padding: 8%;
+ .ProfileMain{
     margin-top: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+}
+.photo3{
+		width:180px;
+	}
+.ProfileMain div{
+text-align:flot;
 }
 
 </style>
@@ -311,227 +308,146 @@ border-color: #F48024;
 
 
 	<!----------------------main--------------------------------------->
-	<div class="main">
+	
+	<div class="main" style="margin-bottom:65%;">
 
 		<div style="margin-top: 20px;"></div>
 
 		<div class="bluebTabDesign">
 			<ul>
 				<li class="selected"><a href="#"><span>프로필</span></a></li>
-				<li><a href="#"><span>활동정보</span></a></li>
 				<li><a href="<c:url value='/memberUpdate'/>"><span>지원관리</span></a></li>
-				<li><a href="#"><span>프로필 설정</span></a></li>
+				<li><a href="<c:url value='/memberProSet'/>"><span>프로필 설정</span></a></li>
 
 			</ul>
 		</div>
 		<div class="main_2">
 			<div style="margin-top: 20px;"></div>
 			<h3>프로필정보</h3>
-		<!-- 	     <div class="ProfileMain">
-        <table>
 			
-						<td></td>
+		</div>
+		     <div class="ProfileMain">
+		  <div style="border: 1px; float: left; width: 10%; padding:10px; height: 200px;">
+<img class='photo3' src="<c:url value='/resources/uploadFile/memberPhoto/${memInfo.memberPhoto}'/>"style="height: 200px;">
+</div>
+
+<div style="border: 1px; float: left; width: 40%; padding:10px;height: 200px;">
+<div><span><h1 style="margin-left:100px;">${memInfo.memberId}</h1></span></div><br>
+<br>
+<span style="margin-left:80px;">안녕 난 짱구야</span>
+</div>
 
 
+<div style="border: 1px; float:left; width: 40%; padding:10px;height: 200px;">
+<table>
 
-    </table>
-        </div> -->
-		<div>
+<tr>
+<td><h4 style="margin-top: 15px; margin-bottom: 15px;">이름:&nbsp${memInfo.memberName}</h4></td>
+</tr>
+
+<tr>
+<td><h4 style="margin-top: 15px; margin-bottom: 15px;">닉네임:&nbsp${memInfo.memberNickname}</h4></td>
+</tr>
+
+<tr>
+<td><h4 style="margin-top: 15px; margin-bottom: 15px;">연락처:&nbsp${memInfo.memberPhone}</h4></td>
+</tr>
+
+<tr>
+<td><h4 style="margin-top: 15px; margin-bottom: 15px;">생년월일:&nbsp${memInfo.memberBirth}</h4></td>
+</tr>
+
+</table>
+</div>
+ 
+        </div>
+       
+
         <div id="mainbar-full" class="user-show-new">
 
             <div id="user-panel-answers" class="user-panel">
                 <div class="subheader p0 grid ai-center" style="min-height: 36px;">
-                    <h3 class="grid--cell mb0 mr-auto px2 profile-section-title"><a href="/users/10257271/jam?tab=answers">
-                            답변 <span>(0)</span>
+                    <h3 class="grid--cell mb0 mr-auto px2 profile-section-title">    
+                            답변 
                         </a></h3>
-                    <div class="grid--cell subtabs user-panel-subtabs" >
+                   <!--  <div class="grid--cell subtabs user-panel-subtabs" >
+                        <a href="javascript:void(0)" class="d-flex ai-center fs-caption bbw2 youarehere" data-sort-id="votes"> 최신 </a>
+                        <a href="javascript:void(0)" class="d-flex ai-center fs-caption bbw2" data-sort-id="newest">투표</a>
+                    </div> -->
+                </div>
+               
+		
+		<!-- 답변  -->
+                <div class="user-panel-content">
+                 <c:forEach items="${replyBoards}" var="rboard" varStatus="status">
+				     <div class="empty"><a href="../op/questionDetail/${rboard.questionNo}">${rboard.content}</a></div>           
+				 </c:forEach>
+                </div>
+                <div class="user-panel-footer">
+                </div>
+            </div>
+            
+            
+            <!-- 질문  -->
+             <div id="user-panel-questions" class="user-panel">
+                <div class="subheader p0 grid ai-center" style="min-height: 36px;">
+                    <h3 class="grid--cell mb0 mr-auto px2 profile-section-title">     <a href="/users/10257271/jam?tab=questions">
+                            질문<!--  <span>(0)</span> -->
+                        </a></h3>
+                    <div class="grid--cell subtabs user-panel-subtabs">
                         <a href="javascript:void(0)" class="d-flex ai-center fs-caption bbw2 youarehere" data-sort-id="votes">
                             최신
                         </a>
-                        <a href="javascript:void(0)" class="d-flex ai-center fs-caption bbw2" data-sort-id="activity">
-                            활동
-                        </a>
-                        <a href="javascript:void(0)" class="d-flex ai-center fs-caption bbw2" data-sort-id="newest">
+                    <!--     <a href="javascript:void(0)" class="d-flex ai-center fs-caption bbw2" data-sort-id="newest">
                             투표
-                        </a>
+                        </a> -->
                     </div>
                 </div>
 
-                <div class="user-panel-content">
-
-                    <div class="empty">너는<a href="/questions/how-to-answer">어떠한질문에도</a> 대답하지않았다능</div>
-
-                </div>
-
-                <div class="user-panel-footer">
-
-                </div>
-            </div>
-            <div id="user-panel-reputation" class="user-panel">
-                <div class="subheader p0 grid ai-center" style="min-height: 36px;">
-                    <h3 class="grid--cell mb0 mr-auto px2 profile-section-title"><a href="/users/10257271/jam?tab=reputation">
-                            Reputation <span>(1)</span>
-                        </a></h3>
-
-                </div>
 
                 <div class="user-panel-content">
-
-
-
-                    <div class="empty">
-                        You have no recent <a href="/help/whats-reputation">reputation changes</a> </div>
-
+                    <c:forEach items="${questionBoards}" var="qboard" varStatus="status">
+				    <div class="empty"><a href="../op/questionDetail/${qboard.questionNo}">${qboard.content}</a></div>           
+				 </c:forEach>
                 </div>
-
                 <div class="user-panel-footer">
-
                 </div>
             </div>
-            <div id="user-panel-questions" class="user-panel">
-                <div class="subheader p0 grid ai-center" style="min-height: 36px;">
-                    <h3 class="grid--cell mb0 mr-auto px2 profile-section-title"><a href="/users/10257271/jam?tab=questions">
-                            Questions <span>(0)</span>
-                        </a></h3>
-                    <div class="grid--cell subtabs user-panel-subtabs">
-                        <a href="javascript:void(0)" class="d-flex ai-center fs-caption bbw2 youarehere" data-sort-id="votes">
-                            votes
-                        </a>
-                        <a href="javascript:void(0)" class="d-flex ai-center fs-caption bbw2" data-sort-id="activity">
-                            activity
-                        </a>
-                        <a href="javascript:void(0)" class="d-flex ai-center fs-caption bbw2" data-sort-id="newest">
-                            newest
-                        </a>
-                    </div>
-                </div>
-
-                <div class="user-panel-content">
-
-                    <div class="empty">
-                        You have not <a href="/questions/how-to-ask">asked</a> any questions
-                    </div>
-
-                </div>
-
-                <div class="user-panel-footer">
-
-                </div>
-            </div>
+            
             <div id="user-panel-tags" class="user-panel">
                 <div class="subheader p0 grid ai-center" style="min-height: 36px;">
-                    <h3 class="grid--cell mb0 mr-auto px2 profile-section-title"><a href="/users/10257271/jam?tab=tags">
-                            Tags <span>(0)</span>
+                    <h3 class="grid--cell mb0 mr-auto px2 profile-section-title">      <a href="/users/10257271/jam?tab=tags">
+                            태그<!--  <span>(0)</span> -->
                         </a></h3>
                 </div>
 
+
                 <div class="user-panel-content">
-
-                    <div class="empty">You have not participated in any <a href="/tags">tags</a></div>
-
+                    <div class="empty">어떠한 태그에도 참여하지 않았습니다. <a href="/tags">tags</a></div>
                 </div>
-
                 <div class="user-panel-footer">
-
                 </div>
             </div>
-            <div id="user-panel-accounts" class="user-panel">
+            
+
+               <div id="user-panel-reputation" class="user-panel">
                 <div class="subheader p0 grid ai-center" style="min-height: 36px;">
-                    <h3 class="grid--cell mb0 mr-auto px2 profile-section-title"><a href="https://stackexchange.com/users/14198814/jam?tab=accounts">
-                            Account <span>(1)</span>
+                    <h3 class="grid--cell mb0 mr-auto px2 profile-section-title">    <a href="/users/10257271/jam?tab=reputation">
+                            평판 <!-- <span>(0)</span> -->
                         </a></h3>
-                </div>
-
-                <div class="user-panel-content">
-
-                    <table class="user-accounts lines">
-                        <tbody>
-                            <tr>
-                                <td class="icon-cell">
-                                    <div class="favicon favicon-stackoverflow favicon" title="Stack Overflow"></div>
-                                </td>
-                                <td>
-                                    <a class="site-hyperlink" href="https://stackoverflow.com/users/10257271/">Stack Overflow</a>
-                                </td>
-                                <td class="reputation">
-                                    <span class="reputation-score">1</span> rep
-                                </td>
-                                <td class="badges">
-
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
 
                 </div>
 
-                <div class="user-panel-footer">
-
-                </div>
+         
             </div>
-            <div id="user-panel-badges" class="user-panel">
-                <div class="subheader p0 grid ai-center" style="min-height: 36px;">
-                    <h3 class="grid--cell mb0 mr-auto px2 profile-section-title"><a href="/users/10257271/jam?tab=badges">
-                            Badges <span>(0)</span>
-                        </a></h3>
-                    <div class="grid--cell subtabs user-panel-subtabs">
-                        <a href="javascript:void(0)" class="d-flex ai-center fs-caption bbw2 youarehere" data-sort-id="recent">
-                            recent
-                        </a>
-                        <a href="javascript:void(0)" class="d-flex ai-center fs-caption bbw2" data-sort-id="class">
-                            class
-                        </a>
-                        <a href="javascript:void(0)" class="d-flex ai-center fs-caption bbw2" data-sort-id="name">
-                            name
-                        </a>
-                    </div>
-                </div>
 
-                <div class="user-panel-content">
+           
+           
+   
+   </div>
 
-                    <div class="empty">You have not earned any <a href="/help/badges">badges</a></div>
-
-                </div>
-
-                <div class="user-panel-footer">
-
-                </div>
-            </div>
-            <div id="user-panel-bounties" class="user-panel">
-                <div class="subheader p0 grid ai-center" style="min-height: 36px;">
-                    <h3 class="grid--cell mb0 mr-auto px2 profile-section-title"><a href="/users/10257271/jam?tab=bounties">
-                            Active bounties <span>(0)</span></a></h3>
-                    <div class="grid--cell subtabs user-panel-subtabs">
-                        <a href="javascript:void(0)" class="d-flex ai-center fs-caption bbw2 youarehere" data-sort-id="active">
-                            active
-                        </a>
-                        <a href="javascript:void(0)" class="d-flex ai-center fs-caption bbw2" data-sort-id="offered">
-                            offered
-                        </a>
-                        <a href="javascript:void(0)" class="d-flex ai-center fs-caption bbw2" data-sort-id="earned">
-                            earned
-                        </a>
-                    </div>
-                </div>
-
-                <div class="user-panel-content">
-
-                    You have no active <a href="/help/bounty">bounties</a>
-                </div>
-
-                <div class="user-panel-footer">
-
-                </div>
-            </div>
-            <div id="user-panel-votes" class="user-panel">
-                <div class="subheader p0 grid ai-center" style="min-height: 36px;">
-                    <h3 class="grid--cell mb0 mr-auto px2 profile-section-title">
-                        Votes Cast <span>(0)</span>
-                    </h3>
-                
-
-
-
+	</div>
+	
 
 
 
@@ -544,9 +460,6 @@ border-color: #F48024;
 	<!----------------------footer--------------------------------------->
 	<%@ include file="/WEB-INF/views/commons/footer.jspf"%>
 	<!----------------------footer End--------------------------------------->
-
-
-
 
 
 </body>

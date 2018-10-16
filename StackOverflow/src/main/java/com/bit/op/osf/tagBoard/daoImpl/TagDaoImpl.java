@@ -5,12 +5,17 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.bit.op.osf.member.model.MemRegInfo;
 import com.bit.op.osf.tagBoard.dao.ITagDao;
+import com.bit.op.osf.tagBoard.model.MemFavTag;
 import com.bit.op.osf.tagBoard.model.QuestionTag;
+import com.bit.op.osf.tagBoard.model.Search;
 import com.bit.op.osf.tagBoard.model.Tag;
 
 @Repository
@@ -22,9 +27,9 @@ public class TagDaoImpl implements ITagDao {
 	private static final String COMMENT_NAMESPACE = "com.bit.op.osf.tagBoard.mapper.TagMapper.";
 	
 	@Override
-	public List<Tag> selectTagList(){
+	public List<Tag> selectTagList(Search search){
 		
-		return sqlSession.selectList(COMMENT_NAMESPACE + "selectTagList");
+		return sqlSession.selectList(COMMENT_NAMESPACE + "selectTagList", search);
 		
 	}
 	
@@ -66,6 +71,39 @@ public class TagDaoImpl implements ITagDao {
 	public void deleteQuestionTag(QuestionTag questionTag1) {
 		// TODO Auto-generated method stub
 		sqlSession.delete(COMMENT_NAMESPACE + "delectQuestionTag", questionTag1);
+	}
+
+	@Override
+	public int updateMemFavTag(MemFavTag memFavTag, HttpServletRequest request) {
+
+		HttpSession session = request.getSession();
+		MemRegInfo memInfo =  (MemRegInfo) session.getAttribute("memInfo");
+		
+		memFavTag.setMemId(memInfo.getMemberId());
+		
+		System.out.println(memFavTag);
+		int result = sqlSession.selectOne(COMMENT_NAMESPACE + "seleteMemFavTag", memFavTag );
+		System.out.println(result);
+		if(result==0)
+			sqlSession.insert(COMMENT_NAMESPACE + "insertMemFavTag", memFavTag );
+		else
+			sqlSession.delete(COMMENT_NAMESPACE + "deleteMemFavTag", memFavTag );
+		
+		return 1;
+	}
+
+	@Override
+	public List<Tag> selectMemFavTagList(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		MemRegInfo memInfo =  (MemRegInfo) session.getAttribute("memInfo");
+		
+		return sqlSession.selectList(COMMENT_NAMESPACE + "selectMemFavTagList", memInfo);
+	}
+
+	@Override
+	public Object selectTagListBySearch(Search search) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

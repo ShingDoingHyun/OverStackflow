@@ -1,5 +1,7 @@
 package com.bit.op.osf.member.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bit.op.osf.member.SHA256.SHA256;
 import com.bit.op.osf.member.dao.MemberInfoDao;
-import com.bit.op.osf.member.daoImpl.MemberInfoImpl;
+import com.bit.op.osf.member.dao.MyPageInfoDao;
 import com.bit.op.osf.member.model.MemRegInfo;
+import com.bit.op.osf.tagBoard.model.QuestionBoard;
+import com.bit.op.osf.tagBoard.model.ReplyBoard;
 
 @Controller
 public class MemController {
@@ -23,6 +27,8 @@ public class MemController {
 	@Inject
 	private MemberInfoDao memberInfoDao;
 	
+	@Inject
+	private MyPageInfoDao myPageInfoDao;
 	
 	@Autowired
 	SHA256 SHA;
@@ -67,9 +73,31 @@ public class MemController {
 	public String Loginform(Model model) {
 		return "login/loginform";
 	}
-
-	@RequestMapping(value = "/memLoginForm", method = RequestMethod.POST)
-	public String memberLogin(@RequestParam("memberId") String id, @RequestParam("memberPwd") String pw, Model model,
+	
+		@RequestMapping(value = "/memberProfile", method = RequestMethod.GET)
+		public String Profile(HttpSession session) throws Exception {
+			
+			MemRegInfo memInfo = (MemRegInfo)session.getAttribute("memInfo");
+			String memId=  memInfo.getMemberId();
+			
+			
+			List<ReplyBoard> replyBoards  =  myPageInfoDao.selectAnswerInfo(memId);
+			session.setAttribute("replyBoards", replyBoards);
+			
+			List<QuestionBoard> questionBoards  =  myPageInfoDao.selectQuestionInfo(memId);
+			session.setAttribute("questionBoards", questionBoards);
+			
+			
+				return "/memberMypage/memberProfile"; 
+		}
+		
+		@RequestMapping(value = "/memberProSet", method = RequestMethod.GET)
+		public String Profile4() {
+				return "/memberMypage/memberProSet"; 
+		}
+		
+	   @RequestMapping(value = "/memLoginForm", method = RequestMethod.POST)
+	   public String memberLogin(@RequestParam("memberId") String id, @RequestParam("memberPwd") String pw, Model model,
 			HttpServletRequest request) {
 
 		// 2-1.세션 만들기
@@ -105,16 +133,5 @@ public class MemController {
 	 return "redirect:/";
 	}
 	
-	//프로필 사진 클릭 프로필정보로 이동 
-	@RequestMapping(value = "/memberProfile", method = RequestMethod.GET)
-	public String Profile() {
-		
-		return "/memberMypage/memberProfile"; 
-	}
-	
-//	@RequestMapping(value = "/memberProfile", method = RequestMethod.GET)
-//	public String Profile1() {
-//		
-//		return "/memberMypage/memberUpdate"; 
-//	}
+
 }
