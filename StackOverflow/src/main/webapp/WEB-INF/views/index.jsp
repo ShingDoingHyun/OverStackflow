@@ -70,7 +70,13 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 		<!-- main content start-->
 		<div id="page-wrapper">
 		
+		
+		
 			<div class="main-page">
+			
+			
+			
+			
 			
 			</div>
 			

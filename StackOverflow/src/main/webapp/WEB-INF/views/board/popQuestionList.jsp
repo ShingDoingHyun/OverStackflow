@@ -56,9 +56,13 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 
 
 <!-- 우리가 추가한 스타일 등등 -->
+
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.cookie.js"></script>
+<script
+	src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 <%-- <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 
@@ -179,9 +183,9 @@ td{
 					<div class="left">
 					<p align="right">
 						<button id="favTagQuestionBtn">나의흥미</button>
-						<button>이번주인기</button>
-						<button>이번달인기</button>
-						<button>전체인기</button>
+						<button onclick="location.href='<c:url value="/popQuestionList"/>'">이번주인기</button>
+						<button onclick="location.href='<c:url value="/popQuestionList"/>'">이번달인기</button>
+						<button onclick="location.href='<c:url value="/popQuestionList"/>'">전체인기</button>
 						</p>
 						<hr>
 						<table width="100%">
@@ -233,7 +237,7 @@ td{
 									<div id="tags">
 										<c:forEach items="${fagTagList }" var="fagTag" varStatus="status">
 											<span class="tag" style="margin-left:10px;">#${ fagTag.tagName}</span>
-											<input type="hidden" name="tagList["+${status}"].tagNo" value="${fagTag.tagNo }">
+											<input type="hidden" name="tagList[${status.index}].tagNo" value="${fagTag.tagNo }">
 										</c:forEach> 
 									</div>
 								</form> 
@@ -243,18 +247,18 @@ td{
 								<p style="text-align: center; border-bottom:1px solid black; padding: 10px 0 10px 0; margin-top: 0; margin-bottom:0;">즐겨찾기한 질문</p>
 								<div id="favList">
 								<c:forEach items="${favQuestionList }" var="favQuestionList">
-									<div style="border-bottom: 1px solid #333333; margin-top:3px; margin-bottom:3px;">
+									<div style="margin-top:3px; margin-bottom:3px;">
 										<a href="<c:url value='/questionDetail/${favQuestionList.questionNo }'/>">${ favQuestionList.title}</a>
 									</div>
 								</c:forEach>
 								</div>
 							</div>
 						</c:if>
-				
+			<!-- 	border-bottom: 1px solid #333333;  -->
 						<div style="border:1px solid black; width:300px; height:200px;margin-left:20px; margin-top:30px">
 						<p style="text-align: center; border-bottom:1px solid black; padding: 10px 0 10px 0; margin-top: 0; margin-bottom:0;">방문한 페이지</p>
 						<c:forEach items="${visitQuestionBoard }" var="visitQuestion">
-							<div style="border-bottom: 1px solid #333333; margin-top:3px; margin-bottom:3px;"><a href="<c:url value='/questionDetail/${visitQuestion.questionNo }'/>">${ visitQuestion.title}</a></div>
+							<div style="margin-top:3px; margin-bottom:3px;"><a href="<c:url value='/questionDetail/${visitQuestion.questionNo }'/>">${ visitQuestion.title}</a></div>
 						</c:forEach>
 						</div>
 					</div>
