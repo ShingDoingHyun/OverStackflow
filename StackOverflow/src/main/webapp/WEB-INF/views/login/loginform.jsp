@@ -90,10 +90,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 		
 			
 			
-		<div class="main-page" style="
-    margin-right: 300px;
-    margin-top: 100px;
-">
+		<div class="main-page" style="margin-right: 300px; margin-top: 100px;">
 				
 				
 					<div class="forms">

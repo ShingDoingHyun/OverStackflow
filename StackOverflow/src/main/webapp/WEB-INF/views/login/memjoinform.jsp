@@ -1,18 +1,53 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<!----------------------header--------------------------------------->
-	<%@ include file="../commons/header.jspf" %>
-	<!----------------------header End--------------------------------------->
-
-	<!----------------------left menu--------------------------------------->
-	<%@ include file="../commons/left.jspf" %>
-	<!----------------------left menu End--------------------------------------->
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+	pageEncoding="UTF-8"%>
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE HTML>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>OverStackFlow</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Novus Admin Panel Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- Bootstrap Core CSS -->
+<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+<!-- Custom CSS -->
+<link href="css/style.css" rel='stylesheet' type='text/css' />
+<!-- font CSS -->
+<!-- font-awesome icons -->
+<link href="css/font-awesome.css" rel="stylesheet"> 
+<!-- //font-awesome icons -->
+ <!-- js-->
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/modernizr.custom.js"></script>
+<!--webfonts-->
+<link href='//fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
+<!--//webfonts--> 
+<!--animate-->
+<link href="css/animate.css" rel="stylesheet" type="text/css" media="all">
+<script src="js/wow.min.js"></script>
+	<script>
+		 new WOW().init();
+	</script>
+<!--//end-animate-->
+<!-- chart -->
+<script src="js/Chart.js"></script>
+<!-- //chart -->
+<!--Calender-->
+
+<!--End Calender-->
+<!-- Metis Menu -->
+<script src="js/metisMenu.min.js"></script>
+<script src="js/custom.js"></script>
+<link href="css/custom.css" rel="stylesheet">
+<!--//Metis Menu -->
+</head> 
 <style>
 
     body {
@@ -241,13 +276,6 @@
 float:auto;
 } */
 </style>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
-<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
-<link rel="stylesheet" href="css/index.css" type="text/css" media="all" />
-<title>Insert title here</title>
 <script type="text/javascript">
         
         // 사진첨부시 사진 미리보기
@@ -288,33 +316,71 @@ float:auto;
         	});
 
     </script>
-</head>
-<body>
+<body class="cbp-spmenu-push">
+	<div class="main-content">
+	
+		<!--left-fixed -navigation-->
+			<%@ include file="../commons/bleft.jspf" %>
+		<!--left-fixed -navigation-->
+		
+		<!-- header-starts -->
+			<%@ include file="../commons/bheader.jspf" %>
+		<!-- //header-ends -->
+		
+		
+		
+		
+		
+		<!-- main content start-->
+		<div id="page-wrapper">
 
-<div id="container">
-<h2 style="margin-bottom:30px; margin-bottom:-10px;">개인회원가입</h2>
-<h5 style="margin-left:300px;margin-bottom:0px">*는 필수 입력 정보입니다</h5><br>
+		
+			<div class="main-page" style="margin-right: 100px;">
+			<div id="container">
+<h2 style="margin-bottom:30px; margin-bottom:-10px; margin-bottom: 20px;">개인회원가입</h2>
 
 
-<form action="memJoinFormTest" method="POST" enctype="multipart/form-data">
+      <form action="memJoinFormTest" method="POST" enctype="multipart/form-data">
 
+                <span style="margin-left: 250px;margin-bottom:0px;margin-top: 0px;">*는 필수 입력 정보입니다</span>
                 <div id="idBox" class="box" style="padding-bottom:10px">
-                    <input type="text" name="memberId" placeholder="아이디 *" class="input" style="width:250px;">
-                    <span>@overstackflow.com</span>
-                </div>
+              <input type="text" name="memberId" placeholder="아이디 *" class="input" style="width:250px;">
+                   <span style="padding-left:0px;">@overstackflow.com</span>
+              </div>
+                
                 <p id="redCheck_id" class="redCheck"></p>
-                
-                
-	<input type="password" name="memberPwd" placeholder="비밀번호(6~16자의 영문,숫자,특수기호)*"><br>
-	<input type="password" name="memberPwd2" placeholder="비밀번호확인"><br>
-	<input type="text" name="memberName" placeholder="이름(실명)*"><br>
-	<input type="text" name="memberNickname" placeholder="닉네임*"><br>
+        <div id="idBox" class="box" style="padding-bottom:10px">
+	<input type="password" name="memberPwd" class="input" placeholder="비밀번호(6~16자의 영문,숫자,특수기호)*"><br>
+	</div>
+	
+	 <div id="idBox" class="box" style="padding-bottom:10px">
+	<input type="password" name="memberPwd2" class="input" placeholder="비밀번호확인"><br>
+	</div>
+	
+	 <div id="idBox" class="box" style="padding-bottom:10px">
+	<input type="text" name="memberName" class="input" placeholder="이름(실명)*"><br>
+	</div>
+	
+	 <div id="idBox" class="box" style="padding-bottom:10px">
+	<input type="text" name="memberNickname" class="input" placeholder="닉네임*"><br>
+	</div>
+	
+	<br><div><span>사진 업로드</span></div>
 	<input type="file" id="imgInp" name="memberPhotoFile">
+	
+	<div style= float: right;">
 	<img id="blah" src="#" alt="your image"/><br>
+	</div>
+	
+	
 	성별 <input type="radio" name="memberGender" value="남"> 남
 	<input type="radio" name="memberGender" value="여"> 여 <br>
-	휴대폰번호 <input type="text" name="memberPhone" placeholder="휴대폰 번호 -없이"><br> 
+	
+	
+	휴대폰번호 <input type="text" name="memberPhone" class="input" placeholder="휴대폰 번호 -없이"><br> 
+	
 	생년월일<input type="Date" name="memberBirth"><br>
+	
 	
 	
 	<input type="checkbox" id="Allagreebox"> 전체동의 <br>
@@ -323,13 +389,50 @@ float:auto;
 	<input type="submit" value="동의하고 회원가입">
 </form>
 </div>
+			
+			
+			
+			
+			
+			</div>
+			
+		</div>
+		<!--footer-->
+		
+		
+		
+		
+		
+		
+		<%@ include file="../commons/bfooter.jspf" %>
+        <!--//footer-->
+	</div>
+	<!-- Classie -->
+		<script src="js/classie.js"></script>
+		<script>
+			var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
+				showLeftPush = document.getElementById( 'showLeftPush' ),
+				body = document.body;
+				
+			showLeftPush.onclick = function() {
+				classie.toggle( this, 'active' );
+				classie.toggle( body, 'cbp-spmenu-push-toright' );
+				classie.toggle( menuLeft, 'cbp-spmenu-open' );
+				disableOther( 'showLeftPush' );
+			};
+			
 
-<script>
-
-	
-
-</script>
-
-<%@ include file="../commons/footer.jspf" %>
+			function disableOther( button ) {
+				if( button !== 'showLeftPush' ) {
+					classie.toggle( showLeftPush, 'disabled' );
+				}
+			}
+		</script>
+	<!--scrolling js-->
+	<script src="js/jquery.nicescroll.js"></script>
+	<script src="js/scripts.js"></script>
+	<!--//scrolling js-->
+	<!-- Bootstrap Core JavaScript -->
+   <script src="js/bootstrap.js"> </script>
 </body>
 </html>
