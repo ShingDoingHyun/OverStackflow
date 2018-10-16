@@ -42,6 +42,12 @@
        width: 90px;
     height: 35px;
     }
+    .photo2 {
+   width: 60px; height: 60px;
+   object-fit: cover;
+   object-position: top;
+   border-radius: 50%;
+}
     
 
     
@@ -75,7 +81,7 @@
 					<div class="clearfix"> </div>
 				</div>
 				<!--notification menu end -->
-		<div class="profile_details" style="margin-top: 20px; margin-right: 30px;">	
+		<div class="profile_details">	
 		
 				
 				
@@ -87,44 +93,15 @@
               <input type="button" class="signup" value="Sign Up" onclick="location.href='<c:url value="/joinChoiceForm"/>'">
               </c:if>
               
-              
-              
-               <!-- 로그인이 되어있는 경우 세션에 있던 memInfo,comInfo 를 제거해줌  -->
-              
-              <c:if test="${memInfo != null}">
-              ${memInfo.memberId}
-              <input type="button" class="logout" value="Logout" onclick="location.href='<c:url value="/logout"/>'">
-              </c:if>
-             
-                 
-                 <c:if test="${comInfo != null}">
-               ${comInfo.comId}
-              <input type="button" class="logout" value="Logout" onclick="location.href='<c:url value="/logout"/>'">
-              </c:if>
-              
-              	<!--  이미지 동그랗게 보임 -->
-              	
-    <div class="right">
-     <c:if test="${memInfo ne null }">
-      <a href="<c:url value='/memberProfile'/>"><img class='photo2' src="<c:url value='/resources/uploadFile/memberPhoto/${memInfo.memberPhoto}'/>"></a>    
-     </c:if>
-
-       <c:if test="${comInfo ne null }">
-        <a href="<c:url value='/comProfile'/>"><img class='photo2' src="<c:url value='/resources/uploadFile/comPhoto/${comInfo.comPhoto}'/>"></a> 
-         </c:if> 
-</div>
-              
-              
-              
-              
-					<!-- <ul>
+    
+ <c:if test="${memInfo != null}">              
+				<ul>
 						<li class="dropdown profile_details_drop">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 								<div class="profile_img">	
-									<span class="prfil-img"><img src="images/a.png" alt=""> </span> 
+									<span class="prfil-img"><img class='photo2' src="<c:url value='/resources/uploadFile/memberPhoto/${memInfo.memberPhoto}'/>"> </span> 
 									<div class="user-name">
-										<p>Wikolia</p>
-										<span>Administrator</span>
+										<p>${memInfo.memberId}</p>					
 									</div>
 									<i class="fa fa-angle-down lnr"></i>
 									<i class="fa fa-angle-up lnr"></i>
@@ -134,10 +111,34 @@
 							<ul class="dropdown-menu drp-mnu">
 								<li> <a href="#"><i class="fa fa-cog"></i> Settings</a> </li> 
 								<li> <a href="#"><i class="fa fa-user"></i> Profile</a> </li> 
-								<li> <a href="#"><i class="fa fa-sign-out"></i> Logout</a> </li>
+								<li> <a onclick="location.href='<c:url value="/logout"/>'"><i class="fa fa-sign-out"></i> Logout</a> </li>
 							</ul>
 						</li>
-					</ul> -->
+					</ul> 
+					</c:if>
+	 <c:if test="${comInfo != null}">
+	 <ul>
+						<li class="dropdown profile_details_drop">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+								<div class="profile_img">	
+									<span class="prfil-img"><img class='photo2' src="<c:url value='/resources/uploadFile/comPhoto/${comInfo.comPhoto}'/>"> </span> 
+									<div class="user-name">
+										<p>${comInfo.comId}</p>					
+									</div>
+									<i class="fa fa-angle-down lnr"></i>
+									<i class="fa fa-angle-up lnr"></i>
+									<div class="clearfix"></div>	
+								</div>	
+							</a>
+							<ul class="dropdown-menu drp-mnu">
+								<li> <a href="#"><i class="fa fa-cog"></i> Settings</a> </li> 
+								<li> <a href="#"><i class="fa fa-user"></i> Profile</a> </li> 
+								<li> <a onclick="location.href='<c:url value="/logout"/>'"><i class="fa fa-sign-out"></i> Logout</a> </li>
+							</ul>
+						</li>
+					</ul> 
+	
+					</c:if>
 				</div>
 				<div class="clearfix"> </div>				
 			</div>
