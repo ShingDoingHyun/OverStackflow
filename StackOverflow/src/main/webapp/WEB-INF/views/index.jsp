@@ -48,7 +48,15 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 <link href="css/custom.css" rel="stylesheet">
 <!--//Metis Menu -->
 </head> 
-<body class="cbp-spmenu-push">
+<style>
+#mainImage:hover{
+	
+	opacity: 0.8;
+
+}
+
+</style>
+<body class="cbp-spmenu-push cbp-spmenu-push-toright ">
 	<div class="main-content">
 	
 		<!--left-fixed -navigation-->
@@ -64,18 +72,16 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 		
 		
 		<!-- main content start-->
-		<div id="page-wrapper">
-		
-		
+
+		<div id="page-wrapper" style="width: 100%; padding-left: 0; padding-right: 0; padding-bottom: 0;padding-top: 65px">
+				<a href="<c:url value="/popQuestionList"/>"><img id="mainImage"src="<c:url value='/img/main.jpg'/>" style="width: 100%;cursor:pointer;">
+				</a>
+
 		
 			<div class="main-page">
-			
-			
-			
-			
-			
 			</div>
-			
+
+		</div>
 		</div>
 		<!--footer-->
 		
@@ -107,6 +113,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 					classie.toggle( showLeftPush, 'disabled' );
 				}
 			}
+
 		</script>
 	<!--scrolling js-->
 	<script src="js/jquery.nicescroll.js"></script>
