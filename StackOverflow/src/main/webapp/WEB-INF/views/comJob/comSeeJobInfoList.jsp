@@ -96,6 +96,13 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 	   cursor: pointer;
 	 }
 	 
+/*  	input[type=button]{
+		border: 0;
+		outline: 0;
+		height: 25px;
+		margin-right: 4px;
+	}  */
+	 
 </style>
 </head>
 <body class="cbp-spmenu-push">
@@ -188,7 +195,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 			</tr>
 			
 		     <tr>
-			 <td colspan="2" style="text-align:center;"><input type="submit" value="검색"></td>
+			 <td colspan="2" style="text-align:center;"><input type="submit"  value="검색" ></td>
 			 <tr>
 			 </table>
 			 </form>

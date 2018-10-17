@@ -311,14 +311,9 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 <!----------------------My Script--------------------------------------->
 <script>
 $(function(){
-	var str = $("textarea").val();
-	str = str.split("<br/>").join("\r\n");
-	$("textarea").val(str);
-
 	
 	var jobNo = parseInt(${jobInfo.jobNo});
  	var list = new cookieList("visitJobInfo");
- 	
  	var cookies  = [];
  	var cookie = null;
  	cookies = getCookie("visitJobInfo").split(",");

@@ -116,9 +116,7 @@ public class ComJobController {
     	if(comInfo != null) {
     		String comId = comInfo.getComId();
 	    	if(comId != null) {
-/*	    		JobInfo jobInfo = new JobInfo();
-	    		jobInfo.setComId(comId);*/
-	    		System.out.println(comId);
+	    		System.out.println("yo"+comId);
 	    		//나의 채용공고 불러오기
 	    		model.addAttribute("myJobInfoListView", comJobDaoImpl.selectMyJobInfoList(pageNumber, comId));
 	    		//즐겨찾기한 채용공고 불러오기
@@ -128,7 +126,6 @@ public class ComJobController {
     	
     	//방문한 채용공고 불러오기 - 쿠키
     	Cookie[] cookies = request.getCookies();
-  
     	if(cookies.length>0) {
     		model.addAttribute("visitJobInfoList", comJobDaoImpl.selectVisitJobInfo(cookies));
     	}
