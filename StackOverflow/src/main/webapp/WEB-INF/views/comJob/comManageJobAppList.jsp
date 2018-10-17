@@ -6,8 +6,44 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="<%= request.getContextPath() %>/css/index.css" type="text/css" media="all" />
+<!-----------------------------head ----------------------------------------->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Novus Admin Panel Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- Bootstrap Core CSS -->
+<link href="<%=request.getContextPath()%>/css/bootstrap.css" rel='stylesheet' type='text/css' />
+<!-- Custom CSS -->
+<link href="<%=request.getContextPath()%>/css/style.css" rel='stylesheet' type='text/css' />
+<!-- font CSS -->
+<!-- font-awesome icons -->
+<link href="<%=request.getContextPath()%>/css/font-awesome.css" rel="stylesheet"> 
+<!-- //font-awesome icons -->
+ <!-- js-->
+<script src="<%=request.getContextPath()%>/js/jquery-1.11.1.min.js"></script>
+<script src="<%=request.getContextPath()%>/js/modernizr.custom.js"></script>
+<!--webfonts-->
+<link href='//fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
+<!--//webfonts--> 
+<!--animate-->
+<link href="<%=request.getContextPath()%>/css/animate.css" rel="stylesheet" type="text/css" media="all">
+<script src="<%=request.getContextPath()%>/js/wow.min.js"></script>
+	<script>
+		 new WOW().init();
+	</script>
+<!--//end-animate-->
+<!-- chart -->
+<script src="<%=request.getContextPath()%>/cjs/Chart.js"></script>
+<!-- //chart -->
+<!--Calender-->
+
+<!--End Calender-->
+<!-- Metis Menu -->
+<script src="<%=request.getContextPath()%>/js/metisMenu.min.js"></script>
+<script src="<%=request.getContextPath()%>/js/custom.js"></script>
+<link href="<%=request.getContextPath()%>/css/custom.css" rel="stylesheet">
+<!-----------------------------head End----------------------------------------->
 <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <title>지원서 관리</title>
@@ -49,13 +85,13 @@ td, .th tr td {
    width: 10%;
  }
  
- .appcontent img{
+/*  .appcontent img{
   float: left;
- }
+ } */
  
- .appcontent div:nth-child(1){
+/*  .appcontent div:nth-child(1){
   float: left;
- }
+ } */
  
  #accordian tr:nth-child(2n){
  	display: none;
@@ -90,20 +126,24 @@ td, .th tr td {
  
 </style>
 </head>
-<body>
-
-<!----------------------header--------------------------------------->
-<%@ include file="../commons/header.jspf" %>
-<!----------------------header End--------------------------------------->
-
-
-<!----------------------left menu--------------------------------------->
-<%@ include file="../commons/left.jspf" %>
-<!----------------------left menu End--------------------------------------->
-
+<body class="cbp-spmenu-push">
+	<div class="main-content">
+	
+	<!--left-fixed -navigation-->
+		<%@ include file="../commons/bleft.jspf" %>
+	<!--left-fixed -navigation-->
+	
+	<!-- header-starts -->
+		<%@ include file="../commons/bheader.jspf" %>
+	<!-- //header-ends -->
+		
+	<!-- main content start-->
+	<div id="page-wrapper">
+	
 <!----------------------main--------------------------------------->
+<div class="main-page">
 
-<div class="leftleft" style="float:left; width:9%; height:100%; margin-left:120px; margin-right:15px; padding-top:90px; position:fixed; top:0;">
+<div class="leftleft" style="float:left; width:9%; height:100%; margin-right:15px; padding-top:120px; position:fixed; top:0;">
 
 	<a href="#" style="font-weight:bold;color:orange;">결과 유형</a>
 	<a href="<%=request.getContextPath()%>/comJob/manageJobAppListByAppResult/${job.jobNo == null? 0: job.jobNo}/all">전체</a>
@@ -117,26 +157,26 @@ td, .th tr td {
 <div class="right">
 	<input type="button" value="채용 공고 관리" onclick="location.href='<c:url value="/comJob/manageJobInfoList/1"/>'">
 	<input type="button" value="새로운 채용 공고 작성" onclick="location.href='<c:url value="/comJob/writeJobInfo"/>'">
-   	<a href="#appForm"><img src="http://icons.iconarchive.com/icons/graphicloads/100-flat-2/256/arrow-up-icon.png" width="4%" 
+   	<a href="#m"><img src="http://icons.iconarchive.com/icons/graphicloads/100-flat-2/256/arrow-up-icon.png" width="4%" 
    	style="position:fixed; bottom: 10px;"></a>
 </div>
 
-<div class="main">
+<div class="main" id="m">
 
     
     <!-- 채용공고 선택 -->
     <form id="appForm">
-	<select id="appselect">
+	<select id="appselect" style="padding: 1%; width: 60%;">
 		<option value="0">전체</option>
 		<c:forEach var="jobInfo" items="${jobInfoList}">
 		<option value="${jobInfo.jobNo}" ${jobInfo.jobNo == job.jobNo? 'selected': ''}>${jobInfo.jobTitle} - ${jobInfo.jobRegisterDate}</option>
 		</c:forEach>
 	</select>
-	<input type="button" value="확인" onclick="return appSelect()">
+	<input type="button" value="확인" onclick="return appSelect()" style="padding: 1%;">
 	</form>
 	
 	<!-- 지원서 관리 -->
-	<div class="left">
+	<div class="left" style="margin-top:3%;">
 	 <h2>지원자 관리</h2>
 	 <c:if test="${job.jobTitle != null and job.jobTitle != ''}">
 	 	<span style="font-size:15px;">${job.jobTitle}(${jobAppNum})</span>
@@ -165,19 +205,19 @@ td, .th tr td {
 					<p style="color:orange; font-weight:bold; font-size: 15px;">학력</p>
 					<c:forEach  var="eduLevel" items="${graph.eduLevel}">
 						<c:if test="${eduLevel.appEduLevel == 'highschool'}">
-							고졸이하 : ${eduLevel.appEduCount} <br>
+							고졸이하 : <span style="font-size:20px; font-weight:bold;">${eduLevel.appEduCount}</span><br>
 						</c:if>
 						<c:if test="${eduLevel.appEduLevel == 'col'}">
-							대학(2/3) : ${eduLevel.appEduCount} <br>
+							대학(2/3) : <span style="font-size:20px; font-weight:bold;">${eduLevel.appEduCount}</span><br>
 						</c:if>
 						<c:if test="${eduLevel.appEduLevel == 'univ'}">
-							대학(4) : ${eduLevel.appEduCount} <br>
+							대학(4) : <span style="font-size:20px; font-weight:bold;">${eduLevel.appEduCount}</span><br>
 						</c:if>
 						<c:if test="${eduLevel.appEduLevel == 'master'}">
-							석사 : ${eduLevel.appEduCount} <br>
+							석사 : <span style="font-size:20px; font-weight:bold;">${eduLevel.appEduCount}</span><br>
 						</c:if>
 						<c:if test="${eduLevel.appEduLevel == 'doctor'}">
-							박사 : ${eduLevel.appEduCount} <br>
+							박사 : <span style="font-size:20px; font-weight:bold;">${eduLevel.appEduCount}</span><br>
 						</c:if>
 					</c:forEach>
 				</td>
@@ -252,7 +292,7 @@ td, .th tr td {
 							  </div>
 							  
 							  <div>
-							  	<label>자기소개<br>
+							  	<label>자기소개</label><br>
 							  	<div class="border" style="margin-top: 18%;"> ${jobApp.appIntroduction}<br></div>
 							  	
 							  	<label style="margin-top: 3%;">입사 포부</labe><br>
@@ -312,14 +352,47 @@ td, .th tr td {
 			</c:forEach>
 		</table>
 		</c:if>
+		</div>
+		</div>
+		</div>
 	 </div>
 </div>
 
 <!----------------------main end--------------------------------------->
 
 <!----------------------footer--------------------------------------->
-	<%@ include file="../commons/footer.jspf" %>
+	<%@ include file="../commons/bfooter.jspf" %>
 <!----------------------footer End--------------------------------------->
+
+<!----------------------boothStrap Script--------------------------------------->
+<script src="<%=request.getContextPath()%>/js/classie.js"></script>
+	<script>
+		var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
+			showLeftPush = document.getElementById( 'showLeftPush' ),
+			body = document.body;
+			
+		showLeftPush.onclick = function() {
+			classie.toggle( this, 'active' );
+			classie.toggle( body, 'cbp-spmenu-push-toright' );
+			classie.toggle( menuLeft, 'cbp-spmenu-open' );
+			disableOther( 'showLeftPush' );
+		};
+		
+
+		function disableOther( button ) {
+			if( button !== 'showLeftPush' ) {
+				classie.toggle( showLeftPush, 'disabled' );
+			}
+		}
+	</script>
+<!--scrolling js-->
+<script src="<%=request.getContextPath()%>/js/jquery.nicescroll.js"></script>
+<script src="<%=request.getContextPath()%>/js/scripts.js"></script>
+<!--//scrolling js-->
+<!-- Bootstrap Core JavaScript -->
+ <script src="<%=request.getContextPath()%>/js/bootstrap.js"> </script> 
+<!----------------------boothStrap Script End--------------------------------------->  
+<!----------------------My Script--------------------------------------->
 
 <script>
 //면접 결과 통보
@@ -448,5 +521,6 @@ function drawVisualization(){
 
  */
 </script>
+<!----------------------My Script End--------------------------------------->
 </body>
 </html>

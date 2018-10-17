@@ -123,8 +123,14 @@ public class ComJobDaoImpl extends DaoImpl implements ComJobDao {
         ComRegInfo comInfo =  (ComRegInfo) request.getSession().getAttribute("comInfo");
 
         for(JobInfo jobInfo : jobInfoList) {
+        	
+        	int jobNo = jobInfo.getJobNo();
+        	ComMember com = sqlSession.selectOne(JOBNAMESPACE + "selectJobInfoCom", jobNo);
+        	jobInfo.setComName(com.getComName());
+        	
         	if(comInfo != null) {
 	        	if(comInfo.getComId() != null) {
+	        		
 	        	Map map = new HashMap();
 	        	map.put("jobNo", jobInfo.getJobNo());
 	        	map.put("comId", comInfo.getComId());
@@ -182,6 +188,11 @@ public class ComJobDaoImpl extends DaoImpl implements ComJobDao {
 	@Override
 	public JobInfo selectJobInfo(int jobNo) {
 		return sqlSession.selectOne(JOBNAMESPACE + "selectJobInfo", jobNo);
+	}
+	
+	@Override
+	public ComMember selectJobInfoCom(int jobNo) {
+		return sqlSession.selectOne(JOBNAMESPACE + "selectJobInfoCom", jobNo);
 	}
 	
 	@Override

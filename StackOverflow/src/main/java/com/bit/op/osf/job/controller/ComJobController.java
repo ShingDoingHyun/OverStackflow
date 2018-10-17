@@ -1,5 +1,4 @@
 package com.bit.op.osf.job.controller;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -47,17 +46,32 @@ public class ComJobController {
 	
 	//채용 공고 작성 폼
     @RequestMapping(value="/comJob/writeJobInfo", method=RequestMethod.GET)
-	public String openWriteJobInfo(HttpServletRequest request, Model model) {
-      String comId = "test1";
-      model.addAttribute("comMember", comJobDaoImpl.selectComMember(comId));
+	public String openWriteJobInfo(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
+    	ComRegInfo comInfo= (ComRegInfo) request.getSession().getAttribute("comInfo");
+    	response.setContentType("text/html; charset=UTF-8");
+    	PrintWriter out = response.getWriter();
+
+        if(comInfo != null) {
+    	  String comId = comInfo.getComId();
+      	  if(comId != null) {
+      		  model.addAttribute("comMember", comJobDaoImpl.selectComMember(comId));
+      	  }else {
+  			out.println("<script>alert('로그인 후 이용해 주세요.'); history.back();</script>");
+  			out.flush(); 
+      	  }
+        }else {
+  		out.println("<script>alert('로그인 후 이용해 주세요.'); history.back();</script>");
+  		out.flush(); 
+        }
+      		  
 	  return "comJob/comInsertJobInfo";
 	}
     
     //채용 공고 작성 실행
     @RequestMapping(value="/comJob/writeJobInfo", method=RequestMethod.POST)
-    public String insertJobInfo(HttpServletRequest request, JobInfo jobInfo, Model model){
-      
-      String result = null;	
+    public String insertJobInfo(HttpServletRequest request, JobInfo jobInfo, Model model) throws IOException{
+    
+      String result = null;
       int jobNo = 0;
       comJobDaoImpl.insertJobInfo(jobInfo);
       System.out.println(comJobDaoImpl.selectJobno());
@@ -70,6 +84,7 @@ public class ComJobController {
       }
       model.addAttribute("result", result);
       model.addAttribute("disting", "insert");
+
       return "comJob/comJobInfoCheck";
 	}
     
@@ -127,30 +142,45 @@ public class ComJobController {
     	
     	model.addAttribute("jobTypeList", comJobDaoImpl.selectJobTypeList(jobNo));
     	model.addAttribute("jobInfo", comJobDaoImpl.selectJobInfo(jobNo));
+    	model.addAttribute("comMem", comJobDaoImpl.selectJobInfoCom(jobNo));
         return "comJob/comSeeJobInfo";
     }
     
     //채용 공고 관리 페이지
     @RequestMapping(value="/comJob/manageJobInfoList/{page}", method=RequestMethod.GET)
-    public String selectJobInfoManageList(@PathVariable("page") String pageNumberStr, HttpServletRequest request , SearchJob search, Model model) throws IOException{
-		String comId = "test1";
-    	int pageNumber =1;
-    	String[] jobTypeList = null;
-    	
-        //페이징 설정
-        if(pageNumberStr!=null) {
-        	pageNumber =Integer.parseInt(pageNumberStr);
-        }
-        
-    	//jobTypeList
-    	if(request.getParameter("jobType")!=null) {
-      	  jobTypeList = request.getParameterValues("jobType");
+    public String selectJobInfoManageList(@PathVariable("page") String pageNumberStr, HttpServletRequest request, HttpServletResponse response, SearchJob search, Model model) throws IOException{
+    	ComRegInfo comInfo= (ComRegInfo) request.getSession().getAttribute("comInfo");
+    	response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		
+    	if(comInfo != null) {
+    		String comId = comInfo.getComId();
+    		if(comId != null) {
+	    	int pageNumber =1;
+	    	String[] jobTypeList = null;
+	    	
+	        //페이징 설정
+	        if(pageNumberStr!=null) {
+	        	pageNumber =Integer.parseInt(pageNumberStr);
+	        }
+	        
+	    	//jobTypeList
+	    	if(request.getParameter("jobType")!=null) {
+	      	  jobTypeList = request.getParameterValues("jobType");
+	    	}
+	    	search.setJobTypeList(jobTypeList);
+	    	System.out.println(search);
+	
+	        model.addAttribute("jobInfoListView", comJobDaoImpl.selectJobInfoListPage(pageNumber, comId, search, request));
+	        model.addAttribute("search", search);
+    		}else{
+    			out.println("<script>alert('로그인 후 이용해 주세요.'); history.back();</script>");
+    			out.flush(); 
+    		}
+    	}else {
+    		out.println("<script>alert('로그인 후 이용해 주세요.'); history.back();</script>");
+			out.flush(); 
     	}
-    	search.setJobTypeList(jobTypeList);
-    	System.out.println(search);
-
-        model.addAttribute("jobInfoListView", comJobDaoImpl.selectJobInfoListPage(pageNumber, comId, search, request));
-        model.addAttribute("search", search);
 
     	return "comJob/comManageJobInfoList";
     }

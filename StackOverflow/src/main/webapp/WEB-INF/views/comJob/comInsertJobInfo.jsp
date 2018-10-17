@@ -1,15 +1,50 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<% request.setCharacterEncoding("UTF-8"); %>
 <html>
 <head>
-<link rel="stylesheet" href="<%= request.getContextPath() %>/css/index.css" type="text/css" media="all" />
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-----------------------------head ----------------------------------------->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Novus Admin Panel Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- Bootstrap Core CSS -->
+<link href="<%=request.getContextPath()%>/css/bootstrap.css" rel='stylesheet' type='text/css' />
+<!-- Custom CSS -->
+<link href="<%=request.getContextPath()%>/css/style.css" rel='stylesheet' type='text/css' />
+<!-- font CSS -->
+<!-- font-awesome icons -->
+<link href="<%=request.getContextPath()%>/css/font-awesome.css" rel="stylesheet"> 
+<!-- //font-awesome icons -->
+ <!-- js-->
+<script src="<%=request.getContextPath()%>/js/jquery-1.11.1.min.js"></script>
+<script src="<%=request.getContextPath()%>/js/modernizr.custom.js"></script>
+<!--webfonts-->
+<link href='//fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
+<!--//webfonts--> 
+<!--animate-->
+<link href="<%=request.getContextPath()%>/css/animate.css" rel="stylesheet" type="text/css" media="all">
+<script src="<%=request.getContextPath()%>/js/wow.min.js"></script>
+	<script>
+		 new WOW().init();
+	</script>
+<!--//end-animate-->
+<!-- chart -->
+<script src="<%=request.getContextPath()%>/cjs/Chart.js"></script>
+<!-- //chart -->
+<!--Calender-->
+
+<!--End Calender-->
+<!-- Metis Menu -->
+<script src="<%=request.getContextPath()%>/js/metisMenu.min.js"></script>
+<script src="<%=request.getContextPath()%>/js/custom.js"></script>
+<link href="<%=request.getContextPath()%>/css/custom.css" rel="stylesheet">
+<!-----------------------------head End----------------------------------------->
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
-<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+<!-- <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet"> -->
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
 <link href="<%=request.getContextPath()%>/summernote/summernote.css" rel="stylesheet">
@@ -33,10 +68,17 @@
 	
 	#accordian li >h1{ 
 	cursor:pointer;
-	font-size: 30px;
+	font-size: 20px;
 	border: 1px solid black;
+	padding-top: 1%;
+	padding-bottom: 1%;
+	padding-left: 3%;
 	}
 	
+	#accordian li >h1+div{
+		padding: 2%;
+	}
+
 	#accordian ul{
 	 padding-left: 0px;
 	}
@@ -44,57 +86,62 @@
 	#accordian{
 	border: 1px solid black;
 	width: 100%;
+	margin-left: 10%;
 	}
 	
-	#accordian #title{
-	margin: 0px auto;
-	text-align: center;
+	#title{
+	
+	margin-bottom: 5%;
+	/* text-align: center; */
 	}
 
 </style>
 </head>
-<body>
-<div>
-<!----------------------header--------------------------------------->
-<%@ include file="../commons/header.jspf" %>
-<!----------------------header End--------------------------------------->
-
-
-<!----------------------left menu--------------------------------------->
-<%@ include file="../commons/left.jspf" %>
-<!----------------------left menu End--------------------------------------->
+<body class="cbp-spmenu-push">
+	<div class="main-content">
+	
+	<!--left-fixed -navigation-->
+		<%@ include file="../commons/bleft.jspf" %>
+	<!--left-fixed -navigation-->
+	
+	<!-- header-starts -->
+		<%@ include file="../commons/bheader.jspf" %>
+	<!-- //header-ends -->
+		
+	<!-- main content start-->
+	<div id="page-wrapper">
 
 <!----------------------main--------------------------------------->
-
+<div class="main-page">
 <div class="main">
 	<form action="<%=request.getContextPath()%>/comJob/writeJobInfo" method="post" name="jobForm" >
+	 <h2 id="title" > 채용 공고 작성</h2>
 	<div id="accordian">
-	 	<h1 id="title"> 채용 공고 작성</h1>
 		<ul>
 			<li>
 				<h1>모집 부문 및 자격 요건<span class="ico_ar">▼</span></h1>
 					<div>
-					 <label>채용 제목</label>
-					 <input type="text" name="jobTitle"><br>
+					 <label>채용 제목</label> &nbsp;
+					 <input type="text" name="jobTitle" style="width:60%; margin-bottom: 1%; padding:2px;"><br>
 					 
-					 <label>모집 분야</label>
-					 <input type="text" name="jobField"><br>
+					 <label>모집 분야</label>  &nbsp;
+					 <input type="text" name="jobField" style="width:60%; margin-bottom: 1%; padding:2px;"><br>
 					 
 					 <label>고용 형태</label>
 					 <input type="checkbox" name="jobType" value="permanent">정규직
 					 <input type="checkbox" name="jobType" value="contract">계약직
 					 <input type="checkbox" name="jobType" value="intern">인턴직
-					 <input type="checkbox" name="jobType" value="partTimeJob">아르바이트<br>
+					 <input type="checkbox" name="jobType" value="partTimeJob" style="margin-bottom: 2%;">아르바이트<br>
 					 
-					 <label>담당 업무</label>
-					 <textarea name="jobRequiredTask" ></textarea><br>
+					 <label>담당 업무</label><br>
+					 <textarea name="jobRequiredTask" style="width:80%; height:150px; margin-bottom: 2%;"></textarea><br>
 					 
-					 <label>지원 자격</label>
-					 <textarea name="jobQualification" ></textarea><br>
+					 <label>지원 자격</label><br>
+					 <textarea name="jobQualification" style="width:80%;  height:150px; margin-bottom: 2%;" ></textarea><br>
 					 
-					 <label>관련 태그</label>
+<!-- 				 <label>관련 태그</label>
 					 <input type="text" name="jobTagList">
-					 <input type="button" value="태그선택"  onclick="" ><br>
+					 <input type="button" value="태그선택"  padding:2px; onclick="" ><br> -->
 					</div>
 			</li>
 			
@@ -102,29 +149,28 @@
 				<h1>근무 조건 및 환경<span class="ico_ar">▼</span></h1>
 					<div>
 					 <label>근무 지역</label> 
-					 <input type="checkbox" value="기본 회사 주소와 동일">기본 회사 주소와 동일<br> 
-					 <input type="text" name="jobLocation" id="jobLocation">
-					 <input type="text" name="jobZipcode" id="jobZipcode">
+					 <input type="text" name="jobLocation" id="jobLocation" style="width:30%; padding:2px;">
+					 <input type="text" name="jobZipcode" id="jobZipcode" style="width:30%; margin-bottom: 1%; padding:2px;">
 					 <input type="button" value="위치 찾기" id="jobLo" onclick="findJobLocation()"><br>
 					 
 					 <label>근무 시간</label>
-					 <input type="text" name="jobWorkTime"><br>
+					 <input type="text" name="jobWorkTime" style="width:30%; margin-bottom: 1%; padding:2px;"><br>
 					 
 					 <label>급여 조건</label>
-					 <input type="radio" name="jobPayType" value="year">연(Year)
-					 <input type="radio" name="jobPayType" value="month">월(Month)
-					 <input type="radio" name="jobPayType" value="day">일(Day)<br>
-					 <input type="text" name="jobPayAmount"><br>
+					 <input type="radio" name="jobPayType" value="year">연(Year) &nbsp;
+					 <input type="radio" name="jobPayType" value="month">월(Month) &nbsp; 
+					 <input type="radio" name="jobPayType" value="day">일(Day) &nbsp;&nbsp;
+					 <input type="text" name="jobPayAmount" style="width:30%; margin-bottom: 2%; padding:2px;"><br>
 					 
-					 <label>복리 후생</label>
-					 <textarea name="jobBenefits" ></textarea><br>
+					 <label>복리 후생</label><br>
+					 <textarea name="jobBenefits" style="width:80%;  height:150px; margin-bottom: 2%;""></textarea><br>
 					</div>
 			</li>
 			
 			<li>
 				<h1>내용 작성 및 첨부 파일 업로드<span class="ico_ar">▼</span></h1>
 					<div>
-				      <label>채용 공고 내용</label>
+				      <label>채용 공고 내용</label><br>
 				      <textarea name="jobContent" class="summernote"></textarea> 
 					</div>
 			</li>
@@ -132,18 +178,17 @@
 			<li>
 				<h1>기업 정보<span class="ico_ar">▼</span></h1>
 					<div>
-					  <label>회사 아이디</label>
-					  <input type="text"  name="comId" value="${comMember.comId}"><br>  <!-- hidden -->
+					  <input type="hidden"  name="comId" value="${comMember.comId}"><br>  <!-- hidden -->
 						
 					  <label>회사 이름</label>
-					  <input type="text" value="${comMember.comName}" readonly="readonly"><br>
+					  <input type="text" value="${comMember.comName}" style="width:60%; padding:2px; margin-bottom: 1%;" readonly="readonly" ><br>
 					  
 					  <label>회사 위치</label>
-					  <input type="text"  value="${comMember.comAddress}" readonly="readonly">
-					  <input type="text"  value="${comMember.comZipcode}" readonly="readonly"><br>
+					  <input type="text"  value="${comMember.comAddress}" style="width:30%; padding:2px; margin-bottom: 1%;" readonly="readonly">
+					  <input type="text"  value="${comMember.comZipcode}" style="width:30%; padding:2px;" readonly="readonly"><br>
 					  
-					  <label>연락처</label>
-					  <input type="text" value="${comMember.comCall}" readonly="readonly"><br>
+					  <label>연락처</label> &nbsp;&nbsp;&nbsp;
+					  <input type="text" value="${comMember.comCall}" style="width:50%; margin-bottom: 2%; padding:2px;" readonly="readonly"><br>
 					  
 					  <label>회사 소개</label>
 					 <textarea name="comIntroduction" class="summernote" value="${comMember.comIntroduction}"></textarea><br>
@@ -153,24 +198,24 @@
 			<li>
 				<h1>접수 기간 및 방법<span class="ico_ar">▼</span></h1>
 					<div>
-					  <label>접수 마감 날짜</label>
-					  <input type="Date" name="jobDueDate"><br>
+					  <label>접수 마감 날짜</label>  &nbsp;
+					  <input type="Date" name="jobDueDate" style="width:30%; margin-bottom: 2%; padding:2px;"><br>
 					  
-					  <label>접수 방법</label>
-					  <input type="radio" name="jobApplyType" value="homepageURL">자사 홈페이지에서 접수
-					  <input type="text" name="jobHomePageUrl" value="${comMember.comHomePageUrl}"><br>
+					  <label>접수 방법</label><br>
+					  <input type="radio" name="jobApplyType" value="homepageURL">자사 홈페이지에서 접수 &nbsp;&nbsp;&nbsp;
+					  <input type="text" name="jobHomePageUrl" value="${comMember.comHomePageUrl}" style="width:30%; margin-bottom: 1%; padding:2px;"><br>
 					  
-					  <input type="radio" name="jobApplyType" value="email">담당자 이메일로 바로 접수
-					  <input type="text" name="jobChargerSendEmail" value="${comMember.comChargerEmail}"><br>
+					  <input type="radio" name="jobApplyType" value="email">담당자 이메일로 바로 접수 &nbsp;
+					  <input type="text" name="jobChargerSendEmail" value="${comMember.comChargerEmail}" style="width:30%; margin-bottom: 1%; padding:2px;"><br>
 					  
-					  <input type="radio" name="jobApplyType" value="etc">기타
-					  <textarea name="jobEtc"></textarea><br>
+					  <input type="radio" name="jobApplyType" value="etc">기타<br>
+					  <textarea name="jobEtc" style="width:80%; height:150px; margin-bottom: 2%;"></textarea><br>
 					  
-					  <label>담당자 이름</label>
-					  <input type="text" name="jobChargerName" value="${comMember.comChargerName}"><br>
+					  <label>담당자 이름</label>  &nbsp;&nbsp;&nbsp;
+					  <input type="text" name="jobChargerName" value="${comMember.comChargerName}" style="width:30%;margin-bottom: 1%;padding:2px;"><br>
 					  
-					  <label>담당자 이메일</label>
-					  <input type="text" name="jobChargerEmail"  value="${comMember.comChargerEmail}">
+					  <label>담당자 이메일</label>  &nbsp;
+					  <input type="text" name="jobChargerEmail"  value="${comMember.comChargerEmail}" style="width:30%; margin-bottom: 3%; padding:2px;">
 					  
 					</div>
 			</li>
@@ -180,35 +225,50 @@
 	</div>
 	</form>
 	</div>
+	</div>
+	</div>
 </div>
 
 
 <!----------------------main end--------------------------------------->
 
 <!----------------------footer--------------------------------------->
-	<%@ include file="../commons/footer.jspf" %>
+	<%@ include file="../commons/bfooter.jspf" %>
 <!----------------------footer End--------------------------------------->
+
+<!----------------------boothStrap Script--------------------------------------->
+<script src="<%=request.getContextPath()%>/js/classie.js"></script>
+	<script>
+		var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
+			showLeftPush = document.getElementById( 'showLeftPush' ),
+			body = document.body;
+			
+		showLeftPush.onclick = function() {
+			classie.toggle( this, 'active' );
+			classie.toggle( body, 'cbp-spmenu-push-toright' );
+			classie.toggle( menuLeft, 'cbp-spmenu-open' );
+			disableOther( 'showLeftPush' );
+		};
+		
+
+		function disableOther( button ) {
+			if( button !== 'showLeftPush' ) {
+				classie.toggle( showLeftPush, 'disabled' );
+			}
+		}
+	</script>
+<!--scrolling js-->
+<script src="<%=request.getContextPath()%>/js/jquery.nicescroll.js"></script>
+<script src="<%=request.getContextPath()%>/js/scripts.js"></script>
+<!--//scrolling js-->
+<!-- Bootstrap Core JavaScript -->
+ <script src="<%=request.getContextPath()%>/js/bootstrap.js"> </script> 
+<!----------------------boothStrap Script End--------------------------------------->  
+<!----------------------My Script--------------------------------------->
+
 <script>
 
 $(function(){
-	//아코디언 형식
-	$("#accordian h1").click(function(){
-		$("#accordian ul div").slideUp();
-		/* $('.ico_ar').css('transform','none'); */
-		if(!$(this).next().is(":visible"))
-		{
-			$(this).next().slideDown(); 
-		} 
-	})
-	
-	var str1 = document.jobForm.jobRequiredTask.val();
-	var str2 = document.jobForm.jobQualification.val();
-	var str3 = document.jobForm.jobBenefits.val();
-	var str5 = document.jobForm.jobEtc.val();
-	
-	alert(str1);
-	alert(str2);
-	
 	$(".summernote").summernote({
 				lang : "ko-KR",
 				height : 300,
@@ -225,8 +285,22 @@ $(function(){
 			            }
 			        }
 				}
-				
 	});
+	
+	var str = $("textarea").val();
+	str = str.replace(/(?:\r\n|\r|\n)/g, "<br/>");
+	$("textarea").val(str);
+	
+	
+	//아코디언 형식
+/* 	$("#accordian h1").click(function(){
+		$("#accordian ul div").slideUp();
+		$('.ico_ar').css('transform','none'); 
+		if(!$(this).next().is(":visible"))
+		{
+			$(this).next().slideDown(); 
+		} 
+	}); */
 });
 
 function sendFile(file, el) {
@@ -278,8 +352,7 @@ function findJobLocation(){
 
 <!-- 우편번호 찾기 -->
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-	 
-</div>
+<!----------------------My Script End--------------------------------------->
 </body>
 </html>
 

@@ -7,8 +7,44 @@
 <html>
 <head>
 <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="<%= request.getContextPath() %>/css/index.css" type="text/css" media="all" />
+<!-----------------------------head ----------------------------------------->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Novus Admin Panel Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- Bootstrap Core CSS -->
+<link href="<%=request.getContextPath()%>/css/bootstrap.css" rel='stylesheet' type='text/css' />
+<!-- Custom CSS -->
+<link href="<%=request.getContextPath()%>/css/style.css" rel='stylesheet' type='text/css' />
+<!-- font CSS -->
+<!-- font-awesome icons -->
+<link href="<%=request.getContextPath()%>/css/font-awesome.css" rel="stylesheet"> 
+<!-- //font-awesome icons -->
+ <!-- js-->
+<script src="<%=request.getContextPath()%>/js/jquery-1.11.1.min.js"></script>
+<script src="<%=request.getContextPath()%>/js/modernizr.custom.js"></script>
+<!--webfonts-->
+<link href='//fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
+<!--//webfonts--> 
+<!--animate-->
+<link href="<%=request.getContextPath()%>/css/animate.css" rel="stylesheet" type="text/css" media="all">
+<script src="<%=request.getContextPath()%>/js/wow.min.js"></script>
+	<script>
+		 new WOW().init();
+	</script>
+<!--//end-animate-->
+<!-- chart -->
+<script src="<%=request.getContextPath()%>/cjs/Chart.js"></script>
+<!-- //chart -->
+<!--Calender-->
+
+<!--End Calender-->
+<!-- Metis Menu -->
+<script src="<%=request.getContextPath()%>/js/metisMenu.min.js"></script>
+<script src="<%=request.getContextPath()%>/js/custom.js"></script>
+<link href="<%=request.getContextPath()%>/css/custom.css" rel="stylesheet">
+<!-----------------------------head End----------------------------------------->
 <title>채용 공고 관리</title>
 <style>
 .main {
@@ -43,14 +79,22 @@ table {
    border-collapse: collapse;
  }
 
-th, td {
+#tttable th, #tttable td {
    border-bottom: 1px solid #777777;
    padding-top: 15px;
    padding-bottom: 15px;
    font-size: 14px;
    width: 10%;
  }
- 
+	 
+#tttable tr:hover{
+	opacity: 0.5;
+}
+
+.hover:hover{
+	opacity: 0.5;
+}
+
 .editDate{
  	display:none;
  	
@@ -58,18 +102,21 @@ th, td {
  
 </style>
 </head>
-<body>
-
-<!----------------------header--------------------------------------->
-<%@ include file="../commons/header.jspf" %>
-<!----------------------header End--------------------------------------->
-
-
-<!----------------------left menu--------------------------------------->
-<%@ include file="../commons/left.jspf" %>
-<!----------------------left menu End--------------------------------------->
-
+<body class="cbp-spmenu-push">
+	<div class="main-content">
+	
+	<!--left-fixed -navigation-->
+		<%@ include file="../commons/bleft.jspf" %>
+	<!--left-fixed -navigation-->
+	
+	<!-- header-starts -->
+		<%@ include file="../commons/bheader.jspf" %>
+	<!-- //header-ends -->
+		
+	<!-- main content start-->
+	<div id="page-wrapper">
 <!----------------------main--------------------------------------->
+<div class="main-page">
 <div class="main">
 	<div class="left">
 	 <h2>채용 공고 관리</h2>
@@ -87,31 +134,51 @@ th, td {
 	 <div class="left">
  	 	<div class="leftup">
 	     <form action="<%=request.getContextPath()%>/comJob/manageJobInfoList/1" id="searchForm" method="get">
-	  		<label>제목</label>
-	 		<input type="text" name="jobTitle" value="${search.jobTitle eq null? '' : search.jobTitle}"><br>
+	  		<table>
+	 		<tr>
+	 		<td><label>제목</label></td>
+	 		<td><input type="text" name="jobTitle" style="width:60%;margin-bottom: 1%;" value="${search.jobTitle eq null? '' : search.jobTitle}"></td>
+	 		</tr>
 	 		
-	 		<label>고용 형태</label>
-	 		 <input type="checkbox" name="jobType" value="permanent" ${search.jobTypeList[0] eq 'permanent'? 'checked' : ''}>정규직
-			 <input type="checkbox" name="jobType" value="contract" ${search.jobTypeList[0] || search.jobTypeList[1] eq 'contract'? 'checked' : ''}>계약직
-			 <input type="checkbox" name="jobType" value="intern" ${search.jobTypeList[0] || search.jobTypeList[1] || search.jobTypeList[2] eq 'intern'? 'checked' : ''}>인턴직
-			 <input type="checkbox" name="jobType" value="partTimeJob" ${search.jobTypeList[0] || search.jobTypeList[1] || search.jobTypeList[2] || search.jobTypeList[3] eq 'partTimeJob'? 'checked' : ''}>아르바이트<br>
-			 
-			<label>근무 지역</label> 
-		     <input type="text" name="jobLocation" value="${search.jobLocation eq null? '' : search.jobLocation}"><br>
-		     
-		     <label>급여 조건</label>
-			 <input type="radio" name="jobPayType" value="year" ${jobInfo.jobPayType eq 'year'? 'checked' : ''}>연(Year)
-			 <input type="radio" name="jobPayType" value="month" ${jobInfo.jobPayType eq 'month'? 'checked' : ''}>월(Month)
-			 <input type="radio" name="jobPayType" value="day" ${jobInfo.jobPayType eq 'day'? 'checked' : ''}>일(Day)
-			 <input type="text" name="jobPayAmount" value="${search.jobPayAmount eq null? '' : search.jobPayAmount}"><br>
-			 
-			 <label>관련 태그</label>
+	 		<tr>
+	 		<td><label>고용 형태</label></td>
+	 		<td>
+	 		 <input type="checkbox" name="jobType" value="permanent" ${search.jobTypeList[0] eq 'permanent'? 'checked' : ''}>정규직 &nbsp;
+			 <input type="checkbox" name="jobType" value="contract" ${search.jobTypeList[0] || search.jobTypeList[1] eq 'contract'? 'checked' : ''}>계약직 &nbsp;
+			 <input type="checkbox" name="jobType" value="intern" ${search.jobTypeList[0] || search.jobTypeList[1] || search.jobTypeList[2] eq 'intern'? 'checked' : ''}>인턴직 &nbsp;
+			 <input type="checkbox" name="jobType" value="partTimeJob" style="margin-bottom:1%;" ${search.jobTypeList[0] || search.jobTypeList[1] || search.jobTypeList[2] || search.jobTypeList[3] eq 'partTimeJob'? 'checked' : ''}>아르바이트 &nbsp;
+			</td>
+			</tr>
+			
+			<tr>
+			<td><label>근무 지역</label></td>
+		    <td><input type="text" name="jobLocation"  style="width:60%; margin-bottom: 1%;" value="${search.jobLocation eq null? '' : search.jobLocation}"></td>
+		    </tr>
+		    
+		    <tr>
+		     <td><label>급여 조건</label></td>
+		     <td>
+			 <input type="radio" name="jobPayType" value="year" ${jobInfo.jobPayType eq 'year'? 'checked' : ''}>연(Year) &nbsp;
+			 <input type="radio" name="jobPayType" value="month" ${jobInfo.jobPayType eq 'month'? 'checked' : ''}>월(Month) &nbsp;
+			 <input type="radio" name="jobPayType" value="day" ${jobInfo.jobPayType eq 'day'? 'checked' : ''}>일(Day) &nbsp;
+			 <input type="text" name="jobPayAmount" style="margin-bottom: 1%;" value="${search.jobPayAmount eq null? '' : search.jobPayAmount}"><br>
+		     <input type="hidden" name="order" id="order">
+			</td>
+			</tr>
+			
+<!-- 	    <tr>
+			 <td><label>관련 태그</label></td>
+			 <td>
 			 <input type="text" name="jobTagList">
 			 <input type="button" value="태그선택"  onclick=""><br>
-			 
 			 <input type="hidden" name="order" id="order">
+			 </td>
+			</tr> -->
 			 
-			 <input type="submit" value="검색">
+			<tr>
+			 <td colspan="2" style="text-align:center;"><input type="submit" value="검색"></td>
+			 </tr>
+			</table>
 		</form>
 		</div>
 		
@@ -129,7 +196,7 @@ th, td {
 		</c:if>
 		
 		<c:if test="${jobInfoListView != null}">
-		<table width="100%">
+		<table width="100%" id="tttable">
 			<tr>
 				<td style="width:20%;">채용공고 제목</td>
 				<td>모집분야</td>
@@ -201,14 +268,48 @@ th, td {
 		</table>
 		</c:if>
 		</div>
+		</div>
+		</div>
+		</div>
 	</div>
 </div>
+
 
 <!----------------------main end--------------------------------------->
 
 <!----------------------footer--------------------------------------->
-	<%@ include file="../commons/footer.jspf" %>
+	<%@ include file="../commons/bfooter.jspf" %>
 <!----------------------footer End--------------------------------------->
+
+<!----------------------boothStrap Script--------------------------------------->
+<script src="<%=request.getContextPath()%>/js/classie.js"></script>
+	<script>
+		var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
+			showLeftPush = document.getElementById( 'showLeftPush' ),
+			body = document.body;
+			
+		showLeftPush.onclick = function() {
+			classie.toggle( this, 'active' );
+			classie.toggle( body, 'cbp-spmenu-push-toright' );
+			classie.toggle( menuLeft, 'cbp-spmenu-open' );
+			disableOther( 'showLeftPush' );
+		};
+		
+
+		function disableOther( button ) {
+			if( button !== 'showLeftPush' ) {
+				classie.toggle( showLeftPush, 'disabled' );
+			}
+		}
+	</script>
+<!--scrolling js-->
+<script src="<%=request.getContextPath()%>/js/jquery.nicescroll.js"></script>
+<script src="<%=request.getContextPath()%>/js/scripts.js"></script>
+<!--//scrolling js-->
+<!-- Bootstrap Core JavaScript -->
+ <script src="<%=request.getContextPath()%>/js/bootstrap.js"> </script> 
+<!----------------------boothStrap Script End--------------------------------------->  
+<!----------------------My Script--------------------------------------->
 <script>
 $(function(){
 	$(".edit").each(function(i){
@@ -249,5 +350,6 @@ function deleteClick(e){
 }
 
 </script>
+<!----------------------My Script End--------------------------------------->
 </body>
 </html>
