@@ -35,4 +35,8 @@ public interface ITagDao {
 
 	int insertNewTagName(Tag tag);
 
+	List<Tag> selectTagRankList();
+
+	void updateTagDeatil(Tag tag);
+
 }

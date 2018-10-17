@@ -237,7 +237,7 @@ margin-right: 4px;
 							<p>${questionBoard.content }</p>
 						</div>
 						<c:forEach items="${questionBoard.tagList }" var="tag" >
-							<a href="<c:url value='/questionList?tagNo=${tag.tagNo }'/>" style="color:white;"><span style="background:#8B9DC3; color:white; width:50px; display:inline-block; text-align: center; border-radius: 2px;border-radius: 10px;">${tag.tagName }</span></a>
+							<a href="<c:url value='/popQuestionList?tagNo=${tag.tagNo }'/>" style="color:white;"><span style="background:#8B9DC3; color:white; width:50px; display:inline-block; text-align: center; border-radius: 2px;border-radius: 10px;">${tag.tagName }</span></a>
 						</c:forEach>
 						<div style="margin-top: 100px;">
 							<a href="">공유</a> <a href="javascript:loginCheck('${questionBoard.memId }', 'openUpdateQuestion/${questionBoard.questionNo }');">수정</a> <a href="javascript:deleteQuestion('${questionBoard.memId }', '/deleteQuestion/${questionBoard.questionNo }');">삭제</a>

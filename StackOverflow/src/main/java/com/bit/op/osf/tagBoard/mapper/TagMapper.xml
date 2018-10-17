@@ -17,6 +17,9 @@
 			</if>
 				;
 	</select>
+	<select id="selecteTagRackList" resultType="com.bit.op.osf.tagBoard.model.Tag">
+		select questiontag.tagNo, tag.tagName, tag.tagDetail, count(*) as count from questiontag, tag where questiontag.tagNo = tag.tagNo  group by tagNo order by count desc limit 0, 9;
+	</select>
 	
 	
 	<select id="selectTagMainNameList" resultType="com.bit.op.osf.tagBoard.model.Tag">
@@ -65,5 +68,9 @@
 	<insert id="insertTag" parameterType="com.bit.op.osf.tagBoard.model.Tag">
 		insert into tag (tagMainName, tagMiddleName, tagName) value (#{tagMainName}, #{tagMiddleName}, #{tagName} );
 	</insert>
+	
+	<update id="updateTagDeatil" parameterType="com.bit.op.osf.tagBoard.model.Tag">
+		update tag set tagDetail = #{tagDetail} where tagNo=#{tagNo};
+	</update>
 	
 </mapper>

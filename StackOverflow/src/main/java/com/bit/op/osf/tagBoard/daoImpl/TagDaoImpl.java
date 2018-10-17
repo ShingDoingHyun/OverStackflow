@@ -113,6 +113,18 @@ public class TagDaoImpl implements ITagDao {
 		return sqlSession.insert(COMMENT_NAMESPACE + "insertTag", tag);
 	}
 
+	@Override
+	public List<Tag> selectTagRankList() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(COMMENT_NAMESPACE + "selecteTagRackList");
+	}
+
+	@Override
+	public void updateTagDeatil(Tag tag) {
+		sqlSession.update(COMMENT_NAMESPACE + "updateTagDeatil", tag);
+		
+	}
+
 
 	
 	

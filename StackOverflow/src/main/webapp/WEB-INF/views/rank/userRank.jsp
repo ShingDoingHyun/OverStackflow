@@ -368,30 +368,18 @@ text-align:flot;
 									<c:if test="${index == 0}">
 										<tr style="height: 170px;">
 									</c:if>
-									
-										<td width="300px;" style="padding-top: 0;">
-											<div style="margin-left: 8px;">
-												<span style="font-size: 30px; font-weight: bord;">${status.count}</span><br>
-												<span style="background:#8B9DC3; color:white; width:60px; display:inline-block; text-align: center; border-radius: 2px;border-radius: 13px;">
-												<a href="<c:url value='/popQuestionList?tagNo=${tag.tagNo }'/>" style="color:white;">${ tag.tagName}</a>
-												</span><br>
-												질문수 : ${ tag.count}<br>
-												
-												<span style="display: block;">${ tag.tagDetail}</span>
-												<span class="tagDetail">태그수정</span>
-												<form style="display: none;" onsubmit="return updateTagDetail($(this));">
-													<input type="hidden" name="tagNo" value="${ tag.tagNo}">
-													<textarea rows="5" cols="37" class="tagD">${ tag.tagDetail}</textarea>
-													<button type="submit">수정</button><button class="cancelTagFix">취소</button>
-												</form>
+										<td width="300px;">
+											<span style="size: 20px; font-weight: bord;">${status.count}</span><br>
+											<span style="background:#8B9DC3; color:white; width:50px; display:inline-block; text-align: center; border-radius: 2px;border-radius: 10px;">${ tag.tagName}</span><br>
+											질문수 : ${ tag.count}<br>
+											${ tag.tagDetail}<br>
 											
-											</div>
 										</td>
 								<c:if test="${index < 3}">
 									<c:set var="index" value="${index+1 }" />
 								</c:if>
 								<c:if test="${index >= 3}">
-									</tr>
+										</tr>
 									<c:set var="index" value="0" />
 								</c:if>
 								</c:forEach>
@@ -456,60 +444,5 @@ text-align:flot;
 	<!--//scrolling js-->
 	<!-- Bootstrap Core JavaScript -->
    <script src="js/bootstrap.js"> </script>
-   <script>
-   $(".tagDetail").click(function() {
-	
-	   $(this).next().show();
-	   $(this).prev().hide();
-	   $(this).hide();
-	   
-	});
-   
-   $(".cancelTagFix").click(function() {
-		
-	   $(this).parent().prev().show();
-	   $(this).parent().prev().prev().show();
-	   $(this).parent().hide();
-	});
-   
-   function getContextPath() {
-		var hostIndex = location.href.indexOf( location.host ) + location.host.length;
-		return location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
-	};
-		
-
-   
-    function updateTagDetail(obj) {
-    	
-      	var tagNo = obj.find("input[name=tagNo]").val();
-    	var tagDetail = obj.find(".tagD").val();
-  
-    	
-    	 $.ajax({
-	            type : 'post',
-	            url : getContextPath() +'/tagDetailUpdate',
-	            data : { "tagNo" : tagNo ,  "tagDetail": tagDetail},
-	            dataType : 'text',
-	            contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
-	            success : function(data){
-	   		
-	            	obj.find(".tagD").val(tagDetail);
-	            	
-	            	obj.prev().prev().text(tagDetail);
-	            	obj.prev().prev().show();
-	            	obj.prev().show();
-	            	obj.hide();
-	            }
-	        }); 
-    
-    	 
- 	   return false;
-    
-    };
-	
-
-   </script>
-   
 </body>
-
 </html>

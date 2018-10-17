@@ -7,6 +7,7 @@ public class Tag {
 	private String tagMiddleName;
 	private String tagName;
 	private String tagDetail;
+	private int count;
 	
 	
 	public Tag() {}
@@ -60,6 +61,15 @@ public class Tag {
 
 	public void setTagDetail(String tagDetail) {
 		this.tagDetail = tagDetail;
+	}
+
+	
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
 	}
 
 	@Override

@@ -6,6 +6,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,8 +24,9 @@ public class TagContoller {
 	
 	
 	@RequestMapping(value = "/selectTagList")
-	public String selectTagList() {
-		System.out.println("여기로");
+	public String selectTagList(Model model) {
+		
+		model.addAttribute("tagRackList", tagDao.selectTagRankList());
 		return "rank/tagRank";
 
 	}
@@ -69,6 +71,14 @@ public class TagContoller {
 		
 	}
 	
+	@RequestMapping(value = "/tagDetailUpdate", method = RequestMethod.POST)
+	@ResponseBody
+	public String tagDetailUpdate(Tag tag) {
+		
+		tagDao.updateTagDeatil(tag);
+		return tag.getTagDetail();
+		
+	}
 
 	
 }

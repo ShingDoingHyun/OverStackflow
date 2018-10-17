@@ -189,6 +189,9 @@ a {
 		<h2>인기질문</h2>
 		<br>
 		<br>
+		<c:if test="${param.tagNo != null and param.tagNo != ''}">
+		${param.tagNo}
+		</c:if>
 			<div class="main-page">
 			
 
