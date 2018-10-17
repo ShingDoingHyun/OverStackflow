@@ -124,6 +124,14 @@ iframe {
 	margin-right: 10px;
 	
 }
+
+button{
+border: 0;
+outline: 0;
+height: 25px;
+margin-right: 4px;
+
+}
 </style>
 
 
@@ -166,13 +174,21 @@ iframe {
 				<div class="main">
 				<div>
 					<h2>${questionBoard.title }</h2>
+				
 					<br>
 					<div style="position: absolute; right: 10px;">
-						<button id="writeBtn" >
+						<button id="writeBtn"  style="position: absolute; right:10px; width:100px; height: 30px; font-size: 15px" class="label label-warning" >
 							질문하기
 						</button>
 					</div>
-					<br>
+					<br><br>
+					<div style="position: absolute; right: 130px;">
+					<span style="font-size: 14px;margin-left:19%;">
+						    <a href="<c:url value="/popQuestionList"/>">질문게시판</a> > 
+						    <a href="<c:url value="/qestionList"/>">질문검색</a>
+					    </span>
+					</div>
+
 				</div>
 				<hr>
 		
@@ -422,7 +438,7 @@ iframe {
 							<br>
 						</div>
 					</div>
-					<div class="mainRight"></div>
+
 			
 				</div>		
 				<br>

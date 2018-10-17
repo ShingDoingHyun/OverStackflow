@@ -161,6 +161,10 @@ a {
 	padding-top: 0;
     padding-bottom: 0;
 }
+
+#tttable tr:hover{
+    opacity: 0.5;
+}
 </style>
 
 <!-- 우리가 추가한 스타일 등등  end-->
@@ -198,7 +202,7 @@ a {
 						<button class="label label-warning" onclick="location.href='<c:url value="/popQuestionList"/>'">전체인기</button>
 						</p>
 						<hr>
-						<table width="100%">
+						<table width="100%" id="tttable">
 							<c:forEach items="${questionBoardList }" var="questionBoard" varStatus="status">
 									<tr>
 										<td width="8%" align="center" rowspan="2" style=" border-bottom: 1px solid #777777;">
@@ -234,7 +238,10 @@ a {
 						</table>
 					</div>
 					<div class="right" style="font-size: 14px">
-				
+						 <span style="font-size: 14px;margin-left:19%;">
+						      <a href="<c:url value="/popQuestionList"/>">질문게시판</a> > 
+						      <a href="<c:url value="/popQuestionList"/>">인기질문</a>
+					      </span>
 						<div style="margin-top: 100px">
 							<button id="writeBtn"  style="position: absolute; right:10px; top:111px; width:100px; height: 30px; font-size: 15px" class="label label-warning">
 								질문하기

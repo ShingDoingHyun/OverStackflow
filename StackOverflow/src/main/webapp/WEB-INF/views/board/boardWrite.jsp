@@ -112,9 +112,17 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 		    padding-bottom: 0;
 		}
 		
+		button{
+			border: 0;
+			outline: 0;
+			height: 25px;
+			margin-right: 4px;
+			
+		}
+		
 </style>
 
-</style>
+
 
 <!-- 우리가 추가한 스타일 등등 end-->
 
@@ -147,11 +155,11 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 						<textarea id="summernote" name="content"></textarea>
 						</div>
 						<br>
-						<button type="button" id="myBtn">태그선택</button>  
+						<button type="button" id="myBtn" class="label label-warning" >태그선택</button>  
 						<div style="height:50px;" id="tags"></div>
 						<input type="hidden" name="tags">
 						<br>
-						<br> <button type="button" onclick="javascript:subEnv();">작성</button>
+						<br> <button type="button" onclick="javascript:subEnv();" class="label label-warning" >작성</button>
 					</form>
 				</div>
 	

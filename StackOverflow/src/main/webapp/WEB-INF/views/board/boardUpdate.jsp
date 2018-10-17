@@ -99,7 +99,18 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
         #mainName, #middleName, #name{
 			cursor:pointer;
 		}
-
+		#myModal td{
+			padding-top: 0;
+		    padding-bottom: 0;
+		}
+		
+		button{
+			border: 0;
+			outline: 0;
+			height: 25px;
+			margin-right: 4px;
+			
+		}
 
 </style>
 
@@ -138,7 +149,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 						<textarea id="summernote" name="content">${questionBoard.content }</textarea>
 						</div>
 						<br>
-						<button type="button" id="myBtn">태그선택</button>  
+						<button type="button" id="myBtn"  class="label label-warning">태그선택</button>  
 						<div style="height:50px;" id="tags">
 						<c:forEach items="${questionBoard.tagList }" var="tag" >
 							<span class="tag" style="margin-left:10px;">#${tag.tagName }</span>
@@ -146,7 +157,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 						</div>
 						<input type="hidden" name="tags" value="<c:forEach items="${questionBoard.tagList }" var="tag" >#${tag.tagNo }</c:forEach>">
 						<br>
-						<br> <input type="submit" value="작성" />
+						<br> <button type="submit"  class="label label-warning">수정</button>
 					</form>
 				</div>
 				
@@ -162,7 +173,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 			        </form>    
 			        <br>
 			        <form>
-			        	<table border="1">
+			        	<table border="1" style="font-size: 12px">
 			        		<tr>
 			        			<td style="width:250px; text-align: center;">대분류</td>
 			        			<td style="width:250px; text-align: center;">중분류</td>
@@ -170,15 +181,15 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 			        		</tr>
 			        		<tr>
 				        		<td style="height:200px;" valign="top">
-				        			<table id="mainName">
+				        			<table id="mainName"  style="width: 100%">
 									</table>
 								</td>
 				        		<td style="height:200px;" valign="top">
-									<table id="middleName">
+									<table id="middleName"  style="width: 100%">
 									</table>
 								</td>
 				        		<td style="height:200px;" valign="top">
-									<table id="name">
+									<table id="name"  style="width: 100%">
 									</table>
 								</td>
 			        		</tr>
@@ -309,7 +320,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 
 	           	  	html += '<td onclick="javascript:mainTagClick($(this));">' + tag.tagMainName +'</td>';
 
-	           	  	html += '<tr>';
+	           	  	html += '</tr>';
 	           	});
 	        	$('#mainName').html(html);
 	        	$('#middleName').html('');
@@ -335,7 +346,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 
 	           	  	html += '<td onclick="javascript:middleTagClick($(this));">' + tag.tagMiddleName +'</td>';
 
-	           	  	html += '<tr>';
+	           	  	html += '</tr>';
 	           	});
 	        	$('#middleName').html(html);
 	        	$('#name').html('');
