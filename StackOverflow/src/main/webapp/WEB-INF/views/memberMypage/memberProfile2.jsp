@@ -1,6 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-	<%@ page import="java.net.URLEncoder" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.net.URLEncoder" %>
 <%@ page import="java.security.SecureRandom" %>
 <%@ page import="java.math.BigInteger" %>
 <%@ page import="java.io.BufferedReader" %>
@@ -8,54 +7,19 @@
 <%@ page import="java.net.HttpURLConnection" %>
 <%@ page import="java.net.URL" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
-<!DOCTYPE HTML>
+
+		
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>OverStackFlow</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="Novus Admin Panel Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
-SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<!-- Bootstrap Core CSS -->
-<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
-<!-- Custom CSS -->
-<link href="css/style.css" rel='stylesheet' type='text/css' />
-<!-- font CSS -->
-<!-- font-awesome icons -->
-<link href="css/font-awesome.css" rel="stylesheet"> 
-<!-- //font-awesome icons -->
- <!-- js-->
-<script src="js/jquery-1.11.1.min.js"></script>
-<script src="js/modernizr.custom.js"></script>
-<!--webfonts-->
-<link href='//fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
-<!--//webfonts--> 
-<!--animate-->
-<link href="css/animate.css" rel="stylesheet" type="text/css" media="all">
-<script src="js/wow.min.js"></script>
-	<script>
-		 new WOW().init();
-	</script>
-<!--//end-animate-->
-<!-- chart -->
-<script src="js/Chart.js"></script>
-<!-- //chart -->
-<!--Calender-->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 
-<!--End Calender-->
-<!-- Metis Menu -->
-<script src="js/metisMenu.min.js"></script>
-<script src="js/custom.js"></script>
-<link href="css/custom.css" rel="stylesheet">
-<!--//Metis Menu -->
-</head> 
+<link rel="stylesheet" href="css/index.css" type="text/css" media="all" />
+</head>
+
+
 <style>
 
 .bluebTabDesign {
@@ -326,29 +290,26 @@ text-align:flot;
 }
 
 </style>
-<body class="cbp-spmenu-push">
-	<div class="main-content">
+
+
+<body>
+	<!----------------------header--------------------------------------->
+
+	<%@ include file="/WEB-INF/views/commons/header.jspf"%>
+	<!----------------------header End--------------------------------------->
+
+
+	<!----------------------left menu--------------------------------------->
+	<%@ include file="/WEB-INF/views/commons/left.jspf"%>
+	<!----------------------left menu End--------------------------------------->
+
+
+
+
+
+	<!----------------------main--------------------------------------->
 	
-		<!--left-fixed -navigation-->
-			<%@ include file="../commons/bleft.jspf" %>
-		<!--left-fixed -navigation-->
-		
-		<!-- header-starts -->
-			<%@ include file="../commons/bheader.jspf" %>
-		<!-- //header-ends -->
-		
-		
-		
-		
-		
-		<!-- main content start-->
-		<div id="page-wrapper">
-		
-		
-		
-			<div class="main-page">
-			
-			<div class="main" style="margin-bottom:65%;">
+	<div class="main" style="margin-bottom:65%;">
 
 		<div style="margin-top: 20px;"></div>
 
@@ -369,8 +330,6 @@ text-align:flot;
 		  <div style="border: 1px; float: left; width: 10%; padding:10px; height: 200px;">
 <img class='photo3' src="<c:url value='/resources/uploadFile/memberPhoto/${memInfo.memberPhoto}'/>"style="height: 200px;">
 </div>
-
-
 
 <div style="border: 1px; float: left; width: 40%; padding:10px;height: 200px;">
 <div><span><h1 style="margin-left:100px;">${memInfo.memberId}</h1></span></div><br>
@@ -436,8 +395,8 @@ text-align:flot;
                             질문<!--  <span>(0)</span> -->
                         </a></h3>
                     <div class="grid--cell subtabs user-panel-subtabs">
-                     <!--    <a href="javascript:void(0)" class="d-flex ai-center fs-caption bbw2 youarehere" data-sort-id="votes">
-                            최신 -->
+                        <a href="javascript:void(0)" class="d-flex ai-center fs-caption bbw2 youarehere" data-sort-id="votes">
+                            최신
                         </a>
                     <!--     <a href="javascript:void(0)" class="d-flex ai-center fs-caption bbw2" data-sort-id="newest">
                             투표
@@ -464,7 +423,7 @@ text-align:flot;
 
 
                 <div class="user-panel-content">
-                   <!--  <div class="empty">어떠한 태그에도 참여하지 않았습니다. <a href="/tags">tags</a></div> -->
+                    <div class="empty">어떠한 태그에도 참여하지 않았습니다. <a href="/tags">tags</a></div>
                 </div>
                 <div class="user-panel-footer">
                 </div>
@@ -482,52 +441,26 @@ text-align:flot;
          
             </div>
 
-               
+           
+           
    
    </div>
 
 	</div>
 	
-			
-			</div>
-			
-		</div>
-		<!--footer-->
-		
-		
-		
-		
-		
-		
-		<%@ include file="../commons/bfooter.jspf" %>
-        <!--//footer-->
-	</div>
-	<!-- Classie -->
-		<script src="js/classie.js"></script>
-		<script>
-			var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
-				showLeftPush = document.getElementById( 'showLeftPush' ),
-				body = document.body;
-				
-			showLeftPush.onclick = function() {
-				classie.toggle( this, 'active' );
-				classie.toggle( body, 'cbp-spmenu-push-toright' );
-				classie.toggle( menuLeft, 'cbp-spmenu-open' );
-				disableOther( 'showLeftPush' );
-			};
-			
 
-			function disableOther( button ) {
-				if( button !== 'showLeftPush' ) {
-					classie.toggle( showLeftPush, 'disabled' );
-				}
-			}
-		</script>
-	<!--scrolling js-->
-	<script src="js/jquery.nicescroll.js"></script>
-	<script src="js/scripts.js"></script>
-	<!--//scrolling js-->
-	<!-- Bootstrap Core JavaScript -->
-   <script src="js/bootstrap.js"> </script>
+
+
+
+
+
+<!----------------------main End--------------------------------------->
+
+
+	<!----------------------footer--------------------------------------->
+	<%@ include file="/WEB-INF/views/commons/footer.jspf"%>
+	<!----------------------footer End--------------------------------------->
+
+
 </body>
 </html>

@@ -4,9 +4,10 @@
     
     
 
-    <link href="css/loginStyle.css" rel="stylesheet" tyoe="text/css" media="all">
+
     
     <style>
+    
     .login{
     font-weight: normal;
     background: none;
@@ -42,7 +43,7 @@
        width: 90px;
     height: 35px;
     }
-    .photo2 {
+  .photo2{
    width: 60px; height: 60px;
    object-fit: cover;
    object-position: top;
