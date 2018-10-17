@@ -11,7 +11,7 @@
 	<c:if test="${comInfo != null}">
 			<script>
 				alert("로그인 성공");
-				location.href = '<c:url value="/"/>';
+				location.href = '<c:url value="/"/>'; 
 			</script>
 	</c:if>
 	<c:if test="${comInfo == null}">
