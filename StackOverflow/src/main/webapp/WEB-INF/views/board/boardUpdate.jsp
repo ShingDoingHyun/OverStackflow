@@ -49,18 +49,11 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 <!--//Metis Menu -->
 
 
-<!-- 우리가 추가한 스타일 등등 -->
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
-
-
+<!-- 추가한 스타일 -->
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
-
-
 <link href="<%=request.getContextPath()%>/summernote/summernote.css" rel="stylesheet">
 <script src="<%=request.getContextPath()%>/summernote/summernote.min.js"></script>
-
 <!-- include summernote-ko-KR -->
 <script src="<%=request.getContextPath()%>/summernote/lang/summernote-ko-KR.js"></script>
 

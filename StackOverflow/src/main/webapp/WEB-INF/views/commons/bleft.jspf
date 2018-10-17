@@ -12,7 +12,7 @@
 							<a href="<c:url value="/popQuestionList"/>" class="leftQuestion"><i class="fa fa-cogs nav_icon"></i>질문게시판 <span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level collapse">
 								<li>
-									<a href="<c:url value="/popQuestionList"/>">인기질문</a>
+									<a href="<c:url value="/popQuestionList"/>">인기질문</a> <span class="nav-badge-btm">Hot</span>
 								</li>
 								<li>
 									<a href="<c:url value="/questionList"/>">질문검색</a>
@@ -36,7 +36,21 @@
 							<!-- /nav-second-level -->
 						</li>
 						<li>
-							<a href="<c:url value="/comJob/seeJobInfoList/1"/>"><i class="fa fa-th-large nav_icon"></i>채용 <span class="nav-badge-btm">08</span></a>
+							<a href="<c:url value="/comJob/seeJobInfoList/1"/>"><i class="fa fa-th-large nav_icon"></i>채용 <span class="fa arrow"></span></a> 
+							<ul class="nav nav-second-level collapse"> 
+								<li>
+									<a href="<c:url value="/comJob/seeJobInfoList/1"/>">채용정보</a> <span class="nav-badge-btm">Hot</span>
+								</li>
+								<li>
+									<a href="<c:url value="/comJob/writeJobInfo"/>">채용공고 작성</a>
+								</li>
+								<li>
+									<a href="<c:url value="/comJob/manageJobInfoList/1"/>">채용공고 관리</a>
+								</li>
+								<li>
+									<a href="<c:url value="/comJob/manageJobAppList/0"/>">지원서 관리</a>
+								</li>
+							</ul>
 						</li>
 						<li>
 							<a href="#"><i class="fa fa-envelope nav_icon"></i>랭킹<span class="fa arrow"></span></a>

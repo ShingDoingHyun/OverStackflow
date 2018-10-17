@@ -1,10 +1,10 @@
-* {
+/* * {
     margin: 0;
     padding: 0;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-}
+} */
 
 body {
     background: white;
@@ -72,7 +72,7 @@ body {
 #loginBtn {
     width: 400px;
     height: 55px;
-    background:#F2B33F;;
+    background:#F2B33F;
     color: white;
     font-size: 20px;
     margin-top: 15px;

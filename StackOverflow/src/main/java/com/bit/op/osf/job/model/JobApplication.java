@@ -2,7 +2,6 @@ package com.bit.op.osf.job.model;
 
 import java.util.Date;
 
-import com.oracle.webservices.internal.api.databinding.DatabindingMode;
 
 public class JobApplication {
 	private int jobNo;

@@ -25,6 +25,8 @@ public interface ComJobDao {
 
     public JobInfo selectJobInfo(int jobNo);
     
+    public ComMember selectJobInfoCom(int jobNo);
+    
     public List<String> selectJobTypeList(int jobNo);
     
     public String updateJobInfo(JobInfo jobInfo);

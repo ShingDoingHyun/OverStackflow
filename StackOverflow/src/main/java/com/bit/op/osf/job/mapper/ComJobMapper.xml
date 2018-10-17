@@ -57,6 +57,13 @@
 	where jobInfo.comId = com.comId and jobNo = #{jobNo};
 </select>
 
+<select id="selectJobInfoCom" resultType="com.bit.op.osf.job.model.ComMember" parameterType="Integer">
+	select comName, comAddress
+	from jobinfo a, commember b
+    where a.comId = b.comId
+    and jobNo = #{jobNo}
+</select>
+
 <select id="selectJobTypeList" resultType="String" parameterType="Integer">
 	select jobType from jobtype where jobNo = #{jobNo}
 </select> 

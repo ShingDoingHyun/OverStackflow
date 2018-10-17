@@ -1,11 +1,48 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<% request.setCharacterEncoding("UTF-8"); %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="<%= request.getContextPath() %>/css/index.css" type="text/css" media="all" />
+<!-----------------------------head ----------------------------------------->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Novus Admin Panel Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- Bootstrap Core CSS -->
+<link href="<%=request.getContextPath()%>/css/bootstrap.css" rel='stylesheet' type='text/css' />
+<!-- Custom CSS -->
+<link href="<%=request.getContextPath()%>/css/style.css" rel='stylesheet' type='text/css' />
+<!-- font CSS -->
+<!-- font-awesome icons -->
+<link href="<%=request.getContextPath()%>/css/font-awesome.css" rel="stylesheet"> 
+<!-- //font-awesome icons -->
+ <!-- js-->
+<script src="<%=request.getContextPath()%>/js/jquery-1.11.1.min.js"></script>
+<script src="<%=request.getContextPath()%>/js/modernizr.custom.js"></script>
+<!--webfonts-->
+<link href='//fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
+<!--//webfonts--> 
+<!--animate-->
+<link href="<%=request.getContextPath()%>/css/animate.css" rel="stylesheet" type="text/css" media="all">
+<script src="<%=request.getContextPath()%>/js/wow.min.js"></script>
+	<script>
+		 new WOW().init();
+	</script>
+<!--//end-animate-->
+<!-- chart -->
+<script src="<%=request.getContextPath()%>/cjs/Chart.js"></script>
+<!-- //chart -->
+<!--Calender-->
+
+<!--End Calender-->
+<!-- Metis Menu -->
+<script src="<%=request.getContextPath()%>/js/metisMenu.min.js"></script>
+<script src="<%=request.getContextPath()%>/js/custom.js"></script>
+<link href="<%=request.getContextPath()%>/css/custom.css" rel="stylesheet">
+<!-----------------------------head End----------------------------------------->
 <title>채용 공고 상세보기</title>
 <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.cookie.js"></script>	
@@ -52,13 +89,22 @@
 }
 
 .center div h2{
-	padding-bottom: 10px;
+	margin-top: 4%;
+	margin-bottom: 4%;
+}
+
+.center div p{
+	margin-top: 1%;
+	margin-bottom:3%;
 }
 
 .box{
  	border: 1px solid black;
- 	padding: 3px;
+ 	padding: 4px;
  	font-weight: bold;
+ 	width: 13%;
+ 	text-align:center;
+ 	/* display: inline-block; */
 }
 
 .index{
@@ -73,18 +119,21 @@
 
 </style>
 </head>
-<body>
-<!----------------------header--------------------------------------->
-<%@ include file="../commons/header.jspf" %>
-<!----------------------header End--------------------------------------->
-
-
-<!----------------------left menu--------------------------------------->
-<%@ include file="../commons/left.jspf" %>
-<!----------------------left menu End--------------------------------------->
-
+<body class="cbp-spmenu-push">
+	<div class="main-content">
+	
+	<!--left-fixed -navigation-->
+		<%@ include file="../commons/bleft.jspf" %>
+	<!--left-fixed -navigation-->
+	
+	<!-- header-starts -->
+		<%@ include file="../commons/bheader.jspf" %>
+	<!-- //header-ends -->
+		
+	<!-- main content start-->
+	<div id="page-wrapper">
 <!----------------------main--------------------------------------->
-
+<div class="main-page">
 <div class="main">
 
    <div class="rightbar">
@@ -95,17 +144,18 @@
 	<div class="centerup">
 		<c:if test="${jobInfo.comPhoto!=null}">
 		<img src="<c:url value="/resources/jobimage/${jobInfo.comPhoto}"/>" width="6%;">
+		
 		</c:if>
-		<div>
-		<h1>${jobInfo.jobTitle}
+		<h1 style="display:inline;">${jobInfo.jobTitle} <span style="font-size:15px;">${jobInfo.comName}</span>
 		<c:if test="${jobInfo.endedJob == 'Y'}">
 			<span style="color:red; font-size:15px;">이 채용공고는 마감되었습니다.</span>
-		</c:if></h1>  
-		${jobInfo.comName}<br>
-		${jobInfo.jobField} <br> 
-		${jobInfo.comCall}
-		${jobInfo.jobLocation} <br> 
-		${jobInfo.jobRegisterDate}<br>
+		</c:if></h1>
+		<div>
+		<br>
+		<span style="font-weight:bold;">모집 분야</span> &nbsp; ${jobInfo.jobField}<br> 
+		<span style="font-weight:bold;">연락처</span> &nbsp; ${jobInfo.comCall}<br>
+		<span style="font-weight:bold;">주소</span> &nbsp; ${jobInfo.jobLocation} <br> 
+		<span style="font-weight:bold;">등록일</span> &nbsp; ${jobInfo.jobRegisterDate}<br><br>
 		
 		<a href="#Qualification" class="index">모집부문 및 자격요건</a>
 		<a href="#Condition" class="index">근무조건 및 환경</a>
@@ -175,10 +225,10 @@
 		<div id="Company">
 		<h2>기업정보</h2>
 			<div class="box">회사 이름</div>
-			<p><p>
+			<p>${comMem.comName}<p>
 			
 			<div class="box">회사 위치</div>
-			<p><p>
+			<p>${comMem.comAddress}<p>
 			
 			<div class="box">연락처</div>
 			<p>${jobInfo.comCall}<p>
@@ -216,7 +266,9 @@
 			<p>${jobInfo.jobChargerName} | 	${jobInfo.jobChargerEmail}<p>
 
 		</div>
-		
+		</div>
+		</div>
+		</div>
 	</div>
 	</div>
 </div>
@@ -225,11 +277,45 @@
 <!----------------------main end--------------------------------------->
 
 <!----------------------footer--------------------------------------->
-	<%@ include file="../commons/footer.jspf" %>
+	<%@ include file="../commons/bfooter.jspf" %>
 <!----------------------footer End--------------------------------------->
 
+<!----------------------boothStrap Script--------------------------------------->
+<script src="<%=request.getContextPath()%>/js/classie.js"></script>
+	<script>
+		var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
+			showLeftPush = document.getElementById( 'showLeftPush' ),
+			body = document.body;
+			
+		showLeftPush.onclick = function() {
+			classie.toggle( this, 'active' );
+			classie.toggle( body, 'cbp-spmenu-push-toright' );
+			classie.toggle( menuLeft, 'cbp-spmenu-open' );
+			disableOther( 'showLeftPush' );
+		};
+		
+
+		function disableOther( button ) {
+			if( button !== 'showLeftPush' ) {
+				classie.toggle( showLeftPush, 'disabled' );
+			}
+		}
+	</script>
+<!--scrolling js-->
+<script src="<%=request.getContextPath()%>/js/jquery.nicescroll.js"></script>
+<script src="<%=request.getContextPath()%>/js/scripts.js"></script>
+<!--//scrolling js-->
+<!-- Bootstrap Core JavaScript -->
+  <script src="<%=request.getContextPath()%>/js/bootstrap.js"> </script> 
+<!----------------------boothStrap Script End--------------------------------------->  
+<!----------------------My Script--------------------------------------->
 <script>
 $(function(){
+	var str = $("textarea").val();
+	str = str.split("<br/>").join("\r\n");
+	$("textarea").val(str);
+
+	
 	var jobNo = parseInt(${jobInfo.jobNo});
  	var list = new cookieList("visitJobInfo");
  	
@@ -300,5 +386,6 @@ var cookieList = function(cookieName){
 };
 };
 </script>
+<!----------------------My Script End--------------------------------------->
 </body>
 </html>

@@ -1,25 +1,57 @@
 <%@page import="com.bit.op.osf.job.model.JobInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<!-----------------------------head ----------------------------------------->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Novus Admin Panel Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- Bootstrap Core CSS -->
+<link href="<%=request.getContextPath()%>/css/bootstrap.css" rel='stylesheet' type='text/css' />
+<!-- Custom CSS -->
+<link href="<%=request.getContextPath()%>/css/style.css" rel='stylesheet' type='text/css' />
+<!-- font CSS -->
+<!-- font-awesome icons -->
+<link href="<%=request.getContextPath()%>/css/font-awesome.css" rel="stylesheet"> 
+<!-- //font-awesome icons -->
+ <!-- js-->
+<script src="<%=request.getContextPath()%>/js/jquery-1.11.1.min.js"></script>
+<script src="<%=request.getContextPath()%>/js/modernizr.custom.js"></script>
+<!--webfonts-->
+<link href='//fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
+<!--//webfonts--> 
+<!--animate-->
+<link href="<%=request.getContextPath()%>/css/animate.css" rel="stylesheet" type="text/css" media="all">
+<script src="<%=request.getContextPath()%>/js/wow.min.js"></script>
+	<script>
+		 new WOW().init();
+	</script>
+<!--//end-animate-->
+<!-- chart -->
+<script src="<%=request.getContextPath()%>/cjs/Chart.js"></script>
+<!-- //chart -->
+<!--Calender-->
 
+<!--End Calender-->
+<!-- Metis Menu -->
+<script src="<%=request.getContextPath()%>/js/metisMenu.min.js"></script>
+<script src="<%=request.getContextPath()%>/js/custom.js"></script>
+<link href="<%=request.getContextPath()%>/css/custom.css" rel="stylesheet">
+<!-----------------------------head End----------------------------------------->
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+<!-- <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet"> -->
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
 <link href="<%=request.getContextPath()%>/summernote/summernote.css" rel="stylesheet">
 <script src="<%=request.getContextPath()%>/summernote/summernote.min.js"></script>
 <script src="<%=request.getContextPath()%>/summernote/lang/summernote-ko-KR.js"></script>
 
-
-<html>
-<head>
-<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
-<link rel="stylesheet" href="<%= request.getContextPath() %>/css/index.css" type="text/css" media="all" />
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>채용 공고 수정</title>
  <style>
 	 .main {
@@ -33,21 +65,25 @@
 	list-style:none;
 	}
 	
-     li > div{ display:none;}
+    /*  li > div{ display:none;} */
 	
 	#accordian li >h1{ 
 	cursor:pointer;
-	font-size: 30px;
+	font-size: 20px;
 	border: 1px solid black;
+	padding-top: 1%;
+	padding-bottom: 1%;
+	padding-left: 3%;
 	}
 	
-	#accordian ul{
-	 padding-left: 0px;
+	#accordian li >h1+div{
+		padding: 2%;
 	}
 	
 	#accordian{
 	border: 1px solid black;
 	width: 100%;
+	margin-left: 10%;
 	}
 	
 	#accordian #title{
@@ -57,19 +93,22 @@
 
 </style>
 </head>
-<body>
-<div>
-<!----------------------header--------------------------------------->
-<%@ include file="../commons/header.jspf" %>
-<!----------------------header End--------------------------------------->
-
-
-<!----------------------left menu--------------------------------------->
-<%@ include file="../commons/left.jspf" %>
-<!----------------------left menu End--------------------------------------->
-
+<body class="cbp-spmenu-push">
+	<div class="main-content">
+	
+	<!--left-fixed -navigation-->
+		<%@ include file="../commons/bleft.jspf" %>
+	<!--left-fixed -navigation-->
+	
+	<!-- header-starts -->
+		<%@ include file="../commons/bheader.jspf" %>
+	<!-- //header-ends -->
+		
+	<!-- main content start-->
+	<div id="page-wrapper">
+	
 <!----------------------main--------------------------------------->
-
+<div class="main-page">
 <div class="main">
 	<form action="<%=request.getContextPath()%>/comJob/updateJobInfo" method="post" >
 	<div id="accordian">
@@ -144,14 +183,13 @@
 				<h1>내용 작성 및 첨부 파일 업로드<span class="ico_ar">▼</span></h1>
 					<div>
 				      <label>채용 공고 내용</label>
-				      <textarea name="jobContent" id="summernote">${jobInfo.jobContent}</textarea> 
+				      <textarea name="jobContent" class="summernote">${jobInfo.jobContent}</textarea> 
 					</div>
 			</li>
 			
 			<li>
 				<h1>기업 정보<span class="ico_ar">▼</span></h1>
 					<div>
-					  <label>회사 아이디</label>
 					  <input type="hidden"  name="comId" value="${jobInfo.comId}"><br>
 						
 					  <label>회사 이름</label>
@@ -165,7 +203,7 @@
 					  <input type="text" name="comCall" value="${jobInfo.comCall}" readonly="readonly"><br>
 					  
 					  <label>회사 소개</label>
-					 <textarea name="comIntroduction">${jobInfo.comIntroduction}</textarea><br>
+					 <textarea name="comIntroduction" class="summernote">${jobInfo.comIntroduction}</textarea><br>
 					</div>
 			</li>
 			
@@ -199,65 +237,104 @@
 	</div>
 	</form>
 	</div>
+	</div>
+	</div>
 </div>
-
-
 <!----------------------main end--------------------------------------->
 
 <!----------------------footer--------------------------------------->
-	<%@ include file="../commons/footer.jspf" %>
+	<%@ include file="../commons/bfooter.jspf" %>
 <!----------------------footer End--------------------------------------->
-<script>
 
+<!----------------------boothStrap Script--------------------------------------->
+<script src="<%=request.getContextPath()%>/js/classie.js"></script>
+	<script>
+		var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
+			showLeftPush = document.getElementById( 'showLeftPush' ),
+			body = document.body;
+			
+		showLeftPush.onclick = function() {
+			classie.toggle( this, 'active' );
+			classie.toggle( body, 'cbp-spmenu-push-toright' );
+			classie.toggle( menuLeft, 'cbp-spmenu-open' );
+			disableOther( 'showLeftPush' );
+		};
+		
+
+		function disableOther( button ) {
+			if( button !== 'showLeftPush' ) {
+				classie.toggle( showLeftPush, 'disabled' );
+			}
+		}
+	</script>
+<!--scrolling js-->
+<script src="<%=request.getContextPath()%>/js/jquery.nicescroll.js"></script>
+<script src="<%=request.getContextPath()%>/js/scripts.js"></script>
+<!--//scrolling js-->
+<!-- Bootstrap Core JavaScript -->
+ <script src="<%=request.getContextPath()%>/js/bootstrap.js"> </script> 
+<!----------------------boothStrap Script End--------------------------------------->  
+<!----------------------My Script--------------------------------------->
+<script>
 $(function(){
+	var str = $("textarea").val();
+	str = str.split("<br/>").join("\r\n");
+	$("textarea").val(str);
+
+	
+	$(".summernote").summernote({
+		lang : "ko-KR",
+		height : 300,
+		width : 600,
+		fontNames : [ "맑은고딕", "Arial", "Arial Black",
+				"Comic Sans MS", "Courier New", ],
+		fontNamesIgnoreCheck : [ "맑은고딕" ],
+		focus : true,
+		callbacks: {
+			onImageUpload: function(files, editor, welEditable) {
+	            for (var i = files.length - 1; i >= 0; i--) {
+
+	            	sendFile(files[i], this);
+	            }
+	        }
+		}
+});
 	//아코디언 형식
-	$("#accordian h1").click(function(){
+/* 	$("#accordian h1").click(function(){
 		$("#accordian ul div").slideUp();
-		/* $('.ico_ar').css('transform','none'); */
+		 $('.ico_ar').css('transform','none'); 
 		if(!$(this).next().is(":visible"))
 		{
 			$(this).next().slideDown(); 
-			/* $(this).find('.ico_ar:eq(0)').css('transform','-');  */
+			 $(this).find('.ico_ar:eq(0)').css('transform','-');  
 		} 
-	})
+	}); */
 });
-	
-/* 	function() {
-		$('#summernote').summernote(
-				{
-					lang : 'ko-KR',
-					height : 300,
-					width : 600,
-					fontNames : [ '맑은고딕', 'Arial', 'Arial Black',
-							'Comic Sans MS', 'Courier New', ],
-					fontNamesIgnoreCheck : [ '맑은고딕' ],
-					focus : true,
-					onImageUpload: function(files, editor, welEditable) {
-					      sendFile(files[0],editor,welEditable); 
-					    }
-				});
-	});
-});
-             
+	         
+function sendFile(file, el) {
+	var form_data = new FormData();
+	form_data.append("file", file);
 
- function sendFile(file,editor,welEditable){
-  data = new FormData();
-  data.append("file", file);
-            $.ajax({
-            data: data,
-            type: "POST",
-                    // 이미지 업로드하는 파일 path 
-            url: rooturl+'/modules/bbs/lang.korean/action/a.ajax_imgupload.php',
-            cache: false,
-            contentType: false,
-            processData: false,
-            success: function(url) {
-                alert(url);
-                   editor.insertImage(welEditable, url);
-            }
-        });
-  } */
- 
+  	$.ajax({
+    	data: form_data,
+    	type: "POST",
+    	url: "imageUpload",
+    	cache: false,
+    	contentType: false,
+    	enctype: "multipart/form-data",
+    	processData: false,
+    	dataType:"text",
+    	success: function(img_name) {
+
+    		$(".summernote").summernote("insertImage", getContextPath()+img_name);
+    	}
+  	});
+}
+
+function getContextPath() {
+	var hostIndex = location.href.indexOf( location.host ) + location.host.length;
+	return location.href.substring( hostIndex, location.href.indexOf("/", hostIndex + 1) );
+};
  
 //Daum 주소 API
 function findJobLocation(){   
@@ -278,47 +355,11 @@ function findJobLocation(){
 	}
 	
 
-	//고용 형태 
-/* 	var jobTypeList = [];
-	
-	$("input[type=submit]").submit(function(){
-		$("input[name='jobType']:checked").each(function(i){
-			jobTypeList.push($(this).val());
-		});
-	}); */
-
-	
-//고용 형태 
-/* 	var jobTypeList = [];
-	$("input[name='jobType']:checked").each(function(i){
-		jobTypeList.push($(this).val());
-	});
-	
-	if(jobTypeList.length==0){
-		$("input[type='submit']").click(function(){
-			alert("고용 형태를 선택해주세요.");
-		});
-	}else{
-		$.ajax({
-			type:'POST',
-			url: '/comJob/insertJobType',
-			data:{jobTypeList: jobTypeList},
-			success:{},
-			error: function(data){
-				alert('죄송합니다. 잠시 후 다시 시도해주세요.');
-				return false;
-			}
-		});
-	}  */
-
-
 </script>
 
 <!-- 우편번호 찾기 -->
-<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-	 
-</div>
+<!----------------------My Script End--------------------------------------->	 
 </body>
 </html>
 
