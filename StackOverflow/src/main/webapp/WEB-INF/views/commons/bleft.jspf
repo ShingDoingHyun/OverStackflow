@@ -56,10 +56,10 @@
 							<a href="#"><i class="fa fa-envelope nav_icon"></i>랭킹<span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level collapse">
 								<li>
-									<a href="inbox.html">Inbox <span class="nav-badge-btm">05</span></a>
+									<a href="<c:url value="/selectTagList"/>">태그랭킹</a>
 								</li>
 								<li>
-									<a href="compose.html">Compose email</a>
+									<a href="compose.html">유저랭킹</a>
 								</li>
 							</ul>
 							<!-- //nav-second-level -->

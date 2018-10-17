@@ -405,7 +405,7 @@ margin-right: 4px;
 											<li> 
 												<div class="comment">
 													<form action="<c:url value="/insertComment"/>" method="post">
-														<input type="hidden" name="memId" value="test">
+														<input type="hidden" name="memId" value="${memInfo.memberId }">
 														<input type="hidden" name="questionNo" value="${replyboard.questionNo }">
 														<input type="hidden" name="replyNo" value="${replyboard.replyNo }">
 														<input type="hidden" name="upperCommentNo" value="${comment.commentNo }">
@@ -424,7 +424,7 @@ margin-right: 4px;
 									<li> 
 										<div class="comment">
 											<form action="<c:url value="/insertComment"/>" method="post">
-												<input type="hidden" name="memId" value="test">
+												<input type="hidden" name="memId" value="${memInfo.memberId }">
 												<input type="hidden" name="questionNo" value="${replyboard.questionNo }">
 												<input type="hidden" name="replyNo" value="${replyboard.replyNo }">
 												<textarea name="content" style="width: 95%;"></textarea>
