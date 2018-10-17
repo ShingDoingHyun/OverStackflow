@@ -75,8 +75,7 @@ public class MemController {
 	}
 	
 		@RequestMapping(value = "/memberProfile", method = RequestMethod.GET)
-		public String Profile(HttpSession session) throws Exception {
-			
+		public String Profile(HttpSession session) throws Exception {	
 			MemRegInfo memInfo = (MemRegInfo)session.getAttribute("memInfo");
 			String memId=  memInfo.getMemberId();
 			
@@ -85,8 +84,7 @@ public class MemController {
 			session.setAttribute("replyBoards", replyBoards);
 			
 			List<QuestionBoard> questionBoards  =  myPageInfoDao.selectQuestionInfo(memId);
-			session.setAttribute("questionBoards", questionBoards);
-			
+			session.setAttribute("questionBoards", questionBoards);		
 			
 				return "/memberMypage/memberProfile"; 
 		}

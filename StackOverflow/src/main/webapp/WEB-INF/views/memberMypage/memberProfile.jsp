@@ -448,7 +448,7 @@ text-align:flot;
 
                 <div class="user-panel-content">
                     <c:forEach items="${questionBoards}" var="qboard" varStatus="status">
-				    <div class="empty"><a href="../op/questionDetail/${qboard.questionNo}">${qboard.content}</a></div>           
+				    <div class="empty"><a href="../op/questionDetail/${qboard.questionNo}">${qboard.title}</a></div>           
 				 </c:forEach>
                 </div>
                 <div class="user-panel-footer">

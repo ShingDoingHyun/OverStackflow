@@ -31,7 +31,7 @@ public class MyPageInfoImpl extends DaoImpl implements MyPageInfoDao {
 	public List<ReplyBoard> selectAnswerInfo(String memId) throws Exception {
 
 		List<ReplyBoard>  replyBoards = sqlSession.selectList(MYPAGEINFO_NAMESPACE+"selectReplyMember", memId);
-		System.out.println("selectAnswerInfo==="+replyBoards);
+	
 		return replyBoards;
 	}
 

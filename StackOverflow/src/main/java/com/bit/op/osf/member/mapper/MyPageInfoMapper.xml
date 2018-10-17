@@ -11,7 +11,7 @@
 	
 	
 	<select id="selectQuestionMember" resultType="com.bit.op.osf.tagBoard.model.QuestionBoard" parameterType="String">
-		select questionNo, content from questionboard where memId = #{memId} order by regDate desc
+		select questionNo, content, title from questionboard where memId = #{memId} order by regDate desc
 	
 	</select>
 	
