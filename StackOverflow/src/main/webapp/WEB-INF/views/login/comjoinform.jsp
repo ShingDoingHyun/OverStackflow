@@ -78,6 +78,78 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 	margin: 0px auto;
 	text-align: center;
 	}
+	  body {
+            margin: 0px;
+            background: #f5f6f7;
+        }
+
+ 
+        #container {
+            width: 460px;
+            margin: 0 auto;
+        }
+ 
+        #container label {
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 30px;
+        }
+ 
+        .box {
+            width: 438px;
+            background: rgb(255, 255, 255);
+            border: 1px solid rgb(218, 218, 218);
+            padding: 10px;
+            margin-top: 8px;
+            margin-bottom: 5px;
+        }
+ 
+        .input {
+            border: none;
+            width: 310px;
+            height: 30px;
+            padding: 0 3px;
+            font-size: 15px;
+        }
+ 
+        #idBox span {
+            font-family: Dotum;
+            font-weight: 100;
+            color: #8e8e8e;
+            padding-left: 15px;
+        } 
+         #idBox span2 {
+            font-family: Dotum;
+            font-weight: 100;
+            color: #8e8e8e;
+            padding-left: 15px;
+        }
+         .box2{
+            width: 245px;
+            background: rgb(255, 255, 255);
+            border: 1px solid rgb(218, 218, 218);
+            padding: 10px;
+            margin-top: 8px;
+            margin-bottom: 5px;
+        }
+          input[type=submit]{
+    font-weight: 300 !important;
+    border-radius: 4px;
+    background-color: #f0ad4e;
+    display: inline;
+    padding: .2em .6em .3em;
+    font-size: 95%;
+    line-height: 1;
+    color: white;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border: 0;
+    outline: 0;
+    height: 25px;
+   margin-right: 4px;
+   font-family: inherit;
+}
 </style>
 <script type="text/javascript">
 
@@ -123,29 +195,79 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 		
 		
 		
-			<div class="main-page">
-			<div class="main">
-<h1>기업회원가입</h1>
+			<div class="main-page" style="margin-right: 100px;">
+				<div id="container">
+<h2 style="margin-bottom:30px; margin-bottom:-10px; margin-bottom: 20px;">기업회원가입</h2>
+
+
 <form action="comJoinForm" method="post" enctype="multipart/form-data">
-	<input type="text" name="comId"placeholder="아이디*"><br>
-	<input type="password" name="comPwd" placeholder="비밀번호(6~16자의 영문,숫자,특수기호)*"><br>
-	<input type="password" name="comPwd2" placeholder="비밀번호확인"><br>
-	기업정보<br><input type="text" name="comNum" placeholder="사업자등록번호 -없이 10자리숫자 입력"><br>
-	<input type="text" name="comName"placeholder="기업명*"><br>
-	<input type="text" name="comAddress"placeholder="기업주소*"><br> 
+
+
+	<span><h5 style="margin-left: 270px; margin-bottom:0px; margin-top: 0px;">*는 필수 입력 정보입니다.</h5></span>
+                <div id="idBox" class="box" style="padding-bottom:10px">
+              <input type="text" name="comId" placeholder="아이디 *" class="input" maxlength="20" style="width:250px;">
+                   <span style="padding-left:0px;">@overstackflow.com</span>
+              </div>
+              
+              
+	  <div id="idBox" class="box" style="padding-bottom:10px">
+	<input type="password" name="comPwd" class="input" maxlength="16" placeholder="비밀번호(6~16자의 영문,숫자,특수기호)*"><br>
+	</div>
+	
+	<div id="idBox" class="box" style="padding-bottom:10px">
+	<input type="password" name="comPwd2" class="input" maxlength="16" placeholder="비밀번호확인*"><br>
+	</div>
+	
+	<div style="margin-top: 20px;"><span>기업 정보</span></div> 
+	
+	 <div id="idBox" class="box" style="padding-bottom:10px">
+	<input type="text" name="comNum" class="input" placeholder="사업자등록번호 -없이 10자리숫자 입력"><br>
+	</div>
+	
+	
+	<div id="idBox" class="box" style="padding-bottom:10px">
+	<input type="text" name="comName" class="input" placeholder="기업명*"><br>
+	</div>
+	
+	<div id="idBox" class="box" style="padding-bottom:10px">
+	<input type="text" name="comAddress" class="input" placeholder="기업주소*"><br> 
+	</div>
+	
+	
+	<div style="margin-top: 30px;"><span>사진 업로드</span></div> 
+	<div id="idBox" class="box2" style="padding-bottom:10px">
 	<input type="file" id="imgInp" name="comPhotoFile">
-	<img id="blah" src="#" alt="your image"/><br>
-	담당자정보<br>
-	<input type="text" name="comHomePageUrl" placeholder="회사 Url"><br>
-	<input type="text" name="comChargerName" placeholder="이름*"><br>
-	휴대폰번호 <input type="text" name="comChargerPhone" placeholder="휴대폰 번호 -없이"><br> 
-	담당자 이메일<input type="text" name="comChargerEmail" placeholder="이메일"><br> 
+	</div>
 	
 	
-	<input type="checkbox" id="Allagreebox"> 전체동의 <br>
+	<div style="border:1px solid black;margin-left:280px;margin-top: -90px; width: 155px;height: 180px; margin-bottom:30px;">
+	<img id="blah" src="#" alt="your image" style=" width: 155px;height: 180px;"/><br>
+	</div>
+	
+   <div style="margin-top: 20px;"><span>담당자 정보</span></div> 
+
+<div id="idBox" class="box" style="padding-bottom:10px">
+	<input type="text" name="comHomePageUrl"class="input"  placeholder="회사 Url"><br>
+	</div>
+	
+	<div id="idBox" class="box" style="padding-bottom:10px">
+	<input type="text" name="comChargerName" class="input" placeholder="이름*"><br>
+	</div> 
+	
+	<div id="idBox" class="box" style="padding-bottom:10px">
+	휴대폰번호 <input type="text" name="comChargerPhone" class="input" placeholder=" &nbsp; &nbsp; &nbsp; &nbsp;-없이"><br> 
+	</div>
+	
+	<div id="idBox" class="box" style="padding-bottom:10px">
+	담당자 이메일<input type="text" name="comChargerEmail" class="input" placeholder="&nbsp; &nbsp; &nbsp; &nbsp;@"><br> 
+	</div>
+	
+<!-- 	<input type="checkbox" id="Allagreebox"> 전체동의 <br>
 	<input type="checkbox" id="ageebox1"> 이용약관 <br>
-	<input type="checkbox" id="Allagreebox"> 개인정보 수집 및 이용<br>
-	<input type="submit" value="동의하고 회원가입">
+	<input type="checkbox" id="Allagreebox"> 개인정보 수집 및 이용<br> -->
+	
+	
+	<input type="submit" value="동의하고 회원가입" style="margin-left: 145px; margin-top: 50px; margin-bottom:100px;">
 </form>
 </div>
 			

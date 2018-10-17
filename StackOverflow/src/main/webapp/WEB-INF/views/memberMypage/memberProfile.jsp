@@ -432,7 +432,7 @@ text-align:flot;
             <!-- 질문  -->
              <div id="user-panel-questions" class="user-panel">
                 <div class="subheader p0 grid ai-center" style="min-height: 36px;">
-                    <h3 class="grid--cell mb0 mr-auto px2 profile-section-title">     <a href="/users/10257271/jam?tab=questions">
+                    <h3 class="grid--cell mb0 mr-auto px2 profile-section-title">  
                             질문<!--  <span>(0)</span> -->
                         </a></h3>
                     <div class="grid--cell subtabs user-panel-subtabs">
@@ -457,7 +457,7 @@ text-align:flot;
             
             <div id="user-panel-tags" class="user-panel">
                 <div class="subheader p0 grid ai-center" style="min-height: 36px;">
-                    <h3 class="grid--cell mb0 mr-auto px2 profile-section-title">      <a href="/users/10257271/jam?tab=tags">
+                    <h3 class="grid--cell mb0 mr-auto px2 profile-section-title">   
                             태그<!--  <span>(0)</span> -->
                         </a></h3>
                 </div>
@@ -473,7 +473,7 @@ text-align:flot;
 
                <div id="user-panel-reputation" class="user-panel">
                 <div class="subheader p0 grid ai-center" style="min-height: 36px;">
-                    <h3 class="grid--cell mb0 mr-auto px2 profile-section-title">    <a href="/users/10257271/jam?tab=reputation">
+                    <h3 class="grid--cell mb0 mr-auto px2 profile-section-title">    
                             평판 <!-- <span>(0)</span> -->
                         </a></h3>
 

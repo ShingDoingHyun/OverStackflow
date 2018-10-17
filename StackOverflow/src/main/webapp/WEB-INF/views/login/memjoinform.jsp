@@ -55,19 +55,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
             margin: 0px;
             background: #f5f6f7;
         }
- 
-        #naver {
-            width: 768px;
-            margin: 0 auto;
-        }
- 
-        #header img {
-            display: block;
-            width: 240px;
-            height: 44px;
-            padding: 64px 0 59px;
-            margin: 0 auto;
-        }
+
  
         #container {
             width: 460px;
@@ -117,20 +105,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
         #redCheck_pwdCheck{
             margin-bottom: 30px;
         }
- 
-/*         #birth input {
-            font-size: 15px;
-            width: 116px;
-            height: 27px;
-            padding: 12px 15px;
-            margin: 8px 0;
- 
-            background: rgb(255, 255, 255);
-            border: 1px solid rgb(218, 218, 218);
- 
-            margin-bottom: 5px;
-        } */
- 
+
         #birth input:nth-child(1) {
             margin-right: 5px;
         }
@@ -169,102 +144,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
             color: #8e8e8e;
             font-weight: normal;
         }
- 
-        #phoneSel {
-            width: 100%;
-            height: 50px;
-            display: block;
-            padding: 10px 0;
- 
-            font-size: 15px;
-            border: 1px solid rgb(218, 218, 218);
- 
-            margin-top: 8px;
- 
-        }
- 
-        #phoneBox {
-            margin: 10px 0;
-            width: 304px;
-        }
- 
-        #phoneBox input {
-            color: #8e8e8e;
-        }
- 
-        #phoneBtn {
-            padding: 16px 13px;
-            float: right;
-            margin-top: 10px;
-            color: #fff;
-            background: #08a600;
-            border: none;
-            font-size: 15px;
- 
-            cursor: pointer;
-        }
- 
-        #phone{
-        width: 300px;
-        }
- 
-        #serialBox,
-        #serialBox input {
-            background: rgb(247, 247, 247);
-            color: #8e8e8e;
-        }
- 
-        #send {
-            width: 100%;
-            height: 55px;
-            border: none;
- 
-            font-size: 20px;
-            font-weight: normal;
-            color: #fff;
-            background: #08a600;
- 
-            margin-top: 10px;
-        }
- 
- 
-        #footer {
-            margin: 0px;
-            margin-bottom:10px;
-            padding: 0px;
-            text-align: center;
-        }
- 
-        #footer ul {
-            padding: 0px;
-            margin-top: 30px;
-            margin-bottom: 9px;
-        }
- 
-        #footer ul li {
-            list-style: none;
-            display: inline;
-        }
- 
-        #footer ul li a {
-            text-decoration: none;
-            padding: 0 4px;
-            border-right: 1px solid #ccc;
- 
-            font-size: 12px;
-            color: #333;
-        }
- 
-        #footer img {
-            width: 63px;
-            margin-bottom: -4px;
-        }
- 
-        #footer label {
-            font-size: 10px;
-            color: #333;
-        }
- 
+
         .redCheck {
             font-size:12px;
             margin-top: 0px;
@@ -310,6 +190,25 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
             line-height: 50px;
             color: grey;
         }
+        
+   input[type=submit]{
+    font-weight: 300 !important;
+    border-radius: 4px;
+    background-color: #f0ad4e;
+    display: inline;
+    padding: .2em .6em .3em;
+    font-size: 95%;
+    line-height: 1;
+    color: white;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border: 0;
+    outline: 0;
+    height: 25px;
+   margin-right: 4px;
+   font-family: inherit;
+}
 </style>
 <script type="text/javascript">
         
@@ -383,7 +282,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                    <span style="padding-left:0px;">@overstackflow.com</span>
               </div>
                 
-                <p id="redCheck_id" class="redCheck"></p>
+        
         <div id="idBox" class="box" style="padding-bottom:10px">
 	<input type="password" name="memberPwd" class="input" maxlength="16" placeholder="비밀번호(6~16자의 영문,숫자,특수기호)*"><br>
 	</div>
@@ -404,31 +303,39 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 	<div id="idBox" class="box2" style="padding-bottom:10px">
 	<input type="file" id="imgInp" name="memberPhotoFile">
 	</div>
-	<div style="border:1px; width: 200px;height: 180px;margin-left: 280px;margin-top: -90px;">
-	<img id="blah" src="#" alt="your image"/><br>
+	<div style="border:1px solid black;margin-left:280px;margin-top: -90px; width: 155px;height: 180px; margin-bottom:30px;">
+	<img id="blah" src="#" alt="your image" style=" width: 155px;height: 180px;"/><br>
 	</div>
+
+
+	생년월일<input type="Date" name="memberBirth" style="width: 355px; height: 49px;margin-left: 20px;"><br>
 
 	
           <label style="margin-top: 0px;">성별</label>
                 <div id="sex">
                     <input type="radio" id="male" name="memberGender" value="남자">
-                    <label for="male">남자</label>
+                    <label for="male" style="padding-left: 90px;">남자</label>
                     <input type="radio" id="female" name="memberGender" value="여자">
-                    <label for="female">여자</label>
+                    <label for="female" style="padding-left:90px;">여자</label>
                 </div>
 	
 	<div>
-	휴대폰번호 <input type="text" name="memberPhone" class="input" placeholder="휴대폰 번호 -없이"><br> 
-	</div>
-	
-	생년월일<input type="Date" name="memberBirth"><br>
 	
 	
+             <div id="idBox" class="box" style="padding-bottom:10px">
+            <input type="text" name="memberPhone" class="input" placeholder="휴대폰 번호 -없이">
+            </div>
 	
+	
+	
+	
+<!-- 	
 	<input type="checkbox" id="Allagreebox"> 전체동의 <br>
 	<input type="checkbox" id="ageebox1"> 이용약관 <br>
-	<input type="checkbox" id="Allagreebox"> 개인정보 수집 및 이용<br>
-	<input type="submit" value="동의하고 회원가입">
+	<input type="checkbox" id="Allagreebox"> 개인정보 수집 및 이용<br> -->
+	
+	
+	<input type="submit" value="동의하고 회원가입" style="margin-left: 145px; margin-top: 50px; margin-bottom:100px;">
 </form>
 </div>
 			
