@@ -343,9 +343,7 @@ text-align:flot;
 		
 		<!-- main content start-->
 		<div id="page-wrapper">
-		
-		
-		
+	
 			<div class="main-page">
 			
 			<div class="main" style="margin-bottom:65%;">
@@ -365,8 +363,8 @@ text-align:flot;
 			<h3>프로필정보</h3>
 			
 		</div>
-		     <div class="ProfileMain">
-		  <div style="border: 1px; float: left; width: 10%; padding:10px; height: 200px;">
+ <div class="ProfileMain">
+<div style="border: 1px; float: left; width: 10%; padding:10px; height: 200px;">
 <img class='photo3' src="<c:url value='/resources/uploadFile/memberPhoto/${memInfo.memberPhoto}'/>"style="height: 200px;">
 </div>
 
@@ -375,7 +373,7 @@ text-align:flot;
 <div style="border: 1px; float: left; width: 40%; padding:10px;height: 200px;">
 <div><span><h1 style="margin-left:100px;">${memInfo.memberId}</h1></span></div><br>
 <br>
-<span style="margin-left:80px;">안녕 난 짱구야</span>
+<span style="margin-left:80px;">${memInfo.memberIntro}</span>
 </div>
 
 

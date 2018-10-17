@@ -14,6 +14,8 @@
 		select questionNo, content, title from questionboard where memId = #{memId} order by regDate desc
 	
 	</select>
-	
-
+	<!-- memberProfileUpdate -->
+ <update id="memberProfileUpdate"  parameterType="com.bit.op.osf.member.model.MemRegInfo">  	
+    	update member set memberPwd=#{memberPwd}, memberNickname=#{memberNickname} , memberIntro=#{memberIntro}   where memberId = #{memberId};
+    </update>
 </mapper>

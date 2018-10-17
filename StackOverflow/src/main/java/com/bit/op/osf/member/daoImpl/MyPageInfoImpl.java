@@ -22,10 +22,13 @@ import com.bit.op.osf.tagBoard.model.ReplyBoard;
 @Repository
 public class MyPageInfoImpl extends DaoImpl implements MyPageInfoDao {
 
-	
+	@Autowired
+	SHA256 SHA;
+
 
 	private static final String MYPAGEINFO_NAMESPACE = "com.bit.op.osf.member.mapper.MyPageInfoMapper.";
 
+	
 	
 	@Override
 	public List<ReplyBoard> selectAnswerInfo(String memId) throws Exception {
@@ -35,10 +38,24 @@ public class MyPageInfoImpl extends DaoImpl implements MyPageInfoDao {
 		return replyBoards;
 	}
 
+	
 	@Override
 	public List<QuestionBoard> selectQuestionInfo(String memId) throws Exception {
 		
 		List<QuestionBoard>  questionBoards = sqlSession.selectList(MYPAGEINFO_NAMESPACE+"selectQuestionMember", memId);
 		return questionBoards;
+	}
+
+	
+	@Override
+	public int memberProfileUpdate(MemRegInfo memInfo) {
+		// TODO Auto-generated method stub
+				
+		String memberPw = SHA.encrypt(memInfo.getMemberPwd());
+		memInfo.setMemberPwd(memberPw);
+
+		
+		
+	return	sqlSession.update(MYPAGEINFO_NAMESPACE+"memberProfileUpdate",memInfo);
 	}
 }

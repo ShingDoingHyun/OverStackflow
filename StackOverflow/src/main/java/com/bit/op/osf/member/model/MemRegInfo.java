@@ -15,8 +15,24 @@ public class MemRegInfo {
 	private String memberGender;
 	private String memberPhone;
 	private String memberRegisterDate;
+	private String memberIntro;
 	
 	
+
+
+
+	public String getMemberIntro() {
+		return memberIntro;
+	}
+
+
+
+	public void setMemberIntro(String memberIntro) {
+		this.memberIntro = memberIntro;
+	}
+
+
+
 	public MemRegInfo() {}
 	
 	
@@ -143,10 +159,10 @@ public class MemRegInfo {
 
 	@Override
 	public String toString() {
-		return "MemRegInfo [memberId=" + memberId + ", memberPwd=" + memberPwd + ", memberName=" + memberName
+		return "MemRegInfo   dfsdfsdfsdsdf    [memberId=" + memberId + ", memberPwd=" + memberPwd + ", memberName=" + memberName
 				+ ", memberNickname=" + memberNickname + ", memberPhoto=" + memberPhoto + ", memberPhotoFile="
 				+ memberPhotoFile + ", memberBirth=" + memberBirth + ", memberGender=" + memberGender + ", memberPhone="
-				+ memberPhone + ", memberRegisterDate=" + memberRegisterDate + "]";
+				+ memberPhone + ", memberRegisterDate=" + memberRegisterDate + ", memberIntro=" + memberIntro + "]";
 	}
 	
 	

@@ -8,7 +8,7 @@
 	</insert>
 
 	<select id="selectId" resultType="com.bit.op.osf.member.model.MemRegInfo" parameterType="String">
-		select memberId, memberPwd, memberName, memberNickname, memberPhoto, memberBirth,memberGender, memberPhone from member where memberId = #{id}
+		select memberId, memberPwd, memberName, memberNickname, memberPhoto, memberBirth,memberGender, memberPhone, memberIntro from member where memberId = #{id}
 	</select>
 	
 	

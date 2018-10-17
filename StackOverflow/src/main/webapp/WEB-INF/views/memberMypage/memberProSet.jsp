@@ -317,6 +317,7 @@ input[type="password"]:not(.s-input){
 }
 input {
     margin: 5px 0;
+    
 }
     .edit-profile .first-row label {
     margin-top: 18px;
@@ -335,13 +336,13 @@ body {
  #blah{
 		width:150px;
 	}
-.input {
+.input2{
             border: none;
             width: 310px;
-            height: 30px;
+            height: 50px;
             padding: 0 3px;
             font-size: 15px;
- }
+ }  
 #mainbar h3{
     font-weight: 400;
 }
@@ -405,34 +406,36 @@ function readURL(input) {
 	
 			<div class="main_2">
 			<div style="margin-top: 20px;"></div>
-			<h3 style="margin-left: 150px;">프로필수정</h3>
+			<h3>프로필수정</h3>
 			
 		</div>
 	
 	<div class="ProfileMain">
-	
+	<div style="border: 1px; float: left; width: 10%; padding:10px; height: 200px;">
+	</div>
         <div id="user-edit-table" class="inner-container">
             <div class="row first-row">
             
                 <div class="col-3">
-              <!--   <div style="border: 1px; float: left; width: 40%; padding:10px;height: 200px;"><br> -->
                   <input type="file" id="imgInp" name="memberPhotoFile">
 	                    <img id="blah" src="#" alt="your image" style="width: 200px;height: 200px;"/><br>
 	                    </div>
                     <div id="picture-popup"></div>
                     <div id="change-picture-progress">&nbsp;</div>
                 </div>
-               
-                <div class="col-9">
+           <form action="<c:url value="/memberProfileUpdate"/>"   method="post">
+                <div class="col-9" style="margin-left: 300px;">
                 
-                    <label style="padding-right: 53px;">아이디</label>
-                    <input name="Id" type="text" value="Id" maxlength="50" tabindex="1"/><br>
+                
+                    <input type="text" disabled="disabled"   name="memberId" value="${memInfo.memberId}" maxlength="20" class="input2" placeholder="아이디" tabindex="1"/><br>
                     
-                    <label style="padding-right: 38px;">비밀번호</label>
-                    <input name="password" type="password" value="비밀번호"  maxlength="50" tabindex="1" /><br>
+
+                    <input type="password"  name="memberPwd"  maxlength="20" class="input2" placeholder="영문/숫자/특수문자 조합 6~15자" tabindex="1" /><br>
                     
-                    <label>비밀번호 확인</label>
-                    <input name="repassword" type="password" value="비밀번호확인" maxlength="50" tabindex="1"/><br>
+
+                    <input type="password" name="memberPwd2" maxlength="15" class="input2" tabindex="1"/><br>
+                    
+                    
                 </div>
           
          
@@ -448,11 +451,15 @@ function readURL(input) {
                 <div class="col-12">
                     <h3>자기소개</h3>
 </div>
-                        <textarea id="wmd-input" class="wmd-input" name="AboutMe" cols="92" rows="15" tabindex="4" style="width: 850px;margin-top: 20px;"></textarea>
+                        <textarea id="wmd-input" class="wmd-input" name="memberIntro"   cols="92" rows="15" tabindex="4" style="width: 850px;margin-top: 20px;">${memInfo.memberIntro}</textarea>
                         <div id="wmd-preview" class="wmd-preview"></div>
                         
+                        <button type="submit"  class="label label-warning">수정</button>
                 </div> 
             </div>
+            
+            </form>
+            
        </div>
       </div>
         </div>

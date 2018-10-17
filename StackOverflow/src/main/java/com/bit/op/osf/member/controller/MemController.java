@@ -56,7 +56,7 @@ public class MemController {
 	}
 	
 	@RequestMapping(value = "/memJoinForm", method = RequestMethod.POST)
-	public String Join(MemRegInfo memInfo, Model model, HttpServletRequest request)throws Exception {
+	public String memberJoin(MemRegInfo memInfo, Model model, HttpServletRequest request)throws Exception {
 		System.out.println("meminfo : " + memInfo);
 		
 		int insertCnt = memberInfoDao.insertMemberInfo(memInfo, request);
@@ -74,50 +74,79 @@ public class MemController {
 		return "login/loginform";
 	}
 	
-		@RequestMapping(value = "/memberProfile", method = RequestMethod.GET)
-		public String Profile(HttpSession session) throws Exception {	
-			MemRegInfo memInfo = (MemRegInfo)session.getAttribute("memInfo");
-			String memId=  memInfo.getMemberId();
+	@RequestMapping(value = "/memberProfile", method = RequestMethod.GET)
+	public String memberProfile(HttpSession session) throws Exception {	
+		MemRegInfo memInfo = (MemRegInfo)session.getAttribute("memInfo");
+		String memId=  memInfo.getMemberId();
+		
+		List<ReplyBoard> replyBoards  =  myPageInfoDao.selectAnswerInfo(memId);
+		session.setAttribute("replyBoards", replyBoards);
+		
+		List<QuestionBoard> questionBoards  =  myPageInfoDao.selectQuestionInfo(memId);
+		session.setAttribute("questionBoards", questionBoards);		
+		
+		//tags
+		
+		
+			return "/memberMypage/memberProfile"; 
+	}
+	
+	@RequestMapping(value = "/memberProSet", method = RequestMethod.GET)
+	public String memberProfileSet(HttpSession session) {
+		MemRegInfo memInfo = (MemRegInfo)session.getAttribute("memInfo");
+		
+		session.setAttribute("memInfo",memInfo);
+		
+			return "/memberMypage/memberProSet"; 
+	}
+		
+	
+	//memberProfileUpdate   post
+	
+	@RequestMapping(value = "/memberProfileUpdate")
+	public String memberProfileUpdate(HttpSession session,  @RequestParam String memberPwd, @RequestParam String memberIntro) {
+		MemRegInfo memInfo=(MemRegInfo)session.getAttribute("memInfo");
+		System.out.println("cont     "+memInfo);
+		memInfo.setMemberPwd(memberPwd);
+		memInfo.setMemberIntro(memberIntro);
+	  	//myPageInfoDao.memberProfileUpdate(memInfo);
+		if(	myPageInfoDao.memberProfileUpdate(memInfo) > 0) {
+			session.setAttribute("memInfo", memInfo);
+			return  "/memberMypage/memberProfile" ;
+		}else {
 			
-			
-			List<ReplyBoard> replyBoards  =  myPageInfoDao.selectAnswerInfo(memId);
-			session.setAttribute("replyBoards", replyBoards);
-			
-			List<QuestionBoard> questionBoards  =  myPageInfoDao.selectQuestionInfo(memId);
-			session.setAttribute("questionBoards", questionBoards);		
-			
-				return "/memberMypage/memberProfile"; 
+			return  "/memberMypage/memberProSet" ; 
 		}
 		
-		@RequestMapping(value = "/memberProSet", method = RequestMethod.GET)
-		public String Profile4() {
-				return "/memberMypage/memberProSet"; 
-		}
-		
-	   @RequestMapping(value = "/memLoginForm", method = RequestMethod.POST)
+	}
+	
+	
+	
+	
+	  @RequestMapping(value = "/memLoginForm", method = RequestMethod.POST)
 	   public String memberLogin(@RequestParam("memberId") String id, @RequestParam("memberPwd") String pw, Model model,
 			HttpServletRequest request) {
-
+	
 		// 2-1.세션 만들기
 		HttpSession session = request.getSession();
-
+	
 		// 1-1.회원 정보 불러오기
 		MemRegInfo memInfo = memberInfoDao.selectMember(id, pw);
-
+	
 		if (memInfo!= null) {
-
+	
 			if (id.equals(memInfo.getMemberId()) && SHA.encrypt(pw).equals(memInfo.getMemberPwd())) {
 				model.addAttribute("memInfo", memInfo);
 				session.setAttribute("memInfo", memInfo);
 			}
 		}
-
+	
 		return "login/logincheck";
 	}
 	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
-
+	
 		if(session.getAttribute("memInfo")!=null) {
 		session.removeAttribute("memInfo");
 		session.invalidate();
@@ -127,9 +156,9 @@ public class MemController {
 			session.removeAttribute("comInfo");
 			session.invalidate();
 		}
-
+	
 	 return "redirect:/";
 	}
-	
+
 
 }
