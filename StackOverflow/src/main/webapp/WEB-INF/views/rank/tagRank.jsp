@@ -1,13 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ page import="java.net.URLEncoder" %>
-<%@ page import="java.security.SecureRandom" %>
-<%@ page import="java.math.BigInteger" %>
-<%@ page import="java.io.BufferedReader" %>
-<%@ page import="java.io.InputStreamReader" %>
-<%@ page import="java.net.HttpURLConnection" %>
-<%@ page import="java.net.URL" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!--
 Author: W3layouts
 Author URL: http://w3layouts.com
@@ -56,104 +48,6 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 <link href="css/custom.css" rel="stylesheet">
 <!--//Metis Menu -->
 </head> 
-<style>
-.bluebTabDesign {
-	padding: 0 0 0px 0px;
-}
-
-.bluebTabDesign ul {
-	margin: 0;
-	padding-left: 10px;
-	list-style: none;
-	border-bottom: 1px solid #2390ff;
-	font-family: dotum, Sans-serif;
-	font-size: 12px;
-	*zoom: 1;
-}
-
-.bluebTabDesign ul:after {
-	content: "";
-	display: block;
-	clear: both;
-}
-
-.bluebTabDesign li {
-	float: left;
-	margin: 0px 1px -1px 1px;
-}
-
-.bluebTabDesign li a {
-	position: relative;
-	float: left;
-	text-decoration: none;
-	border-top: 1px solid #c0c0c0;
-	border-right: 1px solid #c0c0c0;
-	border-left: 1px solid #c0c0c0;
-	background: #efefef;
-	color: #666;
-}
-
-.bluebTabDesign li a span {
-	display: inline-block;
-	padding: 6px 7px;
-	letter-spacing: -1px;
-	cursor: pointer;
-	border-top: 1px solid #fff;
-	border-left: 1px solid #fff;
-}
-
-.bluebTabDesign li a:hover {
-	background: #fff;
-	color: #2390ff;
-	border: 1px solid #2390ff;
-}
-
-.bluebTabDesign li ul {
-	display: none;
-	width: 100%;
-	top: 40px;
-	left: 0;
-	list-style: none;
-	border: 0;
-	margin: 0;
-	padding: 0;
-	white-space: nowrap;
-	overflow: hidden;
-	*zoom: 1;
-}
-
-.bluebTabDesign li ul:after {
-	content: "";
-	display: block;
-	clear: both;
-}
-
-.bluebTabDesign li.selected a {
-	border: 2px solid #2390ff;
-	padding: 1px;
-	border-bottom: 0px solid #fff;
-	margin-top: -3px;
-	background-color: #fff;
-	color: #2390ff;
-}
-
-.bluebTabDesign li.selected a span {
-	display: inline-block;
-	padding-top: 7px;
-	font-weight: bold;
-	background-color: #fff;
-}
-
-.bluebTabDesign li.selected a:hover {
-	border: 2px solid #2390ff;
-	padding: 1px;
-	border-bottom: 0px solid #fff;
-	margin-top: -3px;
-	background-color: #fff;
-	color: #2390ff;
-}
-
-</style>
 <body class="cbp-spmenu-push">
 	<div class="main-content">
 	
@@ -177,19 +71,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 			<div class="main-page">
 			
 			
-			<div class="main" style="margin-bottom:65%;">
-
-		<div style="margin-top: 20px;"></div>
-
-		<div class="bluebTabDesign">
-			<ul>
-				<li class="selected"><a href="#"><span>프로필</span></a></li>
-				<li><a href="#"><span>새로운 채용 공고 등록</span></a></li>
-				<li><a href="<c:url value='/op'/>"><span>채용 정보 관리</span></a></li>
-				<li><a href="<c:url value='/op]'/>"><span>프로필 설정</span></a></li>
-
-			</ul>
-		</div>
+			
 			
 			
 			</div>

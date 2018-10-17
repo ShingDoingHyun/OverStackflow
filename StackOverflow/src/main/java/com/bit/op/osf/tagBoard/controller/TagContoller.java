@@ -24,8 +24,8 @@ public class TagContoller {
 	
 	@RequestMapping(value = "/selectTagList")
 	public String selectTagList() {
-		
-		return "";
+		System.out.println("여기로");
+		return "rank/tagRank";
 
 	}
 	
@@ -69,5 +69,6 @@ public class TagContoller {
 		
 	}
 	
+
 	
 }
