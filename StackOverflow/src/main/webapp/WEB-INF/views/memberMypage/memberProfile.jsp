@@ -337,9 +337,7 @@ text-align:flot;
 			<%@ include file="../commons/bheader.jspf" %>
 		<!-- //header-ends -->
 		
-		
-		
-		
+	
 		
 		<!-- main content start-->
 		<div id="page-wrapper">

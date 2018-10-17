@@ -154,9 +154,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 	background-color: #fff;
 	color: #2390ff;
 }
-.main_2 {
-	margin-Left: 20px;
-}
+
  .ProfileMain{
     margin-left: 300px;
     margin-top: 50px;
@@ -216,9 +214,9 @@ body.user-page #content * {
     display: table;
     content: " ";
 }
-body *, body *:before, body *:after {
+/* body *, body *:before, body *:after {
     box-sizing: inherit;
-}
+} */
     body.user-page #content * {
     box-sizing: border-box;
 }
@@ -226,9 +224,9 @@ body *, body *:before, body *:after {
     width: 25%;
     float: left;
 }
-body *, body *:before, body *:after {
+/* body *, body *:before, body *:after {
     box-sizing: inherit;
-}
+} */
     body.user-page #content * {
     box-sizing: border-box;
 }
@@ -239,9 +237,9 @@ body *, body *:before, body *:after {
     width: 75%;
     float: left;
 }
-body *, body *:before, body *:after {
+/* body *, body *:before, body *:after {
     box-sizing: inherit;
-}
+} */
     
     body.user-page #content * {
     box-sizing: border-box;
@@ -261,9 +259,9 @@ body *, body *:before, body *:after {
 .edit-profile label:not(.btn) {
     display: block;
 }
-body *, body *:before, body *:after {
+/* body *, body *:before, body *:after {
     box-sizing: inherit;
-}
+} */
 label {
     margin: 0;
     padding: 0;
@@ -406,23 +404,17 @@ function readURL(input) {
 	
 			<div class="main_2">
 			<div style="margin-top: 20px;"></div>
-			<h3>프로필수정</h3>
-			
+			<h3 style="margin-left:20px;">프로필수정</h3>
 		</div>
 	
 	<div class="ProfileMain">
-	<div style="border: 1px; float: left; width: 10%; padding:10px; height: 200px;">
-	</div>
+
         <div id="user-edit-table" class="inner-container">
-            <div class="row first-row">
+          
             
-                <div class="col-3">
-                  <input type="file" id="imgInp" name="memberPhotoFile">
-	                    <img id="blah" src="#" alt="your image" style="width: 200px;height: 200px;"/><br>
-	                    </div>
-                    <div id="picture-popup"></div>
-                    <div id="change-picture-progress">&nbsp;</div>
-                </div>
+         
+                 	
+               
            <form action="<c:url value="/memberProfileUpdate"/>"   method="post">
                 <div class="col-9" style="margin-left: 300px;">
                 
