@@ -5,7 +5,7 @@
 <mapper namespace="com.bit.op.osf.job.mapper.ComJobMapper">
 
 <select id="selectComMember" resultType="com.bit.op.osf.job.model.ComMember" parameterType="String">
-	select comName, comAddress, comZipcode, comCall, comHomePageUrl, comChargerName, comChargerEmail, comIntroduction, comBenefits from com where comId = #{comId}
+	select comId, comName, comAddress, comZipcode, comCall, comHomePageUrl, comChargerName, comChargerEmail, comIntroduction, comBenefits from com where comId = #{comId}
 </select>
 
 <insert id="insertJobInfo" parameterType="com.bit.op.osf.job.model.JobInfo" > 

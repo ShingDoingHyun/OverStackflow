@@ -1,11 +1,14 @@
 package com.bit.op.osf.job.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.bit.op.osf.job.daoImpl.ComJobAppDaoImpl;
 import com.bit.op.osf.job.daoImpl.ComJobDaoImpl;
 import com.bit.op.osf.job.model.JobApplication;
+import com.bit.op.osf.member.model.ComRegInfo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -30,28 +34,55 @@ public class ComJobAppController {
 
     //지원서 관리 목록 
     @RequestMapping(value="/comJob/manageJobAppList/{jobNo}", method=RequestMethod.GET)
-    public String selectJobAppManageList(HttpServletRequest request, @PathVariable("jobNo") int jobNo, Model model) {
-    	String comId = "test1";
+    public String selectJobAppManageList(HttpServletRequest request, HttpServletResponse response, @PathVariable("jobNo") int jobNo, Model model) throws IOException {
+    	ComRegInfo comInfo= (ComRegInfo) request.getSession().getAttribute("comInfo");
     	String appResult = null;
     	
-    	model.addAttribute("jobInfoList", comJobAppDaoImpl.selectJobInfoListForApp(comId));
-    	model.addAttribute("jobAppList", comJobAppDaoImpl.selectJobAppManageList(comId, jobNo, appResult));
-    	model.addAttribute("job", comJobDaoImpl.selectJobInfo(jobNo));
-    	model.addAttribute("jobAppNum", comJobAppDaoImpl.countJobAppByJobNo(jobNo, comId, appResult));
-    	model.addAttribute("graph", comJobAppDaoImpl.countJobAppForGraph(comId, jobNo, appResult));
+    	response.setContentType("text/html; charset=UTF-8");
+    	PrintWriter out = response.getWriter();
+    	
+    	if(comInfo != null) {
+    		String comId = comInfo.getComId();
+    		if(comId != null) {
+	    	model.addAttribute("jobInfoList", comJobAppDaoImpl.selectJobInfoListForApp(comId));
+	    	model.addAttribute("jobAppList", comJobAppDaoImpl.selectJobAppManageList(comId, jobNo, appResult));
+	    	model.addAttribute("job", comJobDaoImpl.selectJobInfo(jobNo));
+	    	model.addAttribute("jobAppNum", comJobAppDaoImpl.countJobAppByJobNo(jobNo, comId, appResult));
+	    	model.addAttribute("graph", comJobAppDaoImpl.countJobAppForGraph(comId, jobNo, appResult));
+    		}else {
+      			out.println("<script>alert('로그인 후 이용해 주세요.'); history.back();</script>");
+      			out.flush(); 
+          	  }
+        }else {
+  		out.println("<script>alert('로그인 후 이용해 주세요.'); history.back();</script>");
+  		out.flush(); 
+        }
     	return "comJob/comManageJobAppList";
     }
     
     //지원서 관리 목록 By AppResult
     @RequestMapping(value="/comJob/manageJobAppListByAppResult/{jobNo}/{appResult}", method=RequestMethod.GET)
-    public String selectJobAppManageListByAppResult(HttpServletRequest request, @PathVariable("jobNo") int jobNo, @PathVariable("appResult") String appResult, Model model) {
-    	String comId = "test1";
-
-    	model.addAttribute("jobInfoList", comJobAppDaoImpl.selectJobInfoListForApp(comId));
-    	model.addAttribute("jobAppList", comJobAppDaoImpl.selectJobAppManageList(comId, jobNo, appResult));
-    	model.addAttribute("job", comJobDaoImpl.selectJobInfo(jobNo));
-    	model.addAttribute("jobAppNum", comJobAppDaoImpl.countJobAppByJobNo(jobNo, comId, appResult));
-    	model.addAttribute("graph", comJobAppDaoImpl.countJobAppForGraph(comId, jobNo, appResult));
+    public String selectJobAppManageListByAppResult(HttpServletRequest request,HttpServletResponse response, @PathVariable("jobNo") int jobNo, @PathVariable("appResult") String appResult, Model model) throws IOException {
+    	ComRegInfo comInfo= (ComRegInfo) request.getSession().getAttribute("comInfo");
+    	response.setContentType("text/html; charset=UTF-8");
+    	PrintWriter out = response.getWriter();
+    	
+    	if(comInfo != null) {
+    		String comId = comInfo.getComId();
+    		if(comId != null) {
+				model.addAttribute("jobInfoList", comJobAppDaoImpl.selectJobInfoListForApp(comId));
+				model.addAttribute("jobAppList", comJobAppDaoImpl.selectJobAppManageList(comId, jobNo, appResult));
+				model.addAttribute("job", comJobDaoImpl.selectJobInfo(jobNo));
+				model.addAttribute("jobAppNum", comJobAppDaoImpl.countJobAppByJobNo(jobNo, comId, appResult));
+				model.addAttribute("graph", comJobAppDaoImpl.countJobAppForGraph(comId, jobNo, appResult));
+    		}else {
+      			out.println("<script>alert('로그인 후 이용해 주세요.'); history.back();</script>");
+      			out.flush(); 
+          	  }
+        }else {
+  		out.println("<script>alert('로그인 후 이용해 주세요.'); history.back();</script>");
+  		out.flush(); 
+        }
     	return "comJob/comManageJobAppList";
     }
     
