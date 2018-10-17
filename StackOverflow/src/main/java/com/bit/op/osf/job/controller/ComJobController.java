@@ -48,6 +48,7 @@ public class ComJobController {
     @RequestMapping(value="/comJob/writeJobInfo", method=RequestMethod.GET)
 	public String openWriteJobInfo(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
     	ComRegInfo comInfo= (ComRegInfo) request.getSession().getAttribute("comInfo");
+    	System.out.println(comInfo);
     	response.setContentType("text/html; charset=UTF-8");
     	PrintWriter out = response.getWriter();
 

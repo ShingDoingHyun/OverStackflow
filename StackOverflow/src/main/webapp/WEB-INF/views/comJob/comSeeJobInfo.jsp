@@ -143,8 +143,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
    <div class="mainofmain" id="mainofmain">
 	<div class="centerup">
 		<c:if test="${jobInfo.comPhoto!=null}">
-		<img src="<c:url value="/resources/jobimage/${jobInfo.comPhoto}"/>" width="6%;">
-		
+		<img src="<c:url value="/resources/uploadFile/comPhoto/${jobInfo.comPhoto}"/>" width="6%;">
 		</c:if>
 		<h1 style="display:inline;">${jobInfo.jobTitle} <span style="font-size:15px;">${jobInfo.comName}</span>
 		<c:if test="${jobInfo.endedJob == 'Y'}">

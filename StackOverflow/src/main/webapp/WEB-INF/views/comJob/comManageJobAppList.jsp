@@ -103,7 +103,7 @@ td, .th tr td {
  
  .border{
  	border: 1px solid black;
- 	padding: 5%;
+ 	padding: 3%;
  	margin-bottom: 15px;
  	width: 80%;
  }
@@ -123,6 +123,25 @@ td, .th tr td {
     padding-bottom: 40px;
     margin-right: 10%;
  }
+ 
+  input[type=button], input[type=submit], button{
+	font-weight: 300 !important;
+	border-radius: 4px;
+	background-color: #999999;
+	display: inline;
+ 	padding: .2em .6em .3em;
+ 	font-size: 95%;
+ 	line-height: 1;
+  	color: #fff;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: baseline;
+	border: 0;
+    outline: 0;
+	height: 25px;
+    margin-right: 4px;
+    font-family: inherit;
+}
  
 </style>
 </head>
@@ -155,8 +174,9 @@ td, .th tr td {
 
 
 <div class="right">
-	<input type="button" value="채용 공고 관리" onclick="location.href='<c:url value="/comJob/manageJobInfoList/1"/>'">
-	<input type="button" value="새로운 채용 공고 작성" onclick="location.href='<c:url value="/comJob/writeJobInfo"/>'">
+	<span style="font-size: 14px;"><a href="<c:url value="/comJob/seeJobInfoList/1"/>">채용 정보</a> > <a href="<c:url value="/comJob/manageJobInfoList/1"/>">채용 공고 관리</a> > <a href="<c:url value="/comJob/manageJobAppList/0"/>">지원자 관리</a></span><br>
+	<input type="button" style="background-color:#f0ad4e;margin-top:3%;" value="새로운 채용 공고 작성" onclick="location.href='<c:url value="/comJob/writeJobInfo"/>'">
+	<input type="button" style="background-color:#f0ad4e;margin-top:3%;" value="채용 공고 관리" onclick="location.href='<c:url value="/comJob/manageJobInfoList/1"/>'">
    	<a href="#m"><img src="http://icons.iconarchive.com/icons/graphicloads/100-flat-2/256/arrow-up-icon.png" width="4%" 
    	style="position:fixed; bottom: 10px;"></a>
 </div>
@@ -172,7 +192,7 @@ td, .th tr td {
 		<option value="${jobInfo.jobNo}" ${jobInfo.jobNo == job.jobNo? 'selected': ''}>${jobInfo.jobTitle} - ${jobInfo.jobRegisterDate}</option>
 		</c:forEach>
 	</select>
-	<input type="button" value="확인" onclick="return appSelect()" style="padding: 1%;">
+	<input type="button" value="확인" onclick="return appSelect()">
 	</form>
 	
 	<!-- 지원서 관리 -->
@@ -276,14 +296,14 @@ td, .th tr td {
 			    	  	 <table>
 			   
 							  <c:if test="${jobInfo.comPhoto != null and jobInfo.comPhoto !=''}">
-								<img src="<c:url value="/resources/jobimage/${jobApp.appPhoto}"/>" width="15%;" style="margin: 10px;float:left;">
+								<img src="<c:url value="/resources/jobimage/${jobApp.appPhoto}"/>" width="15%;" style="margin: 0 1%;float:left;">
 							  </c:if>
 			    	  	      <c:if test="${jobInfo.comPhoto == null || jobInfo.comPhoto == '' }">
-								<img src="<c:url value="/resources/jobimage/appprofile.PNG"/>" width="15%;" style="margin: 10px;float:left;">
+								<img src="<c:url value="/resources/jobimage/appprofile.PNG"/>" width="15%;" style="margin: 0 1%;float:left;">
 							  </c:if>
 							  
-							  <div style="margin: 10px;float:left;z-index:1;">
-					    	  ${jobApp.appName}(${jobApp.appGender}, ${jobApp.appAge}세)<br>
+							  <div style="margin: 10px; position:relative; z-index:1;">
+					    	   <h2>${jobApp.appName}(${jobApp.appGender}, ${jobApp.appAge}세)</h2>
 							    ${jobApp.appBirth}<br>
 							    ${jobApp.appEmail}   ${jobApp.appPhone}  ${jobApp.appCall} <br>
 								${jobApp.appEduName}(${jobApp.appEduLevel}) ${jobApp.appEduEntraDate} - ${jobApp.appEduGraduDate}  ${jobApp.appEduState}<br>
@@ -291,13 +311,14 @@ td, .th tr td {
 								${jobApp.appRegisterDate}<br>
 							  </div>
 							  
-							  <div>
+							  <div style="margin-top: 6%; margin-left:1%; position:relative;" >
 							  	<label>자기소개</label><br>
-							  	<div class="border" style="margin-top: 18%;"> ${jobApp.appIntroduction}<br></div>
+							  	<div class="border" > ${jobApp.appIntroduction}<br></div>
 							  	
-							  	<label style="margin-top: 3%;">입사 포부</labe><br>
-							  	<div class="border"> ${jobApp.appAmbition}<br> </div>
+							  	<label style="margin-top: 1%;">입사 포부</labe><br>
+							  	<div class="border" style="width: 231%;"> ${jobApp.appAmbition}<br></div>
 							  	
+							  	<div style="float:left;">
 							  	<!-- 면접 결과 -->
 					  	 		<c:if test="${jobApp.appResult == '-'}">
 					  			   결과 통보:
@@ -312,7 +333,7 @@ td, .th tr td {
 									</c:if>
 									<c:if test="${jobApp.appResult == 'failure'}">
 									<span style="color:red;" id="appResult${status.count}">불합격</span>
-					  				</c:if>
+							</c:if>
 					  			</c:if>
 					  				<form onsubmit="return updateAppResult($(this), ${status.count})" accept-charset="utf-8" >
 					  					<input type="hidden" name="appNo" value="${jobApp.appNo}">
@@ -326,9 +347,10 @@ td, .th tr td {
 					  			<c:if test="${jobApp.appResultDate != null}">
 					  			<span id="appResultDate${status.count}">결과 통보일: ${jobApp.appResultDate}</span>
 					  			</c:if>
-
+								</div>
 
 								<br>
+								<div>
 							    <!-- 면접 날짜 -->
 							    <c:if test="${jobApp.appInterviewDateDate == null}">
 					  			   면접 날짜 지정:
@@ -344,6 +366,7 @@ td, .th tr td {
 								   면접 날짜 통보일: <span id="appInterviewDateDate${status.count}">${jobApp.appInterviewDateDate}</span>
 								</c:if>
 								<br>
+								</div>
 							  </div>
 							 </table>
 					 	 </div>

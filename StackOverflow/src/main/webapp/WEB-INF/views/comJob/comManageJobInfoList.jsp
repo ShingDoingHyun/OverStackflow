@@ -100,6 +100,25 @@ table {
  	
  }
  
+ input[type=button], input[type=submit], button{
+	font-weight: 300 !important;
+	border-radius: 4px;
+	background-color: #999999;
+	display: inline;
+ 	padding: .2em .6em .3em;
+ 	font-size: 95%;
+ 	line-height: 1;
+  	color: #fff;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: baseline;
+	border: 0;
+    outline: 0;
+	height: 25px;
+    margin-right: 4px;
+    font-family: inherit;
+}
+ 
 </style>
 </head>
 <body class="cbp-spmenu-push">
@@ -123,11 +142,13 @@ table {
 	</div>
 	
 	<div class="right">
-	  <button>
-	  	<a href="<c:url value="/comJob/writeJobInfo"/>">새로운 채용 공고 작성</a>
+	  <span style="font-size: 14px;margin-left:19%;"><a href="<c:url value="/comJob/seeJobInfoList/1"/>">채용 정보</a> > <a href="<c:url value="/comJob/manageJobInfoList/1"/>">채용 공고 관리</a></span><br>
+	  
+	  <button style="background-color:#f0ad4e;margin-top:3%;margin-left:19%;">
+	  	<a href="<c:url value="/comJob/writeJobInfo"/>" style="color: #fff;">새로운 채용 공고 작성</a>
 	  </button>
-	  <button>
-	  	<a href="<c:url value="/comJob/manageJobAppList/0"/>">지원자 관리</a>
+	  <button style="background-color:#f0ad4e;margin-top:3%;">
+	  	<a href="<c:url value="/comJob/manageJobAppList/0"/>" style="color: #fff;">지원자 관리</a>
 	  </button>
     </div>
 	
@@ -176,7 +197,7 @@ table {
 			</tr> -->
 			 
 			<tr>
-			 <td colspan="2" style="text-align:center;"><input type="submit" value="검색"></td>
+			 <td colspan="2" style="text-align:center;"><input type="submit" style="background-color:#f0ad4e;" value="검색"></td>
 			 </tr>
 			</table>
 		</form>

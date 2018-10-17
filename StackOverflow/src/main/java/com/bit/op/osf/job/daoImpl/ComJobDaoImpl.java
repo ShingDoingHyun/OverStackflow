@@ -26,6 +26,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.util.SystemPropertyUtils;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bit.op.osf.job.dao.ComJobDao;
@@ -120,14 +121,17 @@ public class ComJobDaoImpl extends DaoImpl implements ComJobDao {
         	jobInfoList = Collections.emptyList();
         }
         
-        ComRegInfo comInfo =  (ComRegInfo) request.getSession().getAttribute("comInfo");
-
         for(JobInfo jobInfo : jobInfoList) {
-        	
         	int jobNo = jobInfo.getJobNo();
+        	System.out.println(jobNo);
         	ComMember com = sqlSession.selectOne(JOBNAMESPACE + "selectJobInfoCom", jobNo);
-        	jobInfo.setComName(com.getComName());
+        	if(com!=null) {
+        		if(com.getComName()!=null) {
+        			jobInfo.setComName(com.getComName());
+        		}
+        	}
         	
+        	ComRegInfo comInfo =  (ComRegInfo) request.getSession().getAttribute("comInfo");
         	if(comInfo != null) {
 	        	if(comInfo.getComId() != null) {
 	        		

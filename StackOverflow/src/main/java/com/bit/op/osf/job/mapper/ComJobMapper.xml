@@ -5,7 +5,7 @@
 <mapper namespace="com.bit.op.osf.job.mapper.ComJobMapper">
 
 <select id="selectComMember" resultType="com.bit.op.osf.job.model.ComMember" parameterType="String">
-	select comName, comAddress, comZipcode, comCall, comHomePageUrl, comChargerName, comChargerEmail, comIntroduction, comBenefits from commember where comId = #{comId}
+	select comName, comAddress, comZipcode, comCall, comHomePageUrl, comChargerName, comChargerEmail, comIntroduction, comBenefits from com where comId = #{comId}
 </select>
 
 <insert id="insertJobInfo" parameterType="com.bit.op.osf.job.model.JobInfo" > 
@@ -53,13 +53,13 @@
 	jobInfo.comIntroduction as comIntroduction, DATE_FORMAT(jobDueDate ,'%Y-%m-%d') as jobDueDate, 
 	jobApplyType, jobHomePageUrl, jobChargerSendEmail ,jobChargerName, jobChargerEmail, jobEtc, endedJob ,DATE_FORMAT(jobRegisterDate ,'%Y-%m-%d') as jobRegisterDate,
 	comName, comAddress, comZipcode, comPhoto
-	from jobinfo jobInfo, commember com
+	from jobinfo jobInfo, com 
 	where jobInfo.comId = com.comId and jobNo = #{jobNo};
 </select>
 
 <select id="selectJobInfoCom" resultType="com.bit.op.osf.job.model.ComMember" parameterType="Integer">
 	select comName, comAddress
-	from jobinfo a, commember b
+	from jobinfo a, com b
     where a.comId = b.comId
     and jobNo = #{jobNo}
 </select>

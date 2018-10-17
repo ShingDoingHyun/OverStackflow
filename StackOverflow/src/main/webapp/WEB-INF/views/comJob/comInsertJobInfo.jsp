@@ -90,10 +90,33 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 	}
 	
 	#title{
-	
 	margin-bottom: 5%;
-	/* text-align: center; */
 	}
+	
+	.right {
+    float: right;
+    width: 30%;
+    right: 10px;
+	}	
+	
+	input[type=button], input[type=submit], button{
+	font-weight: 300 !important;
+	border-radius: 4px;
+	background-color: #999999;
+	display: inline;
+ 	padding: .2em .6em .3em;
+ 	font-size: 95%;
+ 	line-height: 1;
+  	color: #fff;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: baseline;
+	border: 0;
+    outline: 0;
+	height: 25px;
+    margin-right: 4px;
+    font-family: inherit;
+}
 
 </style>
 </head>
@@ -113,6 +136,12 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 
 <!----------------------main--------------------------------------->
 <div class="main-page">
+	
+	<div class="right"> 
+	<span style="font-size: 14px;"><a href="<c:url value="/comJob/seeJobInfoList/1"/>">채용 정보</a> > <a href="<c:url value="/comJob/writeJobInfo"/>">새로운 채용 공고 작성</a> </span><br>
+   	<a href="#title"><img src="http://icons.iconarchive.com/icons/graphicloads/100-flat-2/256/arrow-up-icon.png" width="4%" style="position:fixed; bottom: 10px;"></a>
+	</div>
+	
 <div class="main">
 	<form action="<%=request.getContextPath()%>/comJob/writeJobInfo" method="post" name="jobForm" >
 	 <h2 id="title" > 채용 공고 작성</h2>
@@ -220,8 +249,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 					</div>
 			</li>
 		</ul>
-	<input type="submit" value="확인"> 
-	<input type="button" onclick="" value="취소">
+	<input type="submit" style="margin-left:43%; background-color:#f0ad4e; margin-bottom:5%; text-align: center;" value="확인"> 
+	<input type="button"   style="text-align: center; background-color:#f0ad4e; margin-bottom:5%;"  onclick="" value="취소">
 	</div>
 	</form>
 	</div>

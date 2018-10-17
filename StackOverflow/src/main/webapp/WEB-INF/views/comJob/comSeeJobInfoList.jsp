@@ -96,12 +96,24 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 	   cursor: pointer;
 	 }
 	 
-/*  	input[type=button]{
-		border: 0;
-		outline: 0;
-		height: 25px;
-		margin-right: 4px;
-	}  */
+	 input[type=button], input[type=submit]{
+	 	font-weight: 300 !important;
+	 	border-radius: 4px;
+	 	background-color: #999999;
+	 	display: inline;
+   		padding: .2em .6em .3em;
+   		font-size: 95%;
+   	    line-height: 1;
+    	color: #fff;
+   		text-align: center;
+   		white-space: nowrap;
+   		vertical-align: baseline;
+   		border: 0;
+ 	    outline: 0;
+  		height: 25px;
+        margin-right: 4px;
+        font-family: inherit;
+	 }
 	 
 </style>
 </head>
@@ -127,8 +139,9 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 	</div>
 	
 	<div class="right">
-	  <input type="button" value="채용 공고 관리" onclick="location.href='<c:url value="/comJob/manageJobInfoList/1"/>'">
-	  <input type="button" value="새로운 채용 공고 작성" onclick="location.href='<c:url value="/comJob/writeJobInfo"/>'">
+	  <span style="font-size: 14px;margin-left:19%;"><a href="<c:url value="/comJob/seeJobInfoList/1"/>">채용 정보</a> ></span><br>
+	  <input type="button" value="새로운 채용 공고 작성" style="background-color: #f0ad4e;margin-left:19%;margin-top:3%;" onclick="location.href='<c:url value="/comJob/writeJobInfo"/>'">
+	  <input type="button" value="채용 공고 관리" style="background-color: #f0ad4e;margin-top:3%;" onclick="location.href='<c:url value="/comJob/manageJobInfoList/1"/>'">
 	 
      <div style="border:1px solid black; width:300px; height:200px;margin-left:80px; margin-top:63px">
      <p style="text-align: center; border-bottom:1px solid black; padding: 10px 0 10px 0; margin-top: 0; margin-bottom:0; font-size: 14px; padding-right: 1%;">나의 채용 공고</p>
@@ -195,7 +208,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 			</tr>
 			
 		     <tr>
-			 <td colspan="2" style="text-align:center;"><input type="submit"  value="검색" ></td>
+			 <td colspan="2" style="text-align:center;margin-top: 3%;"><input type="submit" style="background-color:#f0ad4e;" value="검색" ></td>
 			 <tr>
 			 </table>
 			 </form>
