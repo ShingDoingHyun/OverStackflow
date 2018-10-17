@@ -24,13 +24,15 @@
 							<!-- /nav-second-level -->
 						</li>
 						<li class="">
-							<a href="#"><i class="fa fa-book nav_icon"></i>마이페이지<span class="fa arrow"></span></a>
+							<a href="#"/>"><i class="fa fa-book nav_icon"></i>마이페이지<span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level collapse">
 								<li>
-									<a href="general.html">General<span class="nav-badge-btm">08</span></a>
-								</li>
-								<li>
-									<a href="typography.html">Typography</a>
+									<c:if test="${memInfo != null}">  
+									<a href="<c:url value='/memberProfile'/>">마이페이지<span class="nav-badge-btm">Click</span></a>
+									</c:if>
+									<c:if test="${comInfo != null}">  
+									<a href="<c:url value='/comProfile'/>">마이페이지<span class="nav-badge-btm">Click</span></a>
+									</c:if>
 								</li>
 							</ul>
 							<!-- /nav-second-level -->
