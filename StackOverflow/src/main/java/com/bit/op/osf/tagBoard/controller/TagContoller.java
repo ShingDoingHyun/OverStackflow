@@ -59,5 +59,15 @@ public class TagContoller {
 		
 	}
 	
+	@RequestMapping(value = "/insertNewTagName")
+	public @ResponseBody List<Tag> insertNewTagName(Tag tag) {
+		
+		System.out.println(tag);
+		tagDao.insertNewTagName(tag);
+		System.out.println("성공");
+		return tagDao.selectTagNameList(tag.getTagMiddleName());
+		
+	}
+	
 	
 }

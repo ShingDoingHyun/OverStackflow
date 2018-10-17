@@ -48,7 +48,7 @@ public class TagDaoImpl implements ITagDao {
 
 	@Override
 	public List<Tag> selectTagNameList(String middleTag) {
-
+		System.out.println(middleTag);
 		return sqlSession.selectList(COMMENT_NAMESPACE + "selectTagNameList", middleTag);
 	}
 
@@ -104,6 +104,13 @@ public class TagDaoImpl implements ITagDao {
 	public Object selectTagListBySearch(Search search) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public int insertNewTagName(Tag tag) {
+		// TODO Auto-generated method stub
+		System.out.println("1"+tag);
+		return sqlSession.insert(COMMENT_NAMESPACE + "insertTag", tag);
 	}
 
 

@@ -62,4 +62,8 @@
 		select tag.tagNo, tag.tagName from tag, memfavtag where tag.tagNo = memfavtag.tagNo and memfavtag.memId=#{memberId};
 	</select>
 	
+	<insert id="insertTag" parameterType="com.bit.op.osf.tagBoard.model.Tag">
+		insert into tag (tagMainName, tagMiddleName, tagName) value (#{tagMainName}, #{tagMiddleName}, #{tagName} );
+	</insert>
+	
 </mapper>

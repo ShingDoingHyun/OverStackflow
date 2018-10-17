@@ -33,4 +33,6 @@ public interface ITagDao {
 
 	Object selectTagListBySearch(Search search);
 
+	int insertNewTagName(Tag tag);
+
 }

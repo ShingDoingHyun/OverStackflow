@@ -93,6 +93,13 @@ td{
   
 } 
 
+button{
+border: 0;
+outline: 0;
+height: 25px;
+margin-right: 4px;
+
+}
 
 /* The Modal (background) */
 .modal {
@@ -136,6 +143,10 @@ td{
 a {
  color: black;
 }
+#myModal td{
+	padding-top: 0;
+    padding-bottom: 0;
+}
 </style>
 
 
@@ -156,8 +167,7 @@ a {
 		<!-- //header-ends -->
 		
 		
-		
-		
+
 		
 		<!-- main content start-->
 		<div id="page-wrapper">
@@ -174,9 +184,10 @@ a {
 						<input type="hidden" name="page" value="${param.page == null ? 0 :  param.page}">
 					
 				
-						<button onclick="searchForm();">검색</button>	 
+						<button class="label label-default" onclick="searchForm();" style="background: #999999;">검색</button>	 
 					</form>
-						<button type="button" class="tagMenu" id="searchTag">태그선택</button>  
+						<br>
+						<button class="label label-warning tagMenu" type="button" id="searchTag">태그선택</button>  
 						<div style="height:50px;" id="tags">
 						<c:forEach items="${searchTagList }" var="tag" varStatus="status">
 						<span class="tag" style="margin-left:10px;">#${tag.tagName}</span>
@@ -185,9 +196,10 @@ a {
 						<input type="hidden" name="tags" value="${param.tagLists }">	
 					
 					<p align="right">
-						<button onclick="searchForm('order','regDate')">최신순</button>
-						<button onclick="searchForm('order','view')">많이본</button>
-						<button onclick="searchForm('order','vote')">인기순</button>
+					
+						<button class="label label-warning" onclick="searchForm('order','regDate')">최신순</button>
+						<button class="label label-warning" onclick="searchForm('order','view')">많이본</button>
+						<button class="label label-warning" onclick="searchForm('order','vote')">인기순</button>
 						<select>
 							<option value="10">10</option>
 							<option value="30">30</option>
@@ -254,7 +266,7 @@ a {
 					</div>
 					<div class="right" style="font-size: 14px">
 						<div style="margin-top: 100px">
-							<button id="writeBtn"  style="position: absolute; right:10px; top:111px;" >
+							<button class="label label-warning" id="writeBtn"  style="position: absolute; right:10px; top:111px;" >
 								질문하기
 							</button>
 						</div>

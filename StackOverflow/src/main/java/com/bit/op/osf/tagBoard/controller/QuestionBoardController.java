@@ -138,7 +138,7 @@ public class QuestionBoardController {
 		model.addAttribute("memberVote", a);
 		model.addAttribute("questionBoard", questionBoard);
 		model.addAttribute("memberInfo", memberInfoImpl.selectMember(questionBoard.getMemId(), null));
-		
+		System.out.println(questionBoard);
 		return "board/questionDetail";		
 	}	
 	

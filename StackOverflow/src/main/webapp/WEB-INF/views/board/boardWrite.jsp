@@ -107,6 +107,12 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 			cursor:pointer;
 		}
 
+		#myModal td{
+			padding-top: 0;
+		    padding-bottom: 0;
+		}
+		
+</style>
 
 </style>
 
@@ -125,16 +131,13 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 		<!-- //header-ends -->
 		
 		
-		
-		
-		
 		<!-- main content start-->
 		<div id="page-wrapper">
 		<h2>질문작성</h2>
 			
 			<div class="main-page">
 				<div class="main" >
-					<form action="insertQuestion" method="post">
+					<form action="insertQuestion" method="post" id="wrtieForm">
 					<input type="hidden" name="memId" value="${memInfo.memberId}"/>
 						<br> <br> <br>
 						<p>질문 제목</p>
@@ -148,7 +151,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 						<div style="height:50px;" id="tags"></div>
 						<input type="hidden" name="tags">
 						<br>
-						<br> <input type="submit" value="작성" />
+						<br> <button type="button" onclick="javascript:subEnv();">작성</button>
 					</form>
 				</div>
 	
@@ -163,7 +166,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 			        </form>    
 			        <br>
 			        <form>
-			        	<table border="1">
+			        	<table border="1" style="font-size: 12px">
 			        		<tr>
 			        			<td style="width:250px; text-align: center;">대분류</td>
 			        			<td style="width:250px; text-align: center;">중분류</td>
@@ -171,26 +174,25 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 			        		</tr>
 			        		<tr>
 				        		<td style="height:200px;" valign="top">
-				        			<table id="mainName">
+				        			<table id="mainName"  style="width: 100%">
 									</table>
 								</td>
 				        		<td style="height:200px;" valign="top">
-									<table id="middleName">
+									<table id="middleName"  style="width: 100%">
 									</table>
 								</td>
 				        		<td style="height:200px;" valign="top">
-									<table id="name">
+									<table id="name"  style="width: 100%">
 									</table>
 
 								</td>
 			        		</tr>
-			        
-			        
+		        
 			        	</table>
 			        </form>                                                      
 			        
 			      </div>
-			 
+
 			    </div>
 	
 			</div>
@@ -317,9 +319,9 @@ $(function() {
 	           			
 	           		html += '<tr>';
 
-	           	  	html += '<td onclick="javascript:mainTagClick($(this));">' + tag.tagMainName +'</td>';
+	           	  	html += '<td class="mainT" onclick="javascript:mainTagClick($(this));" style="width:100%">' + tag.tagMainName +'</td>';
 
-	           	  	html += '<tr>';
+	           	  	html += '</tr>';
 	           	});
 	        	$('#mainName').html(html);
 	        	$('#middleName').html('');
@@ -328,24 +330,25 @@ $(function() {
 	     });
 
 	};
-	
 
-	function mainTagClick(data) {
-		data.parent().siblings().children().css('background', '');
-		data.css('background', '#AED6F1');
+	function mainTagClick(val) {
+		val.parent().siblings().children().css('background', '');
+		val.css('background', '#AED6F1');
+		$(".mainT").removeClass("TaG");
+		val.addClass("TaG");
 	    var html = '';
 	    $.ajax({
 	       	url: 'selectTagMiddleName',
-	       	data : { "mainTag" : data.text()},
+	       	data : { "mainTag" : val.text()},
 	        dataType:"json",
 	        success: function(data) {
 	        	$.each(data, function(index,tag){ 
 	           			
 	           		html += '<tr>';
 
-	           	  	html += '<td onclick="javascript:middleTagClick($(this));">' + tag.tagMiddleName +'</td>';
+	           	  	html += '<td class="middleT" onclick="javascript:middleTagClick($(this));" style="width:100%">' + tag.tagMiddleName +'</td>';
 
-	           	  	html += '<tr>';
+	           	  	html += '</tr>';
 	           	});
 	        	$('#middleName').html(html);
 	        	$('#name').html('');
@@ -353,16 +356,22 @@ $(function() {
 	     });
 	};
 	
-	function middleTagClick(data) {
-		data.parent().siblings().children().css('background', '');
-		data.css('background', '#AED6F1');
+	function middleTagClick(val) {
+		val.parent().siblings().children().css('background', '');
+		val.css('background', '#AED6F1');
+		$(".middleT").removeClass("TaGM");
+		val.addClass("TaGM");
 	    var html = '';
 	    $.ajax({
 	       	url: 'selectTagName',
-	       	data : { "middleTag" : data.text()},
+	       	data : { "middleTag" : val.text()},
 	        dataType:"json",
 	        success: function(data) {
-	        	html += '<tr id="tagNameInput" style="display:none;"><td><input type="text" name="tagNameInput"></td></tr>';
+	        	html += '<tr id="tagNameInput" style="display:none;"><td style="width:100%">';
+	        	html += '<input type="hidden" name="tagMainName" value="'+$(".TaG").text()+'">';
+	        	html += '<input type="hidden" name="tagMiddleName" value="'+val.text()+'">';
+	        	html += '<input type="text" name="tagName" size="16"><button type="button" onclick="javascript:insertNewTagName();">추가</button><button type="button" onclick="javascript:makeTagBack();">취소</button>';
+	        	html += '</form></td></tr>';
 	        	$.each(data, function(index,tag){ 
 	        		
 					var chk = 0;
@@ -377,15 +386,15 @@ $(function() {
 					
 		           	html += '<tr>';
 	           		if(chk > 0){
-	           			html += '<td onclick="javascript:tagInsert($(this));" style="background:#AED6F1;">' + tag.tagName;
+	           			html += '<td onclick="javascript:tagInsert($(this));" style="background:#AED6F1; width:100%">' + tag.tagName;
 	           		}
 	           		else{ 
-	           			html += '<td onclick="javascript:tagInsert($(this));">' + tag.tagName;
+	           			html += '<td onclick="javascript:tagInsert($(this));"  style="width:100%">' + tag.tagName;
  	           		}
-	           	  	html += '</td><td style="display:none">'+tag.tagNo+'</td><tr>';
+	           	  	html += '</td><td style="display:none; width:100%">'+tag.tagNo+'</td><tr>';
 	           	});
 	        	
-	        	html += '<tr><td onclick="javascript:makeTag();" id="tagNameAdd">태그추가</td></tr>';
+	        	html += '<tr><td onclick="javascript:makeTag();" id="tagNameAdd"  style="width:100%">태그추가</td></tr>';
 	        	
 	        	
 	        	$('#name').html(html);
@@ -436,10 +445,78 @@ $(function() {
 		$("#tagNameAdd").hide();
 		$("#tagNameInput").show();
 	}
+	function makeTagBack(){
+		/* $("#name").prepend('<tr><td onclick="javascript:makeTag();">태그추가</td></tr>'); */
+		$("#tagNameAdd").show();
+		$("#tagNameInput").hide();
+	}
 	
-
-
-
-
+	function insertNewTagName() {
+		var mainName = $('input[name=tagMainName]').val();
+		var middleName = $('input[name=tagMiddleName]').val();
+		var name = $('input[name=tagName]').val();
+		var html = '';
+	    $.ajax({
+	       	url: 'insertNewTagName',
+	       	data : { "tagMainName" : mainName, "tagMiddleName" : middleName, "tagName" : name},
+	        dataType:"json",
+	        success: function(data) {
+	        	
+	        	alert("222");
+	        	$('#name').html('');
+	        	html += '<tr id="tagNameInput" style="display:none;"><td>';
+	        	html += '<input type="hidden" name="tagMainName" value="'+$(".TaG").text()+'">';
+	        	html += '<input type="hidden" name="tagMiddleName" value="'+$(".TaGM").text()+'">';
+	        	html += '<input type="text" name="tagName" size="27"><button type="button" onclick="javascript:insertNewTagName();">추가</button><button type="button" onclick="javascript:makeTagBack();">취소</button>';
+	        	html += '</form></td></tr>';
+	        	$.each(data, function(index,tag){ 
+	        		
+					var chk = 0;
+					$('.tag').each(function(index) {
+						
+						var testValue = $(this).text();
+		        		var subValue  = '#'+String(tag.tagName);
+		        		if(testValue == subValue){
+		        			chk=1;
+		        		}
+					});
+					
+		           	html += '<tr>';
+	           		if(chk > 0){
+	           			html += '<td onclick="javascript:tagInsert($(this));" style="background:#AED6F1;">' + tag.tagName;
+	           		}
+	           		else{ 
+	           			html += '<td onclick="javascript:tagInsert($(this));">' + tag.tagName;
+ 	           		}
+	           	  	html += '</td><td style="display:none">'+tag.tagNo+'</td><tr>';
+	           	});
+	        	
+	        	html += '<tr><td onclick="javascript:makeTag();" id="tagNameAdd">태그추가</td></tr>';
+	        	
+	        	
+	        	$('#name').html(html);
+	        	alert("여기서 왜 새로고침이 될까");
+	        },
+	     error: function(data) {
+	    	 alert("333");
+		 }
+	    	 
+	 });	
+	}
+	
+	
+	function subEnv(){
+		if($('input[name=title]').val()==null || $('input[name=title]').val() ==''){
+			alert("제목을 입력하세요");
+			return false;
+		}else if($('#summernote').val()==null || $('#summernote').val() ==''){
+			alert("내용을 입력하세요");
+			return false;
+		}
+		
+		$("#wrtieForm").submit();
+		
+	}
 </script>
+
 </html>

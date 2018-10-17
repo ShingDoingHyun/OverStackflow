@@ -231,7 +231,10 @@ iframe {
 								댓글작성
 							</div>
 							<div class="profile">
-								<img class='photo2' src="<c:url value='/resources/uploadFile/memberPhoto/${memberInfo.memberPhoto}'/>"> ${memberInfo.memberId}
+								<div style="margin-left: 10px;margin-top:  10px">
+									<img class='photo2' src="<c:url value='/resources/uploadFile/memberPhoto/${memberInfo.memberPhoto}'/>"> ${memberInfo.memberId}<br>
+									<span style="font-size: 12px;">작성시간 : <fmt:formatDate value="${questionBoard.regDate}" pattern="yyyy년 MM월 dd일 HH:mm:ss"/></span>
+								</div>
 							</div>
 						</div>
 						<div>
@@ -344,10 +347,13 @@ iframe {
 							<div style="width: 100%; display: inline-block;">
 								<div style="float: left; width: 50%; margin-top: 80px;" class="accordian">
 									댓글작성
+								</div>	
+								<div class="profile">
+									<div style="margin-left: 10px;margin-top:  10px">
+										<img class='photo2' src="<c:url value='/resources/uploadFile/memberPhoto/${replyboard.memberPhoto}'/>"> ${replyboard.memId}<br>
+										<span style="font-size: 12px;">작성시간 : <fmt:formatDate value="${replyboard.regDate}" pattern="yyyy년 MM월 dd일 HH:mm:ss"/></span>
+									</div>
 								</div>
-							<div class="profile">
-								<img class='photo2' src="<c:url value='/resources/uploadFile/memberPhoto/${replyboard.memberPhoto}'/>"> ${replyboard.memId}
-							</div>
 							</div>
 							<div>
 								<hr>

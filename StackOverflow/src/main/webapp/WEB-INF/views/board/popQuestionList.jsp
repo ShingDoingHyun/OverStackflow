@@ -104,6 +104,14 @@ td{
   
 } 
 
+button{
+border: 0;
+outline: 0;
+height: 25px;
+margin-right: 4px;
+
+}
+
 
 /* The Modal (background) */
 .modal {
@@ -148,15 +156,18 @@ td{
 a {
  color: black;
 }
+
+#favTagModal td{
+	padding-top: 0;
+    padding-bottom: 0;
+}
 </style>
 
 <!-- 우리가 추가한 스타일 등등  end-->
-
-
 </head> 
 <body class="cbp-spmenu-push">
 	<div class="main-content">
-	
+
 		<!--left-fixed -navigation-->
 			<%@ include file="../commons/bleft.jspf" %>
 		<!--left-fixed -navigation-->
@@ -180,10 +191,11 @@ a {
 				<div class="main">
 					<div class="left">
 					<p align="right">
-						<button id="favTagQuestionBtn">나의흥미</button>
-						<button onclick="location.href='<c:url value="/popQuestionList"/>'">이번주인기</button>
-						<button onclick="location.href='<c:url value="/popQuestionList"/>'">이번달인기</button>
-						<button onclick="location.href='<c:url value="/popQuestionList"/>'">전체인기</button>
+
+						<button class="label label-warning" id="favTagQuestionBtn">나의흥미</button>
+						<button class="label label-warning" onclick="location.href='<c:url value="/popQuestionList"/>'">이번주인기</button>
+						<button class="label label-warning" onclick="location.href='<c:url value="/popQuestionList"/>'">이번달인기</button>
+						<button class="label label-warning" onclick="location.href='<c:url value="/popQuestionList"/>'">전체인기</button>
 						</p>
 						<hr>
 						<table width="100%">
@@ -222,9 +234,9 @@ a {
 						</table>
 					</div>
 					<div class="right" style="font-size: 14px">
-					
+				
 						<div style="margin-top: 100px">
-							<button id="writeBtn"  style="position: absolute; right:10px; top:111px;" >
+							<button id="writeBtn"  style="position: absolute; right:10px; top:111px; width:100px; height: 30px; font-size: 15px" class="label label-warning">
 								질문하기
 							</button>
 						</div>

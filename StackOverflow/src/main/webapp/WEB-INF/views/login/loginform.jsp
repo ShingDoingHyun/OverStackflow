@@ -90,10 +90,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 		
 			
 			
-		<div class="main-page" style="
-    margin-right: 300px;
-    margin-top: 100px;
-">
+		<div class="main-page" style="margin-right: 300px; margin-top: 100px;">
 				
 				
 					<div class="forms">
@@ -123,11 +120,15 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 	                    <div style="border-top:1px solid gray; width:182px; display:inline-block"></div>
 	                    <div style="display:inline-block">or</div>
 	                    <div id="a" style="border-top:1px solid gray; width:186px;display:inline-block"></div>
-	                </div><br>
+	                
+	              </div><br>
+	              
 	                <label for="snslogin"><font size="2">SNS으로 로그인 </font></label><br><br>
 	            </div>
+	            
+	            <!-- sns로그인 네이버 -->
 	            <div class="form-group text-center"> 
-			  <a href="<%=apiURL%>"><img height="50px" src="resources/img/naver_Green.png" style="height:55px;width:400px;"/></a>
+			  <a href="<%=apiURL%>"><img height="50px" src="resources/img/naver_Green.png" style="height:55px;width:330px;"/></a>
 			</div>
 	            
 	            <br>

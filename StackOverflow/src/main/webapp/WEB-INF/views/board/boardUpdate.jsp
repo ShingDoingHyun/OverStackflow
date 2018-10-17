@@ -37,7 +37,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 	</script>
 <!--//end-animate-->
 <!-- chart -->
-<script src="<%=request.getContextPath()%>/cjs/Chart.js"></script>
+<script src="<%=request.getContextPath()%>/js/Chart.js"></script>
 <!-- //chart -->
 <!--Calender-->
 
