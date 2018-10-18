@@ -182,9 +182,9 @@ a {
 			선택된 태그 : ${selectTag.tagName}<br>
 			<div style="max-width: 80%;">${selectTag.tagDetail}</div>
 			<span class="tagDetail" style="font-size: 12px; color: #a0a3bb;;">태그수정</span>
-			<form style="display: none;" onsubmit="return updateTagDetail($(this));">
-				<input type="hidden" name="tagNo" value="${ tag.tagNo}">
-				<textarea rows="5" cols="37" class="tagD">${ tag.tagDetail}</textarea>
+			<form style="display: none;" onsubmit="return updateTagDetail($(this));" id="tagDetailForm">
+				<input type="hidden" name="tagNo" value="${ selectTag.tagNo}">
+				<textarea rows="5" style="width: 80%;" class="tagD">${ selectTag.tagDetail}</textarea><br>
 				<button type="submit">수정</button><button class="cancelTagFix">취소</button>
 			</form>
 		</c:if>
@@ -618,6 +618,48 @@ var checkFavQuestion = function(questionNo, value){
 $("#favTagQuestionBtn").click(function() {
 	$("#favTagForm").submit();
 });
+
+
+$(".tagDetail").click(function() {
+	$(this).next().show();
+	$(this).prev().hide();
+	$(this).hide();  
+});
+
+$(".cancelTagFix").click(function() {
+	$(this).parent().prev().show();
+	$(this).parent().prev().prev().show();
+	$(this).parent().hide();
+});
+
+
+function updateTagDetail(obj) {
+	
+  	var tagNo = obj.find("input[name=tagNo]").val();
+	var tagDetail = obj.find(".tagD").val();
+
+	
+	 $.ajax({
+            type : 'post',
+            url : getContextPath() +'/tagDetailUpdate',
+            data : { "tagNo" : tagNo ,  "tagDetail": tagDetail},
+            dataType : 'text',
+            contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
+            success : function(data){
+   		
+            	obj.find(".tagD").val(tagDetail);
+            	
+            	obj.prev().prev().text(tagDetail);
+            	obj.prev().prev().show();
+            	obj.prev().show();
+            	obj.hide();
+            }
+        }); 
+
+	 
+	   return false;
+
+};
  
 
 </script>
