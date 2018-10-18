@@ -49,10 +49,13 @@ public class QuestionBoardController {
 		List<QuestionBoard> favQuestionList = new ArrayList<QuestionBoard>();
 		List<Tag> fagTagList = new ArrayList<Tag>();
 		
+		
 		questionBoardList = questionBoardDao.selectPopQuestionList(request, search);
 		favQuestionList = questionBoardDao.selectFavQuestionList(request);
 		fagTagList = tagDao.selectMemFavTagList(request);
-	
+		if(search.getTagNo()!= null) {
+			model.addAttribute("selectTag", tagDao.selectTag(search));
+		}
 		Cookie[] cookies = request.getCookies();
 		if(cookies.length> 0) {
 			model.addAttribute("visitQuestionBoard", questionBoardDao.selectVisitQuestion(cookies));
@@ -130,14 +133,24 @@ public class QuestionBoardController {
 	
 	@RequestMapping(value = "/questionDetail/{questionBoardNo}", method = RequestMethod.GET)
 	public String questionDetail(Model model, @PathVariable("questionBoardNo") int questionBoardNo, HttpServletRequest request) {
+		List<QuestionBoard> favQuestionList = new ArrayList<QuestionBoard>();
+		List<Tag> fagTagList = new ArrayList<Tag>();
 		
 		QuestionBoard questionBoard = questionBoardDao.selectQuestionDeltail(questionBoardNo, request);
+		favQuestionList = questionBoardDao.selectFavQuestionList(request);
+		fagTagList = tagDao.selectMemFavTagList(request);
 
 		int  a = questionBoardDao.selectMemberQuestionVote(questionBoard, request);
 	
 		model.addAttribute("memberVote", a);
 		model.addAttribute("questionBoard", questionBoard);
 		model.addAttribute("memberInfo", memberInfoImpl.selectMember(questionBoard.getMemId(), null));
+		model.addAttribute("favQuestionList", favQuestionList);
+		model.addAttribute("fagTagList", fagTagList);
+		Cookie[] cookies = request.getCookies();
+		if(cookies.length> 0) {
+			model.addAttribute("visitQuestionBoard", questionBoardDao.selectVisitQuestion(cookies));
+		}
 		System.out.println(questionBoard);
 		return "board/questionDetail";		
 	}	

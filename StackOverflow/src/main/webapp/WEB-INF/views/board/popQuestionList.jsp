@@ -9,7 +9,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Novus Admin Panel an Admin Panel Category Flat Bootstrap Responsive Website Template | Home :: w3layouts</title>
+<title>OverStackFlow</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="Novus Admin Panel Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
@@ -189,12 +189,13 @@ a {
 		<h2>인기질문</h2>
 		<br>
 		<br>
-		<c:if test="${param.tagNo != null and param.tagNo != ''}">
-		${param.tagNo}
+		<c:if test="${selectTag != null}">
+			선택된 태그 : ${selectTag.tagName}<br>
+			<div style="max-width: 80%;">${selectTag.tagDetail}</div>
+			<span class="tagDetail" style="font-size: 12px; color: #a0a3bb;;">태그수정</span>
 		</c:if>
 			<div class="main-page">
-			
-
+		
 				<div class="main">
 					<div class="left">
 					<p align="right">
@@ -208,7 +209,7 @@ a {
 						<table width="100%" id="tttable">
 							<c:forEach items="${questionBoardList }" var="questionBoard" varStatus="status">
 									<tr>
-										<td width="8%" align="center" rowspan="2" style=" border-bottom: 1px solid #777777;">
+										<td width="8%" align="center" rowspan="2" style=" border-bottom: 1px solid #cecbcb;">
 										<a href="javascript:checkFavQuestion('${questionBoard.questionNo }', '${status.index}');">
 											<c:if test="${questionBoard.fav > 0}">
 												<img src="<c:url value='/img/fav.png'/>" width="30px" height="30px" class="fav${status.index}" name="fav">
@@ -223,9 +224,9 @@ a {
 										<td width="8%" align="center">${questionBoard.view}</td>
 										<td width="48%"><p><a href="<c:url value='/questionDetail/${questionBoard.questionNo }'/>">${questionBoard.title }</a>
 										</p></td>
-										<td width="20%" rowspan="2" style=" border-bottom: 1px solid #777777;">작성시간 <fmt:formatDate value="${questionBoard.regDate}" pattern="yyyy년 MM월 dd일 HH:mm:ss"/> ${questionBoard.memId }</td>
+										<td width="20%" rowspan="2" style=" border-bottom: 1px solid #cecbcb;">작성시간 <fmt:formatDate value="${questionBoard.regDate}" pattern="yyyy년 MM월 dd일 HH:mm:ss"/> ${questionBoard.memId }</td>
 									</tr>
-									<tr style=" border-bottom: 1px solid #777777;">
+									<tr style=" border-bottom: 1px solid #cecbcb;">
 										<td width="8%" align="center">추천</td>
 										<td width="8%" align="center">답변</td>
 										<td width="8%" align="center">읽음</td>
@@ -274,7 +275,6 @@ a {
 								</div>
 							</div>
 						</c:if>
-				<!-- 	border-bottom: 1px solid #333333;  -->
 						<div style="border:1px solid black; width:300px; height:auto; min-height: 200px; margin-left:20px; margin-top:30px">
 						<p style="text-align: center; border-bottom:1px solid black; padding: 10px 0 10px 0; margin-top: 0; margin-bottom:0;">방문한 페이지</p>
 						<c:forEach items="${visitQuestionBoard }" var="visitQuestion">
@@ -532,7 +532,6 @@ $(function(){
 
 
  	var list = new cookieList("visitQuestion");
-	console.log(getCookie('visitQuestion')); 
  	
 });
 

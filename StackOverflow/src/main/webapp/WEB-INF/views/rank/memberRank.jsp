@@ -373,7 +373,7 @@ text-align:flot;
 								<c:set var="index" value="0" />
 								<c:forEach items="${memberRackList }" var="member" varStatus="status">
 									<c:if test="${index == 0}">
-										<tr style="height: 170px; border-bottom: 1px solid #999999;">
+										<tr style="height: 170px; border-bottom: 1px solid #cecbcb;">
 									</c:if>
 										<td width="300px;" style="padding-top: 0;">
 											<div style="margin-left: 8px;">

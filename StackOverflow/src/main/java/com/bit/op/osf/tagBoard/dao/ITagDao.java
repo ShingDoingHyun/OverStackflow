@@ -39,4 +39,6 @@ public interface ITagDao {
 
 	void updateTagDeatil(Tag tag);
 
+	Tag selectTag(Search search);
+
 }

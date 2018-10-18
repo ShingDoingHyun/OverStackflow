@@ -74,6 +74,7 @@
 				</if>
 			</where>
 		<if test="order != null and order != '' ">order by ${order} desc</if>
+		<if test="order == null ||  order == '' ">order by regDate desc</if>
 		limit #{firstRow}, #{endRow};
     
     </select>

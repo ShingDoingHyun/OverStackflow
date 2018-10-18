@@ -125,6 +125,12 @@ public class TagDaoImpl implements ITagDao {
 		
 	}
 
+	@Override
+	public Tag selectTag(Search search) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(COMMENT_NAMESPACE + "selectTag", search);
+	}
+
 
 	
 	

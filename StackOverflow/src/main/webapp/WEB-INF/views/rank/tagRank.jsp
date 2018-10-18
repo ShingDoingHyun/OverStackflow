@@ -372,7 +372,7 @@ text-align:flot;
 								<c:set var="index" value="0" />
 								<c:forEach items="${tagRackList }" var="tag" varStatus="status">
 									<c:if test="${index == 0}">
-										<tr style="height: 170px; border-bottom: 1px solid #999999;">
+										<tr style="height: 170px; border-bottom: 1px solid #cecbcb;">
 									</c:if>
 										<td width="300px;" style="padding-top: 0;">
 											<div style="margin-left: 8px;">
@@ -381,7 +381,7 @@ text-align:flot;
 												<a href="<c:url value='/popQuestionList?tagNo=${tag.tagNo }'/>" style="color:white;">${ tag.tagName}</a> 
 												</span> x ${ tag.count}<br>		
 												<span style="display: block; width:290px; height:48px; overflow: hidden;">${ tag.tagDetail}</span>
-												<span class="tagDetail" style="font-size: 12px; color: #a0a3bb;;">태그수정</span>
+												<span class="tagDetail" style="font-size: 12px; color: #a0a3bb;cursor: pointer;">태그수정</span>
 												<form style="display: none;" onsubmit="return updateTagDetail($(this));">
 													<input type="hidden" name="tagNo" value="${ tag.tagNo}">
 													<textarea rows="5" cols="37" class="tagD">${ tag.tagDetail}</textarea>

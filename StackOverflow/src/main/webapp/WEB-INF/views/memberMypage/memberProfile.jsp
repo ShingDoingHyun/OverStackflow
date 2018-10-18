@@ -329,10 +329,13 @@ text-align:flot;
 		</div>
  <div class="ProfileMain">
 <div style="border: 1px; float: left; width: 10%; padding:10px; height: 200px; ">
-<img class='photo3' src="<c:url value='/resources/uploadFile/memberPhoto/${memInfo.memberPhoto}'/>"style="height: 200px; margin-left: 35px;margin-top: 35px;">
+	<c:if test="${memInfo.memberPhoto != null && memInfo.memberPhoto != ''}">
+		<img class='photo3' src="<c:url value='/resources/uploadFile/memberPhoto/${memInfo.memberPhoto}'/>" altSrc="<c:url value='/img/default.png'/>" onerror="this.src = $(this).attr('altSrc')" style="height: 200px; margin-left: 35px;margin-top: 35px;" >
+	</c:if>
+	<c:if test="${memInfo.memberPhoto == null || memInfo.memberPhoto == ''}">
+		<img class='photo3' src="<c:url value='/resources/img/default.png'/>" style="height: 200px; margin-left: 35px;margin-top: 35px;">
+	</c:if>
 </div>
-
-
 
 <div style="border:1px; float:left; width:526px; padding:10px; height:200px; margin-left:50px;">
 
