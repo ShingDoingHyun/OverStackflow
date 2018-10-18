@@ -26,13 +26,13 @@ public class ReplyBoardController {
 		return "redirect:/questionDetail/"+replyBoard.getQuestionNo();
 	}
 
-	@RequestMapping(value = "/deleteReply/{replynBoardNo}", method = RequestMethod.GET)
-	public String deleteQuestion(Model model, @PathVariable("replynBoardNo") int replynBoardNo) {
+	@RequestMapping(value = "/deleteReply/{replynBoardNo}/{questionBoardNo}", method = RequestMethod.GET)
+	public String deleteQuestion(Model model, @PathVariable("replynBoardNo") int replynBoardNo, @PathVariable("questionBoardNo") int questionBoardNo) {
 		
 		
 		replyBoardDao.deleteReplyBoard(replynBoardNo);
 		
-		return "redirect:/questionDetail/"+replynBoardNo;
+		return "redirect:/questionDetail/"+questionBoardNo;
 		
 	}	
 }

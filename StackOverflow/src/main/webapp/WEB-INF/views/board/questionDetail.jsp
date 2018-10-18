@@ -401,7 +401,7 @@ a {
 									<p>${replyboard.content }</p>
 								</div>
 								<div style="margin-top: 100px;">
-									<a href="">공유</a> <a href="javascript:loginCheck('${replyboard.memId }', 'openUpdateQuestion/${replyboard.questionNo }');">수정</a> <a href="javascript:deleteQuestion('${replyboard.memId }', '/deleteQuestion/${replyboard.questionNo }');">삭제</a>
+									<a href="">공유</a> <a href="javascript:loginCheck('${replyboard.memId }', 'openUpdateQuestion/${replyboard.questionNo }');">수정</a> <a href="javascript:deleteQuestion('${replyboard.memId }', '/deleteReply/${replyboard.replyNo }/${questionBoard.questionNo }');">삭제</a>
 								</div>
 								<div style="width: 100%; display: inline-block;">
 									<div style="float: left; width: 50%; margin-top: 80px;" class="accordian">
@@ -835,7 +835,7 @@ var checkFavQuestion = function(questionNo){
 	}
 };
 
-var changeVote = function(questionNo, vote){
+var changeVote = function(questionNo, vote, index){
 	if(${memInfo.memberId == null}){
 		alert("권한이 없습니다.");
 	} 
@@ -872,6 +872,45 @@ var changeVote = function(questionNo, vote){
 	}
 	
 };
+
+var changeVoteReply = function(replyNo, vote){
+	if(${memInfo.memberId == null}){
+		alert("권한이 없습니다.");
+	} 
+	else{ 
+		   $.ajax({
+	            type : 'post',
+	            url : getContextPath() +'/changeVote',
+	            data : { "memId" : '${memInfo.memberId}' ,  "questionNo": replyNo, "vote" : vote},
+	            dataType : 'text',
+	            contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
+	            success : function(data){
+	            	if(vote>0){
+	            		$(".upVote"+replyNo).parent().attr("href","javascript:changeVoteReply('"+replyNo+"','0');");
+	            		$(".downVote"+replyNo).parent().attr("href","javascript:changeVoteReply('"+replyNo+"','-1');");
+						$(".upVote"+replyNo).attr("src",getContextPath()+"/img/voteUp.png");    
+						$(".downVote"+replyNo).attr("src",getContextPath()+"/img/unVoteDown.png");    
+	            	}
+	            	else if(vote<0){
+	            		$(".upVote"+replyNo).parent().attr("href","javascript:changeVoteReply('"+replyNo+"','1');");
+	            		$(".downVote"+replyNo).parent().attr("href","javascript:changeVoteReply('"+replyNo+"','0');");
+	            		$(".upVote"+replyNo).attr("src",getContextPath()+"/img/unVoteUp.png");    
+						$(".downVote"+replyNo).attr("src",getContextPath()+"/img/voteDown.png"); 
+	            	}
+	            	else{
+	            		$(".upVote"+replyNo).parent().attr("href","javascript:changeVoteReply('"+replyNo+"','1');");
+	            		$(".downVote"+replyNo).parent().attr("href","javascript:changeVoteReply('"+replyNo+"','-1');");
+	            		$(".upVote"+replyNo).attr("src",getContextPath()+"/img/unVoteUp.png"); 
+	            		$(".downVote"+replyNo).attr("src",getContextPath()+"/img/unVoteDown.png"); 
+	            	}
+	            	$(".vote"+replyNo).text(data);  
+	            	
+	            }
+	        }); 
+	}
+	
+};
+
 
 var replyInsert = function(){
 

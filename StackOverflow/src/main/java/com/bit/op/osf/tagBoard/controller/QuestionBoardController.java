@@ -142,9 +142,8 @@ public class QuestionBoardController {
 		favQuestionList = questionBoardDao.selectFavQuestionList(memInfo);
 		fagTagList = tagDao.selectMemFavTagList(memInfo);
 
-		int  a = questionBoardDao.selectMemberQuestionVote(questionBoard, memInfo);
-	
-		model.addAttribute("memberVote", a);
+
+		model.addAttribute("memberVote", questionBoardDao.selectMemberQuestionVote(questionBoard, memInfo));
 		model.addAttribute("questionBoard", questionBoard);
 		model.addAttribute("memberInfo", memberInfoImpl.selectMember(questionBoard.getMemId(), null));
 		model.addAttribute("favQuestionList", favQuestionList);
