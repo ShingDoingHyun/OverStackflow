@@ -183,7 +183,7 @@ margin-right: 4px;
 					</div>
 					<br><br>
 					<div style="position: absolute; right: 130px;">
-					<span style="font-size: 14px;margin-left:19%;">
+						<span style="font-size: 14px;margin-left:19%;">
 						    <a href="<c:url value="/popQuestionList"/>">질문게시판</a> > 
 						    <a href="<c:url value="/qestionList"/>">질문검색</a>
 					    </span>

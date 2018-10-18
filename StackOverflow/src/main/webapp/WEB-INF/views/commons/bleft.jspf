@@ -28,8 +28,8 @@
 							</ul>
 							<!-- /nav-second-level -->
 						</li>
-						<li class="">
-							<a href="#"/>"><i class="fa fa-book nav_icon"></i>마이페이지<span class="fa arrow"></span></a>
+						<li>
+							<a href="#"/><i class="fa fa-book nav_icon"></i>마이페이지<span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level collapse">
 								<li>
 									<c:if test="${memInfo != null}">  

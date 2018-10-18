@@ -354,14 +354,20 @@ text-align:flot;
 				
 						<div class="bluebTabDesign">
 							<ul>
-								<li class="selected"><a href="#"><span>태그</span></a></li>
-								<li><a href="<c:url value='/memberUpdate'/>"><span>유저</span></a></li>				
+								<li><a href="<c:url value='/selectTagList'/>"><span>태그</span></a></li>
+								<li class="selected"><a href="<c:url value='/selectMemberList'/>"><span>유저</span></a></li>				
 							</ul>
 						</div>
 						<div class="main_2">
-					
-							<div style="margin-top: 35px;"></div>
-							<h3>태그</h3>
+							<div style="margin-top: 15px;"></div>
+							<div style="position: absolute; right: 130px;">
+								<span style="font-size: 14px;margin-left:19%;">
+									<a href="<c:url value='/selectTagList'/>">랭킹</a> > 
+									<a href="<c:url value='/selectMemberList'/>">유저</a>
+								</span>
+							</div>
+							<div style="margin-top: 20px;"></div>
+							<h3>유저</h3>
 							<br><br>
 							<table style="margin: auto;">
 								<c:set var="index" value="0" />
