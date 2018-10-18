@@ -155,25 +155,29 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 	color: #2390ff;
 }
 
- .ProfileMain{
-    margin-left: 300px;
-    margin-top: 50px;
-}
 
 body.user-page #content * {
     box-sizing: border-box;
 }
+
+
 .inner-container:first-child {
     margin-top: 0;
 }
+
+
 .inner-container {
     margin: 20px 0;
     padding: 13px 0 40px 0;
     border-bottom: 1px solid #eaeaea;
 }
+
+
 body *, body *:before, body *:after {
     box-sizing: inherit;
 }
+
+
      div{
     margin: 0;
     padding: 0;
@@ -191,77 +195,62 @@ form{
     font-size: 100%;
     vertical-align: baseline;
 }
+
+
 user agent stylesheet
 div {
     display: block;
 }
+   
     
 body.user-page #content * {
     box-sizing: border-box;
 }
-.user-page .row {
-    max-width: 1060px;
-}
-.user-page .row {
-    max-width: 1100px;
-}
-.row {
-    max-width: 1080px;
-    width: 100%;
-}
-    
-.row::before, .row::after {
-    display: table;
-    content: " ";
-}
-/* body *, body *:before, body *:after {
-    box-sizing: inherit;
-} */
+
+
     body.user-page #content * {
     box-sizing: border-box;
 }
+
+
 .col-3 {
     width: 25%;
     float: left;
 }
-/* body *, body *:before, body *:after {
-    box-sizing: inherit;
-} */
+
+   
     body.user-page #content * {
     box-sizing: border-box;
 }
-    .edit-profile .first-row .col-9 input {
-    max-width: none;
-}
-.col-9 {
-    width: 75%;
-    float: left;
-}
-/* body *, body *:before, body *:after {
-    box-sizing: inherit;
-} */
+
     
     body.user-page #content * {
     box-sizing: border-box;
 }
+
+
     .edit-profile .avatar-wrapper {
     position: relative;
     width: 164px;
     height: 164px;
     overflow: hidden;
 }
+
+
 .edit-profile .first-row .col-9>label:first-child {
     margin-top: 0;
 }
+
+
 .edit-profile .first-row label {
     margin-top: 18px;
 }
+
+
 .edit-profile label:not(.btn) {
     display: block;
 }
-/* body *, body *:before, body *:after {
-    box-sizing: inherit;
-} */
+
 label {
     margin: 0;
     padding: 0;
@@ -274,23 +263,37 @@ label {
     body.user-page #content * {
     box-sizing: border-box;
 }
+
+
 .edit-profile .first-row input[type="text"] {
     margin-bottom: 6px;
 }
+
+
 .edit-profile .first-row .col-9 input {
     max-width: none;
 }
+
+
 .edit-profile input[type="text"]{
     display: block;
     width: 100%;
     max-width: 390px;
 }
+
+
+
 .inner-container input[type="text"]{
     margin-bottom: 18px;
 }
+
+
+
 input[type="text"]:not(.s-input){
     box-shadow: 0 1px 2px rgba(12,13,14,0.1) inset;
 }
+
+
 input[type="text"]:not(.s-input){
     padding: 13px 100px;
     font-family: Arial,"Helvetica Neue",Helvetica,sans-serif;
@@ -317,32 +320,58 @@ input {
     margin: 5px 0;
     
 }
-    .edit-profile .first-row label {
+
+.edit-profile .first-row label {
     margin-top: 18px;
 }
+
 .edit-profile label:not(.btn) {
     display: block;
 }
+
 body {
     line-height: 1;
 }
+
 user agent stylesheet
 body {
     display: block;
     margin: 8px;
 }
- #blah{
-		width:150px;
-	}
-.input2{
-            border: none;
-            width: 310px;
-            height: 50px;
-            padding: 0 3px;
-            font-size: 15px;
+
+ #blah
+ {
+	width:150px;
+}
+.input2
+{
+   border: none;
+   width: 450px;
+   height: 50px;
+   padding: 0 3px;
+   font-size: 15px;
  }  
 #mainbar h3{
     font-weight: 400;
+}
+.col-8
+{ 
+width:45%;
+height:300px;
+float:left;
+border: 1px solid black;
+}
+
+.col-9
+{
+    width: 55%;
+    height:50px;
+    float:right;
+}
+.col-10
+{
+clear:both; 
+  height:100px;
 }
 
 </style>
@@ -404,56 +433,42 @@ function readURL(input) {
 	
 			<div class="main_2">
 			<div style="margin-top: 20px;"></div>
-			<h3 style="margin-left:20px;">프로필수정</h3>
+			<h3 style="margin-left:20px;margin-bottom: 50px;">프로필수정</h3>
 		</div>
 	
-	<div class="ProfileMain">
 
-        <div id="user-edit-table" class="inner-container">
-          
-            
-         
-                 	
-               
            <form action="<c:url value="/memberProfileUpdate"/>"   method="post">
-                <div class="col-9" style="margin-left: 300px;">
-                
-                
-                    <input type="text" disabled="disabled"   name="memberId" value="${memInfo.memberId}" maxlength="20" class="input2" placeholder="아이디" tabindex="1"/><br>
-                    
+           
+           <div class="col-8"style="width: 252px;  margin-left:340px;  height:282px;  margin-top: 25px;">
+      
+           </div>
+                <div class="col-9">
 
-                    <input type="password"  name="memberPwd"  maxlength="20" class="input2" placeholder="영문/숫자/특수문자 조합 6~15자" tabindex="1" /><br>
+                    <span>아이디</span><br><input type="text" disabled="disabled" name="memberId" value="${memInfo.memberId}" class="input2"><br>
                     
-
-                    <input type="password" name="memberPwd2" maxlength="15" class="input2" tabindex="1"/><br>
+                    <br><span>닉네임</span><br><input type="text"  name="memberNickname"  maxlength="20" value="${memInfo.memberNickname}" class="input2"/><br>
+                   
+                    <br><span>비밀번호</span><br><input type="password"  name="memberPwd"  maxlength="20" class="input2" /><br>
                     
-                    
+                    <br><span>비밀번호 확인</span><br><input type="password" name="memberPwd2" maxlength="15" class="input2"/><br>
+      
                 </div>
-          
-         
-        
-  
-            <div class="row">
+               
+                
 
-                        <div class="wmd-container">
-                   <div class="col-12">&nbsp;</div>
-            </div>
+
+<div class="col-10">
             <div class="row">
             
-                <div class="col-12">
-                    <h3>자기소개</h3>
-</div>
-                        <textarea id="wmd-input" class="wmd-input" name="memberIntro"   cols="92" rows="15" tabindex="4" style="width: 850px;margin-top: 20px;">${memInfo.memberIntro}</textarea>
-                        <div id="wmd-preview" class="wmd-preview"></div>
-                        
-                        <button type="submit"  class="label label-warning">수정</button>
-                </div> 
+                    <br><h3 style="margin-top: 65px; margin-left: 300px;">자기소개</h3>
+
+                        <textarea id="wmd-input" class="wmd-input" name="memberIntro" cols="92" rows="15" tabindex="4" style="width: 850px;margin-top:25px;margin-left:300px;">${memInfo.memberIntro}</textarea>
+                        <br><button type="submit"  class="label label-warning"
+                                  style="margin-top: 40px;margin-left:660px;width: 93.4px;height: 35px;">수정</button>
+                         </div> 
             </div>
-            
             </form>
-            
-       </div>
-      </div>
+           
         </div>
        </div>
 			

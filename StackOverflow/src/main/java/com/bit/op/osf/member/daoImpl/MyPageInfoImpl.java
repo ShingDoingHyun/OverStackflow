@@ -54,8 +54,7 @@ public class MyPageInfoImpl extends DaoImpl implements MyPageInfoDao {
 		String memberPw = SHA.encrypt(memInfo.getMemberPwd());
 		memInfo.setMemberPwd(memberPw);
 
-		
-		
+
 	return	sqlSession.update(MYPAGEINFO_NAMESPACE+"memberProfileUpdate",memInfo);
 	}
 }

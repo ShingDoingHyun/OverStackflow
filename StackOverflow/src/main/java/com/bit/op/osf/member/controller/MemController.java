@@ -24,14 +24,18 @@ import com.bit.op.osf.tagBoard.model.ReplyBoard;
 @Controller
 public class MemController {
 	
+	
 	@Inject
 	private MemberInfoDao memberInfoDao;
+	
 	
 	@Inject
 	private MyPageInfoDao myPageInfoDao;
 	
+	
 	@Autowired
 	SHA256 SHA;
+	
 	
 	// 개인/기업회원가입 선택페이지
 	@RequestMapping(value = "/joinChoiceForm", method = RequestMethod.GET)
@@ -40,11 +44,13 @@ public class MemController {
 		return "login/joinchoiceform"; 
 	}
 	
+	
 	@RequestMapping(value = "/memJoinForm", method = RequestMethod.GET)
 	public String JoinForm() {
 		
 		return "login/memjoinform"; 
 	}
+	
 	
 	@RequestMapping(value = "/memJoinFormTest", method = RequestMethod.POST)
 	public String JoinTest(MemRegInfo memInfo, HttpServletRequest request, Model model)throws Exception {
@@ -54,6 +60,7 @@ public class MemController {
 		model.addAttribute("memberId",memInfo.getMemberId());
 		return "login/joinInsertCheck"; 
 	}
+	
 	
 	@RequestMapping(value = "/memJoinForm", method = RequestMethod.POST)
 	public String memberJoin(MemRegInfo memInfo, Model model, HttpServletRequest request)throws Exception {
@@ -69,10 +76,12 @@ public class MemController {
 		return "login/joinInsertCheck"; 
 	}
 	
+	
 	@RequestMapping(value = "/memLoginForm", method = RequestMethod.GET)
 	public String Loginform(Model model) {
 		return "login/loginform";
 	}
+	
 	
 	@RequestMapping(value = "/memberProfile", method = RequestMethod.GET)
 	public String memberProfile(HttpSession session) throws Exception {	
@@ -91,6 +100,8 @@ public class MemController {
 			return "/memberMypage/memberProfile"; 
 	}
 	
+	
+	
 	@RequestMapping(value = "/memberProSet", method = RequestMethod.GET)
 	public String memberProfileSet(HttpSession session) {
 		MemRegInfo memInfo = (MemRegInfo)session.getAttribute("memInfo");
@@ -101,23 +112,23 @@ public class MemController {
 	}
 		
 	
+	
 	//memberProfileUpdate   post
 	
 	@RequestMapping(value = "/memberProfileUpdate")
-	public String memberProfileUpdate(HttpSession session,  @RequestParam String memberPwd, @RequestParam String memberIntro) {
+	public String memberProfileUpdate(HttpSession session,  @RequestParam String memberPwd, @RequestParam String memberIntro, @RequestParam String memberNickname) {
 		MemRegInfo memInfo=(MemRegInfo)session.getAttribute("memInfo");
-		System.out.println("cont     "+memInfo);
 		memInfo.setMemberPwd(memberPwd);
 		memInfo.setMemberIntro(memberIntro);
+		memInfo.setMemberNickname(memberNickname);
+		
 	  	//myPageInfoDao.memberProfileUpdate(memInfo);
 		if(	myPageInfoDao.memberProfileUpdate(memInfo) > 0) {
 			session.setAttribute("memInfo", memInfo);
 			return  "/memberMypage/memberProfile" ;
-		}else {
-			
+		}else {			
 			return  "/memberMypage/memberProSet" ; 
-		}
-		
+		}	
 	}
 	
 	
@@ -160,5 +171,14 @@ public class MemController {
 	 return "redirect:/";
 	}
 
+	
+	
+	@RequestMapping(value = "/selectMemberList")
+	public String selectMemberList(Model model) {
+		
+		model.addAttribute("memberRackList", memberInfoDao.selectMemberRankList());
+		return "rank/memberRank";
+
+	}
 
 }

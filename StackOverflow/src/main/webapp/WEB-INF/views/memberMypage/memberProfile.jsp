@@ -268,52 +268,6 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
     content: " ";
     clear: both;
 }
-    .user-show-new .user-panel #leagueRank, .user-show-new .user-panel .user-panel-subtabs {
-    float: right;
-    width: auto;
-    margin: 0;
-    margin-top: -35px;
-}
-    .user-show-new .user-panel #leagueRank a, .user-show-new .user-panel .user-panel-subtabs a {
-    float: left;
-    font-size: 11px;
-    font-weight: normal;
-    margin-left: 10px;
-}
-    .subtabs a.youarehere  {
-border-color: #F48024;
-    font-weight: 700;
-}
-    .subtabs a.youarehere {
-    border-color: rgba(244,128,36,0.5);
-    color: #3b4045;
-    text-decoration: none;
-}
-    .subtabs a {
-    display: block;
-    margin: 0 0 0 2px;
-    padding: 8px;
-    border-bottom: 1px solid transparent;
-    color: #6a737c;
-    font-size: 12px;
-    line-height: 1.53333333;
-    text-decoration: none;
-    transition: all 150ms cubic-bezier(.19, 1, .22, 1);
-}
-
-.d-flex {
-    display: flex !important;
-}
-.fs-caption, .fs-category {
-    font-size: .92307692rem !important;
-}
-.ai-center {
-    align-items: center !important;
-}
-.bbw2 {
-    border-bottom-width: 2px !important;
-}
- 
  .ProfileMain{
     margin-top: 20px;
     margin-bottom: 30px;
@@ -431,14 +385,14 @@ text-align:flot;
                     <h3 class="grid--cell mb0 mr-auto px2 profile-section-title">  
                             질문<!--  <span>(0)</span> -->
                         </a></h3>
-                    <div class="grid--cell subtabs user-panel-subtabs">
-                     <!--    <a href="javascript:void(0)" class="d-flex ai-center fs-caption bbw2 youarehere" data-sort-id="votes">
-                            최신 -->
+              <!--       <div class="grid--cell subtabs user-panel-subtabs">
+                        <a href="javascript:void(0)" class="d-flex ai-center fs-caption bbw2 youarehere" data-sort-id="votes">
+                            최신
                         </a>
-                    <!--     <a href="javascript:void(0)" class="d-flex ai-center fs-caption bbw2" data-sort-id="newest">
+                        <a href="javascript:void(0)" class="d-flex ai-center fs-caption bbw2" data-sort-id="newest">
                             투표
-                        </a> -->
-                    </div>
+                        </a>
+                    </div> -->
                 </div>
 
 
