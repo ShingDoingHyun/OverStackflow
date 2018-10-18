@@ -18,7 +18,7 @@
 				;
 	</select>
 	<select id="selecteTagRackList" resultType="com.bit.op.osf.tagBoard.model.Tag">
-		select questiontag.tagNo, tag.tagName, tag.tagDetail, count(*) as count from questiontag, tag where questiontag.tagNo = tag.tagNo  group by tagNo order by count desc limit 0, 9;
+		select questiontag.tagNo, tag.tagName, tag.tagDetail, count(*) as count from questiontag, tag where questiontag.tagNo = tag.tagNo  group by tagNo order by count desc limit 0, 16;
 	</select>
 	
 	

@@ -361,24 +361,20 @@ text-align:flot;
 							<div style="margin-top: 35px;"></div>
 							<h3>태그</h3>
 							<br><br>
-							
-							<table border="1" style="margin: auto;">
+							<table style="margin: auto;">
 								<c:set var="index" value="0" />
 								<c:forEach items="${tagRackList }" var="tag" varStatus="status">
 									<c:if test="${index == 0}">
-										<tr style="height: 170px;">
+										<tr style="height: 170px; border-bottom: 1px solid #999999;">
 									</c:if>
-									
 										<td width="300px;" style="padding-top: 0;">
 											<div style="margin-left: 8px;">
 												<span style="font-size: 30px; font-weight: bord;">${status.count}</span><br>
 												<span style="background:#8B9DC3; color:white; width:60px; display:inline-block; text-align: center; border-radius: 2px;border-radius: 13px;">
-												<a href="<c:url value='/popQuestionList?tagNo=${tag.tagNo }'/>" style="color:white;">${ tag.tagName}</a>
-												</span><br>
-												질문수 : ${ tag.count}<br>
-												
+												<a href="<c:url value='/popQuestionList?tagNo=${tag.tagNo }'/>" style="color:white;">${ tag.tagName}</a> 
+												</span> x ${ tag.count}<br>		
 												<span style="display: block;">${ tag.tagDetail}</span>
-												<span class="tagDetail">태그수정</span>
+												<span class="tagDetail" style="font-size: 12px; color: #a0a3bb;">태그수정</span>
 												<form style="display: none;" onsubmit="return updateTagDetail($(this));">
 													<input type="hidden" name="tagNo" value="${ tag.tagNo}">
 													<textarea rows="5" cols="37" class="tagD">${ tag.tagDetail}</textarea>
@@ -387,10 +383,10 @@ text-align:flot;
 											
 											</div>
 										</td>
-								<c:if test="${index < 3}">
+								<c:if test="${index < 4}">
 									<c:set var="index" value="${index+1 }" />
 								</c:if>
-								<c:if test="${index >= 3}">
+								<c:if test="${index >= 4}">
 									</tr>
 									<c:set var="index" value="0" />
 								</c:if>
