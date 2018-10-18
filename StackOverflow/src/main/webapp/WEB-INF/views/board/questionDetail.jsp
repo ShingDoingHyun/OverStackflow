@@ -248,7 +248,13 @@ margin-right: 4px;
 							</div>
 							<div class="profile">
 								<div style="margin-left: 10px;margin-top:  10px">
-									<img class='photo2' src="<c:url value='/resources/uploadFile/memberPhoto/${memberInfo.memberPhoto}'/>"> ${memberInfo.memberId}<br>
+									<c:if test="${memberInfo.memberPhoto != null && memberInfo.memberPhoto != ''}">
+										<img class='photo2' src="<c:url value='/resources/uploadFile/memberPhoto/${memberInfo.memberPhoto}'/>"  altSrc="<c:url value='/img/default.png'/>" onerror="this.src = $(this).attr('altSrc')">
+									</c:if>
+									<c:if test="${memberInfo.memberPhoto == null || memberInfo.memberPhoto == ''}">
+										<img class='photo2' src="<c:url value='/resources/img/default.png'/>">
+									</c:if>
+									 ${memberInfo.memberId}<br>
 									<span style="font-size: 12px;">작성시간 : <fmt:formatDate value="${questionBoard.regDate}" pattern="yyyy년 MM월 dd일 HH:mm:ss"/></span>
 								</div>
 							</div>
@@ -366,7 +372,13 @@ margin-right: 4px;
 								</div>	
 								<div class="profile">
 									<div style="margin-left: 10px;margin-top:  10px">
-										<img class='photo2' src="<c:url value='/resources/uploadFile/memberPhoto/${replyboard.memberPhoto}'/>"> ${replyboard.memId}<br>
+										<c:if test="${replyboard.memberPhoto != null && replyboard.memberPhoto != ''}">
+											<img class='photo2' src="<c:url value='/resources/uploadFile/memberPhoto/${replyboard.memberPhoto}'/>"  altSrc="<c:url value='/img/default.png'/>" onerror="this.src = $(this).attr('altSrc')">
+										</c:if>
+										<c:if test="${replyboard.memberPhoto == null || replyboard.memberPhoto == ''}">
+											<img class='photo2' src="<c:url value='/resources/img/default.png'/>">
+										</c:if>
+										${replyboard.memId}<br>
 										<span style="font-size: 12px;">작성시간 : <fmt:formatDate value="${replyboard.regDate}" pattern="yyyy년 MM월 dd일 HH:mm:ss"/></span>
 									</div>
 								</div>

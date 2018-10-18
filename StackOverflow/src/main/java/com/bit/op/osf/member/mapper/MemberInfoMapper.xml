@@ -11,5 +11,10 @@
 		select memberId, memberPwd, memberName, memberNickname, memberPhoto, memberBirth,memberGender, memberPhone, memberIntro from member where memberId = #{id}
 	</select>
 	
-	
+	<select id="selectMemberRankList" resultType="com.bit.op.osf.member.model.MemRegInfo">
+		select b.memberId,  count(*) as count, b.memberNickname, b.memberPhoto, DATE_FORMAT(b.memberBirth, '%Y-%m-%d') as memberBirth, DATE_FORMAT(b.memberRegisterDate, '%Y-%m-%d') as memberRegisterDate from questionboard a, member b
+	  	where a.memId = b.memberId
+	   	group by a.memId
+	  	order by count(*) desc;
+	</select>
 </mapper>

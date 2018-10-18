@@ -613,7 +613,7 @@ var checkFavQuestion = function(questionNo, value){
 	            	
 	            	$("#favList").html("");
 		           	$.each( data, function( key, value ) {
-		           		$("#favList").append('<div style="border-bottom: 1px solid #333333; margin-top:3px; margin-bottom:3px;"><a href="<c:url value="/questionDetail/'+value.questionNo+'"/>">'+value.title+'</a></div>');
+		           		$("#favList").append('<div style="margin-top:3px; margin-bottom:3px;"><a href="<c:url value="/questionDetail/'+value.questionNo+'"/>">'+value.title+'</a></div>');
 		           		});
 	                
 	            }

@@ -325,6 +325,8 @@ border-color: #F48024;
 text-align:flot;
 }
 
+
+
 </style>
 <body class="cbp-spmenu-push">
 	<div class="main-content">
@@ -361,51 +363,36 @@ text-align:flot;
 							<div style="margin-top: 35px;"></div>
 							<h3>태그</h3>
 							<br><br>
-							
-							<table border="1" style="margin: auto;">
+							<table style="margin: auto;">
 								<c:set var="index" value="0" />
-								<c:forEach items="${tagRackList }" var="tag" varStatus="status">
+								<c:forEach items="${memberRackList }" var="member" varStatus="status">
 									<c:if test="${index == 0}">
-										<tr style="height: 170px;">
+										<tr style="height: 170px; border-bottom: 1px solid #999999;">
 									</c:if>
-										<td width="300px;">
-											<span style="size: 20px; font-weight: bord;">${status.count}</span><br>
-											<span style="background:#8B9DC3; color:white; width:50px; display:inline-block; text-align: center; border-radius: 2px;border-radius: 10px;">${ tag.tagName}</span><br>
-											질문수 : ${ tag.count}<br>
-											${ tag.tagDetail}<br>
-											
+										<td width="300px;" style="padding-top: 0;">
+											<div style="margin-left: 8px;">
+												<span style="font-size: 30px; font-weight: bord;">${status.count }</span><br>	
+												<c:if test="${member.memberPhoto != null && member.memberPhoto != ''}">
+												<img class='photo2' src="<c:url value='/resources/uploadFile/memberPhoto/${member.memberPhoto}'/>"  altSrc="<c:url value='/img/default.png'/>" onerror="this.src = $(this).attr('altSrc')">
+												</c:if>
+												<c:if test="${member.memberPhoto == null || member.memberPhoto == ''}">
+												<img class='photo2' src="<c:url value='/resources/img/default.png'/>">
+												</c:if>
+												${member.memberId }<br>
+												작성글 : ${member.count}
+											</div>
 										</td>
-								<c:if test="${index < 3}">
+								<c:if test="${index < 4}">
 									<c:set var="index" value="${index+1 }" />
 								</c:if>
-								<c:if test="${index >= 3}">
-										</tr>
+								<c:if test="${index >= 4}">
+									</tr>
 									<c:set var="index" value="0" />
 								</c:if>
 								</c:forEach>
 						
 							</table>
 							
-							
-<%-- 							<table border="1" style="margin: auto;">
-								<c:forEach items="${searchTagList }" var="tag" varStatus="status">
-								<tr style="height: 200px;">
-									<td width="300px;"></td>
-									<td width="300px;"></td>
-									<td width="300px;"></td>
-								</tr>
-								</c:forEach>
-								<tr style="height: 200px;">
-									<td width="300px;"></td>
-									<td width="300px;"></td>
-									<td width="300px;"></td>
-								</tr>
-								<tr style="height: 200px;">
-									<td width="300px;"></td>
-									<td width="300px;"></td>
-									<td width="300px;"></td>
-								</tr>
-							</table> --%>
 							
 						</div>
 				
@@ -444,5 +431,60 @@ text-align:flot;
 	<!--//scrolling js-->
 	<!-- Bootstrap Core JavaScript -->
    <script src="js/bootstrap.js"> </script>
+   <script>
+   $(".tagDetail").click(function() {
+	
+	   $(this).next().show();
+	   $(this).prev().hide();
+	   $(this).hide();
+	   
+	});
+   
+   $(".cancelTagFix").click(function() {
+		
+	   $(this).parent().prev().show();
+	   $(this).parent().prev().prev().show();
+	   $(this).parent().hide();
+	});
+   
+   function getContextPath() {
+		var hostIndex = location.href.indexOf( location.host ) + location.host.length;
+		return location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
+	};
+		
+
+   
+    function updateTagDetail(obj) {
+    	
+      	var tagNo = obj.find("input[name=tagNo]").val();
+    	var tagDetail = obj.find(".tagD").val();
+  
+    	
+    	 $.ajax({
+	            type : 'post',
+	            url : getContextPath() +'/tagDetailUpdate',
+	            data : { "tagNo" : tagNo ,  "tagDetail": tagDetail},
+	            dataType : 'text',
+	            contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
+	            success : function(data){
+	   		
+	            	obj.find(".tagD").val(tagDetail);
+	            	
+	            	obj.prev().prev().text(tagDetail);
+	            	obj.prev().prev().show();
+	            	obj.prev().show();
+	            	obj.hide();
+	            }
+	        }); 
+    
+    	 
+ 	   return false;
+    
+    };
+	
+
+   </script>
+   
 </body>
+
 </html>

@@ -160,5 +160,14 @@ public class MemController {
 	 return "redirect:/";
 	}
 
+	
+	
+	@RequestMapping(value = "/selectMemberList")
+	public String selectMemberList(Model model) {
+		
+		model.addAttribute("memberRackList", memberInfoDao.selectMemberRankList());
+		return "rank/memberRank";
+
+	}
 
 }

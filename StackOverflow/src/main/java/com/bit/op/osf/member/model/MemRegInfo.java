@@ -16,8 +16,21 @@ public class MemRegInfo {
 	private String memberPhone;
 	private String memberRegisterDate;
 	private String memberIntro;
+	private int count;
 	
 	
+
+
+
+	public int getCount() {
+		return count;
+	}
+
+
+
+	public void setCount(int count) {
+		this.count = count;
+	}
 
 
 
