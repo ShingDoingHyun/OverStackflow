@@ -1,6 +1,7 @@
 package com.bit.op.osf.member.daoImpl;
 
 import java.io.File;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -80,5 +81,11 @@ public class MemberInfoImpl extends DaoImpl implements MemberInfoDao {
 		System.out.println("memInfo       "+memInfo);  
 		
 		return memInfo;
+	}
+
+	@Override
+	public List<MemRegInfo> selectMemberRankList() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(MEMBERINFO_NAMESPACE +"selectMemberRankList");
 	}
 }
