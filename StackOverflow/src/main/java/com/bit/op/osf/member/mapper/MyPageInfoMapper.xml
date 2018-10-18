@@ -23,6 +23,6 @@
     	<if test=" memberPwd != 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'">
     		memberPwd=#{memberPwd}, 
     	</if>
-    	memberNickname=#{memberNickname} , memberIntro=#{memberIntro} , memberPhone=#{memberPhone} where memberId = #{memberId};
+    	memberNickname=#{memberNickname} , memberIntro=#{memberIntro} , memberPhone=#{memberPhone},memberPhoto=#{memberPhoto}  where memberId = #{memberId};
     </update>
 </mapper>

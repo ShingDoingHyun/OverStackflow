@@ -13,13 +13,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.bit.op.osf.member.SHA256.SHA256;
 import com.bit.op.osf.member.dao.MemberInfoDao;
 import com.bit.op.osf.member.dao.MyPageInfoDao;
 import com.bit.op.osf.member.model.MemRegInfo;
+import com.bit.op.osf.tagBoard.dao.IQuestionBoardDao;
+import com.bit.op.osf.tagBoard.dao.ITagDao;
 import com.bit.op.osf.tagBoard.model.QuestionBoard;
 import com.bit.op.osf.tagBoard.model.ReplyBoard;
+import com.bit.op.osf.tagBoard.model.Tag;
 
 @Controller
 public class MemController {
@@ -32,11 +36,18 @@ public class MemController {
 	@Inject
 	private MyPageInfoDao myPageInfoDao;
 	
+	@Inject
+	private ITagDao tagDao;
+	
+	@Inject
+	private IQuestionBoardDao questionBoardDao;
 	
 	@Autowired
 	SHA256 SHA;
 	
-	
+	// 1. 저장 경로 설정
+	String uploadUri = "/resources/uploadFile/memberPhoto";
+	String uploadUriDir;
 	// 개인/기업회원가입 선택페이지
 	@RequestMapping(value = "/joinChoiceForm", method = RequestMethod.GET)
 	public String ChoiceJoinForm() {
@@ -65,9 +76,12 @@ public class MemController {
 	@RequestMapping(value = "/memJoinForm", method = RequestMethod.POST)
 	public String memberJoin(MemRegInfo memInfo, Model model, HttpServletRequest request)throws Exception {
 		System.out.println("meminfo : " + memInfo);
-		
-		int insertCnt = memberInfoDao.insertMemberInfo(memInfo, request);
-		
+		// 2. 시스템의 물리적인 경로
+		uploadUriDir = request.getSession().getServletContext().getRealPath(uploadUri);
+		/*int insertCnt = memberInfoDao.insertMemberInfo(memInfo, request);
+		*/
+		memInfo.setRealPath(uploadUriDir);
+		int insertCnt = memberInfoDao.insertMemberInfo(memInfo);
 		
 		model.addAttribute("memberID",memInfo.getMemberId());
 		model.addAttribute("insertCnt",insertCnt);
@@ -84,7 +98,7 @@ public class MemController {
 	
 	
 	@RequestMapping(value = "/memberProfile", method = RequestMethod.GET)
-	public String memberProfile(HttpSession session) throws Exception {	
+	public String memberProfile(HttpSession session, Model model) throws Exception {	
 		MemRegInfo memInfo = (MemRegInfo)session.getAttribute("memInfo");
 		String memId=  memInfo.getMemberId();
 		
@@ -94,6 +108,8 @@ public class MemController {
 		List<QuestionBoard> questionBoards  =  myPageInfoDao.selectQuestionInfo(memId);
 		session.setAttribute("questionBoards", questionBoards);		
 		
+		model.addAttribute("favQuestionList", questionBoardDao.selectFavQuestionList(memInfo));
+		model.addAttribute("favTagList", tagDao.selectMemFavTagList(memInfo));
 		//tags
 		
 		
@@ -110,22 +126,33 @@ public class MemController {
 		
 			return "/memberMypage/memberProSet"; 
 	}
+	
+	
+	
 		
 	
 	
 	//memberProfileUpdate   post
 	
 	@RequestMapping(value = "/memberProfileUpdate")
-	public String memberProfileUpdate(HttpSession session,  @RequestParam String memberPwd, @RequestParam String memberIntro, @RequestParam String memberPhone ,@RequestParam String memberNickname) {
+	public String memberProfileUpdate(HttpSession session,  @RequestParam String memberPwd, @RequestParam String memberIntro, @RequestParam String memberPhone ,
+			@RequestParam String memberNickname,@RequestParam  MultipartFile memberPhotoFile, HttpServletRequest request) throws Exception {
+		
+		
+//	public String memberProfileUpdate(HttpSession session, MemRegInfo memInfo, Model model ) throws Exception {
+		
+	
+		
 		MemRegInfo memInfo=(MemRegInfo)session.getAttribute("memInfo");
 		memInfo.setMemberPwd(memberPwd);
 		memInfo.setMemberIntro(memberIntro);
 		memInfo.setMemberNickname(memberNickname);
 		memInfo.setMemberPhone(memberPhone);
-		
+		memInfo.setMemberPhotoFile(memberPhotoFile);
 	  	//myPageInfoDao.memberProfileUpdate(memInfo);
-		if(	myPageInfoDao.memberProfileUpdate(memInfo) > 0) {
+		if(	myPageInfoDao.memberProfileUpdate(memInfo, request) > 0) {
 			session.setAttribute("memInfo", memInfo);
+			
 			return  "/memberMypage/memberProfile" ;
 		}else {			
 			return  "/memberMypage/memberProSet" ; 

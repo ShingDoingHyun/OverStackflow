@@ -18,7 +18,19 @@ public class MemRegInfo {
 	private String memberIntro;
 	private int count;
 	
-	
+	public String getRealPath() {
+		return realPath;
+	}
+
+
+
+	public void setRealPath(String realPath) {
+		this.realPath = realPath;
+	}
+
+
+
+	private String realPath ;
 
 
 
@@ -172,10 +184,11 @@ public class MemRegInfo {
 
 	@Override
 	public String toString() {
-		return "MemRegInfo   dfsdfsdfsdsdf    [memberId=" + memberId + ", memberPwd=" + memberPwd + ", memberName=" + memberName
+		return "MemRegInfo [memberId=" + memberId + ", memberPwd=" + memberPwd + ", memberName=" + memberName
 				+ ", memberNickname=" + memberNickname + ", memberPhoto=" + memberPhoto + ", memberPhotoFile="
 				+ memberPhotoFile + ", memberBirth=" + memberBirth + ", memberGender=" + memberGender + ", memberPhone="
-				+ memberPhone + ", memberRegisterDate=" + memberRegisterDate + ", memberIntro=" + memberIntro + "]";
+				+ memberPhone + ", memberRegisterDate=" + memberRegisterDate + ", memberIntro=" + memberIntro
+				+ ", count=" + count + ", realPath=" + realPath + "]";
 	}
 	
 	

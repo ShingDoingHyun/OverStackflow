@@ -292,6 +292,7 @@ text-align:flot;
 }
 
 </style>
+
 <body class="cbp-spmenu-push">
 	<div class="main-content">
 	
@@ -329,10 +330,13 @@ text-align:flot;
 		</div>
  <div class="ProfileMain">
 <div style="border: 1px; float: left; width: 10%; padding:10px; height: 200px; ">
-<img class='photo3' src="<c:url value='/resources/uploadFile/memberPhoto/${memInfo.memberPhoto}'/>"style="height: 200px; margin-left: 35px;margin-top: 35px;">
+	<c:if test="${memInfo.memberPhoto != null && memInfo.memberPhoto != ''}">
+		<img class='photo3' src="<c:url value='/resources/uploadFile/memberPhoto/${memInfo.memberPhoto}'/>" altSrc="<c:url value='/img/default.png'/>" onerror="this.src = $(this).attr('altSrc')" style="height: 200px; margin-left: 35px;margin-top: 35px;" >
+	</c:if>
+	<c:if test="${memInfo.memberPhoto == null || memInfo.memberPhoto == ''}">
+		<img class='photo3' src="<c:url value='/resources/img/default.png'/>" style="height: 200px; margin-left: 35px;margin-top: 35px;">
+	</c:if>
 </div>
-
-
 
 <div style="border:1px; float:left; width:526px; padding:10px; height:200px; margin-left:50px;">
 
@@ -359,7 +363,7 @@ text-align:flot;
 </tr>
 
 <tr>
-<td><h4 class="line" style=" width:500px; min-height:36px; margin-top: 15px; margin-bottom: 15px;">연락처:&nbsp${memInfo.memberPhone}</h4></td>
+<td><h4 class="line" style=" width:500px; min-height:36px; margin-top: 15px; margin-bottom: 15px;">핸드폰번호:&nbsp${memInfo.memberPhone}</h4></td>
 </tr>
 
 <tr>
@@ -432,23 +436,29 @@ text-align:flot;
 
 
                 <div class="user-panel-content">
-                   <!--  <div class="empty">어떠한 태그에도 참여하지 않았습니다. <a href="/tags">tags</a></div> -->
+                   	<c:forEach items="${favTagList }" var="fagTag" varStatus="status">
+						<span style="background:#8B9DC3; color:white; width:50px; display:inline-block; text-align: center; border-radius: 2px;border-radius: 10px;">
+							<a href="<c:url value='/popQuestionList?tagNo=${fagTag.tagNo }'/>" style="color:white;">${fagTag.tagName }</a>
+						</span>&nbsp;
+					</c:forEach>              
                 </div>
                 <div class="user-panel-footer">
                 </div>
             </div>
             
-<!-- 
-               <div id="user-panel-reputation" class="user-panel">
-                <div class="subheader p0 grid ai-center" style="min-height: 36px;">
-                    <h3 class="grid--cell mb0 mr-auto px2 profile-section-title">    
-                            평판 <span>(0)</span>
-                        </a></h3>
 
+            <div id="user-panel-reputation" class="user-panel">
+               	<div class="subheader p0 grid ai-center" style="min-height: 36px;">
+                    <h3 class="grid--cell mb0 mr-auto px2 profile-section-title">즐겨찾기한 질문 </h3>               
                 </div>
-
-         
-            </div> -->
+                <div class="user-panel-content">
+                 <c:forEach items="${favQuestionList }" var="favQuestionList">
+					<div class="empty">
+						<a href="<c:url value='/questionDetail/${favQuestionList.questionNo }'/>">${ favQuestionList.title}</a>
+					</div>
+				</c:forEach>
+				</div>
+            </div> 
 
                
    

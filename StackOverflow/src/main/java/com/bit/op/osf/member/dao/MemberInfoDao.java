@@ -10,4 +10,6 @@ public interface MemberInfoDao {
 	public int insertMemberInfo(MemRegInfo memRegInfo, HttpServletRequest request) throws Exception;
 	public MemRegInfo selectMember( String id, String pw);
 	public List<MemRegInfo> selectMemberRankList();
+	
+	public int insertMemberInfo(MemRegInfo memInfo) throws Exception;
 }

@@ -15,6 +15,6 @@ public interface MyPageInfoDao {
 	public List<QuestionBoard> selectQuestionInfo(String memId) throws Exception;
 
 
-	public int memberProfileUpdate(MemRegInfo memInfo);
+	public int memberProfileUpdate(MemRegInfo memInfo, HttpServletRequest request) throws Exception;
 	
 }

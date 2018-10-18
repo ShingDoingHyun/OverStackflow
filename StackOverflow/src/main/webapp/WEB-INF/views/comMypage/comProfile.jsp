@@ -153,6 +153,142 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 	color: #2390ff;
 }
 
+.main_2 {
+	margin-Left: 20px;
+}
+
+ body.user-page #content * {
+        box-sizing: border-box;
+    }
+
+    body {
+        line-height: 1;
+    }
+
+    div {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font: inherit;
+        font-size: 100%;
+        vertical-align: baseline;
+    }
+
+    div {
+        display: block;
+    }
+
+    .user-show-new .user-panel:nth-child(odd) {
+        margin-right: 30px;
+    }
+
+    .user-show-new .user-panel {
+        width: calc((100% - 30px) / 2);
+        float: left;
+        margin-bottom: 30px;
+        margin-top: 60px;
+    }
+
+    .container {
+        position: relative;
+        width: 100%;
+        flex: 1 0 auto;
+        margin: 0 auto;
+        text-align: left;
+    }
+
+    #content {
+        max-width: 1100px;
+        width: calc(100% - 164px);
+        background-color: #FFF;
+        border-radius: 0;
+        border: 1px solid #d6d9dc;
+        border-top-width: 0;
+        border-bottom-width: 0;
+        border-left-width: 1px;
+        border-right-width: 0;
+        padding: 24px;
+        box-sizing: border-box;
+    }
+
+    body>.container {
+        max-width: 1264px;
+        width: 100%;
+        background: none;
+        display: flex;
+        justify-content: space-between;
+        margin: 0 auto;
+    }
+
+    .container {
+        position: relative;
+        width: 100%;
+        flex: 1 0 auto;
+        margin: 0 auto;
+        text-align: left;
+    }
+
+    #content:before,
+    #content:after {
+        content: "";
+        display: table;
+    }
+
+    .profile-section-title {
+        font-weight: 700;
+        color: #0C0D0E;
+    }
+
+    .px2 {
+        padding-left: 2px !important;
+        padding-right: 2px !important;
+    }
+    .user-show-new .user-panel .subheader {
+    border-bottom: 1px solid #c8ccd0;
+    height: auto;
+    padding-bottom: 6px;
+}
+.line
+{
+
+ border-bottom: 1px solid #c8ccd0;
+    height: auto;
+    padding-bottom: 6px;
+}
+}
+    .user-show-new .user-panel-content {
+    padding-top: 5px;
+}
+    .user-show-new .user-panel .user-panel-content {
+    margin-bottom: 10px;
+}
+.user-show-new .empty {
+    margin-bottom: 15px;
+    margin-left:20px;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    width:500px;
+}
+    .user-show-new .subheader {
+    margin-bottom: 12px;
+}
+    .user-show-new .user-panel.user-panel:nth-child(odd):before {
+    display: table;
+    content: " ";
+    clear: both;
+}
+ .ProfileMain{
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+.photo3{
+		width:180px;
+	}
+.ProfileMain div{
+text-align:flot;
+}
+
 </style>
 <body class="cbp-spmenu-push">
 	<div class="main-content">
@@ -172,11 +308,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 		<!-- main content start-->
 		<div id="page-wrapper">
 		
-		
-		
 			<div class="main-page">
-			
-			
+	
 			<div class="main" style="margin-bottom:65%;">
 
 		<div style="margin-top: 20px;"></div>
@@ -188,9 +321,150 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 				<li><a href="<c:url value="/comJob/manageJobInfoList/1"/>"><span>채용공고 관리</span></a></li>
 				<li><a href="<c:url value="/comJob/manageJobAppList/0"/>"><span>지원서 관리</span></a></li>
 				<li><a href="<c:url value='/op]'/>"><span>프로필 설정</span></a></li>
-
 			</ul>
 		</div>
+			<div class="main_2">
+			<div style="margin-top: 20px;"></div>
+			<h3 style="margin-bottom: 40px;">프로필정보</h3>
+			
+		</div>
+ <div class="ProfileMain">
+<div style="border: 1px; float: left; width: 10%; padding:10px; height: 200px; ">
+<img class='photo3' src="<c:url value='/resources/uploadFile/memberPhoto/${comInfo.comPhoto}'/>"style="height: 200px; margin-left: 35px;margin-top: 35px;">
+</div>
+
+
+
+<div style="border:1px; float:left; width:526px; padding:10px; height:200px; margin-left:50px;">
+
+<div><span><h1 style="margin-left:200px;margin-bottom: 20px;">${comInfo.comChargerName}</h1></span>
+
+</div><br>
+
+<div style="width:356px; border:1px solid silver; margin-left:70px; width:400px;height:170px; background-color:white;">${comInfo.comIntro}</div>
+</div>
+
+
+
+<div style="border: 1px; float:left; width: 40%; padding:10px;height: 200px; margin-left: 30px;"">
+<table>
+<tr>
+<td><h4 class="line" style=" width:500px; min-height:36px; margin-top: 15px; margin-bottom: 15px; hr:width:500px;">담당자 이름:&nbsp${comInfo.comChargerName}</h4></td>
+
+</tr>
+
+<tr>
+<td><h4 class="line" style=" width:500px; min-height:36px; margin-top: 15px; margin-bottom: 15px;">회사Url:&nbsp${comInfo.comHomePageUrl}</h4></td>
+</tr>
+
+<tr>
+<td><h4 class="line" style=" width:500px; min-height:36px; margin-top: 15px; margin-bottom: 15px;">핸드폰번호:</h4>&nbsp${comInfo.comChargerPhone}</h4></td>
+</tr>
+
+<tr>
+<td><h4 class="line" style=" width:500px; min-height:36px; margin-top: 15px; margin-bottom: 15px;">담당자 이메일:&nbsp${comInfo.comChargerEmail}</h4></td>
+</tr>
+
+</table>
+</div>
+ 
+        </div>
+       
+
+        <div id="mainbar-full" class="user-show-new">
+
+            <div id="user-panel-answers" class="user-panel" style="margin-top:200px;">
+                <div class="subheader p0 grid ai-center" style="min-height: 36px;">
+                    <h3 class="grid--cell mb0 mr-auto px2 profile-section-title">    
+                            답변 
+                        </a></h3>
+                   <!--  <div class="grid--cell subtabs user-panel-subtabs" >
+                        <a href="javascript:void(0)" class="d-flex ai-center fs-caption bbw2 youarehere" data-sort-id="votes"> 최신 </a>
+                        <a href="javascript:void(0)" class="d-flex ai-center fs-caption bbw2" data-sort-id="newest">투표</a>
+                    </div> -->
+                </div>
+               
+		
+		<!-- 답변  -->
+                <div class="user-panel-content">
+                <%--  <c:forEach items="${replyBoards}" var="rboard" varStatus="status">
+				     <div class="empty"><a href="../op/questionDetail/${rboard.questionNo}">${rboard.content}</a></div>           
+				 </c:forEach> --%>
+                </div>
+                <div class="user-panel-footer">
+                </div>
+            </div>
+            
+            
+            <!-- 질문  -->
+             <div id="user-panel-questions" class="user-panel" style="margin-top:200px;">
+                <div class="subheader p0 grid ai-center" style="min-height: 36px;">
+                    <h3 class="grid--cell mb0 mr-auto px2 profile-section-title">  
+                            질문<!--  <span>(0)</span> -->
+                        </a></h3>
+              <!--       <div class="grid--cell subtabs user-panel-subtabs">
+                        <a href="javascript:void(0)" class="d-flex ai-center fs-caption bbw2 youarehere" data-sort-id="votes">
+                            최신
+                        </a>
+                        <a href="javascript:void(0)" class="d-flex ai-center fs-caption bbw2" data-sort-id="newest">
+                            투표
+                        </a>
+                    </div> -->
+                </div>
+
+
+                <div class="user-panel-content">
+                  <%--   <c:forEach items="${questionBoards}" var="qboard" varStatus="status">
+				    <div class="empty"><a href="../op/questionDetail/${qboard.questionNo}">${qboard.title}</a></div>           
+				 </c:forEach> --%>
+                </div>
+                <div class="user-panel-footer">
+                </div>
+            </div>
+            
+            <div id="user-panel-tags" class="user-panel">
+                <div class="subheader p0 grid ai-center" style="min-height: 36px;">
+                    <h3 class="grid--cell mb0 mr-auto px2 profile-section-title">   
+                            태그<!--  <span>(0)</span> -->
+                        </a></h3>
+                </div>
+
+
+                <div class="user-panel-content">
+                   <!--  <div class="empty">어떠한 태그에도 참여하지 않았습니다. <a href="/tags">tags</a></div> -->
+                </div>
+                <div class="user-panel-footer">
+                </div>
+            </div>
+            
+<!-- 
+               <div id="user-panel-reputation" class="user-panel">
+                <div class="subheader p0 grid ai-center" style="min-height: 36px;">
+                    <h3 class="grid--cell mb0 mr-auto px2 profile-section-title">    
+                            평판 <span>(0)</span>
+                        </a></h3>
+
+                </div>
+
+         
+            </div> -->
+
+               
+   
+   </div>
+
+	</div>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			
 			
 			</div>

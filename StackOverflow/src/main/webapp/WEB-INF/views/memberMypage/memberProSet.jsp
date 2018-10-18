@@ -359,9 +359,8 @@ body {
 width:45%;
 height:300px;
 float:left;
-border: 1px solid black;
 margin-left: 50px;
-margin-top: 40px;
+margin-top: 35px;
 }
 
 .col-9
@@ -439,11 +438,15 @@ function readURL(input) {
 		</div>
 	
 
-           <form action="<c:url value="/memberProfileUpdate"/>"   method="post">
+           <form action="<c:url value="/memberProfileUpdate"/>"   method="POST" enctype="multipart/form-data">
            
-           <div class="col-8"style="width: 252px;  margin-left:320px;  height:282px;  margin-top: 60px;">
-      
+           <div class="col-8"style="width:252px;  margin-left:320px; height:282px; margin-top: 60px; margin-bottom: 30px;">
+           
+           		<img class='photo3' id="blah" alt="your image" src="<c:url 
+           		value='/resources/uploadFile/memberPhoto/${memInfo.memberPhoto}'/>"style=" width:250px; height:250px;"> 	
+           				
            </div>
+          
                 <div class="col-9">
 
                     <span>아이디</span><br><input type="text" disabled="disabled" name="memberId" value="${memInfo.memberId}" class="input2"><br>
@@ -462,11 +465,18 @@ function readURL(input) {
 
 
 <div class="col-10">
+
+<!-- 이미지 수정 버튼  -->
+<input type="file" id="imgInp" name="memberPhotoFile" style="margin-left: 400px;">
+
             <div class="row">
             
-                    <br><h3 style="margin-top:160px; margin-left:300px;">자기소개</h3>
+                    <br><h3 style="margin-left:300px;">자기소개</h3>
 
-                        <textarea id="wmd-input" class="wmd-input" name="memberIntro" cols="92" rows="15" tabindex="4" style="width: 850px;margin-top:25px;margin-left:300px;">${memInfo.memberIntro}</textarea>
+                        <textarea id="wmd-input" class="wmd-input" name="memberIntro" cols="92" rows="15" tabindex="4" 
+                        style="width: 850px;margin-top:25px;margin-left:300px;">${memInfo.memberIntro}</textarea>
+                        
+                        
                         <br><button type="submit"  class="label label-warning"
                                   style="margin-top: 40px;margin-left:660px;width: 93.4px;height: 35px;">수정</button>
                          </div> 
