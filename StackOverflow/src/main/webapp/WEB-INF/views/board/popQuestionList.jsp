@@ -193,6 +193,11 @@ a {
 			선택된 태그 : ${selectTag.tagName}<br>
 			<div style="max-width: 80%;">${selectTag.tagDetail}</div>
 			<span class="tagDetail" style="font-size: 12px; color: #a0a3bb;;">태그수정</span>
+			<form style="display: none;" onsubmit="return updateTagDetail($(this));">
+				<input type="hidden" name="tagNo" value="${ tag.tagNo}">
+				<textarea rows="5" cols="37" class="tagD">${ tag.tagDetail}</textarea>
+				<button type="submit">수정</button><button class="cancelTagFix">취소</button>
+			</form>
 		</c:if>
 			<div class="main-page">
 		

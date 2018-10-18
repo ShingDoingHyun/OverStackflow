@@ -8,6 +8,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,19 +41,17 @@ public class QuestionBoardController {
 	private MemberInfoImpl memberInfoImpl;
 
 	@Inject
-	ITagDao tagDao;
+	private ITagDao tagDao;
 	
 	@RequestMapping(value = "/popQuestionList", method = RequestMethod.GET)
 	public String popQuestionList(Model model, @ModelAttribute("search") Search search, HttpServletRequest request) {
-		System.out.println(search.getTagList());
-		List<QuestionBoard> questionBoardList = new ArrayList<QuestionBoard>();
-		List<QuestionBoard> favQuestionList = new ArrayList<QuestionBoard>();
-		List<Tag> fagTagList = new ArrayList<Tag>();
 		
+		MemRegInfo memInfo =  (MemRegInfo)request.getSession().getAttribute("memInfo");
 		
-		questionBoardList = questionBoardDao.selectPopQuestionList(request, search);
-		favQuestionList = questionBoardDao.selectFavQuestionList(request);
-		fagTagList = tagDao.selectMemFavTagList(request);
+			
+		List<QuestionBoard> questionBoardList = questionBoardDao.selectPopQuestionList(memInfo, search);
+		List<QuestionBoard> favQuestionList = questionBoardDao.selectFavQuestionList(memInfo);
+		List<Tag> fagTagList = tagDao.selectMemFavTagList(memInfo);
 		if(search.getTagNo()!= null) {
 			model.addAttribute("selectTag", tagDao.selectTag(search));
 		}
@@ -71,17 +70,15 @@ public class QuestionBoardController {
 	@RequestMapping(value = "/questionList", method = RequestMethod.GET)
 	public String questionList(Model model, Search search, HttpServletRequest request) {
 		
-		List<QuestionBoard> favQuestionList = new ArrayList<QuestionBoard>();
-		List<Tag> fagTagList = new ArrayList<Tag>();
-		List<Tag> searchTagList = new ArrayList<Tag>();
 		
 		MemRegInfo memInfo =  (MemRegInfo)request.getSession().getAttribute("memInfo");
+		
 		QuestionBoardList questionBoardList = questionBoardDao.selectQuestionList(search, memInfo);
-		favQuestionList = questionBoardDao.selectFavQuestionList(request);
-		fagTagList = tagDao.selectMemFavTagList(request);
+		List<QuestionBoard> favQuestionList = questionBoardDao.selectFavQuestionList(memInfo);
+		List<Tag> fagTagList = tagDao.selectMemFavTagList(memInfo);
 		
 		if(search.getTagList() !=null) {
-			searchTagList = tagDao.selectTagList(search);
+			List<Tag> searchTagList = tagDao.selectTagList(search);
 			model.addAttribute("searchTagList", searchTagList);
 		}
 		Cookie[] cookies = request.getCookies();
@@ -116,7 +113,9 @@ public class QuestionBoardController {
 	@RequestMapping(value = "/openUpdateQuestion/{questionBoardNo}", method = RequestMethod.GET)
 	public String openUpdateQuestion(Model model, @PathVariable("questionBoardNo") int questionBoardNo, HttpServletRequest request) {		
 		
-		model.addAttribute("questionBoard", questionBoardDao.selectQuestionDeltail(questionBoardNo, request));
+		MemRegInfo memInfo =  (MemRegInfo)request.getSession().getAttribute("memInfo");
+		
+		model.addAttribute("questionBoard", questionBoardDao.selectQuestionDeltail(questionBoardNo, memInfo));
 		
 		return "board/boardUpdate";
 	}
@@ -133,14 +132,17 @@ public class QuestionBoardController {
 	
 	@RequestMapping(value = "/questionDetail/{questionBoardNo}", method = RequestMethod.GET)
 	public String questionDetail(Model model, @PathVariable("questionBoardNo") int questionBoardNo, HttpServletRequest request) {
+		
+		MemRegInfo memInfo =  (MemRegInfo)request.getSession().getAttribute("memInfo");
+		
 		List<QuestionBoard> favQuestionList = new ArrayList<QuestionBoard>();
 		List<Tag> fagTagList = new ArrayList<Tag>();
 		
-		QuestionBoard questionBoard = questionBoardDao.selectQuestionDeltail(questionBoardNo, request);
-		favQuestionList = questionBoardDao.selectFavQuestionList(request);
-		fagTagList = tagDao.selectMemFavTagList(request);
+		QuestionBoard questionBoard = questionBoardDao.selectQuestionDeltail(questionBoardNo, memInfo);
+		favQuestionList = questionBoardDao.selectFavQuestionList(memInfo);
+		fagTagList = tagDao.selectMemFavTagList(memInfo);
 
-		int  a = questionBoardDao.selectMemberQuestionVote(questionBoard, request);
+		int  a = questionBoardDao.selectMemberQuestionVote(questionBoard, memInfo);
 	
 		model.addAttribute("memberVote", a);
 		model.addAttribute("questionBoard", questionBoard);
@@ -168,8 +170,9 @@ public class QuestionBoardController {
 	public List<QuestionBoard> checkQuestionFav(QuestionBoard questionBoard, HttpServletRequest request ) {
 		
 		int result = questionBoardDao.changeFavQuestion(questionBoard);
-	
-		return questionBoardDao.selectFavQuestionList(request);
+		MemRegInfo memInfo =  (MemRegInfo)request.getSession().getAttribute("memInfo");
+		
+		return questionBoardDao.selectFavQuestionList(memInfo);
 	}
 	
 	@RequestMapping(value = "/changeVote", method = RequestMethod.POST)

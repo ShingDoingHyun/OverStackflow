@@ -15,11 +15,11 @@ public interface IQuestionBoardDao {
 
 	int insertQuestionBoard(QuestionBoard questionboard);
 
-	List<QuestionBoard> selectPopQuestionList(HttpServletRequest request, Search search);
+	List<QuestionBoard> selectPopQuestionList(MemRegInfo memInfo, Search search);
 
 	int updateQuestionView(int questionNo);
 
-	QuestionBoard selectQuestionDeltail(int questionBoardNo, HttpServletRequest request);
+	QuestionBoard selectQuestionDeltail(int questionBoardNo, MemRegInfo memInfo);
 
 	int updateQuestionBoard(QuestionBoard questionBoard);
 
@@ -31,11 +31,11 @@ public interface IQuestionBoardDao {
 
 	int changeFavQuestion(QuestionBoard questionBoard);
 
-	List<QuestionBoard> selectFavQuestionList(HttpServletRequest request);
+	List<QuestionBoard> selectFavQuestionList(MemRegInfo memInfo);
 
 	int chageVote(QuestionBoard questionBoard);
 
-	int selectMemberQuestionVote(QuestionBoard questionBoard, HttpServletRequest request);
+	int selectMemberQuestionVote(QuestionBoard questionBoard, MemRegInfo memInfo);
 
 
 }

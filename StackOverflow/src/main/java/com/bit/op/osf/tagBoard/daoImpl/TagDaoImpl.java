@@ -74,10 +74,7 @@ public class TagDaoImpl implements ITagDao {
 	}
 
 	@Override
-	public int updateMemFavTag(MemFavTag memFavTag, HttpServletRequest request) {
-
-		HttpSession session = request.getSession();
-		MemRegInfo memInfo =  (MemRegInfo) session.getAttribute("memInfo");
+	public int updateMemFavTag(MemFavTag memFavTag, MemRegInfo memInfo) {
 		
 		memFavTag.setMemId(memInfo.getMemberId());
 		
@@ -93,10 +90,8 @@ public class TagDaoImpl implements ITagDao {
 	}
 
 	@Override
-	public List<Tag> selectMemFavTagList(HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		MemRegInfo memInfo =  (MemRegInfo) session.getAttribute("memInfo");
-		
+	public List<Tag> selectMemFavTagList(MemRegInfo memInfo) {
+
 		return sqlSession.selectList(COMMENT_NAMESPACE + "selectMemFavTagList", memInfo);
 	}
 

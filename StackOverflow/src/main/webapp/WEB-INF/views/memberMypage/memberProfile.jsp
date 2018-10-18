@@ -435,23 +435,29 @@ text-align:flot;
 
 
                 <div class="user-panel-content">
-                   <!--  <div class="empty">어떠한 태그에도 참여하지 않았습니다. <a href="/tags">tags</a></div> -->
+                   	<c:forEach items="${favTagList }" var="fagTag" varStatus="status">
+						<span style="background:#8B9DC3; color:white; width:50px; display:inline-block; text-align: center; border-radius: 2px;border-radius: 10px;">
+							<a href="<c:url value='/popQuestionList?tagNo=${fagTag.tagNo }'/>" style="color:white;">${fagTag.tagName }</a>
+						</span>&nbsp;
+					</c:forEach>              
                 </div>
                 <div class="user-panel-footer">
                 </div>
             </div>
             
-<!-- 
-               <div id="user-panel-reputation" class="user-panel">
-                <div class="subheader p0 grid ai-center" style="min-height: 36px;">
-                    <h3 class="grid--cell mb0 mr-auto px2 profile-section-title">    
-                            평판 <span>(0)</span>
-                        </a></h3>
 
+            <div id="user-panel-reputation" class="user-panel">
+               	<div class="subheader p0 grid ai-center" style="min-height: 36px;">
+                    <h3 class="grid--cell mb0 mr-auto px2 profile-section-title">즐겨찾기한 질문 </h3>               
                 </div>
-
-         
-            </div> -->
+                <div class="user-panel-content">
+                 <c:forEach items="${favQuestionList }" var="favQuestionList">
+					<div class="empty">
+						<a href="<c:url value='/questionDetail/${favQuestionList.questionNo }'/>">${ favQuestionList.title}</a>
+					</div>
+				</c:forEach>
+				</div>
+            </div> 
 
                
    

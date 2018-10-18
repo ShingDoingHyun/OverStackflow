@@ -18,8 +18,11 @@ import com.bit.op.osf.member.SHA256.SHA256;
 import com.bit.op.osf.member.dao.MemberInfoDao;
 import com.bit.op.osf.member.dao.MyPageInfoDao;
 import com.bit.op.osf.member.model.MemRegInfo;
+import com.bit.op.osf.tagBoard.dao.IQuestionBoardDao;
+import com.bit.op.osf.tagBoard.dao.ITagDao;
 import com.bit.op.osf.tagBoard.model.QuestionBoard;
 import com.bit.op.osf.tagBoard.model.ReplyBoard;
+import com.bit.op.osf.tagBoard.model.Tag;
 
 @Controller
 public class MemController {
@@ -32,6 +35,11 @@ public class MemController {
 	@Inject
 	private MyPageInfoDao myPageInfoDao;
 	
+	@Inject
+	private ITagDao tagDao;
+	
+	@Inject
+	private IQuestionBoardDao questionBoardDao;
 	
 	@Autowired
 	SHA256 SHA;
@@ -84,7 +92,7 @@ public class MemController {
 	
 	
 	@RequestMapping(value = "/memberProfile", method = RequestMethod.GET)
-	public String memberProfile(HttpSession session) throws Exception {	
+	public String memberProfile(HttpSession session, Model model) throws Exception {	
 		MemRegInfo memInfo = (MemRegInfo)session.getAttribute("memInfo");
 		String memId=  memInfo.getMemberId();
 		
@@ -94,6 +102,8 @@ public class MemController {
 		List<QuestionBoard> questionBoards  =  myPageInfoDao.selectQuestionInfo(memId);
 		session.setAttribute("questionBoards", questionBoards);		
 		
+		model.addAttribute("favQuestionList", questionBoardDao.selectFavQuestionList(memInfo));
+		model.addAttribute("favTagList", tagDao.selectMemFavTagList(memInfo));
 		//tags
 		
 		
