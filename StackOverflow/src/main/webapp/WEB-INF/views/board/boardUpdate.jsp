@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!--
 Author: W3layouts
 Author URL: http://w3layouts.com
@@ -16,48 +18,50 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- Bootstrap Core CSS -->
-<link href="<%=request.getContextPath()%>/css/bootstrap.css" rel='stylesheet' type='text/css' />
+<link href="<c:url value="/css/bootstrap.css"/>" rel='stylesheet' type='text/css' />
 <!-- Custom CSS -->
-<link href="<%=request.getContextPath()%>/css/style.css" rel='stylesheet' type='text/css' />
+<link href="<c:url value="/css/style.css"/>" rel='stylesheet' type='text/css' />
 <!-- font CSS -->
 <!-- font-awesome icons -->
-<link href="<%=request.getContextPath()%>/css/font-awesome.css" rel="stylesheet"> 
+<link href="<c:url value="/css/font-awesome.css"/>" rel="stylesheet"> 
 <!-- //font-awesome icons -->
  <!-- js-->
-<script src="<%=request.getContextPath()%>/js/jquery-1.11.1.min.js"></script>
-<script src="<%=request.getContextPath()%>/js/modernizr.custom.js"></script>
+<script src="<c:url value="/js/jquery-1.11.1.min.js"/>"></script>
+<script src="<c:url value="/js/modernizr.custom.js"/>"></script>
 <!--webfonts-->
 <link href='//fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
 <!--//webfonts--> 
 <!--animate-->
-<link href="<%=request.getContextPath()%>/css/animate.css" rel="stylesheet" type="text/css" media="all">
-<script src="<%=request.getContextPath()%>/js/wow.min.js"></script>
+<link href="<c:url value="/css/animate.css"/>" rel="stylesheet" type="text/css" media="all">
+<script src="<c:url value="/js/wow.min.js"/>"></script>
 	<script>
 		 new WOW().init();
 	</script>
 <!--//end-animate-->
 <!-- chart -->
-<script src="<%=request.getContextPath()%>/js/Chart.js"></script>
+<script src="<c:url value="/cjs/Chart.js"/>"></script>
 <!-- //chart -->
 <!--Calender-->
 
 <!--End Calender-->
 <!-- Metis Menu -->
-<script src="<%=request.getContextPath()%>/js/metisMenu.min.js"></script>
-<script src="<%=request.getContextPath()%>/js/custom.js"></script>
-<link href="<%=request.getContextPath()%>/css/custom.css" rel="stylesheet">
+<script src="<c:url value="/js/metisMenu.min.js"/>"></script>
+<script src="<c:url value="/js/custom.js"/>"></script>
+<link href="<c:url value="/css/custom.css"/>" rel="stylesheet">
 <!--//Metis Menu -->
 
 
 
 <!-- 추가한 스타일 -->
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
-<link href="<%=request.getContextPath()%>/summernote/summernote.css" rel="stylesheet">
-<script src="<%=request.getContextPath()%>/summernote/summernote.min.js"></script>
-<!-- include summernote-ko-KR -->
-<script src="<%=request.getContextPath()%>/summernote/lang/summernote-ko-KR.js"></script>
 
-</head>
+<link href="<c:url value="/summernote/summernote.css"/>" rel="stylesheet">
+<script src="<c:url value="/summernote/summernote.min.js"/>"></script>
+
+<!-- include summernote-ko-KR -->
+<script src="<c:url value="/summernote/lang/summernote-ko-KR.js"/>"></script>
+
+
 <style>
 
 /* The Modal (background) */
@@ -111,6 +115,19 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 			margin-right: 4px;
 			
 		}
+		.main {
+			display: inline-block;
+		}
+		
+		.left {
+			float: left;
+			width: 50%;
+		}
+		
+		.right {
+			float: right;
+			width: 50%;
+		}
 
 </style>
 
@@ -136,9 +153,9 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 		<div id="page-wrapper">
 		<h2>질문수정</h2>
 			
-			<div class="main-page">
+			<div class="main-page" style="overflow: auto;">
 		<!-- 썸머노트 부분 -->
-				<div class="main" >
+				<div class="left" >
 					<form action="<c:url value="/updateQuestion"/>" method="post">
 					<input type="hidden" name="questionNo" value="${questionBoard.questionNo }"/>
 						<br> <br> <br>
@@ -160,7 +177,14 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 						<br> <button type="submit"  class="label label-warning">수정</button>
 					</form>
 				</div>
-				
+				<div class="right">
+					<div style="margin-top: 125px;"></div>
+						
+					<h3 style="margin-bottom: 5px;">미리보기</h3>
+					<div id="view">${questionBoard.content }</div>
+						
+				</div>
+			</div>
 				
 				    <!-- The Modal -->
 			    <div id="myModal" class="modal">
@@ -202,7 +226,6 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 			 
 			    </div>
 			</div>
-		</div>
 			
 		<!--footer-->
 	
@@ -211,7 +234,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
         <!--//footer-->
 	</div>
 	<!-- Classie -->
-		<script src="<%=request.getContextPath()%>/js/classie.js"></script>
+		<script src="<c:url value="/js/classie.js"/>"></script>
 		<script>
 			var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
 				showLeftPush = document.getElementById( 'showLeftPush' ),
@@ -231,12 +254,13 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 				}
 			}
 		</script>
+		
 	<!--scrolling js-->
-	<script src="<%=request.getContextPath()%>/js/jquery.nicescroll.js"></script>
-	<script src="<%=request.getContextPath()%>/js/scripts.js"></script>
+	<script src="<c:url value="/js/jquery.nicescroll.js"/>"></script>
+	<script src="<c:url value="/js/scripts.js"/>"></script>
 	<!--//scrolling js-->
 	<!-- Bootstrap Core JavaScript -->
-   <script src="<%=request.getContextPath()%>/js/bootstrap.js"> </script> 
+   <script src="<c:url value="/js/bootstrap.js"/>"> </script> 
 </body>
 
 <!-- 게시판 jQuery -->
@@ -259,7 +283,12 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 
 						            	sendFile(files[i], this);
 						            }
-						        }
+						        },
+						        onKeyup: function ($editable, sHtml) {
+									  console.log($editable, sHtml);
+										$("#view").html($("#summernote").val());
+										
+								}
 							}
 							
 						});
