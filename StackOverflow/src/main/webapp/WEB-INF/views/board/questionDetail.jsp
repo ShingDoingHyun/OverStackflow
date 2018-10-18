@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!--
 Author: W3layouts
 Author URL: http://w3layouts.com
@@ -9,56 +11,51 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Novus Admin Panel an Admin Panel Category Flat Bootstrap Responsive Website Template | Home :: w3layouts</title>
+<title>OverStackFlow</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="Novus Admin Panel Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
 SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- Bootstrap Core CSS -->
-<link href="<%=request.getContextPath()%>/css/bootstrap.css" rel='stylesheet' type='text/css' />
+<link href="<c:url value="/css/bootstrap.css"/>" rel='stylesheet' type='text/css' />
 <!-- Custom CSS -->
-<link href="<%=request.getContextPath()%>/css/style.css" rel='stylesheet' type='text/css' />
+<link href="<c:url value="/css/style.css"/>" rel='stylesheet' type='text/css' />
 <!-- font CSS -->
 <!-- font-awesome icons -->
-<link href="<%=request.getContextPath()%>/css/font-awesome.css" rel="stylesheet"> 
+<link href="<c:url value="/css/font-awesome.css"/>" rel="stylesheet"> 
 <!-- //font-awesome icons -->
  <!-- js-->
-<script src="<%=request.getContextPath()%>/js/jquery-1.11.1.min.js"></script>
-<script src="<%=request.getContextPath()%>/js/modernizr.custom.js"></script>
+<script src="<c:url value="/js/jquery-1.11.1.min.js"/>"></script>
+<script src="<c:url value="/js/modernizr.custom.js"/>"></script>
 <!--webfonts-->
 <link href='//fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
 <!--//webfonts--> 
 <!--animate-->
-<link href="<%=request.getContextPath()%>/css/animate.css" rel="stylesheet" type="text/css" media="all">
-<script src="<%=request.getContextPath()%>/js/wow.min.js"></script>
+<link href="<c:url value="/css/animate.css"/>" rel="stylesheet" type="text/css" media="all">
+<script src="<c:url value="/js/wow.min.js"/>"></script>
 	<script>
 		 new WOW().init();
 	</script>
 <!--//end-animate-->
 <!-- chart -->
-<script src="<%=request.getContextPath()%>/cjs/Chart.js"></script>
+<script src="<c:url value="/cjs/Chart.js"/>"></script>
 <!-- //chart -->
 <!--Calender-->
 
 <!--End Calender-->
 <!-- Metis Menu -->
-<script src="<%=request.getContextPath()%>/js/metisMenu.min.js"></script>
-<script src="<%=request.getContextPath()%>/js/custom.js"></script>
-<link href="<%=request.getContextPath()%>/css/custom.css" rel="stylesheet">
+<script src="<c:url value="/js/metisMenu.min.js"/>"></script>
+<script src="<c:url value="/js/custom.js"/>"></script>
+<link href="<c:url value="/css/custom.css"/>" rel="stylesheet">
 <!--//Metis Menu -->
 
 
 
 
 <!-- 우리가 추가한 스타일 등등 -->
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!-- 
-<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
-<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
- -->
-</head>
+
+
 
 <style>
 .accordian .subCommentAcco{
@@ -90,10 +87,19 @@ li > div{ display:none;}
 	width: 100%;
 }
 
+.left {
+	float: left;
+	width: 80%;
+}
+
+.right {
+	float: right;
+	width: 20%;
+}
+
 .mainLeft {
 	float: left;
 	width: 50%;
-	border-right: 1px solid black;
 	display: inline-block;
 }
 
@@ -132,18 +138,20 @@ height: 25px;
 margin-right: 4px;
 
 }
+a {
+ color: black;
+}
 </style>
 
 
-<link href="<%=request.getContextPath()%>/summernote/summernote.css" rel="stylesheet">
-<script src="<%=request.getContextPath()%>/summernote/summernote.min.js"></script>
+<link href="<c:url value="/summernote/summernote.css"/>" rel="stylesheet">
+<script src="<c:url value="/summernote/summernote.min.js"/>"></script>
 
 <!-- include summernote-ko-KR -->
-<script
-	src="<%=request.getContextPath()%>/summernote/lang/summernote-ko-KR.js"></script>
+<script src="<c:url value="/summernote/lang/summernote-ko-KR.js"/>"></script>
 	
 	
-<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.cookie.js"></script>	
+<script type="text/javascript" src="<c:url value="/js/jquery.cookie.js"/>"></script>	
 
 
 <!-- 우리가 추가한 스타일 등등  end-->
@@ -172,220 +180,81 @@ margin-right: 4px;
 			
 
 				<div class="main">
-				<div>
-					<h2>${questionBoard.title }</h2>
-				
-					<br>
-					<div style="position: absolute; right: 10px;">
-						<button id="writeBtn"  style="position: absolute; right:10px; width:100px; height: 30px; font-size: 15px" class="label label-warning" >
-							질문하기
-						</button>
+					<div>
+						<h2>${questionBoard.title }</h2>
+					
 					</div>
-					<br><br>
-					<div style="position: absolute; right: 130px;">
-						<span style="font-size: 14px;margin-left:19%;">
-						    <a href="<c:url value="/popQuestionList"/>">질문게시판</a> > 
-						    <a href="<c:url value="/qestionList"/>">질문검색</a>
-					    </span>
-					</div>
-
-				</div>
-				<hr>
-		
-				<div class="mainLeft">
-					<div style="float: left; width: 15%;">
-						<br> 
-						<c:if test="${memberVote > 0}">
-						<a href="javascript:changeVote('${questionBoard.questionNo }','0');">
-							<img src="<c:url value='/img/voteUp.png'/>" width="30px" height="20px" class="upVote">
-						</a>
-						</c:if>
-						<c:if test="${memberVote <= 0}">
-						<a href="javascript:changeVote('${questionBoard.questionNo }','1');">
-							<img src="<c:url value='/img/unVoteUp.png'/>" width="30px" height="20px" class="upVote">
-						</a>
-						</c:if>
-						<br>
-						<br>
-						<div style="width: 30px; text-align: center;" class="vote">${questionBoard.vote }</div>
-						<br>
-						<c:if test="${memberVote >= 0}"> 
-						<a href="javascript:changeVote('${questionBoard.questionNo }','-1');">
-							<img src="<c:url value='/img/unVoteDown.png'/>" width="30px" height="20px" class="downVote">
-						</a>
-						</c:if>
-						<c:if test="${memberVote < 0}"> 
-						<a href="javascript:changeVote('${questionBoard.questionNo }','0');">
-							<img src="<c:url value='/img/voteDown.png'/>" width="30px" height="20px" class="downVote">
-						</a>
-						</c:if>
-						<br>
-						<br>
-						<a href="javascript:checkFavQuestion('${questionBoard.questionNo }');">
-						
-						
-							<c:if test="${questionBoard.fav > 0}">
-								<img src="<c:url value='/img/fav.png'/>" width="30px" height="30px" class="fav" name="fav">
-							</c:if>
-							<c:if test="${questionBoard.fav <= 0}">
-								<img src="<c:url value='/img/unFav.png'/>" width="30px" height="30px" class="fav" name="unFav">
-							</c:if>				
-						</a>
-					</div>
-					<div style="float: right; width: 85%;">
-						<div>
-							<p>${questionBoard.content }</p>
-						</div>
-						<c:forEach items="${questionBoard.tagList }" var="tag" >
-							<a href="<c:url value='/popQuestionList?tagNo=${tag.tagNo }'/>" style="color:white;"><span style="background:#8B9DC3; color:white; width:50px; display:inline-block; text-align: center; border-radius: 2px;border-radius: 10px;">${tag.tagName }</span></a>
-						</c:forEach>
-						<div style="margin-top: 100px;">
-							<a href="">공유</a> <a href="javascript:loginCheck('${questionBoard.memId }', 'openUpdateQuestion/${questionBoard.questionNo }');">수정</a> <a href="javascript:deleteQuestion('${questionBoard.memId }', '/deleteQuestion/${questionBoard.questionNo }');">삭제</a>
-						</div>
-						<div style="width: 100%; display: inline-block;">
-							<div style="float: left; width: 50%; margin-top: 80px;" class="accordian">
-								댓글작성
-							</div>
-							<div class="profile">
-								<div style="margin-left: 10px;margin-top:  10px">
-									<c:if test="${memberInfo.memberPhoto != null && memberInfo.memberPhoto != ''}">
-										<img class='photo2' src="<c:url value='/resources/uploadFile/memberPhoto/${memberInfo.memberPhoto}'/>"  altSrc="<c:url value='/img/default.png'/>" onerror="this.src = $(this).attr('altSrc')">
-									</c:if>
-									<c:if test="${memberInfo.memberPhoto == null || memberInfo.memberPhoto == ''}">
-										<img class='photo2' src="<c:url value='/resources/img/default.png'/>">
-									</c:if>
-									 ${memberInfo.memberId}<br>
-									<span style="font-size: 12px;">작성시간 : <fmt:formatDate value="${questionBoard.regDate}" pattern="yyyy년 MM월 dd일 HH:mm:ss"/></span>
-								</div>
-							</div>
-						</div>
-						<div>
-							<hr>
-							<c:forEach items="${questionBoard.commentList }" var="comment">
-								<div style="margin-left: 10px;">
-									<span class="content">${comment.content }</span> - <span class="commentId">${comment.memId }</span> &nbsp;&nbsp; [ 작성시간 ${comment.regDate} 
-									<span class="subCommentAcco">댓글</span> <span class="updateComment">수정</span> <span onclick="javacript:deleteComment(${comment.commentNo }, $(this));">삭제</span> ]
-								</div>
-								<div style="display: none;">
-									<form  onSubmit="return updateComment($(this));">
-										<input type="hidden" name="commentNo" value="${comment.commentNo }">
-										<textarea name="content" style="width: 95%;">${comment.content }</textarea>
-										<br> <button type="button" class="cancelUpdate">수정취소</button> <input type="submit" value="댓글수정">
-									</form>
-								</div>
-								<div>
-								<c:forEach items="${comment.commentList }" var="comment2">
-									<div style="margin-left: 10px;">
-										&nbsp;&nbsp;&nbsp;&nbsp;- <span class="content">${comment2.content }</span> - <span class="commentId">${comment2.memId }</span> &nbsp;&nbsp; [작성시간 ${comment2.regDate} 
-										<span class="updateComment">수정</span> <span onclick="javacript:deleteComment(${comment2.commentNo }, $(this));">삭제</span> ]
-									</div>
-									<div style="display: none;">
-										<form  onSubmit="return updateComment($(this));">
-											<input type="hidden" name="commentNo" value="${comment2.commentNo }">
-											<textarea name="content" style="width: 95%;">${comment2.content }</textarea>
-											<br> <button type="button" class="cancelUpdate">수정취소</button> <input type="submit" value="댓글수정">
-										</form>
-									</div>
-								</c:forEach>
-								</div>
-								<div id="accordian">
-									<ul>
-										<li> 
-											<div class="comment">
-												<form action="<c:url value="/insertComment"/>" method="post">
-													<input type="hidden" name="memId" value="${memInfo.memberId }">
-													<input type="hidden" name="questionNo" value="${questionBoard.questionNo }">
-													<input type="hidden" name="upperCommentNo" value="${comment.commentNo }">
-													<textarea name="content" style="width: 95%;"></textarea>
-													<br> <input type="submit" value="댓글작성" />
-												</form>
-											</div>
-										</li>
-									</ul>
-								</div>
-								<hr>
-							</c:forEach>
-						</div>
-						<div id="accordian">
-							<ul>
-								<li> 
-									<div class="comment">
-										<form action="<c:url value="/insertComment"/>" method="post">
-											<input type="hidden" name="memId" value="${memInfo.memberId }">
-											<input type="hidden" name="questionNo" value="${questionBoard.questionNo }">
-											<textarea name="content" style="width: 95%;"></textarea>
-											<br> <input type="submit" value="댓글작성" />
-										</form>
-									</div>
-								</li>
-							</ul>
-						</div>
-						<br>
-						<br>
-		
-						<p>답글작성</p>
-						<form action="<c:url value="/insertReply"/>" onsubmit="return replyInsert();" method="post">
-							<input type="hidden" name="memId" value="${memInfo.memberId }" /> 
-							<input type="hidden" name="questionNo" value="${questionBoard.questionNo }">
-							<textarea id="summernote" name="content"></textarea>
-							<br> <input type="submit" value="작성" />
-		
-						</form>
-		
-					</div>
-		
-		
-				</div>
-
-			</div>
-			
-			<div class="main">
-				<hr>
-				<h2>총 ${questionBoard.replyBoardList.size() }개의 답변</h2>
-				<hr>
-			</div>
-			
-			<c:forEach items="${questionBoard.replyBoardList }" var="replyboard">
-				<div class="main">
-				
-		
-					<div class="mainLeft" style="border-bottom: 1px solid #EEEEEE;">
+					<hr>		
+					<div class="mainLeft">
 						<div style="float: left; width: 15%;">
 							<br> 
-							<a href=""><img src="<c:url value='/img/unVoteUp.png'/>" width="30px" height="20px"></a>
+							<c:if test="${memberVote > 0}">
+							<a href="javascript:changeVote('${questionBoard.questionNo }','0');">
+								<img src="<c:url value='/img/voteUp.png'/>" width="30px" height="20px" class="upVote">
+							</a>
+							</c:if>
+							<c:if test="${memberVote <= 0}">
+							<a href="javascript:changeVote('${questionBoard.questionNo }','1');">
+								<img src="<c:url value='/img/unVoteUp.png'/>" width="30px" height="20px" class="upVote">
+							</a>
+							</c:if>
 							<br>
 							<br>
-							<div style="width: 30px; text-align: center;">${replyboard.vote }</div>
-							<br> 
-							<a href=""><img src="<c:url value='/img/unVoteDown.png'/>" width="30px" height="20px"></a><br>
+							<div style="width: 30px; text-align: center;" class="vote">${questionBoard.vote }</div>
+							<br>
+							<c:if test="${memberVote >= 0}"> 
+							<a href="javascript:changeVote('${questionBoard.questionNo }','-1');">
+								<img src="<c:url value='/img/unVoteDown.png'/>" width="30px" height="20px" class="downVote">
+							</a>
+							</c:if>
+							<c:if test="${memberVote < 0}"> 
+							<a href="javascript:changeVote('${questionBoard.questionNo }','0');">
+								<img src="<c:url value='/img/voteDown.png'/>" width="30px" height="20px" class="downVote">
+							</a>
+							</c:if>
+							<br>
+							<br>
+							<a href="javascript:checkFavQuestion('${questionBoard.questionNo }');">
+							
+							
+								<c:if test="${questionBoard.fav > 0}">
+									<img src="<c:url value='/img/fav.png'/>" width="30px" height="30px" class="fav" name="fav">
+								</c:if>
+								<c:if test="${questionBoard.fav <= 0}">
+									<img src="<c:url value='/img/unFav.png'/>" width="30px" height="30px" class="fav" name="unFav">
+								</c:if>				
+							</a>
 						</div>
 						<div style="float: right; width: 85%;">
 							<div>
-								<p>${replyboard.content }</p>
+								<p>${questionBoard.content }</p>
 							</div>
+							<c:forEach items="${questionBoard.tagList }" var="tag" >
+								<a href="<c:url value='/popQuestionList?tagNo=${tag.tagNo }'/>" style="color:white;"><span style="background:#8B9DC3; color:white; width:50px; display:inline-block; text-align: center; border-radius: 2px;border-radius: 10px;">${tag.tagName }</span></a>
+							</c:forEach>
 							<div style="margin-top: 100px;">
-								<a href="">공유</a> <a href="javascript:loginCheck('${replyboard.memId }', 'openUpdateQuestion/${replyboard.questionNo }');">수정</a> <a href="javascript:deleteQuestion('${replyboard.memId }', '/deleteQuestion/${replyboard.questionNo }');">삭제</a>
+								<a href="">공유</a> <a href="javascript:loginCheck('${questionBoard.memId }', 'openUpdateQuestion/${questionBoard.questionNo }');">수정</a> <a href="javascript:deleteQuestion('${questionBoard.memId }', '/deleteQuestion/${questionBoard.questionNo }');">삭제</a>
 							</div>
 							<div style="width: 100%; display: inline-block;">
 								<div style="float: left; width: 50%; margin-top: 80px;" class="accordian">
 									댓글작성
-								</div>	
+								</div>
 								<div class="profile">
 									<div style="margin-left: 10px;margin-top:  10px">
-										<c:if test="${replyboard.memberPhoto != null && replyboard.memberPhoto != ''}">
-											<img class='photo2' src="<c:url value='/resources/uploadFile/memberPhoto/${replyboard.memberPhoto}'/>"  altSrc="<c:url value='/img/default.png'/>" onerror="this.src = $(this).attr('altSrc')">
+										<c:if test="${memberInfo.memberPhoto != null && memberInfo.memberPhoto != ''}">
+											<img class='photo2' src="<c:url value='/resources/uploadFile/memberPhoto/${memberInfo.memberPhoto}'/>"  altSrc="<c:url value='/img/default.png'/>" onerror="this.src = $(this).attr('altSrc')">
 										</c:if>
-										<c:if test="${replyboard.memberPhoto == null || replyboard.memberPhoto == ''}">
+										<c:if test="${memberInfo.memberPhoto == null || memberInfo.memberPhoto == ''}">
 											<img class='photo2' src="<c:url value='/resources/img/default.png'/>">
 										</c:if>
-										${replyboard.memId}<br>
-										<span style="font-size: 12px;">작성시간 : <fmt:formatDate value="${replyboard.regDate}" pattern="yyyy년 MM월 dd일 HH:mm:ss"/></span>
+										 ${memberInfo.memberId}<br>
+										<span style="font-size: 12px;">작성시간 : <fmt:formatDate value="${questionBoard.regDate}" pattern="yyyy년 MM월 dd일 HH:mm:ss"/></span>
 									</div>
 								</div>
 							</div>
 							<div>
 								<hr>
-								<c:forEach items="${replyboard.commentList }" var="comment">
+								<c:forEach items="${questionBoard.commentList }" var="comment">
 									<div style="margin-left: 10px;">
 										<span class="content">${comment.content }</span> - <span class="commentId">${comment.memId }</span> &nbsp;&nbsp; [ 작성시간 ${comment.regDate} 
 										<span class="subCommentAcco">댓글</span> <span class="updateComment">수정</span> <span onclick="javacript:deleteComment(${comment.commentNo }, $(this));">삭제</span> ]
@@ -398,19 +267,19 @@ margin-right: 4px;
 										</form>
 									</div>
 									<div>
-										<c:forEach items="${comment.commentList }" var="comment2">
-											<div style="margin-left: 10px;">
-												&nbsp;&nbsp;&nbsp;&nbsp;- <span class="content">${comment2.content }</span> - <span class="commentId">${comment2.memId }</span> &nbsp;&nbsp; [ 작성시간 ${comment2.regDate} 
-												<span class="updateComment">수정</span> <span onclick="javacript:deleteComment(${comment2.commentNo }, $(this));">삭제</span> ]
-											</div>
-											<div style="display: none;">
-												<form  onSubmit="return updateComment($(this));">
-													<input type="hidden" name="commentNo" value="${comment2.commentNo }">
-													<textarea name="content" style="width: 95%;">${comment2.content }</textarea>
-													<br> <button type="button" class="cancelUpdate">수정취소</button> <input type="submit" value="댓글수정">
-												</form>
-											</div>
-										</c:forEach>
+									<c:forEach items="${comment.commentList }" var="comment2">
+										<div style="margin-left: 10px;">
+											&nbsp;&nbsp;&nbsp;&nbsp;- <span class="content">${comment2.content }</span> - <span class="commentId">${comment2.memId }</span> &nbsp;&nbsp; [작성시간 ${comment2.regDate} 
+											<span class="updateComment">수정</span> <span onclick="javacript:deleteComment(${comment2.commentNo }, $(this));">삭제</span> ]
+										</div>
+										<div style="display: none;">
+											<form  onSubmit="return updateComment($(this));">
+												<input type="hidden" name="commentNo" value="${comment2.commentNo }">
+												<textarea name="content" style="width: 95%;">${comment2.content }</textarea>
+												<br> <button type="button" class="cancelUpdate">수정취소</button> <input type="submit" value="댓글수정">
+											</form>
+										</div>
+									</c:forEach>
 									</div>
 									<div id="accordian">
 										<ul>
@@ -418,15 +287,14 @@ margin-right: 4px;
 												<div class="comment">
 													<form action="<c:url value="/insertComment"/>" method="post">
 														<input type="hidden" name="memId" value="${memInfo.memberId }">
-														<input type="hidden" name="questionNo" value="${replyboard.questionNo }">
-														<input type="hidden" name="replyNo" value="${replyboard.replyNo }">
+														<input type="hidden" name="questionNo" value="${questionBoard.questionNo }">
 														<input type="hidden" name="upperCommentNo" value="${comment.commentNo }">
 														<textarea name="content" style="width: 95%;"></textarea>
 														<br> <input type="submit" value="댓글작성" />
 													</form>
 												</div>
 											</li>
-										</ul>			
+										</ul>
 									</div>
 									<hr>
 								</c:forEach>
@@ -437,8 +305,7 @@ margin-right: 4px;
 										<div class="comment">
 											<form action="<c:url value="/insertComment"/>" method="post">
 												<input type="hidden" name="memId" value="${memInfo.memberId }">
-												<input type="hidden" name="questionNo" value="${replyboard.questionNo }">
-												<input type="hidden" name="replyNo" value="${replyboard.replyNo }">
+												<input type="hidden" name="questionNo" value="${questionBoard.questionNo }">
 												<textarea name="content" style="width: 95%;"></textarea>
 												<br> <input type="submit" value="댓글작성" />
 											</form>
@@ -448,22 +315,192 @@ margin-right: 4px;
 							</div>
 							<br>
 							<br>
+			
+							<p>답글작성</p>
+							<form action="<c:url value="/insertReply"/>" onsubmit="return replyInsert();" method="post">
+								<input type="hidden" name="memId" value="${memInfo.memberId }" /> 
+								<input type="hidden" name="questionNo" value="${questionBoard.questionNo }">
+								<textarea id="summernote" name="content"></textarea>
+								<br> <input type="submit" value="작성" />
+			
+							</form>
+			
+						</div>
+			
+			
+					</div>
+					<div class="right" style="font-size: 14px">
+						 <span style="font-size: 14px;margin-left:19%;">
+						      <a href="<c:url value="/popQuestionList"/>">질문게시판</a> > 
+						      <a href="<c:url value="/popQuestionList"/>">인기질문</a>
+					      </span>
+						<div style="margin-top: 100px">
+							<button id="writeBtn"  style="position: absolute; right:10px; top:111px; width:100px; height: 30px; font-size: 15px" class="label label-warning">
+								질문하기
+							</button>
+						</div>
+						<c:if test="${memInfo != null}">
+							<div style="border:1px solid black; width:300px; height:auto; min-height: 200px; margin-left:20px; margin-top:30px" class="modalLoad" id="favTag">
+								<p style="text-align: center; border-bottom:1px solid black; padding: 10px 0 10px 0; margin-top: 0; margin-bottom:0;">흥미태그</p>
+								<form id="favTagForm" action="<c:url value='/popQuestionList'/>" method="get">
+									<div id="tags">
+										<c:forEach items="${fagTagList }" var="fagTag" varStatus="status">
+											<span class="tag" style="margin-left:10px;">#${ fagTag.tagName}</span>
+											<input type="hidden" name="tagList[${status.index}].tagNo" value="${fagTag.tagNo }">
+										</c:forEach> 
+									</div>
+								</form> 
+							</div>
+							
+							<div style="border:1px solid black; width:300px; height:auto; min-height: 200px; margin-left:20px; margin-top:30px">
+								<p style="text-align: center; border-bottom:1px solid black; padding: 10px 0 10px 0; margin-top: 0; margin-bottom:0;">즐겨찾기한 질문</p>
+								<div id="favList">
+								<c:forEach items="${favQuestionList }" var="favQuestionList">
+									<div style="margin-top:3px; margin-bottom:3px;">
+										<a href="<c:url value='/questionDetail/${favQuestionList.questionNo }'/>">${ favQuestionList.title}</a>
+									</div>
+								</c:forEach>
+								</div>
+							</div>
+						</c:if>
+						<div style="border:1px solid black; width:300px; height:auto; min-height: 200px; margin-left:20px; margin-top:30px">
+						<p style="text-align: center; border-bottom:1px solid black; padding: 10px 0 10px 0; margin-top: 0; margin-bottom:0;">방문한 페이지</p>
+						<div style="margin-top:3px; margin-bottom:3px;"><a href="<c:url value='/questionDetail/${questionBoard.questionNo }'/>">${ questionBoard.title}</a></div>
+						<c:forEach items="${visitQuestionBoard }" var="visitQuestion">
+							<c:if test="${questionBoard.questionNo != visitQuestion.questionNo}">
+								<div style="margin-top:3px; margin-bottom:3px;"><a href="<c:url value='/questionDetail/${visitQuestion.questionNo }'/>">${ visitQuestion.title}</a></div>
+							</c:if>
+						</c:forEach>
 						</div>
 					</div>
 
+				</div>
 			
-				</div>		
-				<br>
-				<br>
-			
-			
-
-				</c:forEach>
-
+				<div class="main">
+					<hr>
+					<h2>총 ${questionBoard.replyBoardList.size() }개의 답변</h2>
+					<hr>
+				</div>
+				
+				<c:forEach items="${questionBoard.replyBoardList }" var="replyboard">
+					<div class="main">
 					
-			</div>
 			
-		</div>
+						<div class="mainLeft" style="border-bottom: 1px solid #EEEEEE;">
+							<div style="float: left; width: 15%;">
+								<br> 
+								<a href=""><img src="<c:url value='/img/unVoteUp.png'/>" width="30px" height="20px"></a>
+								<br>
+								<br>
+								<div style="width: 30px; text-align: center;">${replyboard.vote }</div>
+								<br> 
+								<a href=""><img src="<c:url value='/img/unVoteDown.png'/>" width="30px" height="20px"></a><br>
+							</div>
+							<div style="float: right; width: 85%;">
+								<div>
+									<p>${replyboard.content }</p>
+								</div>
+								<div style="margin-top: 100px;">
+									<a href="">공유</a> <a href="javascript:loginCheck('${replyboard.memId }', 'openUpdateQuestion/${replyboard.questionNo }');">수정</a> <a href="javascript:deleteQuestion('${replyboard.memId }', '/deleteQuestion/${replyboard.questionNo }');">삭제</a>
+								</div>
+								<div style="width: 100%; display: inline-block;">
+									<div style="float: left; width: 50%; margin-top: 80px;" class="accordian">
+										댓글작성
+									</div>	
+									<div class="profile">
+										<div style="margin-left: 10px;margin-top:  10px">
+											<c:if test="${replyboard.memberPhoto != null && replyboard.memberPhoto != ''}">
+												<img class='photo2' src="<c:url value='/resources/uploadFile/memberPhoto/${replyboard.memberPhoto}'/>"  altSrc="<c:url value='/img/default.png'/>" onerror="this.src = $(this).attr('altSrc')">
+											</c:if>
+											<c:if test="${replyboard.memberPhoto == null || replyboard.memberPhoto == ''}">
+												<img class='photo2' src="<c:url value='/resources/img/default.png'/>">
+											</c:if>
+											${replyboard.memId}<br>
+											<span style="font-size: 12px;">작성시간 : <fmt:formatDate value="${replyboard.regDate}" pattern="yyyy년 MM월 dd일 HH:mm:ss"/></span>
+										</div>
+									</div>
+								</div>
+								<div>
+									<hr>
+									<c:forEach items="${replyboard.commentList }" var="comment">
+										<div style="margin-left: 10px;">
+											<span class="content">${comment.content }</span> - <span class="commentId">${comment.memId }</span> &nbsp;&nbsp; [ 작성시간 ${comment.regDate} 
+											<span class="subCommentAcco">댓글</span> <span class="updateComment">수정</span> <span onclick="javacript:deleteComment(${comment.commentNo }, $(this));">삭제</span> ]
+										</div>
+										<div style="display: none;">
+											<form  onSubmit="return updateComment($(this));">
+												<input type="hidden" name="commentNo" value="${comment.commentNo }">
+												<textarea name="content" style="width: 95%;">${comment.content }</textarea>
+												<br> <button type="button" class="cancelUpdate">수정취소</button> <input type="submit" value="댓글수정">
+											</form>
+										</div>
+										<div>
+											<c:forEach items="${comment.commentList }" var="comment2">
+												<div style="margin-left: 10px;">
+													&nbsp;&nbsp;&nbsp;&nbsp;- <span class="content">${comment2.content }</span> - <span class="commentId">${comment2.memId }</span> &nbsp;&nbsp; [ 작성시간 ${comment2.regDate} 
+													<span class="updateComment">수정</span> <span onclick="javacript:deleteComment(${comment2.commentNo }, $(this));">삭제</span> ]
+												</div>
+												<div style="display: none;">
+													<form  onSubmit="return updateComment($(this));">
+														<input type="hidden" name="commentNo" value="${comment2.commentNo }">
+														<textarea name="content" style="width: 95%;">${comment2.content }</textarea>
+														<br> <button type="button" class="cancelUpdate">수정취소</button> <input type="submit" value="댓글수정">
+													</form>
+												</div>
+											</c:forEach>
+										</div>
+										<div id="accordian">
+											<ul>
+												<li> 
+													<div class="comment">
+														<form action="<c:url value="/insertComment"/>" method="post">
+															<input type="hidden" name="memId" value="${memInfo.memberId }">
+															<input type="hidden" name="questionNo" value="${replyboard.questionNo }">
+															<input type="hidden" name="replyNo" value="${replyboard.replyNo }">
+															<input type="hidden" name="upperCommentNo" value="${comment.commentNo }">
+															<textarea name="content" style="width: 95%;"></textarea>
+															<br> <input type="submit" value="댓글작성" />
+														</form>
+													</div>
+												</li>
+											</ul>			
+										</div>
+										<hr>
+									</c:forEach>
+								</div>
+								<div id="accordian">
+									<ul>
+										<li> 
+											<div class="comment">
+												<form action="<c:url value="/insertComment"/>" method="post">
+													<input type="hidden" name="memId" value="${memInfo.memberId }">
+													<input type="hidden" name="questionNo" value="${replyboard.questionNo }">
+													<input type="hidden" name="replyNo" value="${replyboard.replyNo }">
+													<textarea name="content" style="width: 95%;"></textarea>
+													<br> <input type="submit" value="댓글작성" />
+												</form>
+											</div>
+										</li>
+									</ul>
+								</div>
+								<br>
+								<br>
+							</div>
+						</div>
+	
+				
+					</div>		
+					<br>
+					<br>
+				
+				
+	
+					</c:forEach>
+	
+						
+				</div>
+				
+			</div>
 		
 		<!--footer-->
 		<%@ include file="../commons/bfooter.jspf" %>
@@ -471,7 +508,7 @@ margin-right: 4px;
         
 	</div>
 	<!-- Classie -->
-		<script src="<%=request.getContextPath()%>/js/classie.js"></script>
+		<script src="<c:url value="/js/classie.js"/>"></script>
 		<script>
 			var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
 				showLeftPush = document.getElementById( 'showLeftPush' ),
@@ -493,11 +530,11 @@ margin-right: 4px;
 		</script>
 		
 	<!--scrolling js-->
-	<script src="<%=request.getContextPath()%>/js/jquery.nicescroll.js"></script>
-	<script src="<%=request.getContextPath()%>/js/scripts.js"></script>
+	<script src="<c:url value="/js/jquery.nicescroll.js"/>"></script>
+	<script src="<c:url value="/js/scripts.js"/>"></script>
 	<!--//scrolling js-->
 	<!-- Bootstrap Core JavaScript -->
-   <script src="<%=request.getContextPath()%>/js/bootstrap.js"> </script> 
+   <script src="<c:url value="/js/bootstrap.js"/>"> </script> 
    
    
    
@@ -846,6 +883,17 @@ var replyInsert = function(){
 			return true;
 		}
 };
+
+
+
+
+
+
+
+
+
+
+
 	
 </script>
 </html>

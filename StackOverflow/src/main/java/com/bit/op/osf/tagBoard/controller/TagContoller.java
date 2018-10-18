@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bit.op.osf.member.model.MemRegInfo;
 import com.bit.op.osf.tagBoard.dao.ITagDao;
 import com.bit.op.osf.tagBoard.model.MemFavTag;
 import com.bit.op.osf.tagBoard.model.Tag;
@@ -56,7 +57,9 @@ public class TagContoller {
 	@ResponseBody
 	public String updateMemFavTag(MemFavTag memFavTag, HttpServletRequest request) {
 		
-		int result = tagDao.updateMemFavTag(memFavTag, request);
+		MemRegInfo memInfo =  (MemRegInfo)request.getSession().getAttribute("memInfo");
+		
+		int result = tagDao.updateMemFavTag(memFavTag, memInfo);
 		return result+"";
 		
 	}

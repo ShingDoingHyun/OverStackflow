@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.bit.op.osf.member.model.MemRegInfo;
 import com.bit.op.osf.tagBoard.model.MemFavTag;
 import com.bit.op.osf.tagBoard.model.QuestionTag;
 import com.bit.op.osf.tagBoard.model.Search;
@@ -27,9 +28,9 @@ public interface ITagDao {
 
 	void deleteQuestionTag(QuestionTag questionTag1);
 
-	int updateMemFavTag(MemFavTag memFavTag, HttpServletRequest request);
+	int updateMemFavTag(MemFavTag memFavTag, MemRegInfo memInfo);
 
-	List<Tag> selectMemFavTagList(HttpServletRequest request);
+	List<Tag> selectMemFavTagList(MemRegInfo memInfo);
 
 	Object selectTagListBySearch(Search search);
 
@@ -38,5 +39,7 @@ public interface ITagDao {
 	List<Tag> selectTagRankList();
 
 	void updateTagDeatil(Tag tag);
+
+	Tag selectTag(Search search);
 
 }

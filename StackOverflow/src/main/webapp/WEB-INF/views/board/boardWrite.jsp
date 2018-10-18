@@ -9,7 +9,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Novus Admin Panel an Admin Panel Category Flat Bootstrap Responsive Website Template | Home :: w3layouts</title>
+<title>OverStackFlow</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="Novus Admin Panel Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
@@ -58,14 +58,14 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
 
 
-<link href="<%=request.getContextPath()%>/summernote/summernote.css" rel="stylesheet">
-<script src="<%=request.getContextPath()%>/summernote/summernote.min.js"></script>
+<link href="summernote/summernote.css" rel="stylesheet">
+<script src="summernote/summernote.min.js"></script>
 
 <!-- include summernote-ko-KR -->
-<script src="<%=request.getContextPath()%>/summernote/lang/summernote-ko-KR.js"></script>
+<script src="summernote/lang/summernote-ko-KR.js"></script>
 
-</head>
 <style>
+
 
 /* The Modal (background) */
         .modal {
@@ -119,7 +119,19 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 			margin-right: 4px;
 			
 		}
+		.main {
+			display: inline-block;
+		}
 		
+		.left {
+			float: left;
+			width: 50%;
+		}
+		
+		.right {
+			float: right;
+			width: 50%;
+		}
 </style>
 
 
@@ -143,26 +155,34 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 		<div id="page-wrapper">
 		<h2>질문작성</h2>
 			
-			<div class="main-page">
-				<div class="main" >
+			<div class="main-page" style="overflow: auto;">
+	
+				<div class="left">
 					<form action="insertQuestion" method="post" id="wrtieForm">
-					<input type="hidden" name="memId" value="${memInfo.memberId}"/>
-						<br> <br> <br>
-						<p>질문 제목</p>
-						<input type="text" size="80" name="title" /> <br> <br>
-						<p>질문 내용</p>
-						<div>
-						<textarea id="summernote" name="content"></textarea>
-						</div>
-						<br>
-						<button type="button" id="myBtn" class="label label-warning" >태그선택</button>  
-						<div style="height:50px;" id="tags"></div>
-						<input type="hidden" name="tags">
-						<br>
-						<br> <button type="button" onclick="javascript:subEnv();" class="label label-warning" >작성</button>
+						<input type="hidden" name="memId" value="${memInfo.memberId}"/>
+							<br> <br> <br>
+							<p>질문 제목</p>
+							<input type="text" size="80" name="title" /> <br> <br>
+							<p>질문 내용</p>
+							<div>
+							<textarea id="summernote" name="content" keydown=></textarea>
+							</div>
+							<br>
+							<button type="button" id="myBtn" class="label label-warning" >태그선택</button>  
+							<div style="height:50px;" id="tags"></div>
+							<input type="hidden" name="tags">
+							<br>
+							<br> <button type="button" onclick="javascript:subEnv();" class="label label-warning" >작성</button>
 					</form>
 				</div>
-	
+				<div class="right">
+					<div style="margin-top: 125px;"></div>
+						
+					<h3 style="margin-bottom: 5px;">미리보기</h3>
+					<div id="view">미리보기 내용</div>
+						
+				</div>
+			</div>
 				    <!-- The Modal -->
 			    <div id="myModal" class="modal">
 			 
@@ -203,7 +223,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 
 			    </div>
 	
-			</div>
+		
 			
 		</div>
 		<!--footer-->
@@ -268,8 +288,14 @@ $(function() {
 
 						            	sendFile(files[i], this);
 						            }
-						        }
+						        },
+						        onKeyup: function ($editable, sHtml) {
+									  console.log($editable, sHtml);
+										$("#view").html($("#summernote").val());
+										
+								}
 							}
+							
 							
 						});
 			});
@@ -525,6 +551,9 @@ $(function() {
 		$("#wrtieForm").submit();
 		
 	}
+	
+	
+
 </script>
 
 </html>

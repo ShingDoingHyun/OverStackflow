@@ -73,12 +73,8 @@ public class QuestionBoardDaoImpl implements IQuestionBoardDao {
 
 	
 	@Override
-	public List<QuestionBoard> selectPopQuestionList(HttpServletRequest request, Search search) {
+	public List<QuestionBoard> selectPopQuestionList(MemRegInfo memInfo, Search search) {
 		List<QuestionBoard> questionBoardList = sqlSession.selectList(QUSETION_NAMESPACE + "selectPopQuestion", search);
-
-		
-		HttpSession session = request.getSession();
-		MemRegInfo memInfo =  (MemRegInfo) session.getAttribute("memInfo");
 		
 		for (QuestionBoard questionBoard : questionBoardList) {
 			
@@ -181,10 +177,10 @@ public class QuestionBoardDaoImpl implements IQuestionBoardDao {
 	}
 
 	@Override
-	public QuestionBoard selectQuestionDeltail(int questionNo, HttpServletRequest request) {
+	public QuestionBoard selectQuestionDeltail(int questionNo, MemRegInfo memInfo) {
 
 		updateQuestionView(questionNo);
-		QuestionBoard questionBoard = selectQuestionNo(questionNo, request);
+		QuestionBoard questionBoard = selectQuestionNo(questionNo, memInfo);
 		questionBoard.setReplyBoardList(replyBoardDao.selectReplyBoardList(questionNo));
 		questionBoard.setCommentList(commentDao.selectCommentList(questionBoard.getQuestionNo(), "question"));
 		return questionBoard;
@@ -291,12 +287,9 @@ public class QuestionBoardDaoImpl implements IQuestionBoardDao {
 	
 	
 	
-	public QuestionBoard selectQuestionNo(int questionNo, HttpServletRequest request) {
+	public QuestionBoard selectQuestionNo(int questionNo, MemRegInfo memInfo) {
 
 		QuestionBoard questionBoard = sqlSession.selectOne(QUSETION_NAMESPACE + "selectQuestionNo", questionNo);
-		
-		HttpSession session = request.getSession();
-		MemRegInfo memInfo =  (MemRegInfo) session.getAttribute("memInfo");
 		
 		//즐겨찾기
 		if(memInfo!=null) {
@@ -331,10 +324,7 @@ public class QuestionBoardDaoImpl implements IQuestionBoardDao {
 
 
 	@Override
-	public List<QuestionBoard> selectFavQuestionList(HttpServletRequest request) {
-		
-		HttpSession session = request.getSession();
-		MemRegInfo memInfo =  (MemRegInfo) session.getAttribute("memInfo");
+	public List<QuestionBoard> selectFavQuestionList(MemRegInfo memInfo) {
 		
 		return sqlSession.selectList(QUSETION_NAMESPACE + "selectFavQuestionList", memInfo);
 	}
@@ -359,9 +349,7 @@ public class QuestionBoardDaoImpl implements IQuestionBoardDao {
 
 
 	@Override
-	public int selectMemberQuestionVote(QuestionBoard questionBoard, HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		MemRegInfo memInfo =  (MemRegInfo) session.getAttribute("memInfo");
+	public int selectMemberQuestionVote(QuestionBoard questionBoard, MemRegInfo memInfo) {
 		
 		//즐겨찾기
 		if(memInfo!=null) {

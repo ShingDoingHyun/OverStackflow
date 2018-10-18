@@ -73,4 +73,8 @@
 		update tag set tagDetail = #{tagDetail} where tagNo=#{tagNo};
 	</update>
 	
+		<select id="selectTag" resultType="com.bit.op.osf.tagBoard.model.Tag" parameterType="com.bit.op.osf.tagBoard.model.Search">
+		select tagNo, tagName, tagDetail  from tag where tagNo= #{tagNo};
+	</select>
+	
 </mapper>
