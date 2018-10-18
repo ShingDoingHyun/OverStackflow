@@ -360,6 +360,8 @@ width:45%;
 height:300px;
 float:left;
 border: 1px solid black;
+margin-left: 50px;
+margin-top: 40px;
 }
 
 .col-9
@@ -439,7 +441,7 @@ function readURL(input) {
 
            <form action="<c:url value="/memberProfileUpdate"/>"   method="post">
            
-           <div class="col-8"style="width: 252px;  margin-left:340px;  height:282px;  margin-top: 25px;">
+           <div class="col-8"style="width: 252px;  margin-left:320px;  height:282px;  margin-top: 60px;">
       
            </div>
                 <div class="col-9">
@@ -447,6 +449,8 @@ function readURL(input) {
                     <span>아이디</span><br><input type="text" disabled="disabled" name="memberId" value="${memInfo.memberId}" class="input2"><br>
                     
                     <br><span>닉네임</span><br><input type="text"  name="memberNickname"  maxlength="20" value="${memInfo.memberNickname}" class="input2"/><br>
+                   
+                    <br><span>연락처</span><br><input type="text" name="memberPhone" maxlength="20" value="${memInfo.memberPhone}" class="input2"/><br>
                    
                     <br><span>비밀번호</span><br><input type="password"  name="memberPwd"  maxlength="20" class="input2" /><br>
                     
@@ -460,7 +464,7 @@ function readURL(input) {
 <div class="col-10">
             <div class="row">
             
-                    <br><h3 style="margin-top: 65px; margin-left: 300px;">자기소개</h3>
+                    <br><h3 style="margin-top:160px; margin-left:300px;">자기소개</h3>
 
                         <textarea id="wmd-input" class="wmd-input" name="memberIntro" cols="92" rows="15" tabindex="4" style="width: 850px;margin-top:25px;margin-left:300px;">${memInfo.memberIntro}</textarea>
                         <br><button type="submit"  class="label label-warning"

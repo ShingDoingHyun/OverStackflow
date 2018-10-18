@@ -311,8 +311,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 	생년월일<input type="Date" name="memberBirth" style="width: 355px; height: 49px;margin-left: 20px;"><br>
 
 	
-          <label style="margin-top: 0px;">성별</label>
-                <div id="sex">
+       
+                <br><div id="sex">
                     <input type="radio" id="male" name="memberGender" value="남자">
                     <label for="male" style="padding-left: 90px;">남자</label>
                     <input type="radio" id="female" name="memberGender" value="여자">

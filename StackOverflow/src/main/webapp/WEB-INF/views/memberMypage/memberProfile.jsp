@@ -250,7 +250,14 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
     height: auto;
     padding-bottom: 6px;
 }
+.line
+{
 
+ border-bottom: 1px solid #c8ccd0;
+    height: auto;
+    padding-bottom: 6px;
+}
+}
     .user-show-new .user-panel-content {
     padding-top: 5px;
 }
@@ -258,7 +265,12 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
     margin-bottom: 10px;
 }
 .user-show-new .empty {
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    margin-left:20px;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    width:500px;
 }
     .user-show-new .subheader {
     margin-bottom: 12px;
@@ -312,40 +324,46 @@ text-align:flot;
 		</div>
 		<div class="main_2">
 			<div style="margin-top: 20px;"></div>
-			<h3>프로필정보</h3>
+			<h3 style="margin-bottom: 40px;">프로필정보</h3>
 			
 		</div>
  <div class="ProfileMain">
-<div style="border: 1px; float: left; width: 10%; padding:10px; height: 200px;">
-<img class='photo3' src="<c:url value='/resources/uploadFile/memberPhoto/${memInfo.memberPhoto}'/>"style="height: 200px;">
+<div style="border: 1px; float: left; width: 10%; padding:10px; height: 200px; ">
+<img class='photo3' src="<c:url value='/resources/uploadFile/memberPhoto/${memInfo.memberPhoto}'/>"style="height: 200px; margin-left: 35px;margin-top: 35px;">
 </div>
 
 
 
-<div style="border: 1px; float: left; width: 40%; padding:10px;height: 200px;">
-<div><span><h1 style="margin-left:100px;">${memInfo.memberId}</h1></span></div><br>
-<br>
-<span style="margin-left:80px;">${memInfo.memberIntro}</span>
+<div style="border:1px; float:left; width:526px; padding:10px; height:200px; margin-left:50px;">
+
+<div><span><h1 style="margin-left:200px;margin-bottom: 20px;">${memInfo.memberId}</h1></span>
+
+</div><br>
+
+<div style="width:356px; border:1px solid silver; margin-left:70px; width:400px;height:170px; background-color:white;">${memInfo.memberIntro}</div>
 </div>
 
 
-<div style="border: 1px; float:left; width: 40%; padding:10px;height: 200px;">
+
+<div style="border: 1px; float:left; width: 40%; padding:10px;height: 200px; margin-left: 30px;"">
 <table>
+<tr>
+<td><h4 class="line" style=" width:500px; min-height:36px; margin-top: 15px; margin-bottom: 15px; hr:width:500px;">이름:&nbsp${memInfo.memberName}</h4></td>
+
+</tr>
+
+ 
 
 <tr>
-<td><h4 style="margin-top: 15px; margin-bottom: 15px;">이름:&nbsp${memInfo.memberName}</h4></td>
+<td><h4 class="line" style=" width:500px; min-height:36px; margin-top: 15px; margin-bottom: 15px;">닉네임:&nbsp${memInfo.memberNickname}</h4></td>
 </tr>
 
 <tr>
-<td><h4 style="margin-top: 15px; margin-bottom: 15px;">닉네임:&nbsp${memInfo.memberNickname}</h4></td>
+<td><h4 class="line" style=" width:500px; min-height:36px; margin-top: 15px; margin-bottom: 15px;">연락처:&nbsp${memInfo.memberPhone}</h4></td>
 </tr>
 
 <tr>
-<td><h4 style="margin-top: 15px; margin-bottom: 15px;">연락처:&nbsp${memInfo.memberPhone}</h4></td>
-</tr>
-
-<tr>
-<td><h4 style="margin-top: 15px; margin-bottom: 15px;">생년월일:&nbsp${memInfo.memberBirth}</h4></td>
+<td><h4 class="line" style=" width:500px; min-height:36px; margin-top: 15px; margin-bottom: 15px;">생년월일:&nbsp${memInfo.memberBirth}</h4></td>
 </tr>
 
 </table>
@@ -356,7 +374,7 @@ text-align:flot;
 
         <div id="mainbar-full" class="user-show-new">
 
-            <div id="user-panel-answers" class="user-panel">
+            <div id="user-panel-answers" class="user-panel" style="margin-top:200px;">
                 <div class="subheader p0 grid ai-center" style="min-height: 36px;">
                     <h3 class="grid--cell mb0 mr-auto px2 profile-section-title">    
                             답변 
@@ -380,7 +398,7 @@ text-align:flot;
             
             
             <!-- 질문  -->
-             <div id="user-panel-questions" class="user-panel">
+             <div id="user-panel-questions" class="user-panel" style="margin-top:200px;">
                 <div class="subheader p0 grid ai-center" style="min-height: 36px;">
                     <h3 class="grid--cell mb0 mr-auto px2 profile-section-title">  
                             질문<!--  <span>(0)</span> -->
@@ -420,17 +438,17 @@ text-align:flot;
                 </div>
             </div>
             
-
+<!-- 
                <div id="user-panel-reputation" class="user-panel">
                 <div class="subheader p0 grid ai-center" style="min-height: 36px;">
                     <h3 class="grid--cell mb0 mr-auto px2 profile-section-title">    
-                            평판 <!-- <span>(0)</span> -->
+                            평판 <span>(0)</span>
                         </a></h3>
 
                 </div>
 
          
-            </div>
+            </div> -->
 
                
    

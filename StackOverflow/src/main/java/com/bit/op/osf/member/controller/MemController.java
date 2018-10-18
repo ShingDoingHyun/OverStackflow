@@ -116,11 +116,12 @@ public class MemController {
 	//memberProfileUpdate   post
 	
 	@RequestMapping(value = "/memberProfileUpdate")
-	public String memberProfileUpdate(HttpSession session,  @RequestParam String memberPwd, @RequestParam String memberIntro, @RequestParam String memberNickname) {
+	public String memberProfileUpdate(HttpSession session,  @RequestParam String memberPwd, @RequestParam String memberIntro, @RequestParam String memberPhone ,@RequestParam String memberNickname) {
 		MemRegInfo memInfo=(MemRegInfo)session.getAttribute("memInfo");
 		memInfo.setMemberPwd(memberPwd);
 		memInfo.setMemberIntro(memberIntro);
 		memInfo.setMemberNickname(memberNickname);
+		memInfo.setMemberPhone(memberPhone);
 		
 	  	//myPageInfoDao.memberProfileUpdate(memInfo);
 		if(	myPageInfoDao.memberProfileUpdate(memInfo) > 0) {
