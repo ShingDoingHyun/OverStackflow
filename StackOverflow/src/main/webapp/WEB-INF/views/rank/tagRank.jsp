@@ -380,7 +380,7 @@ text-align:flot;
 												<span style="background:#8B9DC3; color:white; width:60px; display:inline-block; text-align: center; border-radius: 2px;border-radius: 13px;">
 												<a href="<c:url value='/popQuestionList?tagNo=${tag.tagNo }'/>" style="color:white;">${ tag.tagName}</a> 
 												</span> x ${ tag.count}<br>		
-												<span style="display: block; width:290px; height:48px; overflow: hidden">${ tag.tagDetail}</span>
+												<span style="display: block; width:290px; height:48px; overflow: hidden;">${ tag.tagDetail}</span>
 												<span class="tagDetail" style="font-size: 12px; color: #a0a3bb;;">태그수정</span>
 												<form style="display: none;" onsubmit="return updateTagDetail($(this));">
 													<input type="hidden" name="tagNo" value="${ tag.tagNo}">

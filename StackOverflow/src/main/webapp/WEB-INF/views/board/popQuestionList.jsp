@@ -251,7 +251,7 @@ a {
 							</button>
 						</div>
 						<c:if test="${memInfo != null}">
-							<div style="border:1px solid black; width:300px; height:200px;margin-left:20px; margin-top:30px" class="modalLoad" id="favTag">
+							<div style="border:1px solid black; width:300px; height:auto; min-height: 200px; margin-left:20px; margin-top:30px" class="modalLoad" id="favTag">
 								<p style="text-align: center; border-bottom:1px solid black; padding: 10px 0 10px 0; margin-top: 0; margin-bottom:0;">흥미태그</p>
 								<form id="favTagForm" action="<c:url value='/popQuestionList'/>" method="get">
 									<div id="tags">
@@ -263,7 +263,7 @@ a {
 								</form> 
 							</div>
 							
-							<div style="border:1px solid black; width:300px; height:200px;margin-left:20px; margin-top:30px">
+							<div style="border:1px solid black; width:300px; height:auto; min-height: 200px; margin-left:20px; margin-top:30px">
 								<p style="text-align: center; border-bottom:1px solid black; padding: 10px 0 10px 0; margin-top: 0; margin-bottom:0;">즐겨찾기한 질문</p>
 								<div id="favList">
 								<c:forEach items="${favQuestionList }" var="favQuestionList">
@@ -275,7 +275,7 @@ a {
 							</div>
 						</c:if>
 				<!-- 	border-bottom: 1px solid #333333;  -->
-						<div style="border:1px solid black; width:300px; height:200px;margin-left:20px; margin-top:30px">
+						<div style="border:1px solid black; width:300px; height:auto; min-height: 200px; margin-left:20px; margin-top:30px">
 						<p style="text-align: center; border-bottom:1px solid black; padding: 10px 0 10px 0; margin-top: 0; margin-bottom:0;">방문한 페이지</p>
 						<c:forEach items="${visitQuestionBoard }" var="visitQuestion">
 							<div style="margin-top:3px; margin-bottom:3px;"><a href="<c:url value='/questionDetail/${visitQuestion.questionNo }'/>">${ visitQuestion.title}</a></div>
