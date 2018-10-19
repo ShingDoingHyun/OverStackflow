@@ -52,7 +52,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
     display: inline-block;
     height: 100%;
     width: 70%;
-    margin-left: 15%;
+    margin-left: 3%;
 }
 
 .left {
@@ -142,7 +142,102 @@ td, .th tr td {
     margin-right: 4px;
     font-family: inherit;
 }
- 
+
+.bluebTabDesign {
+	padding: 0 0 0px 0px;
+}
+
+.bluebTabDesign ul {
+	margin: 0;
+	padding-left: 10px;
+	list-style: none;
+	border-bottom: 1px solid #2390ff;
+	font-family: dotum, Sans-serif;
+	font-size: 12px;
+	*zoom: 1;
+}
+
+.bluebTabDesign ul:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+.bluebTabDesign li {
+	float: left;
+	margin: 0px 1px -1px 1px;
+}
+
+.bluebTabDesign li a {
+	position: relative;
+	float: left;
+	text-decoration: none;
+	border-top: 1px solid #c0c0c0;
+	border-right: 1px solid #c0c0c0;
+	border-left: 1px solid #c0c0c0;
+	background: #efefef;
+	color: #666;
+}
+
+.bluebTabDesign li a span {
+	display: inline-block;
+	padding: 6px 7px;
+	letter-spacing: -1px;
+	cursor: pointer;
+	border-top: 1px solid #fff;
+	border-left: 1px solid #fff;
+}
+
+.bluebTabDesign li a:hover {
+	background: #fff;
+	color: #2390ff;
+	border: 1px solid #2390ff;
+}
+
+.bluebTabDesign li ul {
+	display: none;
+	width: 100%;
+	top: 40px;
+	left: 0;
+	list-style: none;
+	border: 0;
+	margin: 0;
+	padding: 0;
+	white-space: nowrap;
+	overflow: hidden;
+	*zoom: 1;
+}
+
+.bluebTabDesign li ul:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+.bluebTabDesign li.selected a {
+	border: 2px solid #2390ff;
+	padding: 1px;
+	border-bottom: 0px solid #fff;
+	margin-top: -3px;
+	background-color: #fff;
+	color: #2390ff;
+}
+
+.bluebTabDesign li.selected a span {
+	display: inline-block;
+	padding-top: 7px;
+	font-weight: bold;
+	background-color: #fff;
+}
+
+.bluebTabDesign li.selected a:hover {
+	border: 2px solid #2390ff;
+	padding: 1px;
+	border-bottom: 0px solid #fff;
+	margin-top: -3px;
+	background-color: #fff;
+	color: #2390ff;
+}
 </style>
 </head>
 <body class="cbp-spmenu-push">
@@ -162,7 +257,17 @@ td, .th tr td {
 <!----------------------main--------------------------------------->
 <div class="main-page">
 
-<div class="leftleft" style="float:left; width:9%; height:100%; margin-right:15px; padding-top:120px; position:fixed; top:0;">
+
+<div class="bluebTabDesign" style="margin-bottom: 3%;">
+	<ul>
+		<li><a href="<c:url value="/comProfile"/>"><span>프로필</span></a></li>
+		<li><a href="<c:url value="/comJob/writeJobInfo"/>"><span>채용공고 작성</span></a></li>
+		<li><a href="<c:url value="/comJob/manageJobInfoList/1"/>"><span>채용공고 관리</span></a></li>
+		<li class="selected"><a href="#"><span>지원서 관리</span></a></li>
+		<li><a href="<c:url value="/comProSet"/>"><span>프로필 설정</span></a></li>
+	</ul>
+</div>
+<div class="leftleft" style="float:left; width:9%; height:100%; margin-right:15px; position:relative; top: 2%; ">
 
 	<a href="#" style="font-weight:bold;color:orange;">결과 유형</a>
 	<a href="<%=request.getContextPath()%>/comJob/manageJobAppListByAppResult/${job.jobNo == null? 0: job.jobNo}/all">전체</a>
@@ -171,7 +276,6 @@ td, .th tr td {
 	<a href="<%=request.getContextPath()%>/comJob/manageJobAppListByAppResult/${job.jobNo == null?  0: job.jobNo}/passFinal">최종합격</a>
 	<a href="<%=request.getContextPath()%>/comJob/manageJobAppListByAppResult/${job.jobNo == null?  0: job.jobNo}/failure">불합격</a>
 </div>
-
 
 <div class="right">
 	<span style="font-size: 14px;"><a href="<c:url value="/comJob/seeJobInfoList/1"/>">채용 정보</a> > <a href="<c:url value="/comJob/manageJobInfoList/1"/>">채용 공고 관리</a> > <a href="<c:url value="/comJob/manageJobAppList/0"/>">지원자 관리</a></span><br>
@@ -294,11 +398,10 @@ td, .th tr td {
 			    	  <td colspan="6">
 			    	  	 <div class="appcontent">
 			    	  	 <table>
-			   
-							  <c:if test="${jobInfo.comPhoto != null and jobInfo.comPhoto !=''}">
+							  <c:if test="${jobApp.appPhoto != null and jobApp.appPhoto !=''}">
 								<img src="<c:url value="/resources/jobimage/${jobApp.appPhoto}"/>" width="15%;" style="margin: 0 1%;float:left;">
 							  </c:if>
-			    	  	      <c:if test="${jobInfo.comPhoto == null || jobInfo.comPhoto == '' }">
+			    	  	      <c:if test="${jobApp.appPhoto == null || jobApp.appPhoto == '' }">
 								<img src="<c:url value="/resources/jobimage/appprofile.PNG"/>" width="15%;" style="margin: 0 1%;float:left;">
 							  </c:if>
 							  
@@ -311,14 +414,14 @@ td, .th tr td {
 								${jobApp.appRegisterDate}<br>
 							  </div>
 							  
-							  <div style="margin-top: 6%; margin-left:1%; position:relative;" >
+							  <div style="margin-top: 7%; margin-left:1%; position:relative;" >
 							  	<label>자기소개</label><br>
 							  	<div class="border" > ${jobApp.appIntroduction}<br></div>
 							  	
 							  	<label style="margin-top: 1%;">입사 포부</labe><br>
-							  	<div class="border" style="width: 231%;"> ${jobApp.appAmbition}<br></div>
+							  	<div class="border" style="font-weight: normal;"> ${jobApp.appAmbition}<br></div>
 							  	
-							  	<div style="float:left;">
+							  	<div style="float:left; margin-right: 10%;">
 							  	<!-- 면접 결과 -->
 					  	 		<c:if test="${jobApp.appResult == '-'}">
 					  			   결과 통보:
@@ -345,27 +448,26 @@ td, .th tr td {
 						  				<input type="submit" value="확인">
 					  			 	</form>
 					  			<c:if test="${jobApp.appResultDate != null}">
-					  			<span id="appResultDate${status.count}">결과 통보일: ${jobApp.appResultDate}</span>
+					  			<span id="appResultDate${status.count}" style="width:90%;">결과 통보일: ${jobApp.appResultDate}</span>
 					  			</c:if>
 								</div>
 
-								<br>
-								<div>
+								<div style="margin-top: 3px;">
 							    <!-- 면접 날짜 -->
 							    <c:if test="${jobApp.appInterviewDateDate == null}">
-					  			   면접 날짜 지정:
+					  			  면접 날짜 지정:
 					  			</c:if>
+					  			
 					  			<c:if test="${jobApp.appInterviewDateDate != null}">
-								   면접 날짜 수정: <span style="color:red" id="appInterviewDate${status.count}">${jobApp.appInterviewDate}</span>
+								 <br> 면접 날짜 수정: <span style="color:red" id="appInterviewDate${status.count}">${jobApp.appInterviewDate}</span>
  								</c:if>
 								<form onsubmit="return updateAppInterviewDate($(this), ${status.count})" accept-charset="utf-8" >
 									<input type="hidden" name="appNo" value="${jobApp.appNo}">
 									<input type="date" name="appInterviewDate"><input type="submit" value="확인">
 								</form>
 								<c:if test="${jobApp.appInterviewDateDate != null}">
-								   면접 날짜 통보일: <span id="appInterviewDateDate${status.count}">${jobApp.appInterviewDateDate}</span>
+								  <br> 면접 날짜 통보일: <span id="appInterviewDateDate${status.count}">${jobApp.appInterviewDateDate}</span>
 								</c:if>
-								<br>
 								</div>
 							  </div>
 							 </table>

@@ -16,6 +16,7 @@
  	<if test="appResult != null and appResult != 'all'">
  	and appResult = #{appResult}
  	</if>
+ 	order by appRegisterDate desc;
  </select>
  
  <update id="updateAppResult" parameterType="java.util.HashMap">

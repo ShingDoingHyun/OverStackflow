@@ -118,7 +118,102 @@ table {
     margin-right: 4px;
     font-family: inherit;
 }
- 
+
+.bluebTabDesign {
+	padding: 0 0 0px 0px;
+}
+
+.bluebTabDesign ul {
+	margin: 0;
+	padding-left: 10px;
+	list-style: none;
+	border-bottom: 1px solid #2390ff;
+	font-family: dotum, Sans-serif;
+	font-size: 12px;
+	*zoom: 1;
+}
+
+.bluebTabDesign ul:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+.bluebTabDesign li {
+	float: left;
+	margin: 0px 1px -1px 1px;
+}
+
+.bluebTabDesign li a {
+	position: relative;
+	float: left;
+	text-decoration: none;
+	border-top: 1px solid #c0c0c0;
+	border-right: 1px solid #c0c0c0;
+	border-left: 1px solid #c0c0c0;
+	background: #efefef;
+	color: #666;
+}
+
+.bluebTabDesign li a span {
+	display: inline-block;
+	padding: 6px 7px;
+	letter-spacing: -1px;
+	cursor: pointer;
+	border-top: 1px solid #fff;
+	border-left: 1px solid #fff;
+}
+
+.bluebTabDesign li a:hover {
+	background: #fff;
+	color: #2390ff;
+	border: 1px solid #2390ff;
+}
+
+.bluebTabDesign li ul {
+	display: none;
+	width: 100%;
+	top: 40px;
+	left: 0;
+	list-style: none;
+	border: 0;
+	margin: 0;
+	padding: 0;
+	white-space: nowrap;
+	overflow: hidden;
+	*zoom: 1;
+}
+
+.bluebTabDesign li ul:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+.bluebTabDesign li.selected a {
+	border: 2px solid #2390ff;
+	padding: 1px;
+	border-bottom: 0px solid #fff;
+	margin-top: -3px;
+	background-color: #fff;
+	color: #2390ff;
+}
+
+.bluebTabDesign li.selected a span {
+	display: inline-block;
+	padding-top: 7px;
+	font-weight: bold;
+	background-color: #fff;
+}
+
+.bluebTabDesign li.selected a:hover {
+	border: 2px solid #2390ff;
+	padding: 1px;
+	border-bottom: 0px solid #fff;
+	margin-top: -3px;
+	background-color: #fff;
+	color: #2390ff;
+}
 </style>
 </head>
 <body class="cbp-spmenu-push">
@@ -137,6 +232,15 @@ table {
 <!----------------------main--------------------------------------->
 <div class="main-page">
 <div class="main">
+	<div class="bluebTabDesign" style="margin-bottom: 3%;">
+		<ul>
+			<li><a href="<c:url value="/comProfile"/>"><span>프로필</span></a></li>
+			<li><a href="<c:url value="/comJob/writeJobInfo"/>"><span>채용공고 작성</span></a></li>
+			<li class="selected"><a href="#"><span>채용공고 관리</span></a></li>
+			<li><a href="<c:url value="/comJob/manageJobAppList/0"/>"><span>지원서 관리</span></a></li>
+			<li><a href="<c:url value='/comProSet'/>"><span>프로필 설정</span></a></li>
+		</ul>
+	</div>
 	<div class="left">
 	 <h2>채용 공고 관리</h2>
 	</div>
