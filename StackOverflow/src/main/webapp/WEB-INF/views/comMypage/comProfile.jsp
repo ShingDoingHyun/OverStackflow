@@ -330,14 +330,19 @@ text-align:flot;
 		</div>
  <div class="ProfileMain">
 <div style="border: 1px; float: left; width: 10%; padding:10px; height: 200px; ">
-<img class='photo3' src="<c:url value='/resources/uploadFile/memberPhoto/${comInfo.comPhoto}'/>"style="height: 200px; margin-left: 35px;margin-top: 35px;">
+<c:if test="${comInfo.comPhoto != null && comInfo.comPhoto != ''}">
+<img class='photo3' src="<c:url value='/resources/uploadFile/comPhoto/${comInfo.comPhoto}'/>"altSrc="<c:url value='/img/default.png'/>" onerror="this.src = $(this).attr('altSrc')"style="height: 200px; margin-left: 35px;margin-top: 35px;">
+</c:if>
+<c:if test="${comInfo.comPhoto == null || comInfo.comPhoto == ''}">
+		<img class='photo3' src="<c:url value='/resources/img/default.png'/>" style="height: 200px; margin-left: 35px;margin-top: 35px;">
+	</c:if>
 </div>
 
 
 
 <div style="border:1px; float:left; width:526px; padding:10px; height:200px; margin-left:50px;">
 
-<div><span><h1 style="margin-left:200px;margin-bottom: 20px;">${comInfo.comChargerName}</h1></span>
+<div><span><h1 style="margin-left:200px;margin-bottom: 20px;">${comInfo.comId}</h1></span>
 
 </div><br>
 
@@ -358,7 +363,7 @@ text-align:flot;
 </tr>
 
 <tr>
-<td><h4 class="line" style=" width:500px; min-height:36px; margin-top: 15px; margin-bottom: 15px;">핸드폰번호:</h4>&nbsp${comInfo.comChargerPhone}</h4></td>
+<td><h4 class="line" style=" width:500px; min-height:36px; margin-top: 15px; margin-bottom: 15px;">핸드폰번호:&nbsp${comInfo.comChargerPhone}</h4></td>
 </tr>
 
 <tr>
@@ -370,7 +375,7 @@ text-align:flot;
  
         </div>
        
-
+<%-- 
         <div id="mainbar-full" class="user-show-new">
 
             <div id="user-panel-answers" class="user-panel" style="margin-top:200px;">
@@ -387,9 +392,9 @@ text-align:flot;
 		
 		<!-- 답변  -->
                 <div class="user-panel-content">
-                <%--  <c:forEach items="${replyBoards}" var="rboard" varStatus="status">
+                 <c:forEach items="${replyBoards}" var="rboard" varStatus="status">
 				     <div class="empty"><a href="../op/questionDetail/${rboard.questionNo}">${rboard.content}</a></div>           
-				 </c:forEach> --%>
+				 </c:forEach>
                 </div>
                 <div class="user-panel-footer">
                 </div>
@@ -414,9 +419,9 @@ text-align:flot;
 
 
                 <div class="user-panel-content">
-                  <%--   <c:forEach items="${questionBoards}" var="qboard" varStatus="status">
+                    <c:forEach items="${questionBoards}" var="qboard" varStatus="status">
 				    <div class="empty"><a href="../op/questionDetail/${qboard.questionNo}">${qboard.title}</a></div>           
-				 </c:forEach> --%>
+				 </c:forEach>
                 </div>
                 <div class="user-panel-footer">
                 </div>
@@ -436,7 +441,7 @@ text-align:flot;
                 <div class="user-panel-footer">
                 </div>
             </div>
-            
+             --%>
 <!-- 
                <div id="user-panel-reputation" class="user-panel">
                 <div class="subheader p0 grid ai-center" style="min-height: 36px;">
@@ -454,19 +459,7 @@ text-align:flot;
    </div>
 
 	</div>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
+					
 			</div>
 			
 		</div>

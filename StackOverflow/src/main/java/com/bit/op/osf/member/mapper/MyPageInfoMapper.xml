@@ -29,19 +29,15 @@
     
    <!-- 기 업  -->
    
+   
 	<!-- comProfileUpdate -->
     <update id="comProfileUpdate"  parameterType="com.bit.op.osf.member.model.ComRegInfo">  	
     	update com set 
     	<if test=" comPwd != 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'">
     		comPwd = #{comPwd}, 
     	</if>
-    	comChargerName = #{comChargerName} , comIntro = #{comIntro} , comChargerPhone = #{comChargerPhone}, comPhoto = #{comPhoto}  where comId = #{comId};
+    	comChargerName = #{comChargerName} , comChargerEmail = #{comChargerEmail} ,comIntro = #{comIntro} , comChargerPhone = #{comChargerPhone}, comPhoto = #{comPhoto}  where comId = #{comId};
     </update>
-    
-    
-    
-    
-    
     
     
 </mapper>

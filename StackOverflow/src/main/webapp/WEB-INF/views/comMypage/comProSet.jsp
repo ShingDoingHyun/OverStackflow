@@ -314,7 +314,6 @@ input[type="password"]:not(.s-input){
     border: 1px solid #c8ccd0;
     padding-left: 20px;
     padding-right: 200px;
-    margin-bottom: 18px;
 }
 input {
     margin: 5px 0;
@@ -439,26 +438,30 @@ function readURL(input) {
 		</div>
 	
 
-           <form action="<c:url value="/memberProfileUpdate"/>"   method="POST" enctype="multipart/form-data">
+           <form action="<c:url value="/comProfileUpdate"/>"   method="POST" enctype="multipart/form-data">
            
            <div class="col-8"style="width:252px;  margin-left:320px; height:282px; margin-top: 60px; margin-bottom:10px;">
            
            		<img class='photo3' id="blah" alt="your image" src="<c:url 
-           		value='/resources/uploadFile/memberPhoto/${memInfo.memberPhoto}'/>"style=" width:250px; height:250px;"> 	
+           		value='/resources/uploadFile/comPhoto/${comInfo.comPhoto}'/>"style=" width:250px; height:250px;"> 	
            				
            </div>
           
                 <div class="col-9">
 
-                    <span>아이디</span><br><input type="text" disabled="disabled" name="memberId" value="${memInfo.memberId}" class="input2"><br>
+                    <span>아이디</span><br><input type="text" disabled="disabled" name="comId" value="${comInfo.comId}" class="input2"><br>
                     
-                    <br><span>닉네임</span><br><input type="text"  name="memberNickname"  maxlength="20" value="${memInfo.memberNickname}" class="input2"/><br>
-                   
-                    <br><span>연락처</span><br><input type="text" name="memberPhone" maxlength="20" value="${memInfo.memberPhone}" class="input2"/><br>
-                   
-                    <br><span>비밀번호</span><br><input type="password"  name="memberPwd"  maxlength="20" class="input2" /><br>
+                    <br><span>닉네임</span><br><input type="text"  name="comChargerName"  maxlength="20" value="${comInfo.comChargerName}" class="input2"/><br>
                     
-                    <br><span>비밀번호 확인</span><br><input type="password" name="memberPwd2" maxlength="15" class="input2"/><br>
+                    <br><span>담당자 이메일</span><br><input type="text" name="comChargerEmail" maxlength="20" value="${comInfo.comChargerEmail}" class="input2"/><br>
+                   
+                    <br><span>핸드폰번호</span><br><input type="text" name="comChargerPhone" maxlength="20" value="${comInfo.comChargerPhone}" class="input2"/><br>
+                   
+                    <br><span>비밀번호</span><br><input type="password"  name="comPwd"  maxlength="20" class="input2" /><br>
+                    
+                    <br><span>비밀번호 확인</span><br><input type="password" name="comPwd2" maxlength="15" class="input2"/><br>
+                    
+                    
       
                 </div>
                
@@ -468,14 +471,14 @@ function readURL(input) {
 <div class="col-10">
 
 <!-- 이미지 수정 버튼  -->
-<input type="file" id="imgInp" name="memberPhotoFile" style="margin-left: 400px;">
+<input type="file" id="imgInp" name="comPhotoFile" style="margin-left: 400px;">
 
             <div class="row">
             
-                    <br><h3 style="margin-top:20px; margin-left:300px;">자기소개</h3>
+                    <br><h3 style="margin-top:130px; margin-left:300px;">자기소개</h3>
 
-                        <textarea id="wmd-input" class="wmd-input" name="memberIntro" cols="92" rows="15" tabindex="4" 
-                        style="width: 850px;margin-top:25px;margin-left:300px;">${memInfo.memberIntro}</textarea>
+                        <textarea id="wmd-input" class="wmd-input" name="comIntro" cols="92" rows="15" tabindex="4" 
+                        style="width: 850px;margin-top:25px;margin-left:300px;">${comInfo.comIntro}</textarea>
                         
                         
                         <br><button type="submit"  class="label label-warning"
@@ -486,8 +489,7 @@ function readURL(input) {
            
         </div>
        </div>
-			
-			
+
 			</div>
 			
 		</div>

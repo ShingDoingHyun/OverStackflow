@@ -318,11 +318,12 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 
 	
        
-                <br><div id="sex">
-                    <input type="radio" id="male" name="memberGender" value="남자">
-                    <label for="male" style="padding-left: 90px;">남자</label>
-                    <input type="radio" id="female" name="memberGender" value="여자">
-                    <label for="female" style="padding-left:90px;">여자</label>
+                <br>
+                <div id="sex">
+	                <input type="radio" id="male" name="memberGender" value="남자">
+	                <label for="male" style="padding-left: 90px;">남자</label>
+	                <input type="radio" id="female" name="memberGender" value="여자">
+	                <label for="female" style="padding-left:90px;">여자</label>
                 </div>
 	
 	<div>
@@ -382,6 +383,18 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 					classie.toggle( showLeftPush, 'disabled' );
 				}
 			}
+			
+			
+			
+			 $('input[type=radio]').change(function() {
+		            $('input[type=radio]').each(function() {
+		                if ($(this).prop('checked'))
+		                    $(this).next().css('border', '1px solid #00BB40');
+		                else
+		                    $(this).next().css('border', '1px solid #D9D9D9');
+		            });
+
+		        });
 			
 		</script>
 	<!--scrolling js-->

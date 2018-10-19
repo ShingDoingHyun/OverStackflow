@@ -27,7 +27,7 @@ public class ComInfoImpl extends DaoImpl implements ComInfoDao {
 
 	private static final String COMINFO_NAMESPACE = "com.bit.op.osf.member.mapper.ComInfoMapper.";
 
-	private static final String MYPAGEINFO_NAMESPACE = null;
+	private static final String MYPAGEINFO_NAMESPACE = "com.bit.op.osf.member.mapper.MyPageInfoMapper.";
 
 
 	@Override

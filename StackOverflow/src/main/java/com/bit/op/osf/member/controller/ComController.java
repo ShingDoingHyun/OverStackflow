@@ -97,8 +97,8 @@ public class ComController {
 	//comProfileUpdate   post
 	
 		@RequestMapping(value = "/comProfileUpdate")
-		public String memberProfileUpdate(HttpSession session,  @RequestParam String comPwd, @RequestParam String comIntro, @RequestParam String com ,
-				@RequestParam String comChargerName,@RequestParam  MultipartFile comPhotoFile, @RequestParam  String comChargerPhone, HttpServletRequest request) throws Exception {
+		public String memberProfileUpdate(HttpSession session,  @RequestParam String comPwd, @RequestParam String comIntro, 
+				@RequestParam String comChargerName,@RequestParam  MultipartFile comPhotoFile, @RequestParam  String comChargerPhone, HttpServletRequest request,@RequestParam String comChargerEmail) throws Exception {
 			
 			
 //		public String comProfileUpdate(HttpSession session, comRegInfo memInfo, Model model ) throws Exception {
@@ -110,10 +110,11 @@ public class ComController {
 			comInfo.setComChargerName(comChargerName);
 			comInfo.setComChargerPhone(comChargerPhone);
 			comInfo.setComPhotoFile(comPhotoFile);
+			comInfo.setComChargerEmail(comChargerEmail);
 	
 		  	//myPageInfoDao.memberProfileUpdate(memInfo);
 			if(	comInfoDao.comProfileUpdate(comInfo, request) > 0) {
-				session.setAttribute("memInfo", comInfo);
+				session.setAttribute("comInfo", comInfo);
 				
 				return  "/comMypage/comProfile" ;
 			}else {			
