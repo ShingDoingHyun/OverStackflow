@@ -138,7 +138,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                    margin-top: 150px;">
                    
                 <div class="member_wrap">
-                    <h4 class="tit t_join">회원가입</h4>
+                    <h2 class="tit t_join">회원가입</h2>
                     <div class="member_gate">
                         <a href="../op/memJoinForm">
                         

@@ -31,6 +31,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 <!--//webfonts--> 
 <!--animate-->
 <link href="css/animate.css" rel="stylesheet" type="text/css" media="all">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Archivo+Black" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="js/wow.min.js"></script>
 	<script>
@@ -209,6 +211,10 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
    margin-right: 4px;
    font-family: inherit;
 }
+p
+{
+margin-left:14px; font-size:14px;
+}
 </style>
 <script type="text/javascript">
         
@@ -274,30 +280,40 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 <h2 style="margin-bottom:30px; margin-bottom:-10px; margin-bottom: 20px;">개인회원가입</h2>
 
 
-      <form action="memJoinFormTest" method="POST" enctype="multipart/form-data">
+      <form action="memJoinFormTest" method="POST" enctype="multipart/form-data" class="joinForm">
 
                 <span><h5 style="margin-left: 270px; margin-bottom:0px; margin-top: 0px;">*는 필수 입력 정보입니다.</h5></span>
                 <div id="idBox" class="box" style="padding-bottom:10px">
-              <input type="text" name="memberId" placeholder="아이디 *" class="input" maxlength="20" style="width:250px;">
+              
+              <input type="text" name="memberId" id="mId" placeholder="아이디 *" class="input" maxlength="20" style="width:250px;">
                    <span style="padding-left:0px;">@overstackflow.com</span>
               </div>
+                 <p class="red-alert" id="idP"></p>
                 
         
         <div id="idBox" class="box" style="padding-bottom:10px">
-	<input type="password" name="memberPwd" class="input" maxlength="16" placeholder="비밀번호(6~16자의 영문,숫자,특수기호)*"><br>
+	<input type="password" name="memberPwd"  id="pwd1" class="input" maxlength="16" placeholder="비밀번호 &nbsp; &nbsp;&nbsp; &nbsp;(6~16자의 영문,숫자,특수기호)*">
+	 <i class="material-icons" id="lock1" style="margin-left: 70px;">&#xe899;</i>
+	
 	</div>
+	<p class="red-alert" id="pw1P"></p>
 	
 	 <div id="idBox" class="box" style="padding-bottom:10px">
-	<input type="password" name="memberPwd2" class="input" maxlength="16" placeholder="비밀번호확인"><br>
+	<input type="password" name="memberPwd2" id="pwd2" class="input" maxlength="16" placeholder="비밀번호확인*">
+	<i class="material-icons" id="lock2" style="margin-left: 70px;">&#xe899;</i>
+	
 	</div>
+	<p class="red-alert" id="pw2P"></p>
 	
 	 <div id="idBox" class="box" style="padding-bottom:10px">
 	<input type="text" name="memberName" class="input" placeholder="이름(실명)*"><br>
 	</div>
+	<p class="red-alert"></p>
 	
 	 <div id="idBox" class="box" style="padding-bottom:10px">
 	<input type="text" name="memberNickname" class="input" placeholder="닉네임*"><br>
 	</div>
+	<p class="red-alert"></p>
 	
 	<div style="margin-top:25px;"><span>사진 업로드</span></div> 
 	<div id="idBox" class="box2" style="padding-bottom:10px">
@@ -314,7 +330,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 	</div>
 
 
-	생년월일<input type="Date" name="memberBirth" style="width: 355px; height: 49px;margin-left: 20px;"><br>
+	<span style="margin-right:20px;">생년월일</span><span><input type="Date" name="memberBirth" style="width: 355px; height: 49px;"></span><br>
 
 	
        
@@ -326,23 +342,16 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 	                <label for="female" style="padding-left:90px;">여자</label>
                 </div>
 	
-	<div>
-	
 	
              <div id="idBox" class="box" style="padding-bottom:10px">
-            <input type="text" name="memberPhone" class="input" placeholder="휴대폰 번호 &nbsp; &nbsp; &nbsp; &nbsp; -없이">
+            <input type="text" name="memberPhone" class="input" id="phone" placeholder="휴대폰 번호 &nbsp; &nbsp; &nbsp; &nbsp; -없이">
             </div>
 	
 	
 	
+
 	
-<!-- 	
-	<input type="checkbox" id="Allagreebox"> 전체동의 <br>
-	<input type="checkbox" id="ageebox1"> 이용약관 <br>
-	<input type="checkbox" id="Allagreebox"> 개인정보 수집 및 이용<br> -->
-	
-	
-	<input type="submit" value="동의하고 회원가입" style="margin-left: 145px; margin-top: 50px; margin-bottom:100px;">
+	  <input type="submit" value="동의하고 회원가입" style="margin-left: 145px; margin-top: 50px; margin-bottom:100px;">
 </form>
 </div>
 			
@@ -353,6 +362,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 			</div>
 			
 		</div>
+		
 		<!--footer-->
 		
 		
@@ -366,6 +376,9 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 	<!-- Classie -->
 		<script src="js/classie.js"></script>
 		<script>
+		
+		
+		
 			var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
 				showLeftPush = document.getElementById( 'showLeftPush' ),
 				body = document.body;
@@ -395,6 +408,80 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 		            });
 
 		        });
+			 
+			 //        포커스가 잡히면 테두리에 효과를준다.
+		        $('.joinForm input').focusin(function() {
+		            $(this).parent().css('border', '1px solid #00BB40');
+		        });
+			 
+//		        포커스를 잃으면 테두리에 효과를 제거한다.
+		        $('.joinForm input').focusout(function() {
+		        	var idCheck = /^[A-Za-z0-9_-]{5,20}$/;
+		        	var passCheck = /^.*(?=^.{6,16}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=*]).*$/;
+		        
+		            $(this).parent().css('border', '1px solid #D9D9D9');
+		            var id = $(this).attr('id');
+		        	console.log(id);
+		            /*날짜,  비밀번호는 아래쪽 스위치문에서 공백체크, 이메일은 공백체크 안함*/
+		            if ($(this).val() === '' && id !== 'email' && id !== 'pwd1' && id !== 'pwd2' && id !=='phone') {
+		                $(this).parent().next().text("필수 입력 정보입니다.").css('color', 'red');
+		            } else {
+		            	
+		            	
+		                /*해당 div 조건에따라 유효성 체크*/
+		                switch (id) {
+
+		                    case 'mId':
+		                        if (!idCheck.test($(this).val()))
+		                            $('#idP').text("5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.").css('color', 'red');
+		                        else
+		                            $('#idP').text("멋진아이디네요!").css('color', '#00BB40');
+		                        break;
+		                    case 'pwd1':
+		                        if (!passCheck.test($(this).val())) {
+		                            if($(this).val()===""){
+		                                $('#pw1P').text("필수 정보입니다.").css('color', 'red');
+		                            }
+		                            else{
+		                                $('#pw1P').text("6~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.").css('color', 'red');
+		                             
+		                           
+		                            }
+		                            $('#lock1').css('color', 'red');
+		                        } else {
+		                            $('#pw1P').text("");
+		                            $('#lock1').css('color', '#00BB40');
+		                          
+		                        }
+		                        break;
+		                    case 'pwd2':
+		                        if($(this).val()===""){
+		                                $('#pw2P').text("필수 정보입니다.").css('color', 'red');
+		                                $('#lock2').css('color', 'red');
+		                                
+		                        }
+		                        else{
+		                            if ($('#pwd1').val() !== $(this).val()) {
+		                                $('#pw2P').text("비밀번호가 일치하지 않습니다.").css('color', 'red');
+		                                $('#lock2').css('color', 'red');
+		                                $(this).val('');
+		                            } else {
+		                                $('#pwd2').text("");
+		                                $('#lock2').css('color', '#00BB40');
+		                            }
+		                        
+		                        }
+		                        break;
+		                    
+		                    default:
+		                        /*2경우 경고 공백으로*/
+		                        $(this).parent().parent().find('.red-alert').text("");
+		                        $(this).parent().parent().parent().find('.red-alert').text("");
+		                }
+		            }
+
+		        });
+
 			
 		</script>
 	<!--scrolling js-->

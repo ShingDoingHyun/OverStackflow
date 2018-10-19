@@ -449,15 +449,15 @@ function readURL(input) {
           
                 <div class="col-9">
 
-                    <span>아이디</span><br><input type="text" disabled="disabled" name="memberId" value="${memInfo.memberId}" class="input2"><br>
+                    <span>아이디</span><br><br><input type="text" disabled="disabled" name="memberId" value="${memInfo.memberId}" class="input2"><br>
                     
-                    <br><span>닉네임</span><br><input type="text"  name="memberNickname"  maxlength="20" value="${memInfo.memberNickname}" class="input2"/><br>
+                    <br><span>닉네임</span><br><br><input type="text"  name="memberNickname"  maxlength="20" value="${memInfo.memberNickname}" class="input2"/><br>
                    
-                    <br><span>연락처</span><br><input type="text" name="memberPhone" maxlength="20" value="${memInfo.memberPhone}" class="input2"/><br>
+                    <br><span>연락처</span><br><br><input type="text" name="memberPhone" maxlength="20" value="${memInfo.memberPhone}" class="input2"/><br>
                    
-                    <br><span>비밀번호</span><br><input type="password"  name="memberPwd"  maxlength="20" class="input2" /><br>
+                    <br><span>비밀번호</span><br><br><input type="password"  name="memberPwd"  maxlength="20" class="input2" /><br>
                     
-                    <br><span>비밀번호 확인</span><br><input type="password" name="memberPwd2" maxlength="15" class="input2"/><br>
+                    <br><span>비밀번호 확인</span><br><br><input type="password" name="memberPwd2" maxlength="15" class="input2"/><br>
       
                 </div>
                
