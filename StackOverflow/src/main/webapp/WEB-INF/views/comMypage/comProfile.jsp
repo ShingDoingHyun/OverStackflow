@@ -353,13 +353,13 @@ text-align:flot;
 
 <div style="border: 1px; float:left; width: 40%; padding:10px;height: 200px; margin-left: 30px;"">
 <table>
+
 <tr>
 <td><h4 class="line" style=" width:500px; min-height:36px; margin-top: 15px; margin-bottom: 15px; hr:width:500px;">담당자 이름:&nbsp${comInfo.comChargerName}</h4></td>
-
 </tr>
 
 <tr>
-<td><h4 class="line" style=" width:500px; min-height:36px; margin-top: 15px; margin-bottom: 15px;">회사Url:&nbsp${comInfo.comHomePageUrl}</h4></td>
+<td><h4 class="line" style=" width:500px; min-height:36px; margin-top: 15px; margin-bottom: 15px;">담당자 이메일:&nbsp${comInfo.comChargerEmail}</h4></td>
 </tr>
 
 <tr>
@@ -367,7 +367,7 @@ text-align:flot;
 </tr>
 
 <tr>
-<td><h4 class="line" style=" width:500px; min-height:36px; margin-top: 15px; margin-bottom: 15px;">담당자 이메일:&nbsp${comInfo.comChargerEmail}</h4></td>
+<td><h4 class="line" style=" width:500px; min-height:36px; margin-top: 15px; margin-bottom: 15px;">회사Url:&nbsp${comInfo.comHomePageUrl}</h4></td>
 </tr>
 
 </table>

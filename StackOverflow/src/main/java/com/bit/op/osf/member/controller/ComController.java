@@ -44,6 +44,8 @@ public class ComController {
 		return "login/comjoinform"; 
 	}
 	
+	
+	
 	@RequestMapping(value = "/comJoinFormTest", method = RequestMethod.POST)
 	public String JoinTest(ComRegInfo comInfo, HttpServletRequest request, Model model)throws Exception {
 		System.out.println(comInfo);
@@ -53,18 +55,18 @@ public class ComController {
 		return "login/joinInsertCheck"; 
 	}
 	
+	
+	
 	@RequestMapping(value = "/comJoinForm", method = RequestMethod.POST)
 	public String Join(ComRegInfo comInfo, Model model, HttpServletRequest request)throws Exception {
 		System.out.println("cominfo : " + comInfo);
 		
 		// 2. 시스템의 물리적인 경로 10 18
 				uploadUriDir = request.getSession().getServletContext().getRealPath(uploadUri);
-				/*int insertCnt = memberInfoDao.insertMemberInfo(memInfo, request);
-				*/
+			
 				comInfo.setRealPath(uploadUriDir);
 		
 		int insertCnt = comInfoDao.insertComInfo(comInfo, request);
-		
 		
 		model.addAttribute("comID",comInfo.getComId());
 		model.addAttribute("comInfo",comInfo);
@@ -74,10 +76,12 @@ public class ComController {
 		return "login/joinInsertCheck"; 
 	}
 	
+	
 	@RequestMapping(value = "/comLoginForm", method = RequestMethod.GET)
 	public String Loginform(Model model) {
 		return "login/loginform";
 	}
+	
 	
 	@RequestMapping(value = "/comProfile", method = RequestMethod.GET)
 	public String Profile() {
@@ -98,12 +102,9 @@ public class ComController {
 	
 		@RequestMapping(value = "/comProfileUpdate")
 		public String memberProfileUpdate(HttpSession session,  @RequestParam String comPwd, @RequestParam String comIntro, 
-				@RequestParam String comChargerName,@RequestParam  MultipartFile comPhotoFile, @RequestParam  String comChargerPhone, HttpServletRequest request,@RequestParam String comChargerEmail) throws Exception {
+				@RequestParam String comChargerName,@RequestParam  MultipartFile comPhotoFile, @RequestParam  String comChargerPhone, HttpServletRequest request,@RequestParam String comChargerEmail, @RequestParam String comHomePageUrl) throws Exception {
 			
-			
-//		public String comProfileUpdate(HttpSession session, comRegInfo memInfo, Model model ) throws Exception {
-			
-			
+					
 			ComRegInfo comInfo=(ComRegInfo)session.getAttribute("comInfo");
 			comInfo.setComPwd(comPwd);
 			comInfo.setComIntro(comIntro);
@@ -111,8 +112,9 @@ public class ComController {
 			comInfo.setComChargerPhone(comChargerPhone);
 			comInfo.setComPhotoFile(comPhotoFile);
 			comInfo.setComChargerEmail(comChargerEmail);
+			comInfo.setComHomePageUrl(comHomePageUrl);
 	
-		  	//myPageInfoDao.memberProfileUpdate(memInfo);
+		
 			if(	comInfoDao.comProfileUpdate(comInfo, request) > 0) {
 				session.setAttribute("comInfo", comInfo);
 				
@@ -122,6 +124,8 @@ public class ComController {
 			}	
 		}
 
+		
+		
 	@RequestMapping(value = "/comLoginForm", method = RequestMethod.POST)
 	public String comLogin(@RequestParam("comId") String id, @RequestParam("comPwd") String pw, Model model,
 			HttpServletRequest request) {

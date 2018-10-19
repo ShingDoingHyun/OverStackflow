@@ -451,9 +451,11 @@ function readURL(input) {
 
                     <span>아이디</span><br><input type="text" disabled="disabled" name="comId" value="${comInfo.comId}" class="input2"><br>
                     
-                    <br><span>닉네임</span><br><input type="text"  name="comChargerName"  maxlength="20" value="${comInfo.comChargerName}" class="input2"/><br>
+                    <br><span>담당자 이름</span><br><input type="text"  name="comChargerName"  maxlength="20" value="${comInfo.comChargerName}" class="input2"/><br>
                     
                     <br><span>담당자 이메일</span><br><input type="text" name="comChargerEmail" maxlength="20" value="${comInfo.comChargerEmail}" class="input2"/><br>
+                    
+                    <br><span>회사 Url</span><br><input type="text" name="comHomePageUrl" maxlength="20" value="${comInfo.comHomePageUrl}" class="input2"/><br>
                    
                     <br><span>핸드폰번호</span><br><input type="text" name="comChargerPhone" maxlength="20" value="${comInfo.comChargerPhone}" class="input2"/><br>
                    
@@ -475,7 +477,7 @@ function readURL(input) {
 
             <div class="row">
             
-                    <br><h3 style="margin-top:130px; margin-left:300px;">자기소개</h3>
+                    <br><h3 style="margin-top:200px; margin-left:300px;">자기소개</h3>
 
                         <textarea id="wmd-input" class="wmd-input" name="comIntro" cols="92" rows="15" tabindex="4" 
                         style="width: 850px;margin-top:25px;margin-left:300px;">${comInfo.comIntro}</textarea>
