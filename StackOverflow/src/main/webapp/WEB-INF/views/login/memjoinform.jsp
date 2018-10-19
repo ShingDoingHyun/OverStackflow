@@ -299,12 +299,18 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 	<input type="text" name="memberNickname" class="input" placeholder="닉네임*"><br>
 	</div>
 	
-	<div style="margin-top: 30px;"><span>사진 업로드</span></div> 
+	<div style="margin-top:25px;"><span>사진 업로드</span></div> 
 	<div id="idBox" class="box2" style="padding-bottom:10px">
 	<input type="file" id="imgInp" name="memberPhotoFile">
+								
+	
 	</div>
-	<div style="border:1px solid black;margin-left:280px;margin-top: -90px; width: 155px;height: 180px; margin-bottom:30px;">
-	<img id="blah" src="#" alt="your image" style=" width: 155px;height: 180px;"/><br>
+	<div style="border:1px;margin-left:280px;margin-top: -90px; width: 155px;height: 180px; margin-bottom:30px;">
+
+	<img id="blah"  style="width: 155px; height: 180px;" src="<c:url value='/resources/uploadFile/memPhoto/${memInfo.memPhoto}'/>"  
+						altSrc="<c:url value='/img/default.png'/>" onerror="this.src = $(this).attr('altSrc')">
+	<br>
+	
 	</div>
 
 
@@ -323,7 +329,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 	
 	
              <div id="idBox" class="box" style="padding-bottom:10px">
-            <input type="text" name="memberPhone" class="input" placeholder="휴대폰 번호 -없이">
+            <input type="text" name="memberPhone" class="input" placeholder="휴대폰 번호 &nbsp; &nbsp; &nbsp; &nbsp; -없이">
             </div>
 	
 	

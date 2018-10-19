@@ -320,7 +320,7 @@ text-align:flot;
 				<li><a href="<c:url value="/comJob/writeJobInfo"/>"><span>채용공고 작성</span></a></li>
 				<li><a href="<c:url value="/comJob/manageJobInfoList/1"/>"><span>채용공고 관리</span></a></li>
 				<li><a href="<c:url value="/comJob/manageJobAppList/0"/>"><span>지원서 관리</span></a></li>
-				<li><a href="<c:url value='/op]'/>"><span>프로필 설정</span></a></li>
+				<li><a href="<c:url value='/comProSet'/>"><span>프로필 설정</span></a></li>
 			</ul>
 		</div>
 			<div class="main_2">

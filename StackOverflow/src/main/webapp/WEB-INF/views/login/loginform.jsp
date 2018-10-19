@@ -147,7 +147,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 	                    </td>
 	                </tr>
 	                <tr>
-	                    <td><input type="password" class="jam9" name="comPw" placeholder="비밀번호" /></td>
+	                    <td><input type="password" class="jam9" name="comPwd" placeholder="비밀번호" /></td>
 	                </tr>
 	            </table>
 	

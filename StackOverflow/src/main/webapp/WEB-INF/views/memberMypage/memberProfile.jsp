@@ -383,17 +383,13 @@ text-align:flot;
                     <h3 class="grid--cell mb0 mr-auto px2 profile-section-title">    
                             답변 
                         </a></h3>
-                   <!--  <div class="grid--cell subtabs user-panel-subtabs" >
-                        <a href="javascript:void(0)" class="d-flex ai-center fs-caption bbw2 youarehere" data-sort-id="votes"> 최신 </a>
-                        <a href="javascript:void(0)" class="d-flex ai-center fs-caption bbw2" data-sort-id="newest">투표</a>
-                    </div> -->
+       
                 </div>
-               
-		
 		<!-- 답변  -->
                 <div class="user-panel-content">
                  <c:forEach items="${replyBoards}" var="rboard" varStatus="status">
-				     <div class="empty"><a href="../op/questionDetail/${rboard.questionNo}">${rboard.content}</a></div>           
+				     <div class="empty"><a href="../op/questionDetail/${rboard.questionNo}">${rboard.content}
+				     </a></div>           
 				 </c:forEach>
                 </div>
                 <div class="user-panel-footer">
@@ -402,30 +398,23 @@ text-align:flot;
             
             
             <!-- 질문  -->
-             <div id="user-panel-questions" class="user-panel" style="margin-top:200px;">
+             <div id="user-panel-questions" class="user-panel" style="margin-top:200px; margin-bottom: 0px;"">
                 <div class="subheader p0 grid ai-center" style="min-height: 36px;">
                     <h3 class="grid--cell mb0 mr-auto px2 profile-section-title">  
                             질문<!--  <span>(0)</span> -->
                         </a></h3>
-              <!--       <div class="grid--cell subtabs user-panel-subtabs">
-                        <a href="javascript:void(0)" class="d-flex ai-center fs-caption bbw2 youarehere" data-sort-id="votes">
-                            최신
-                        </a>
-                        <a href="javascript:void(0)" class="d-flex ai-center fs-caption bbw2" data-sort-id="newest">
-                            투표
-                        </a>
-                    </div> -->
+                    </div> 
                 </div>
-
 
                 <div class="user-panel-content">
                     <c:forEach items="${questionBoards}" var="qboard" varStatus="status">
-				    <div class="empty"><a href="../op/questionDetail/${qboard.questionNo}">${qboard.title}</a></div>           
+				    <div class="empty"><a href="../op/questionDetail/${qboard.questionNo}">${qboard.title}
+				    </a></div>           
 				 </c:forEach>
                 </div>
                 <div class="user-panel-footer">
                 </div>
-            </div>
+          
             
             <div id="user-panel-tags" class="user-panel">
                 <div class="subheader p0 grid ai-center" style="min-height: 36px;">
@@ -458,9 +447,7 @@ text-align:flot;
 					</div>
 				</c:forEach>
 				</div>
-            </div> 
-
-               
+            </div>
    
    </div>
 

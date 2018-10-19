@@ -16,8 +16,30 @@ public class ComRegInfo {
 	private String comChargerName;//담당자 이름
 	private String comChargerEmail;//담당자 이메일
 	private String comChargerPhone;//담당자 연락처
+	private String comIntro;
+	private String realPath ;
 	
 	
+	
+	public String getRealPath() {
+		return realPath;
+	}
+	
+	public void setRealPath(String realPath) {
+		this.realPath = realPath;
+	}
+	
+	
+	public String getComIntro() {
+		return comIntro;
+	}
+
+
+	public void setComIntro(String comIntro) {
+		this.comIntro = comIntro;
+	}
+
+
 	public ComRegInfo() {}
 
 
@@ -136,10 +158,11 @@ public class ComRegInfo {
 		return "ComRegInfo [comId=" + comId + ", comPwd=" + comPwd + ", comNum=" + comNum + ", comName=" + comName
 				+ ", comAddress=" + comAddress + ", comPhoto=" + comPhoto + ", comPhotoFile=" + comPhotoFile
 				+ ", comHomePageUrl=" + comHomePageUrl + ", comChargerName=" + comChargerName + ", comChargerEmail="
-				+ comChargerEmail + ", comChargerPhone=" + comChargerPhone + "]";
+				+ comChargerEmail + ", comChargerPhone=" + comChargerPhone + ", comIntro=" + comIntro + "]";
 	}
-	
-	
+
+
+
 }
 	
 	

@@ -425,10 +425,11 @@ function readURL(input) {
 
 		<div class="bluebTabDesign">
 			<ul>
-				<li><a href="<c:url value='/memberProfile'/>"><span>프로필</span></a></li>
-				<li><a href="<c:url value='/memberUpdate'/>"><span>지원관리</span></a></li>
-				<li class="selected"><a href="#"><span>프로필 설정</span></a></li>
-
+				<li><a href="<c:url value='/comProfile'/>"><span>프로필</span></a></li>
+				<li><a href="<c:url value="/comJob/writeJobInfo"/>"><span>채용공고 작성</span></a></li>
+				<li><a href="<c:url value="/comJob/manageJobInfoList/1"/>"><span>채용공고 관리</span></a></li>
+				<li><a href="<c:url value="/comJob/manageJobAppList/0"/>"><span>지원서 관리</span></a></li>
+                <li class="selected"><a href="#"><span>프로필 설정</span></a></li>
 			</ul>
 		</div>
 	

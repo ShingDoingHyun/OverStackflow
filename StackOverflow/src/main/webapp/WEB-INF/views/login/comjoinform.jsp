@@ -221,7 +221,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 	<div style="margin-top: 20px;"><span>기업 정보</span></div> 
 	
 	 <div id="idBox" class="box" style="padding-bottom:10px">
-	<input type="text" name="comNum" class="input" placeholder="사업자등록번호 -없이 10자리숫자 입력"><br>
+	<input type="text" name="comNum" class="input" placeholder="사업자등록번호  &nbsp; &nbsp; &nbsp; &nbsp;-없이 10자리숫자 입력"><br>
 	</div>
 	
 	
@@ -240,13 +240,16 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 	</div>
 	
 	
-	<div style="border:1px solid black;margin-left:280px;margin-top: -90px; width: 155px;height: 180px; margin-bottom:30px;">
-	<img id="blah" src="#" alt="your image" style=" width: 155px;height: 180px;"/><br>
+	<div style="border:1px; margin-left:280px;margin-top: -90px; width: 155px;height: 180px; margin-bottom:30px;">
+	<img id="blah" style="width: 155px; height: 180px;" src="<c:url value='/resources/uploadFile/comPhoto/${comInfo.comPhoto}'/>"  
+						altSrc="<c:url value='/img/default.png'/>" onerror="this.src = $(this).attr('altSrc')">
+	
+	<br>
 	</div>
 	
    <div style="margin-top: 20px;"><span>담당자 정보</span></div> 
 
-<div id="idBox" class="box" style="padding-bottom:10px">
+   <div id="idBox" class="box" style="padding-bottom:10px">
 	<input type="text" name="comHomePageUrl"class="input"  placeholder="회사 Url"><br>
 	</div>
 	
