@@ -294,14 +294,12 @@ margin-left:14px; font-size:14px;
         <div id="idBox" class="box" style="padding-bottom:10px">
 	<input type="password" name="memberPwd"  id="pwd1" class="input" maxlength="16" placeholder="비밀번호 &nbsp; &nbsp;&nbsp; &nbsp;(6~16자의 영문,숫자,특수기호)*">
 	 <i class="material-icons" id="lock1" style="margin-left: 70px;">&#xe899;</i>
-	
 	</div>
 	<p class="red-alert" id="pw1P"></p>
 	
 	 <div id="idBox" class="box" style="padding-bottom:10px">
 	<input type="password" name="memberPwd2" id="pwd2" class="input" maxlength="16" placeholder="비밀번호확인*">
 	<i class="material-icons" id="lock2" style="margin-left: 70px;">&#xe899;</i>
-	
 	</div>
 	<p class="red-alert" id="pw2P"></p>
 	
@@ -321,9 +319,11 @@ margin-left:14px; font-size:14px;
 								
 	
 	</div>
-	<div style="border:1px;margin-left:280px;margin-top: -90px; width: 155px;height: 180px; margin-bottom:30px;">
+	
+	<div style="border:1px;  margin-left:280px;  margin-top: -90px; width: 155px;height: 180px; margin-bottom:30px;">
 
 	<img id="blah"  style="width: 155px; height: 180px;" src="<c:url value='/resources/uploadFile/memPhoto/${memInfo.memPhoto}'/>"  
+	
 						altSrc="<c:url value='/img/default.png'/>" onerror="this.src = $(this).attr('altSrc')">
 	<br>
 	
@@ -423,7 +423,7 @@ margin-left:14px; font-size:14px;
 		            var id = $(this).attr('id');
 		        	console.log(id);
 		            /*날짜,  비밀번호는 아래쪽 스위치문에서 공백체크, 이메일은 공백체크 안함*/
-		            if ($(this).val() === '' && id !== 'email' && id !== 'pwd1' && id !== 'pwd2' && id !=='phone') {
+		            if ($(this).val() === '' && id !== 'email' && id !== 'pwd1' && id !== 'pwd2' && id !=='phone' && id !=='imgInp' ) {
 		                $(this).parent().next().text("필수 입력 정보입니다.").css('color', 'red');
 		            } else {
 		            	
