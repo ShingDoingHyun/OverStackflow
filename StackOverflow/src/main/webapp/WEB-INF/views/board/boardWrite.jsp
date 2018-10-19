@@ -447,8 +447,7 @@ $(function() {
         			$(this).remove();
         		}
 			});
-		console.log(data);
-		console.log(data.next());
+
 	 	if(chk > 0){
 			data.css('background', '');	
 			$('input[name=tags]').val($('input[name=tags]').val().replace('#'+data.next().text(),''));
