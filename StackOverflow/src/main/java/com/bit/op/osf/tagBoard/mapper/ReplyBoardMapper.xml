@@ -11,8 +11,9 @@
     	select replyNo, questionNo, vote, content, replyboard.memId, memberPhoto, regDate from replyboard  left join member  on replyboard.memId = member.memberId where questionNo = #{param};
     </select>
     
-    <update id="deleteQuestion" parameterType="int">
-    	update replyboard set content='삭제된 답변입니다.', title='삭제된 질문입니다.', memId='알 수 없는 사용자' where replyNo = #{param};
+    <update id="deleteReplyBoard" parameterType="int">
+    	update replyboard set content='삭제된 답변입니다.', memId='알 수 없는 사용자' where replyNo = #{param};
     </update>
+    
     
 </mapper>
